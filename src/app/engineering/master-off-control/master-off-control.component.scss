@@ -1,0 +1,15 @@
+.light-levels {
+  border         : 4px solid #4b535f;
+  border-radius  : 50%;
+  width          : 165px;
+  height         : 165px;
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  justify-content: center;
+  margin         : auto;
+
+  .material-icons {
+      font-size: 50px;
+  }
+}

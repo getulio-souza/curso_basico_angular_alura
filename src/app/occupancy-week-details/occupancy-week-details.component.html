@@ -1,0 +1,27 @@
+<div class="main-panel">
+  <nav
+    class=" navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top "
+  >
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="btn btn-secondary btn-round btn-just-icon" (click)="back()">
+            <i class="material-icons"> keyboard_arrow_left </i>
+        </a>
+        <a class="navbar-brand"> {{ "chart.occupancy.title" | translate }} </a>
+      </div>
+    </div>
+  </nav>
+  <div class="content">
+    <app-week-navigation
+      [dayName]="getWeekDayName()"
+      [resolution]="resolution"
+      (onStepBack)="onStepBack($event)"
+    ></app-week-navigation>
+
+    <div class="card dark-card">
+      <div class="card-content  my-4">
+        <nvd3 [options]="options" [data]="data"></nvd3>
+      </div>
+    </div>
+  </div>
+</div>

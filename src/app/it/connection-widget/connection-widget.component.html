@@ -1,0 +1,13 @@
+<div style="text-align: center;">
+  <i class="material-icons" style="font-size: 1200%" [ngClass]="{
+    'green-connection': connectionState == 1, 
+    'yellow-connection': connectionState == 2,
+    'red-connection': connectionState == 3
+  }">
+    wifi
+  </i>
+
+  <h5 style="color: black"> 
+    {{'Updated' | translate}}: {{lastNetworkUpdated | date: 'short'}} <br>
+    {{diffMinutes}} {{'minutes ago' | translate}}</h5>
+</div>

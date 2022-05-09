@@ -1,0 +1,11 @@
+.chiller-not-warning{
+  border-right: solid 5px transparent;
+}
+.chiller-warning{
+  border-right: solid 5px #FF0000;
+  background-color: #36404E;
+}
+.chiller-warning .material-icons{
+  color: #FF0000;
+  font-size: 16px;
+}

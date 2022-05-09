@@ -1,0 +1,118 @@
+
+<div *ngIf="showEventsGrid">
+
+	<button class="btn btn-secondary btn-round btn-just-icon" (click)="backToCharts()" >
+		<i _ngcontent-c29="" class="material-icons" style="font-size: 40px;cursor:pointer;"> keyboard_arrow_left </i>
+	</button>
+
+	<proxper-grid
+		[customColumns]="gridColumns"
+		[showDataButton]="false"
+		[data]="eventsGridData"
+		(onGridItemEmitter)="onGridItemClick($event)"
+  	>
+	</proxper-grid>
+</div>
+
+<div *ngIf="!showEventsGrid">
+
+<!-- HEADER -->
+<div class="px-3">
+		<div class="row">
+			<div class="col-m-12 d-flex">
+				<div class="card dark-card text-center my-1" style="background: transparent;">
+					<div>
+						<app-history-navigation 
+						
+						[resolution]="resolution" [startDate]="startDate" [endDate]="endDate" (onViewChange)="onNavigationDateChange($event)"> </app-history-navigation>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+	
+	<!-- Automation -->
+	<div class="px-3">
+		<div class="row">
+			<div class="col-md-6 d-flex">
+				<div class="card dark-card text-center my-1">
+					<h3>{{'Automation usage' | translate}}</h3>
+					<div>
+						<app-automation-usage-volume-chart 
+						(goDeeperEventEmitter)="onGoDeeperAutomation($event)"
+						[resolution]="resolution"
+						[startDate]="startDate"
+						[endDate]="endDate"
+						[propertyId]="propertyId"
+						[tag]="tag"
+						>
+						</app-automation-usage-volume-chart>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-6 d-flex">
+				<div class="card dark-card text-center my-1">
+					<h3>{{'Automation units usage' | translate}}</h3>
+					<div>
+						<app-automation-usage-percent-chart
+						[structure]="structure"
+						[propertyId]="propertyId"
+						(goDeeperEventEmitter)="onGoDeeper($event)"
+						[resolution]="resolution"
+						[startDate]="startDate"
+						[endDate]="endDate"
+						[tag]="tag"
+						
+						>
+					
+					</app-automation-usage-percent-chart>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+	
+	<!-- Hospitality -->
+	<div class="px-3">
+		<div class="row">
+			<div class="col-md-6 d-flex">
+				<div class="card dark-card text-center my-1">
+					<h3>{{'Call usage' | translate}}</h3>
+					<div>
+						<app-call-usage-volume-chart
+							(goDeeperEventEmitter)="onGoDeeperCalls($event)"
+							[resolution]="resolution"
+							[startDate]="startDate"
+							[endDate]="endDate"
+							[propertyId]="propertyId"
+							[tag]="tag"
+						>
+						</app-call-usage-volume-chart>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-6 d-flex">
+				<div class="card dark-card text-center my-1">
+					<h3>{{'Call units usage' | translate}}</h3>
+					<div>
+						<app-call-usage-percent-chart
+						[structure]="structure"
+						[propertyId]="propertyId"
+						(goDeeperEventEmitter)="onGoDeeper($event)"
+						[resolution]="resolution"
+						[startDate]="startDate"
+						[endDate]="endDate"
+						[tag]="tag"
+						
+						></app-call-usage-percent-chart>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+</div>

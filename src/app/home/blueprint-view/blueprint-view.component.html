@@ -1,0 +1,35 @@
+<div class="d-flex">
+  <pxb-blueprint 
+    [blueprintInfo]="blueprintInfo"
+    [roomsInfo]="roomsInfo"
+    [isEditable]="false"
+    (onSaveEmitter)="onSaveBlueprint($event)"
+    (onBlueprintUnitClickEmitter)="onBlueprintUnitClick($event)"
+    [customComponentClass]="customClass" style="flex:1"
+    data-toggle="modal" data-target="#roomDetailsInfo">
+
+  </pxb-blueprint>
+  <div class="px-5">
+    <header>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </header>
+    <div class="my-4">
+      <h5 class="m-0"><i class="material-icons sold-circle circle-mask bg-success"></i> Occupied</h5>
+    </div>
+  </div>
+</div>
+
+
+<property-summary-room-info-dialog 
+  [selectedRoom]="selectedRoom">
+</property-summary-room-info-dialog>

@@ -1,0 +1,12 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+
+  <div class="chart-header">
+    <div>Tempo médio de atendimento</div>
+    <app-filter [items]="categories" [selected]="selectedCategory" (selectedModified)="pickLoopItem($event, selectedSector)"></app-filter>
+    <app-filter [items]="sectors" [selected]="selectedSector" (selectedModified)="pickLoopItem(selectedCategory, $event)"></app-filter>
+  </div>
+  <div style="width: 100%;">
+    <div #canvas id="canvas" style="width:100%; height: 400px;">
+    </div>
+  </div>
+</div>

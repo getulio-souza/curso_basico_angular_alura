@@ -1,0 +1,23 @@
+
+
+.filter {
+    background-color: #434c58;
+    color: white;
+    outline: none;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 0;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 0.6; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+  }

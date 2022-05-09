@@ -1,0 +1,65 @@
+<!-- nova marcação -->
+<div class="d-flex">
+  <div class="dark-card my-1 w-100">
+    <div *ngFor="let chiller of chillers">
+    <div class="row my-3">
+      <div class="col-6 ext-temp text-center opacity-08">
+        <div class="d-flex align-items-center justify-content-center">
+            <span>
+                <img src="assets/assets-customer-base/weather-white/cloudy.svg" width="50" height="50" alt="temperature outside">
+              </span>
+            <span class="d-flex align-items-stretch">
+              <span class="mx-2" *ngIf="chiller?.thermometer?.tempOutsideLabel || chiller.thermometer?.tempOutsideLabel == 0" >
+               <span>{{ chiller.thermometer.tempOutsideLabel.split(' ')[0].split('.')[0] }}</span>
+                <span class="percentValue" *ngIf="chiller.thermometer.tempOutsideLabel.split(' ')[0].split('.').length > 1" >.{{ chiller.thermometer?.tempOutsideLabel.split(' ')[0].split('.')[1] }}</span>
+            </span>
+              <span *ngIf="chiller.thermometer?.tempOutsideLabel != null" class="sup-text-temp">
+                {{ chiller.thermometer.tempOutsideLabel.split(' ')[1] }}
+              </span>
+            </span>
+        </div>
+        <h3 class="text-uppercase ext-temp-label"> {{ "ext. temperature" | translate }}</h3>
+      </div>
+      <div class="col-6 ext-humi text-center opacity-08">
+          <div class="d-flex align-items-center justify-content-center">
+            <span class="mr-2">
+              <img src="assets/images/humidity.svg" width="30" height="50" alt="humidity">
+            </span>
+            <span>
+                <span *ngIf="chiller.hygrometer?.externalHumidity || chiller.hygrometer?.externalHumidity == 0">
+                  <span>{{ chiller.hygrometer?.externalHumidityLabel.split('.')[0] }}</span>
+                  <span class="percentValue" *ngIf="chiller.hygrometer?.externalHumidityLabel.split('.')[1]">.{{chiller.hygrometer?.externalHumidityLabel.split('.')[1]}}</span>
+                  <span class="percentValue" *ngIf="!chiller.hygrometer?.externalHumidityLabel.split('.')[1] == undefined">{{ chiller.hygrometer?.externalHumidityLabel.split('.')[1] }}</span>
+                 </span>
+                <span *ngIf="!chiller.hygrometer?.externalHumidity && chiller.hygrometer?.externalHumidity != 0">-</span>
+            </span>
+        </div>
+        <h3 class="text-uppercase ext-humi-label"> {{ "ext. humidity" | translate }}</h3>
+      </div>
+    </div>
+
+  <table class="table table-transparent-dark mt-4 table-hover">
+      <tr *ngFor="let temperature of temperatures" [ngClass]="{'chiller-warning': temperature.alert && temperature.value > temperature.alertValue, 'chiller-not-warning':true}">
+        <td class="text-left pl-4 border-0">
+            {{ temperature?.name | translate }}
+        </td>
+        <td class="border-0">
+            <span [ngClass]="{'d-block': temperature.alert && temperature.value > temperature.alertValue, 'd-none': true}">
+              <i class="material-icons"> warning </i>
+            </span>
+        </td>
+        <td class="text-right pr-4 temperature-value border-0" style="font-size: 25px; width: 110px;">
+            <span *ngIf="temperature.value || temperature.value == 0"> {{ temperature.valueLabel.split(' ')[0] }} <sup class="temperatureLabel">{{ temperature.valueLabel.split(' ')[1] }}</sup></span>
+            <span *ngIf="!temperature.value && temperature.value != 0">-</span>
+        </td>
+      </tr>
+  </table>
+
+  <div class="card-footer">
+      <div class="stats">
+        <i class="material-icons">access_time</i>
+        {{ "updated 30 seconds ago" | translate }}
+      </div>
+    </div>
+  </div>
+</div>

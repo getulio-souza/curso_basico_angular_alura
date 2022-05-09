@@ -1,0 +1,11 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+
+  <div class="chart-header center">
+    <div>Top 4 Setores mais Demandados por uma Categoria</div>
+  </div>
+  <app-filter [items]="loopItems" [selected]="selectedItem" (selectedModified)="pickLoopItem($event)"></app-filter>
+  <div style="width: 100%;">
+    <div #canvas id="canvas" style="width:100%; height: 300px;">
+    </div>
+  </div>
+</div>

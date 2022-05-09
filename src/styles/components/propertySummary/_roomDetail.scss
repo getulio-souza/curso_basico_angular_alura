@@ -1,0 +1,87 @@
+.room-detail-header {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: auto 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.d-flex {
+  display: flex !important;
+  flex-grow: 1;
+}
+.timeline-item {
+  // top: 5px !important;
+  border-radius: 18px;
+}
+
+.room-detail{
+  position: relative;top: 100px;
+}
+
+.room-detail-timeline {
+  background: #434c58;
+  height: 60px;
+}
+
+.timeline-group {
+  &:nth-child(even) {
+    background: #333c49;
+  }
+  &:nth-child(odd) {
+    background: #434c58;
+  }
+}
+
+.timeline-labelset .timeline-label .timeline-inner,
+.timeline-time-axis .timeline-text {
+  color: #ffffff;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+.sold {
+  .timeline-item {
+    background: 	#7878ff !important;
+    border: 	#7878ff !important;
+  }
+}
+
+.sensor-door {
+  .timeline-item {
+    background: #18a055!important;
+    border: #18a055 !important;
+  }
+}
+
+.relay-level-state {
+  .timeline-item {
+    background: #caca54 !important;
+    border: #caca54 !important;
+  }
+}
+
+.lock-state {
+  .timeline-item {
+    background: #ca5e5e !important;
+    border: #ca5e5e !important;
+  }
+}
+
+
+.master-switch {
+  .timeline-item {
+    background: 	#90EE90 !important;
+    border: 	#90EE90 !important;
+  }
+}

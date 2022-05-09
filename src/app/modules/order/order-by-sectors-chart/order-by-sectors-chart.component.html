@@ -1,0 +1,12 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+
+  <div class="chart-header center">
+    <div>Número de pedidos por setor</div>
+  </div>
+  <app-filter [items]="loopItems" [selected]="selectedItem" (selectedModified)="pickLoopItem($event)"></app-filter>
+  <div style="width: 100%;">
+    <div #canvas id="canvas" style="width:100%; height: 300px;">
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,93 @@
+<nav class=" navbar navbar-summary text-white  navbar-expand-lg navbar-transparent navbar-fixed fixed-top "
+  *ngIf="complete == true && !showSubdivisionDetails  ||  showSubdivisionDetails && !showUnitDetails">
+  <div class="container-fluid justify-content-center">
+    <div class="navbar-wrapper">
+
+      <div class="navbar-brand">
+        <button *ngIf="showSubdivisionDetails" class="btn btn-secondary btn-round btn-just-icon"
+          (click)="backToPropertySummary()">
+          <i _ngcontent-c29="" class="material-icons"> keyboard_arrow_left </i>
+        </button>
+        <span *ngIf="!showSubdivisionDetails"> {{'Property summary' | translate }}</span>
+        <span *ngIf="showSubdivisionDetails"> {{selectedSubdivision.name}}</span>
+      </div>
+
+      <!-- unit filter -->
+      <building-unit-filter 
+        [hidden]="showSubdivisionDetails ||
+        properties?.propertySummary?.propertySubdivisionFilter == null"
+        
+        [subdivisionFilterLevel]="properties?.propertySummary?.propertySubdivisionFilter?.level"
+        [subdivisionFilterLabel]=properties?.propertySummary?.propertySubdivisionFilter?.label
+        [structure]="structure"
+        [properties]="properties"
+        [propertyId]="propertyId"
+        (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"
+        
+        >
+      </building-unit-filter>
+      <!-- end unit filter -->
+
+
+    </div>
+    <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+  </div>
+
+</nav>
+
+
+<div class="property-summary"
+  [ngClass]="{'summary-complete': complete == true && !showSubdivisionDetails ||  showSubdivisionDetails && !showUnitDetails} ">
+  <nav class="navbar text-white navbar-vilas navbar-expand-lg navbar-transparent ">
+
+    <div *ngIf="selectedSubdivision" class="carousel-vilas">
+      <owl-carousel-o [options]="config">
+        <ng-template carouselSlide *ngFor="let subdivisionSummary of subdivisionSummaries; let i=index">
+          <button (click)="onDotSubdivisionClick(subdivisionSummary)"
+            class="btn btn-lg btn-secondary btn-round btn-just-icon"
+            [ngClass]="{'button-active': selectedSubdivision.id == subdivisionSummary.id}" style="cursor: pointer;">
+            {{subdivisionSummary.shortName}}
+          </button>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </nav>
+  <div class="pt-3" [hidden]="showSubdivisionDetails && showUnitDetails">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 text-center d-flex align-items-center" *ngIf="selectedSubdivision">
+          <h2 class="my-4 w-100"> {{selectedSubdivision?.name}} </h2>
+        </div>
+        <div [ngClass]="{'col-lg-12' : !selectedSubdivision, 'col-lg-10' : selectedSubdivision}">
+          <home-summary-info *ngIf="!showSubdivisionDetails" [showSoldBars]="showSoldBars"
+            [showOccupancyBars]="showOccupancyBars" [showConsumptionSummaryData]="showConsumptionSummaryData"
+            [showDndBars]="showDndBars" [summary]="generalSummary"></home-summary-info>
+          <home-summary-info *ngIf="showSubdivisionDetails" [showSoldBars]="showSoldBars"
+            [showOccupancyBars]="showOccupancyBars" [showConsumptionSummaryData]="showConsumptionSummaryData"
+            [showDndBars]="showDndBars" [summary]="selectedSubdivision"></home-summary-info>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- complete component -->
+  <!-- subdivisions cards summary -->
+  <div class="summary-card-content" style="height: 100%;" *ngIf="complete == true">
+    <div class="container" *ngIf="complete == true && !showSubdivisionDetails">
+      <div *ngFor="let subdivisionSummary of subdivisionSummaries">
+        <!-- subdivision summary card -->
+        <home-card-summary style="cursor: pointer;" [showSoldBars]="showSoldBars"
+          [showOccupancyBars]="showOccupancyBars" [showConsumptionSummaryData]="showConsumptionSummaryData"
+          [showDndBars]="showDndBars" [summary]="subdivisionSummary" (click)="onCardSummaryClick(subdivisionSummary)">
+        </home-card-summary>
+      </div>
+    </div>
+
+    <!-- subdivision details (blueprint or grid) -->
+    <div *ngIf="showSubdivisionDetails">
+      <app-level-details [propertyId]="propertyId" [roundValueInfo]="roundValueInfo" [properties]="properties"
+        [structure]="structure" [selectedFloor]="selectedSubdivision"></app-level-details>
+    </div>
+
+  </div>
+</div>

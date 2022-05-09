@@ -1,0 +1,12 @@
+<h2 style="text-align: center;"> {{deviceConfig?.name}} </h2>
+
+<h3 *ngIf="hasError || temperature != null" style="text-align: center;"> {{getTempLabel()}}  </h3>
+
+<div  *ngIf="!hasError && temperature == null" style="width: 90%; display: flex; margin: auto;">
+    <img src="assets/loading.svg" alt="loading" style="flex: 1; height: 55px;">
+</div>
+
+<div style="display: flex; width: 58%; margin: auto;"> 
+    <button style="flex: 1;"   (click)="setTemperatureUomIsFahrenheit(false)" type="button" class="btn btn-dark">ºC</button>
+    <button style="flex: 1;"(click)="setTemperatureUomIsFahrenheit(true)" type="button" class="btn btn-dark">ºF</button>
+</div>

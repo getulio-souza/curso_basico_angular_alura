@@ -1,0 +1,11 @@
+<div class="main-panel home"
+    [ngStyle]="backgroundStyle"
+>
+  <home-property-summary 
+    *ngIf="ready" 
+    [propertyId]="propertyId"
+    [complete]="true"
+    [structure]="structure"
+    [properties]="properties">
+  </home-property-summary>
+</div>

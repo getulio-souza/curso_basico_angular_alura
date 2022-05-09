@@ -1,0 +1,13 @@
+<div style="color: white; padding: 10px;" >
+  
+    <h3 style="margin: 0px;"> 
+    {{'Occupancy'| translate}}/{{'Sold'| translate}}</h3>
+
+  <i class="material-icons" style="position: absolute;right: 10px; top:10px; cursor: pointer" (click)="onCloseButtonClick()">
+    close
+  </i>
+
+
+  <div class="card-content">
+    <nvd3 [options]="options" [data]="data"></nvd3>
+  </div>

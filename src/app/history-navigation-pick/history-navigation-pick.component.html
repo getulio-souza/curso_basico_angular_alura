@@ -1,0 +1,10 @@
+<div class="light-group" style="border-radius: 4px; display: flex;">
+  <div>
+    <p-calendar [ngModel]="rangeDates" (ngModelChange)="setRangeDate($event)" selectionMode="range" [readonlyInput]="true" [hideOnDateTimeSelect]="true" [showTime]="showTime"
+      styleClass="historyNavigationCalendarPick" #calendar [showIcon]="true" [locale]="getCalendarLang()">
+    </p-calendar>
+  </div>
+  <div style="margin-left: 4rem; width: 10rem;" class="charts charts-header">
+    <app-filter [items]="periods" [selected]="period" (selectedModified)="pickPeriod($event)"></app-filter>
+  </div>
+</div>

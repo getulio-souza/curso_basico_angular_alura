@@ -1,0 +1,24 @@
+
+<div *ngIf="thermometers?.length > 0" class="dark-card d-flex flex-column justify-content-between min-height-250">
+  <div class="mb-5">
+    <table class="table table-transparent-dark mt-4 table-hover table-striped">
+      <tr *ngFor="let currentThermometer of thermometers">
+        <td class="text-left pl-4" style="font-size: 14px">
+          {{currentThermometer.name}}
+        </td>
+        <td class="text-right pr-4" style="font-size: 25px;">
+          <span class="d-flex justify-content-end" *ngIf="currentThermometer.temperature || currentThermometer.temperature == 0">
+            <span>{{currentThermometer.temperatureLabel.split(' ')[0] }}</span>
+            <span class="temperatureLabel ml-1"> {{ currentThermometer.temperatureLabel.split(' ')[1] }} </span>
+          </span>
+          <span *ngIf="!currentThermometer.temperature && currentThermometer.temperature != 0">-</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="card-footer clock-update-time">
+      <div class="stats">
+        <i class="material-icons">access_time</i> {{ 'updated 30 seconds ago' | translate }}
+      </div>
+    </div>
+</div>

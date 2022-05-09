@@ -1,0 +1,8 @@
+<div class="dropdown">
+  <button class="form-control -input-select dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [disabled]="!items.length || disabled" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 18ch;">
+    <span>{{ selected  ?  (selected | translate) : caption}}</span>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button class="dropdown-item" type="button" (click)="pick(item)" *ngFor="let item of list">{{item | translate}}</button>
+  </div>
+</div>

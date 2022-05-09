@@ -1,0 +1,17 @@
+<nvd3 [options]="options" [data]="data"></nvd3>
+
+<div class="container" style="margin-top: -150px;">
+  <div class="online-label">{{onlineThermostatsPerc}}%</div>
+  <hr class="card-divid">
+  <div class="row">
+    <div class="col text-uppercase">
+      <h3> {{ onlineThermostats?.length }} </h3>
+      <h6> {{ 'Online' | translate }}</h6>
+    </div>
+    <div class="col text-uppercase">
+      <h3> {{ thermostatsTotal }} </h3>
+      <h6> {{ 'Total' | translate }}</h6>
+    </div>
+  </div>
+  <hr class="card-divid">
+</div>

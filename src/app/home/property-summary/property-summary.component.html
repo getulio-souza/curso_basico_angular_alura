@@ -1,0 +1,83 @@
+<nav class=" navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top " *ngIf="complete == true && !showSubdivisionDetails  ||  showSubdivisionDetails && !showUnitDetails">
+  <div class="container-fluid justify-content-center">
+    <div class="navbar-wrapper">
+     <button *ngIf="showSubdivisionDetails" class="btn btn-secondary btn-round btn-just-icon" (click)="backToPropertySummary()" >
+      <i _ngcontent-c29="" class="material-icons"> keyboard_arrow_left </i>
+    </button>
+     <a class="navbar-brand">
+       <span *ngIf="!showSubdivisionDetails"> {{'Property summary' | translate }}</span>
+       <span *ngIf="showSubdivisionDetails"> {{selectedSubdivision.name}}</span>
+     </a>
+
+     <!-- unit filter -->
+     <building-unit-filter
+      *ngIf="!showSubdivisionDetails" 
+      [structure]="structure"
+      [properties]="properties"
+      [propertyId]="propertyId"
+      (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"
+      >
+    </building-unit-filter>
+    <!-- end unit filter -->
+
+    </div>
+    <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+  </div>
+</nav>
+
+
+<div class="property-summary" [ngClass]="{'summary-complete': complete == true && !showSubdivisionDetails ||  showSubdivisionDetails && !showUnitDetails} ">
+  
+  <div class="summary-content pt-3" [hidden]="showSubdivisionDetails && showUnitDetails">
+    <div class="floor-tabs overflow-style" *ngIf="selectedSubdivision">
+      <div class="mx-2" *ngFor="let subdivisionSummary of subdivisionSummaries">
+        <button (click)="onDotSubdivisionClick(subdivisionSummary)" class="btn btn-secondary btn-round btn-just-icon  btn-lg "
+          [ngClass]="{'active': selectedSubdivision.id == subdivisionSummary.id}" style="cursor: pointer;">
+          {{subdivisionSummary.shortName}}
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      
+      <div class="row">
+        
+        <div  [ngClass]="{'col-lg-12' : !selectedSubdivision, 'col-lg-11' : selectedSubdivision} ">
+          <home-summary-info *ngIf="!showSubdivisionDetails" [showSoldBars]="showSoldBars" [showOccupancyBars]="showOccupancyBars" [showConsumptionSummaryData]="showConsumptionSummaryData" [showDndBars]="showDndBars" [summary]="generalSummary"></home-summary-info>
+          <home-summary-info *ngIf="showSubdivisionDetails"  [showSoldBars]="showSoldBars" [showOccupancyBars]="showOccupancyBars" [showConsumptionSummaryData]="showConsumptionSummaryData" [showDndBars]="showDndBars" [summary]="selectedSubdivision"></home-summary-info>
+        </div>
+        <!-- <div class="col-lg-1 text-center" *ngIf="selectedSubdivision" >
+            <i class="material-icons" style=" font-size: 70px;cursor: pointer;" [hidden]="isBlueprintViewSelected" (click)="selectBlueprintView()">picture_in_picture_alt</i>
+            <i class="material-icons" style=" font-size: 70px;cursor: pointer;" [hidden]="!isBlueprintViewSelected" (click)="selectTableView()">list</i>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- complete component -->
+  <!-- subdivisions cards summary -->
+  <div class="summary-card-content" *ngIf="complete == true">
+    <div class="container" *ngIf="complete == true && !showSubdivisionDetails">
+      <div *ngFor="let subdivisionSummary of subdivisionSummaries">
+        <!-- subdivision summary card -->
+        <home-card-summary style="cursor: pointer;"
+                           [showSoldBars]="showSoldBars"
+                           [showOccupancyBars]="showOccupancyBars"
+                           [showConsumptionSummaryData]="showConsumptionSummaryData"
+                           [showDndBars]="showDndBars"
+                           [summary]="subdivisionSummary"
+                           (click)="onCardSummaryClick(subdivisionSummary)">
+        </home-card-summary>
+      </div>
+    </div>
+
+    <!-- subdivision details (blueprint or grid) -->
+    <div *ngIf="showSubdivisionDetails">
+      <!-- <home-floor-details-grid 
+        [propertyId]="propertyId" [roundValueInfo]="roundValueInfo"
+        [structure]="structure" [selectedFloor]="selectedSubdivision"
+        (onUnitClickEmitter)="onUnitClick($event)" (onBackRoomDetailEmitter)="onBackRoomDetail($event)"
+        ></home-floor-details-grid> -->
+    </div>
+    
+  </div>
+</div>

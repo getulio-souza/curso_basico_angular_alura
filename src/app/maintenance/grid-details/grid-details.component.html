@@ -1,0 +1,28 @@
+<section class="container-fluid grid-details transition navbar-summary"
+         [ngClass]="{'grid-details--open': panelOpen}"
+         [ngStyle]="{'height': panelOpen ? 'calc(100% - 260px)' : panelHeightInitial}">
+  <button type="button" (click)="onShowContentGrid()" class="rounded-circle btn btn-toggle-panel">
+    <i class="material-icons">
+      <span *ngIf="panelOpen">expand_more</span>
+      <span *ngIf="!panelOpen">expand_less</span>
+    </i>
+  </button>
+  <div class="grid-details-title" [ngClass]="{ 'd-none': panelOpen }">
+    <h6 class="grid-details-title--bottom text-center"> {{ 'event list' | translate }} </h6>
+  </div>
+  <div class="row grid-details-header d-flex align-items-end align-items-md-end justify-content-md-between pb-3 px-5" [ngClass]="{ 'd-none': !panelOpen }">
+    <h3 class="title text-white m-0"> {{ 'Event List' | translate }} </h3>
+    <div class="btn-group" role="group">
+        <button class="btn btn-secondary  text-uppercase active" type="button">{{ 'table' | translate }}</button>
+        <button class="btn btn-secondary text-uppercase " type="button">{{ 'grid' | translate }}</button>
+      </div>
+  </div>
+  <div class="row">
+    <div class="grid-details-content grid-details-centent--table">
+      <proxper-grid
+      [customColumns]="cols"
+      [showDataButton]="showDataButton"
+      [data]="data"></proxper-grid>
+    </div>
+  </div>
+</section>

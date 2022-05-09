@@ -1,0 +1,67 @@
+<!-- control components -->
+
+<!-- hvac -->
+<div class="row" *ngIf="selectedItem?.control == 'hvac'">
+    <!-- hvac should display all content as a hvac controller -->
+    <div style="width: 100%;">
+        <div>
+            <engineering-hvac-control-device
+                [device]="selectedDevice">
+            </engineering-hvac-control-device>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- pump -->
+<div class="row" *ngIf="selectedItem?.control == 'relay' || selectedItem?.control == 'pump'">
+    <div style="width: 100%;">
+        <div>
+            <engineering-relay-control
+                [propertyId]="propertyId"
+                [deviceConfig]="selectedItem"
+                [device]="selectedDevice">
+            </engineering-relay-control>
+        </div>
+    </div>
+</div>
+
+<!-- cistern -->
+<div class="row" *ngIf="selectedItem?.control == 'cistern'">
+    <div style="width: 100%;">
+        <div>
+            <engineering-cistern-control
+                [propertyId]="propertyId"
+                [device]="selectedDevice">
+            </engineering-cistern-control>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row" *ngIf="selectedItem?.control == 'manometer'">
+    <div style="width: 100%;">
+        <div>
+            <engineering-manometer-control [device]="selectedDevice"
+                [deviceConfig]="selectedItem"
+                [pressureUomIsPsi]="pressureUomIsPsi">
+            </engineering-manometer-control>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="selectedItem?.control == 'thermometer'">
+    <div style="width: 100%;">
+        <div>
+
+            <engineering-thermometer-control
+                [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                [deviceConfig]="selectedItem"
+                [device]="selectedDevice"></engineering-thermometer-control>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="main-panel home" id="homePage" [ngClass]="{'summary-complete': isSidebarOpen == true}"
+  [ngStyle]="backgroundStyle">
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper"></div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+  <div class="home-content">
+    <div class="general-infos">
+      <div class="info-content">
+        <div class="row align-items-center">
+          <!-- weather clock and calendar -->
+          <div class="col-md-7">
+            <home-weather [hasLoadedProperties]="hasLoadedProperties"
+              [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit" class="d-flex align-items-center">
+            </home-weather>
+          </div>
+          <div class="col-md-5">
+            <div class="date-content">
+              <home-clock class="mb-3"></home-clock>
+              <home-calendar *ngIf="properties" [properties]="properties" class="mb-3"></home-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-summary" id="home-summary">
+      <div class="header">
+        <button (click)="onPropertyDetailsClick()" class="btn btn-primary btn-round btn-just-icon btn-lg">
+          <i class="material-icons">
+            add
+          </i>
+        </button>
+      </div>
+      <!-- property summary -->
+      <home-property-summary *ngIf="properties && structure" [propertyId]="propertyId" [complete]="showPropertyDetails"
+        [structure]="structure" [properties]="properties"></home-property-summary>
+    </div>
+  </div>
+</div>

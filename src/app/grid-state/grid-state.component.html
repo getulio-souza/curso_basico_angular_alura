@@ -1,0 +1,100 @@
+<!-- invalid data -->
+<span *ngIf="!isValid(room[column.field])"> -- </span>        
+
+<!-- valid data -->
+<span *ngIf="isValid(room[column.field])">
+
+    <!-- Default cases -->
+    <span *ngIf="
+                column.field != 'icon' &&
+                column.field != 'status' &&
+                column.field != 'deviceTypeAndId' &&
+                column.field != 'presence' &&
+                column.field != 'timestamp' &&
+                column.field != 'lastTraceReceived' &&
+                column.field != 'stateSince' &&
+                column.field != 'dnd' &&
+                column.field != 'doorSensor' &&
+                column.field != 'lockState' &&
+                column.field != 'switchState' &&
+                column.field != 'levelState' &&
+                column.field != 'sold' ">
+        {{room[column.field]}}
+    </span>
+
+    <!-- presence -->
+    <span *ngIf="column.field == 'presence' ">
+        <div class=" material-icons sold-circle circle-mask" [ngClass]="{'bg-success' : room[column.field] == 'true'}"></div>
+    </span>
+
+    <span *ngIf="column.field == 'status' ">
+        <div class=" material-icons sold-circle circle-mask" [style.background-color]="room[column.field]"></div>
+    </span>
+
+    <span *ngIf="column.field == 'icon'" class="d-flex justify-content-center align-content-center">
+        <div class=" material-icons">
+          {{room[column.field]}}
+        </div>
+    </span>
+
+    <!-- deviceTypeAndId -->
+    <span *ngIf="column.field == 'deviceTypeAndId'" class="d-flex align-items-center flex-columnumn flex-md-row">
+        <div class=" material-icons mr-2" [ngStyle]="{'color' : room.connection === 'Online' ? '#00dca9' : '#7d8c8f'}" >
+            {{room?.icon}}
+        </div>
+        {{room?.deviceName}}
+    </span>
+
+    <!-- date -->
+    <span *ngIf="column.field == 'timestamp' || column.field == 'stateSince' || column.field == 'lastTraceReceived' ">
+        {{room[column.field] | date: 'short'}}
+    </span>
+
+    <!-- pmsState / sold -->
+    <span *ngIf="column.field == 'sold' ">
+        {{room[sold]}}
+    </span>
+
+    <!-- switch / relay -->
+    <span *ngIf="column.field == 'switchState' ">
+        <i *ngIf="room[column.field] == 'off' || room[column.field] == 'false'" class="material-icons" style="color:#e65452">
+            power_off
+        </i>
+        <i *ngIf="room[column.field] == 'on' || room[column.field] == 'true'" class="material-icons" style="color:#00dca9">
+            power
+        </i>
+    </span>
+
+    <!-- level -->
+    <span *ngIf="column.field == 'levelState' ">
+        <i class="material-icons" 
+            [ngClass]="{
+                'lightOn': room[column.field] == 'on',
+                'lightOff': room[column.field] == 'off'
+            }">
+            highlight
+        </i>
+    </span>
+
+    <!-- doorSensor -->
+    <span *ngIf="column.field == 'doorSensor' || column.field == 'lockState'">
+        <i *ngIf="room[column.field] == 'closed' || room[column.field] == 'locked'" class="material-icons" style="color:#e65452">
+            lock
+        </i>
+        <i *ngIf="room[column.field] == 'opened' || room[column.field] == 'unlocked'" class="material-icons" style="color:#00dca9">
+            lock_open
+        </i>
+    </span>
+
+    <!-- dnd -->
+    <span *ngIf="column.field == 'dnd' ">
+        <i *ngIf="room[column.field] == 'do-not-disturb'" class="material-icons" style="color:#e65452">
+            remove_circle_outline
+        </i>
+        <i *ngIf="room[column.field] == 'make-up-room'" class="material-icons" style="color:#00dca9">
+            check_circle_outline
+        </i>
+        <div *ngIf="room[column.field] == 'none'" class="material-icons sold-circle circle-mask" style="background-color: darkgrey"></div>
+    </span>
+
+</span>        

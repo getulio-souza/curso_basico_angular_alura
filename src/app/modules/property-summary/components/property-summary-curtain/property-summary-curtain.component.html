@@ -1,0 +1,25 @@
+<section class=" transition" [ngClass]="{
+      '--open': panelOpen,
+      'card-selected': showFloorDetails && panelOpen,
+      'card-not-selected': !showFloorDetails && panelOpen}">
+  <!-- [ngStyle]="{'height': panelOpen ? 'calc(100% - 85px)' : panelHeightInitial}" -->
+
+  <div class="summary-content">
+    <button type="button" (click)="openCurtain()" *ngIf="!panelOpen && svg != null"
+      class="rounded-circle btn btn-secondary btn-toggle-panel">
+      <i class="material-icons">
+        <span>expand_less</span>
+      </i>
+    </button>
+
+    <button type="button" (click)="closeCurtain()" *ngIf="panelOpen && svg != null"
+      class="rounded-circle btn btn-secondary btn-toggle-panel close-button">
+      <i class="material-icons">
+        <span *ngIf="panelOpen">close</span>
+      </i>
+    </button>
+    <home-property-summary2 [propertyId]="propertyId" [floorIdFromFloorplan]="floorIdFromFloorplan" [complete]="true"
+      [structure]="structure" [properties]="properties" (cardSummaryClickEmitter)="onCardSummaryChange($event)">
+    </home-property-summary2>
+  </div>
+</section>

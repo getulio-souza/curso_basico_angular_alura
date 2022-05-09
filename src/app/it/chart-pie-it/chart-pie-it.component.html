@@ -1,0 +1,10 @@
+<div class="px-3" style="height: 477px;">
+  <h3 class="text-white ">{{ 'Status' | translate }}</h3>
+  <div class="d-flex justify-content-center" style="position: relative; top: 50px;">
+    <nvd3 [options]="options" [data]="data"></nvd3>
+    <div class="total-device-online text-center">
+      {{ percentOnline }}<span style="font-size: 16px; color: #bdc0c4;">%</span>
+      <h6 class="text-uppercase">Online</h6>
+    </div>
+  </div>
+</div>

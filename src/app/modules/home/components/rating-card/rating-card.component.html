@@ -1,0 +1,32 @@
+<div class="mx-2">
+        <div class="card card--property dark-card my-0">
+          <div class="card-header">
+            <div class="card-header-content m-0 px-0 d-flex justify-content-between">
+              <span class="col-2 px-0 d-flex align-content-center flex-wrap"><i class="material-icons"> {{indicatorGroup.icon}} </i></span>
+              <span class="col-6 pl-0 d-flex align-content-center flex-wrap">
+                <h6 class="title">{{ indicatorGroup?.label | translate }}</h6>
+              </span>
+              <span class="col-4">
+                <span *ngIf="average != null" class="ratingChartLabel">{{average}}</span>
+                <span *ngIf="average == null" class="ratingChartLabel">--</span>
+                <home-rating-pie-chart [rating]='average'></home-rating-pie-chart>
+              </span>
+            </div>
+          </div>
+          <div class="card-content p-3">
+            <table class="table mb-0">
+              <tr *ngFor="let indicator of indicatorGroup?.indicators">
+                      <td class="card-content-table-icons w-20">
+                              <i class="material-icons"> {{indicator.icon}} </i>
+                      </td>
+                      <td class="card-content-table-label">{{ indicator?.label | translate }}</td>
+                      <td class="card-content-table-value"> {{indicator?.data?.label ? indicator?.data?.label : '--' }} </td>
+              </tr>
+            </table>
+            <footer class="blockquote-footer" style="position: absolute;bottom: 10px;">
+              {{ 'Updated' | translate }} {{indicatorGroup?.date | date:'short' }}
+            </footer>
+
+          </div>
+        </div>
+    </div>

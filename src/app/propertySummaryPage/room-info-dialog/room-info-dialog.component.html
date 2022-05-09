@@ -1,0 +1,88 @@
+<!-- Modal -->
+<div class="modal fade" id="roomDetailsInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content text-dark">
+          <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">{{selectedRoom?.name}} ({{selectedRoom?.id}}) </h3>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <h6>{{'Sold' | translate}}:
+                          <span *ngIf="selectedRoom?.sold">true</span>
+                          <span *ngIf="!selectedRoom?.sold">false</span>
+                      </h6>
+
+                  </div>
+                  <div class="col-sm-6">
+                      <h6 class="align-middle">{{'Occupancy' | translate}}:
+                          <div class=" material-icons sold-circle circle-mask align-middle" [ngClass]="{'bg-success' : selectedRoom?.presence}"></div>
+                      </h6>
+
+                  </div>
+              </div>
+              <hr />
+              <div class="card dark-card">
+                  <header class="card-header d-flex justify-content-between">
+                      <div>
+                          <h3>
+                              <i class="material-icons">ac_unit</i> HVAC
+                          </h3>
+                      </div>
+                      <div class="btn-group btn-group-toggle ">
+                          <button (click)="changeMetric('c')" type="button" [ngClass]="{'active': isCelsius}" class="btn btn-secondary">ºC</button>
+                          <button (click)="changeMetric('f')" type="button" [ngClass]="{'active': !isCelsius}" class="btn btn-secondary">ºF</button>
+                      </div>
+
+                  </header>
+                  <div class="card-body">
+                      <hr />
+                      <div class="row">
+                          <div class="col-sm-6 text-center">
+                              <h6>{{'Temperature' | translate}}:</h6>
+                              <h2 *ngIf="isCelsius">{{selectedRoom?.temperature}}
+                                  <sup>
+                                      <small>ºC</small>
+                                  </sup>
+                              </h2>
+                              <h2 *ngIf="!isCelsius">{{selectedRoom?.temperature * 9.0 / 5.0 + 32}}
+                                  <sup>
+                                      <small>ºF</small>
+                                  </sup>
+                              </h2>
+                          </div>
+                          <div class="col-sm-6 text-center">
+
+                              <h6>{{'Setpoint' | translate}}</h6>
+                              <h2 *ngIf="isCelsius"> {{selectedRoom?.setpoint}}
+                                  <sup>
+                                      <small>ºC</small>
+                                  </sup>
+                              </h2>
+                              <h2 *ngIf="!isCelsius"> {{selectedRoom?.setpoint * 9.0 / 5.0 + 32}}
+                                  <sup>
+                                      <small>ºF</small>
+                                  </sup>
+                              </h2>
+
+                          </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <h6>{{'Mode' | translate}}: {{selectedRoom?.mode}}</h6>
+                          </div>
+                          <div class="col-sm-6">
+                              <h6>{{'Fanspeed' | translate}}: {{selectedRoom?.fanspeed}} </h6>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>

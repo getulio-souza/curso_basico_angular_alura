@@ -1,0 +1,48 @@
+<section class="container-fluid grid-details transition navbar-summary" [ngClass]="{'grid-details--open': panelOpen}"
+  [ngStyle]="{'height': panelOpen ? 'calc(100% - 390px)' : panelHeightInitial}">
+  <button type="button" (click)="onShowContentGrid()" class="rounded-circle btn btn-toggle-panel">
+    <i class="material-icons">
+      <span *ngIf="panelOpen">expand_more</span>
+      <span *ngIf="!panelOpen">expand_less</span>
+    </i>
+  </button>
+  <div class="grid-details-title" [ngClass]="{ 'd-none': panelOpen }">
+    <h6 class="grid-details-title--bottom text-center"> {{ 'Survey responses' | translate }} </h6>
+  </div>
+  <div class="grid-details-title" [ngClass]="{ 'd-none': !panelOpen }">
+    <h3 class="text-center"> {{ 'Survey responses' | translate }} </h3>
+  </div>
+  <div class="row">
+
+      <a *ngIf="showDetailResponse" 
+          class="btn btn-secondary btn-round btn-just-icon" (click)="showDetailResponse = false">
+          <i class="material-icons"> keyboard_arrow_left </i>
+      </a>
+
+
+    <div class="col s2" style="padding-left: 25px;"> 
+        <input type="text" class="filter" *ngIf="!showDetailResponse" placeholder="{{'Search' | translate}}" pInputText [(ngModel)]="keyword"
+          name="search" (keyup)="filterTraces()" />
+    </div>
+  
+      
+    <div  *ngIf="isReady && !showDetailResponse" class="grid-details-content grid-devices-centent--table">
+      <proxper-grid 
+        [customColumns]="gridColumns"
+        [multiSortMeta]="multiSortMeta"
+        [showDataButton]="false"
+        [data]="gridDataFiltered"
+        (onGridItemEmitter)="onGridItemClick($event)">
+      </proxper-grid>
+    </div>
+
+
+    <survey-response-detail
+      style="width: 100%; margin-bottom: 50px;background-color: #333c49"
+      *ngIf="showDetailResponse"
+      [surveyResponse]="selectedResponse"
+      [questionsMap]="allQuestionsMap"></survey-response-detail>
+
+
+  </div>
+</section>

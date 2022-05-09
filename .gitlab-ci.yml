@@ -1,0 +1,62 @@
+image: nexus.cloud.evolutix.com.br:5000/devops/nodejs-ci:gitlab
+
+stages:
+  - check
+  - build
+  - deploy
+  - update
+  - docker-deploy
+
+version:
+  tags:
+    - docker
+  stage: check
+  script:
+    - run version-check
+  only:
+    - develop
+    - master
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - VERSION
+
+build:
+  tags:
+    - docker
+  stage: build
+  script:
+    - run build
+  only:
+    - develop
+    - master
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - ${CI_PROJECT_DIR}
+    exclude:
+      - ${CI_PROJECT_DIR}/.git
+
+docker:
+  tags:
+    - docker
+  image: nexus.cloud.evolutix.com.br:5000/devops/docker-ci:gitlab
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - run build-and-push
+  only:
+    - develop
+    - master
+
+dcos:
+  tags:
+    - docker
+  stage: docker-deploy
+  script:
+    - "./restart-dcos-app.sh dev/health/services/api-order"
+  only:
+    - develop
+  dependencies:
+    - docker

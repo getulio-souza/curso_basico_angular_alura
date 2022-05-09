@@ -1,0 +1,56 @@
+<div class="main-panel home" [ngStyle]="backgroundStyle" style="overflow: hidden;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top ">
+    <div class="container-fluid justify-content-center">
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">{{ "Room Control" | translate }} </a>
+      </div>
+      <!-- unit filter -->
+     <building-unit-filter
+     [structure]="structure"
+     [subdivisionFilterLevel]="propertySubdivisionLevel"
+     [subdivisionFilterLabel]="propertySubdivisionLabel"
+     [showAllAsOption]="true"
+     [showStep2]="true"
+     [properties]="properties"
+     [propertyId]="propertyId"
+     [externalChangeStep1]="selectedFloor"
+     [externalChangeStep2]="selectedRoom"
+     (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"
+     (onChangeStructureFilterEmitter2)="onChangeStructureFilter2($event)"
+     >
+    </building-unit-filter>
+    <!-- end unit filter -->
+
+    
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="content">
+        <div class="summary-content">
+        <div class="summary-card-content row" style="height: 100%; padding-bottom: 0px !important;">
+        
+          <div style="flex: 4; margin-right: 5px; margin-left: 15px">
+            <rooms-grid [selectedRoom]="selectedRoom"  (selectedRoomChange)="onSelectedRoomChange($event)" [selectedFloor]="selectedFloor" [roomsInfo]="roomsInfo"></rooms-grid>
+          </div>
+
+          <div class="card dark-card" style="flex: 1;min-width: 350px; margin: 40px 25px 5px 15px; overflow-y: scroll;  height: 88vh;">
+            <room-control
+              [propertyId]="propertyId"
+              [roomControlConfig]="roomControlConfig"
+              [selectedRoom]="selectedRoom"
+              >
+            
+            </room-control>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,48 @@
+<div *ngFor="let advancedColdChamber of advancedColdChambers">
+  <div class="dark-card d-flex flex-column justify-content-between min-height-250">
+  <div class="d-flex flex-wrap">
+
+    <div class="box" [ngClass]="getBackgroundColor(advancedColdChamber?.negativeChamberDoorTemperature)">
+      <h3 *ngIf="advancedColdChamber.negativeChamberDoorTemperature">{{advancedColdChamber?.negativeChamberDoorTemperatureLabel}}</h3>
+      <h3 *ngIf="!advancedColdChamber.negativeChamberDoorTemperature">--</h3>
+      <label class="text-white">{{ 'Door Temperature' | translate }}</label>
+      <label class="text-white">{{ 'Negative Ch.' | translate }}</label>
+    </div>
+
+    <div class="box" [ngClass]="getBackgroundColor(advancedColdChamber?.negativeChamberRearTemperature)">
+      <h3 *ngIf="advancedColdChamber.negativeChamberRearTemperature">{{advancedColdChamber?.negativeChamberRearTemperatureLabel}}</h3>
+      <h3 *ngIf="!advancedColdChamber.negativeChamberRearTemperature">--</h3>
+      <label class="text-white">{{ 'Rear Temperature' | translate }}</label>
+      <label class="text-white">{{ 'Negative Ch.' | translate }}</label>
+    </div>
+
+    <div class="box" [ngClass]="getBackgroundColor(advancedColdChamber?.negativeChamberHumidity)">
+      <h3 *ngIf="advancedColdChamber.negativeChamberHumidity">{{advancedColdChamber?.negativeChamberHumidityLabel}}</h3>
+      <h3 *ngIf="!advancedColdChamber.negativeChamberHumidity">--</h3>
+      <label class="text-white">{{ 'Humidity' | translate }}</label>
+      <label class="text-white">{{ 'Negative Ch.' | translate }}</label>
+    </div>
+
+
+    <div class="box" [ngClass]="getBackgroundColor(advancedColdChamber?.positiveChamberTemperature)">
+      <h3 *ngIf="advancedColdChamber.positiveChamberTemperature">{{advancedColdChamber?.positiveChamberTemperatureLabel}}</h3>
+      <h3 *ngIf="!advancedColdChamber.positiveChamberTemperature">--</h3>
+      <label class="text-white">{{ 'Temperature' | translate }}</label>
+      <label class="text-white">{{ 'Positive Ch.' | translate }}</label>
+    </div>
+
+    <div class="box" [ngClass]="getBackgroundColor(advancedColdChamber?.doorSensor)">
+      <h3 *ngIf="advancedColdChamber.doorSensor >= 0">{{advancedColdChamber?.doorSensorLabel | translate}}</h3>
+      <h3 *ngIf="!(advancedColdChamber.doorSensor >= 0)">--</h3>
+      <label class="text-white"> {{ 'Front Door' | translate }}</label>
+    </div>
+
+  </div>
+  <div class="card-footer clock-update-time">
+      <div class="stats">
+        <i class="material-icons">access_time</i>
+        {{ 'updated 30 seconds ago' | translate }}
+      </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,77 @@
+<div class="card dark-card">
+  <div class="card-header" data-background-color="deltix">
+    <h4 class="title">{{ 'Cold Chambers' | translate }} Evolutix</h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <table class="table table-transparent-dark table-striped table-hover">
+          <tr>
+            <td>
+              {{ 'Front' | translate }}
+            </td>
+            <td>
+              {{coldChamber.frontTemp}}º
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ 'BackRoom' | translate }}
+            </td>
+            <td>
+              {{coldChamber.backRoomTemp}}º
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ 'Food surface' | translate }}
+            </td>
+            <td>
+              {{coldChamber.foodSurfaceTemp}}º
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <table class="table table-hover">
+          <tr>
+            <td>
+              {{ 'Compressor' | translate }}
+            </td>
+            <td *ngIf="coldChamber.isCompressorOn" class='temp-text'>
+              On
+            </td>
+            <td *ngIf="!coldChamber.isCompressorOn" class='temp-text'>
+              Off
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{ 'Door' | translate }}
+            </td>
+            <td *ngIf="coldChamber.isDoorOpen" class='temp-text'>
+              Open
+            </td>
+            <td *ngIf="!coldChamber.isDoorOpen" class='temp-text'>
+              Closed
+            </td>
+          </tr>
+          <tr>
+            <td>{{ 'Evaporator' | translate }} </td>
+            <td *ngIf="coldChamber.isEvaporatorOn" class='temp-text'> On </td>
+            <td *ngIf="!coldChamber.isEvaporatorOn" class='temp-text'> Off </td>
+          </tr>
+          <tr>
+            <td>{{ 'Humity' | translate }}</td>
+            <td class='temp-text'> {{coldChamber.humidity}}%</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <i class="material-icons">access_time</i> {{ 'updated 30 minutes ago' | translate }}
+    </div>
+  </div>
+</div>

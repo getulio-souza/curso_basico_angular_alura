@@ -1,0 +1,13 @@
+<div class="card dark-card" pDraggable="dd" 
+    (onDragStart)="dragStart($event)"
+    (onDragEnd)="dragEnd($event)"
+    (click)="onComponentClick($event)"
+    >
+    <div class="card-body p-2 text-center">
+        <h5 class="roomId mb-1">{{roomInfo.name}} </h5>
+        <span class="sold-circle circle-mask d-inline-block" 
+        [ngClass]="{'bg-success': roomInfo.presence == 'true'}"></span>
+        <h6 *ngIf="roomInfo.consumptionLastHour" class="m-0" style="text-transform: none">{{roomInfo.consumptionLastHour}}<small> kWh</small></h6>
+        <h6 *ngIf="!roomInfo.consumptionLastHour" class="m-0">--</h6>
+    </div>
+</div>

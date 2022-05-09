@@ -1,0 +1,48 @@
+<div style="width: 100%;">
+  <div class="nav  nav-tabs justify-content-center">
+    <div *ngFor="let tab of propertySubdivisionTabs" class="nav-item" style="cursor: pointer;">
+      <div class="nav-link" [ngClass]="{'active': selectedTab?.id == tab.id}"  (click)="onClickTab(tab)">
+        {{ tab.name | translate}}
+      </div>
+      
+      <div *ngIf="selectedTab?.id == tab.id" class="underline"> </div>
+    </div>
+  </div>
+</div>
+
+<div style="background-color: #3f4854;  overflow: hidden;">
+
+  <!-- detailed table -->
+  <div class="py-4" [hidden]="selectedTab?.id != 'grid'">
+    <home-floor-details-grid [propertyId]="propertyId" [roundValueInfo]="roundValueInfo" [structure]="structure"
+      [selectedFloor]="selectedFloor" (onUnitClickEmitter)="onUnitClick($event)"
+      (onBackRoomDetailEmitter)="onBackRoomDetail($event)" (onRoomsInfoBuildEmitter)="onRoomsInfoBuild($event)"></home-floor-details-grid>   
+  </div>
+
+  <div  *ngIf="selectedTab?.id == 'floorPlans'">
+      <app-ground-plan-grid
+      [propertyId]="propertyId"
+      [selectedFloor]="selectedFloor"
+      [hideGridColumns]="hideGridColumns"
+      [properties]="properties"
+      [floorPlans]="floorPlans"
+      [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+      [columns]="gridColumns"
+      [roomsInfo]="roomsInfo"
+      ></app-ground-plan-grid>
+  </div>
+  <div  *ngIf="selectedTab?.id == 'bms'">
+    
+   <app-bms
+    [bmsConfig]="properties?.propertySummary?.bms"
+    [alertConfig]="properties?.alerts"
+    [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+    [pressureUomIsPsi]="pressureUomIsPsi"
+    [propertyId]="propertyId"
+    [selectedFloor]="selectedFloor"
+    
+    ></app-bms>
+  </div>
+
+
+</div>

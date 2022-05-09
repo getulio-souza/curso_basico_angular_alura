@@ -1,0 +1,13 @@
+
+<div class="d-flex justify-content-between">
+<h3 class="text-capitalize text-white" style="margin-left: 3%;">{{'Historical' | translate}}</h3>
+</div>
+<app-history-navigation
+[resolution]="resolution"
+[startDate]="startDate"
+[endDate]="endDate"
+(onViewChange)="onNavigationDateChange($event)"
+>
+</app-history-navigation>
+
+<nvd3 [options]="options" [data]="data"></nvd3> 

@@ -1,0 +1,32 @@
+<div class="card dark-card">
+  <div class="card-header" data-background-color="deltix">
+    <h4 class="title">{{ 'Energy Consumption' | translate }}</h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+
+
+      <div class="col-xs-6 col-md-7">
+        <div class="temp-box">
+          <h1 class='temp-text'> {{geralMainBuilding}}W</h1>
+          <small>{{ 'Main Building' | translate }} </small>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-5">
+        <div class="temp-box">
+          <h1 class='temp-text'> {{geralAnnexBuilding}}W</h1>
+          <small>{{ 'Annex Building' | translate }} </small>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <i class="material-icons">access_time</i> {{ 'updated 30 minutes ago' | translate }}
+    </div>
+  </div>
+</div>

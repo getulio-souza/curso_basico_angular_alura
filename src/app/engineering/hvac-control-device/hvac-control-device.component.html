@@ -1,0 +1,66 @@
+<div class="unit-control p-0">
+  <div>
+    <div class="d-flex justify-content-around py-4">
+      <span class="text-center">
+        <i class="material-icons">opacity</i>
+        <h2 *ngIf="umidity != null" class="mt-0">{{umidity}}<sup class="unit">%</sup></h2>
+        <h2 *ngIf="umidity == null" class="mt-0">--<sup class="unit">%</sup></h2>
+      </span>
+      <span class="text-center">
+        <i class="material-icons">waves</i>
+        <h2 class="mt-0">{{temperature | number : '2.0-0'}}<sup class="unit">ºC</sup> </h2>
+      </span>
+    </div>
+    <div class="text-center py-4">
+      <section class="d-flex justify-content-around align-items-center">
+        <button class="btn-setpoint-more" (click)="onClickSetpointDown($event)" (touchstart)="onClickSetpointDown($event)">
+          <i class="material-icons">expand_more</i>
+        </button>
+        <div class="hvac-control mb-4 noselect">
+          <h6 class="m-0">hvac</h6>
+            <h1 class="text-uppercase" [ngStyle]="{'color': setPointPower ? '#b4b8bc' : '#ffffff'}">
+              <span  class="fade-in temp" *ngIf="getMode() === 'cool' || getMode() === 'auto'">{{getTempLabel(cool_setpoint)}}  </span> 
+              <span  class="fade-in temp" *ngIf="getMode() === 'heat'">{{getTempLabel(heat_setpoint)}} </span> 
+              <span  class="fade-in temp" *ngIf="getMode() === 'off'">
+                --
+              </span> 
+              <sup class="unit fade-in">ºC</sup>
+            </h1>
+          <h6>setpoint</h6>
+        </div>
+        <button class="btn-setpoint-less" (click)="onClickSetpointUp($event)" (touchstart)="onClickSetpointUp($event)">
+          <i class="material-icons">expand_less</i>
+        </button>
+      </section>
+
+      <div class="d-flex justify-content-around ">
+        <button  (click)="onClickPower($event)" (touchstart)="onClickPower($event);" class="btn btn-just-icon btn-default btn-round btn-lg btn-link">
+          <i class="material-icons" [ngStyle]="{'color': getMode() != 'off' ? '#00dca9':'#ffffff'}">
+            power_settings_new
+          </i>
+        </button>
+
+        <div class="column">
+          <button (click)="onClickIconMode($event)" (touchstart)="onClickIconMode($event)" [disabled]="getMode() == 'off'" class="btn btn-secondary btn-round btn-just-icon btn-lg">
+            <span *ngIf="!mode || mode == 'off'">off</span> 
+            <span *ngIf="mode =='auto'">auto</span> 
+            <i class="material-icons" *ngIf="mode == 'cool'">ac_unit</i> 
+            <i class="material-icons" *ngIf="mode == 'heat'">whatshot</i>
+          </button>
+
+        </div>
+        
+        <div class="column">
+          
+          <button [disabled]="getMode() == 'off'" (click)="onClickChangeFanSpeed($event)" (touchstart)="onClickChangeFanSpeed($event)" class="btn btn-secondary btn-round btn-just-icon btn-lg" class="btn btn-secondary btn-round btn-just-icon btn-lg">
+            <i class="material-icons"><img style="height: 34px;display: block;margin: 11px;" [src]="'assets/assets-proxper-base/fan/icon-fan-' + fanIconNumber + '.svg'"></i>
+          </button>
+
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

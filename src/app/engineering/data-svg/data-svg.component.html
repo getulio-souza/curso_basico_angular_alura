@@ -1,0 +1,68 @@
+
+<div *ngIf="isLoading">
+    <img src="assets/loading.svg" style="display: block; margin-left: auto; margin-right: auto;" alt="loading">
+</div>
+
+<div *ngIf="!isLoading">
+
+    <!-- Button to open modal, its being used only by code, keep it hidden -->
+    <button id="controlButton" [hidden]="true" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#controlModal">
+        Control button
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade " id="controlModal" tabindex="-1" role="dialog" aria-labelledby="controlLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-blue-grey-800">
+                <div class="modal-header">
+                    <h5 class="modal-title m-0" id="controlLabel">{{'Control' | translate}} </h5>
+                    <button type="button" class="close" style="outline: none;"data-dismiss="modal" aria-label="Fechar"
+                        (click)="onHideDialog($event)">
+                        <i class="material-icons" aria-hidden="true">close</i>
+                    </button>
+                </div>
+                
+                
+                <div class="modal-body">
+
+                    <div *ngIf="selectedAlert != null">
+                        <app-alert-dialog
+                        [alertConfigMap]="alertConfigMap"
+                        [alert]="selectedAlert"></app-alert-dialog>
+                    </div>
+
+                    
+                    <div *ngIf="selectedDevice == null">
+                        <img src="assets/loading.svg" style="display: block; margin-left: auto; margin-right: auto;" alt="loading">
+                    </div>
+                
+                    <span *ngIf="selectedDevice != null">
+
+                        <app-modal-control
+                            [propertyId]="propertyId"
+                            [selectedDevice]="selectedDevice"
+                            [selectedItem]="selectedItem"
+                            [pressureUomIsPsi]="pressureUomIsPsi"
+                            [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                        >
+
+                        </app-modal-control>
+
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [@visibilityChanged]="isLoading ? 'hidden' : 'shown'" id="{{ 'svgContainerId-' + svgConfig.svg }}" class="svgContainer"> </div>
+
+
+
+<div style="position: absolute;z-index: 1;top: 0px; margin: 0px; overflow: hidden; width: 400px;">
+    <app-alert-carousel [alertConfigMap]="alertConfigMap" [selectedAlert]="selectedAlert" [alerts]="alerts"> </app-alert-carousel>
+
+</div>

@@ -1,0 +1,23 @@
+<section *ngIf="floorPlans">
+
+  <!-- content component -->
+  <section class="grid-details--content">
+    <div class="row no-gutters">
+
+      <div class="col-md-3 col-lg-2 py-2 px-2" style="background-color:#434c58; ">
+          <button type="button"  class="btn btn-secondary btn-block text-right" *ngFor="let column of columns" [ngClass]="{
+                      'd-none': column.field === 'name' || column.field === 'timestamp',
+                      'active': field == column.field
+                    }"  (click)="onClickColumn(column)">
+              {{ column.header | translate }} <i class="material-icons">keyboard_arrow_right</i>
+          </button>
+      </div>
+      <div class="col p-2">
+        <app-floor-plan-svg style="width:100%;" [roomsInfo]="roomsInfo" [field]="field" [propertyId]="propertyId"
+          [floor]="selectedFloor" [properties]="properties">
+        </app-floor-plan-svg>
+      </div>
+    </div>
+
+  </section>
+</section>

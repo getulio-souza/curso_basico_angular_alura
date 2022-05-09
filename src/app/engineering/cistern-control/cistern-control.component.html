@@ -1,0 +1,18 @@
+
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div [hidden]="dataLoading" id="controlImage" style="width: 50%; margin: auto; position: relative; display: block;" [innerHtml]="controlImageSvg"  ></div>
+    <img *ngIf="dataLoading && !hasError" src="assets/loading.svg" alt="loading">
+  </div>
+  
+  <div class="col-md-6">
+   
+    <h4>{{device?.name}}</h4>
+        
+  </div>
+  
+
+</div>
+

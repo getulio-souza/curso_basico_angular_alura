@@ -1,0 +1,22 @@
+<div>
+
+  <h1 style="text-align: center;">{{cardLabel}}</h1>
+  <div style="margin:  auto; text-align: center">
+    <div *ngFor="let card of cardsList" class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a style="text-transform: uppercase;">{{card.composedName}}</a>
+        </h4>
+
+        <p class="card-text">
+          <br>
+          <b> {{ 'Consumption' | translate }} </b> {{card.trace.consume | number:'1.0-0'}} kWh
+          <br>
+          <b>{{ 'Occupancy' | translate }}:</b> {{card.trace.occupancy * 100 | number:'1.0-0'}}%
+          <br>
+          <b>{{ 'Sold' | translate }}: </b>{{card.trace.sold * 100 | number:'1.0-0'}} %
+      </div>
+
+    </div>
+  </div>
+</div>

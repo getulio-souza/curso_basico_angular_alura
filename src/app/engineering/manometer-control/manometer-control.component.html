@@ -1,0 +1,12 @@
+<h2 style="text-align: center;"> {{deviceConfig?.name}} </h2>
+
+<h3 *ngIf="hasError || pressure != null" style="text-align: center;"> {{getPressureLabel()}}  </h3>
+
+<div  *ngIf="!hasError && pressure == null" style="width: 90%; display: flex; margin: auto;">
+    <img src="assets/loading.svg" alt="loading" style="flex: 1; height: 55px;">
+</div>
+
+<div style="display: flex; width: 58%; margin: auto;">
+    <button style="flex: 1"  (click)="setPressureUomIsPsi(false)" type="button" class="btn btn-dark"> Pascal</button>
+    <button style="flex: 1"  (click)="setPressureUomIsPsi(true)" type="button" class="btn btn-dark"> PSI </button>
+</div>

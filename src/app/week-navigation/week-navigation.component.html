@@ -1,0 +1,8 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+    <div class="pointer" *ngIf="resolution == 'hour'" (click)="oneStepBack()">
+        <span > {{ 'Weekly view' | translate}}</span>
+    </div>
+    <h3 *ngIf="resolution == 'day'">{{'Week Historical' | translate}}</h3>
+    <h3 *ngIf="resolution == 'hour'"> {{getWeekDayName() | translate}}</h3>
+</div>
+ 

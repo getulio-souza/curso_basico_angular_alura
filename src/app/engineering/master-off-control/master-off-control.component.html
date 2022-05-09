@@ -1,0 +1,26 @@
+<div class="px-3">
+  <div class="light-levels mb-3 fade-in"
+       [ngClass]="{'fade-in':state == 'on'}"
+       [ngStyle]="{
+       'border-color': state == 'on' ? color : '#4b535f',
+       'background': state == 'on' ? 'radial-gradient('+ colorWhite + ', '+ color +')': 'transparent'
+       }">
+    <i class="material-icons fade-in"
+       [ngClass]="{'fade-in':state == 'on'}"
+       [ngStyle]="{'color': state == 'on' ? color : '#ffffff'}">
+       flash_on
+    </i>
+  </div>
+</div>
+<div class="card-footer justify-content-center">
+<div>
+  <button (click)="onClick($event)"
+          [attr.disabled]="state != 'on'? true : null"
+          [ngStyle]="{'color':state == 'on' ? '#ffffff' : '#b4b8bc'}"
+          type="button" class="btn btn-link">{{'Off' | translate}} </button>
+  <button (click)="onClick($event)"
+          [attr.disabled]="state == 'on' ? true : null"
+          [ngStyle]="{'color':state != 'on' ? '#ffffff' : '#b4b8bc'}"
+          type="button" class="btn btn-secondary">{{'On' | translate}} </button>
+</div>
+</div>

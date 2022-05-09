@@ -1,0 +1,346 @@
+@import 'components/propertySummary/propertySummary.scss';
+@import '../../src/app/building-unit-filter/building-unit-filter.component.scss';
+@import '../../src/app/modules/home/components/homePage2/homePage2.component.scss';
+
+@import 'components/crmPage/crm-page.scss';
+@import 'components/control/control.scss';
+
+
+.sidebar,
+.userIcon {
+  z-index: 99999999;
+}
+
+body {
+  font-size: 1rem;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+  
+  background-color: #333c49 !important;
+
+  
+  .summary-card-content {
+    background-color: #333c49 !important;
+  }
+
+  .form-check, label {
+    font-size: 14px;
+  }
+
+  
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #0089f2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1599ff; 
+}
+
+
+
+// app-room-detail .ui-autocomplete-dd input.ui-corner-all{
+//     width       : 122px !important;
+//     border      : solid 1px;
+//     border-color: white;
+//     margin-right: 28px;
+//     text-align  : center;
+// }
+
+home-property-summary2 .owl-dots {
+  position: unset !important;
+}
+
+
+
+
+.--map{
+  height: 100vh;
+  overflow: hidden;
+}
+.--map .summary-content {
+  border-top-left-radius : 10px;
+  border-top-right-radius: 10px;
+  margin-top             : -230px;
+  position: relative;
+  display: block;
+}
+
+.--map .navbar-summary {
+  background-image: linear-gradient(180deg, rgba(51, 60, 73, 0.85) 0%, rgba(51, 60, 73, 0) 100%);
+  background-color: transparent !important;
+  box-shadow      : none;
+}
+
+.--map .navbar-vilas {
+  top             : 70px;
+  background-color: transparent !important;
+  background-image: none;
+  position        : fixed;
+  left            : 100px;
+  width: calc(100% - 100px);
+  z-index: 1;
+}
+
+.nav-open .--map .navbar-vilas{
+  
+  width: calc(100% - 260px);
+  left            : 260px;
+} 
+
+.carousel-vilas {
+  width : 360px;
+  margin: 0px auto;
+  
+}
+
+
+app-alert-carousel .owl-dots {
+  position: relative !important;
+
+  .carousel-alerts {
+    width : 300px;
+    margin: 0px auto;
+    
+    .owl-stage-outer {
+      overflow: hidden !important;
+    }
+  }
+
+}
+
+
+
+.--map #svgContainer,
+.--map #svgContainer svg {
+  height          : 100vh;
+  width           : 100%;
+  transition      : 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) height, 2s cubic-bezier(0.075, 0.82, 0.165, 1) opacity;
+  opacity         : 1;
+  background-color: #abd6d3;
+}
+
+.main-panel.--map.--open #svgContainer,
+.main-panel.--map.--open #svgContainer svg {
+  height : 350px;
+  opacity: 0.5;
+}
+
+
+.main-panel.--map.--open {
+  height: inherit;
+  overflow: visible;
+}
+
+
+.carousel-vilas .owl-stage-outer {
+  overflow: hidden !important;
+}
+
+.carousel-vilas .owl-next,
+.carousel-vilas .owl-prev {
+  top: -7px !important;
+}
+
+// Modal
+.modal-header {
+  border-bottom: 1px solid #1d232b;
+  align-items  : center;
+
+  .close {
+    box-shadow: none;
+    color     : #fff;
+  }
+}
+
+.modal-footer {
+  border-top: 1px solid #1d232b;
+}
+
+
+.button-active {
+  background-color: #00dca9 !important;
+}
+
+.bg-blue-grey-50 {
+  background-color: #a9adb3
+}
+
+.bg-blue-grey-100 {
+  background-color: #91969d
+}
+
+.bg-blue-grey-200 {
+  background-color: #787e87
+}
+
+.bg-blue-grey-300 {
+  background-color: #606771
+}
+
+.bg-blue-grey-400 {
+  background-color: #545b66
+}
+
+.bg-blue-grey-500 {
+  background-color: #4b535f
+}
+
+.bg-blue-grey-600 {
+  background-color: #47505b
+}
+
+.bg-blue-grey-700 {
+  background-color: #434c58
+}
+
+.bg-blue-grey-900 {
+  background-color: #333c49
+}
+
+.bg-blue-grey-dark {
+  background-color: #1d232b
+}
+
+.svgContainer {
+  width : 100%;
+  height: auto;
+}
+
+.svgContainer svg {
+  width : 100%;
+  height: auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.light-group {
+  background-color: rgba(255,255,255,0.1);
+}
+
+
+.charts {
+  .chartsDiv {
+    position: relative;
+    padding: 2rem;
+    * {
+      border-radius: 4px;
+    }
+    .chart-header {
+      display: flex;
+      width: 90%;
+      padding-bottom: 1rem;
+      margin-top: 1.2rem;
+      div {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+      }
+      .dropdown {
+        .dropdown-menu,
+        .show {
+          display: block;
+        }
+      }
+    }
+    .chart-header.center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      div {
+        margin-right: 0;
+      }
+    }
+  }
+  //Dropdown 
+  .dropdown {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    .dropdown-menu {
+      background-color: #333c49;
+      transition: unset;
+      .dropdown-item {
+        color: white;
+      }
+    }
+    .dropdown-menu,
+    .show {
+      display: block;
+    }
+    .dropdown-toggle.-input-select {
+      text-transform: inherit;
+      font-size: 1rem;
+      min-width: 100px;
+      text-align: left;
+      padding-right: 2rem;
+    }
+    .form-control,
+    .ui-inputtext {
+      border-radius: 4px;
+      padding: 0 5px;
+      border: none;
+      color: #fff;
+      height: 40.8px;
+    }
+    .form-control:focus {
+      color: #91969d;
+      background-color: rgba(255, 255, 255, .1);
+      border-color: #a4d7ff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(36, 160, 255, .25);
+    }
+  }
+  .dropdown-toggle.-input-select::after {
+    top: 17px;
+    opacity: 0.5;
+  }
+}
+
+.historyNavigationCalendarPick {
+  .ui-datepicker-group {
+    background-color: #333c49;
+    color: white;
+  }
+  .ui-datepicker-current-day {
+    background-color: #009fff;
+  }
+  .ui-inputtext {
+    background-color: #47505b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 12rem;
+    cursor: pointer;
+  }
+  .ui-calendar-button {
+    border: none;
+    background-color: #47505b;
+    color: white;
+    font-size: 1.4rem;
+    margin-left: -0.5rem;
+  }
+}
+
+.charts,.charts-header {
+  .dropdown {
+    .form-control {
+      height: 2rem;
+    }
+  }
+}

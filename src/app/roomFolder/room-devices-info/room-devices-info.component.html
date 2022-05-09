@@ -1,0 +1,58 @@
+<div>
+  <div style="float:left;">
+    <div style="width: 450px;height: 650px;margin-bottom: 110px;border-style: solid;background-color: white;">
+      <div style="background-color: 	#4682B4;height: 50px;font-size: 25px;padding: 12px;">
+        <span style="color: white;position: relative;top: 0px;background-color:  #4682B4;font-size: 17px;float: right;">
+          20/07/2018
+          <i class="material-icons" style="position: relative; top:4px">date_range </i>
+        </span>
+      </div>
+      <div style="padding: 22px;">
+        <div class="hvac-icon">
+          <i class="material-icons" style="font-size: 90px;margin-left: 50px;color: mediumaquamarine;">
+            ac_unit
+          </i>
+          <h5 style="font-size: 20px;text-align: center;position:  relative;left: 75px;bottom: 75px;">HVAC</h5>
+        </div>
+
+
+        <div>
+          <span style="font-size: 22px;">{{'Temperature' | translate }}:
+            <b> {{currentTemp}}ºC </b>
+          </span>
+          <span style="font-size: 22px;"> Setpoint:
+            <b> {{setPoint}}ºC </b>
+          </span>
+          <span style="font-size: 22px;">{{'Mode' | translate }}:
+            <b> {{mode}} </b>
+          </span>
+          <span style="font-size: 22px;">{{'Fanspeed' | translate }}:
+            <b> {{fanspeed}} </b>
+          </span>
+          <span style="font-size: 22px;">{{'Occupied' | translate }}:
+            <b> {{hasPresence}}</b>
+          </span>
+        </div>
+
+
+
+        <div class="bulb-icon">
+          <i class="material-icons" style="font-size: 90px;margin-left: 50px;color: darkgoldenrod;">
+            &#xE90F;
+          </i>
+          <h5 style="font-size: 20px;text-align: center;position:  relative;left: 100px;bottom: 75px;text-transform: uppercase"> {{'lighting' | translate }}</h5>
+        </div>
+
+        <div>
+          <span style="font-size: 22px;">Switches
+            <b>{{switchesOn}} on; {{switchesOff}} off</b>
+          </span>
+          <span style="font-size: 22px;"> Dimmers:
+            <b>{{switchesOff}} on; {{dimmersOff}} off</b>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

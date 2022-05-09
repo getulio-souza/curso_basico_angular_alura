@@ -1,0 +1,13 @@
+<app-history-navigation
+[resolution]="resolution"
+[startDate]="startDate"
+[endDate]="endDate"
+(onViewChange)="onNavigationDateChange($event)"
+>
+</app-history-navigation>
+
+<div  style="margin-bottom: 20px;">
+    <nvd3 [options]="options" [data]="data" ></nvd3>
+</div>
+
+

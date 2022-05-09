@@ -1,0 +1,34 @@
+<div class="main-panel home" [ngStyle]="backgroundStyle">
+	<nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top ">
+		<div class="container-fluid justify-content-center">
+			<div class="navbar-wrapper">
+				<a class="navbar-brand">{{'Usage Report' | translate }} </a>
+			</div>
+			<app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+			
+			<building-unit-filter
+			*ngIf="properties && !showGrid"
+			[structure]="structure"
+			[properties]="properties"
+			[propertyId]="propertyId"
+			
+			(onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"
+			>
+		  	</building-unit-filter>
+
+		</div>
+	</nav>
+
+	<div class="property-summary summary-complete">
+
+		<div class="summary-card-content">
+
+			<app-usage-report-charts *ngIf="structure != null"
+			 [structure]="structure"
+			 [tag]="selectedFloor?.id"
+			 [propertyId]="propertyId"
+			 (onGridShowEmitter)="onGridClick($event)"
+			></app-usage-report-charts>
+
+		</div>
+	</div>

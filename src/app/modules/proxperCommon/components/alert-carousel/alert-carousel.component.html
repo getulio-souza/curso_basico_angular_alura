@@ -1,0 +1,13 @@
+<div style="width: 100%;">
+
+    <owl-carousel-o [options]="config">
+        <ng-template carouselSlide dataHash="{{alert?.deviceId}}" *ngFor="let alert of alerts">
+            <app-alert-dialog
+            [alertConfigMap]="alertConfigMap"
+            [alert]="alert"></app-alert-dialog>
+        </ng-template>
+
+
+    </owl-carousel-o>
+
+</div>

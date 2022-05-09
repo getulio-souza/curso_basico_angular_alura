@@ -1,0 +1,46 @@
+<div class="ui-g">
+  <div class="ui-g-4" style="text-align: center; border: #4a525a; border-style: solid">
+    <h3>{{contactName}}</h3>
+  </div>
+
+  <div class="ui-g-4" style="text-align: center; border: #4a525a; border-style: solid">
+    <h3>{{location}}</h3>
+  </div>
+
+  <div class="ui-g-4" style="text-align: center; border: #4a525a; border-style: solid">
+    <h3>{{surveyDate | date: 'short'}}</h3>
+  </div>
+
+</div>
+
+
+<div class="ui-g" *ngFor="let card of cards">
+  <div class="ui-g-6" style="text-align: center; border: #4a525a; border-style: solid">
+    <h4>{{card.questionLabel}}</h4>
+  </div>
+
+  <div class="ui-g-6" style="text-align: center; border: #4a525a; border-style: solid">
+
+    <span *ngIf="card.responseType == 'text'">
+      <h4>{{card.answer}}</h4>
+      <h4 *ngIf="card?.answer == null || card?.answer.length == 0">---</h4>
+    </span>
+
+
+    <span *ngIf="card.responseType == 'stars'">
+      <i class="material-icons star" [ngStyle]="{'color' : card.answer >= 1 ? 'e0e02eb8' : '#00000057'}">star</i>
+      <i class="material-icons star" [ngStyle]="{'color' : card.answer >= 2 ? 'e0e02eb8' : '#00000057'}">star</i>
+      <i class="material-icons star" [ngStyle]="{'color' : card.answer >= 3 ? 'e0e02eb8' : '#00000057'}">star</i>
+      <i class="material-icons star" [ngStyle]="{'color' : card.answer >= 4 ? 'e0e02eb8' : '#00000057'}">star</i>
+      <i class="material-icons star" [ngStyle]="{'color' : card.answer >= 5 ? 'e0e02eb8' : '#00000057'}">star</i>
+    </span>
+
+
+    <span *ngIf="card.responseType == 'boolean'">
+      <mat-icon *ngIf="card.answer == true" style="color: #00C07F; font-size: 80px;">done</mat-icon>
+      <mat-icon *ngIf="card.answer == false" style="color: #FF6562; font-size: 80px;">clear</mat-icon>
+      <h4 *ngIf="card.answer == null">---</h4>
+    </span>
+
+  </div>
+</div>

@@ -1,0 +1,120 @@
+/* Custom font */
+$font-family-sans-serif: Roboto;
+$font-size-base: 1.2rem;
+$headings-font-weight: 400;
+
+/* Custom colors*/
+
+$brand-primary: #24a0ff;
+$success: #00dca9;
+$warning: #ffa726;
+$info: #26c6da;
+$danger: #e45454;
+$proexper-grey: #333c49;
+$color-black: #1d232b;
+$theme-colors: (
+  'primary': #24a0ff,
+  'danger': $danger,
+  'success': $success,
+  'warning': $warning,
+  'info': $info,
+);
+
+$grid-gutter-width: 0.75rem;
+
+$red-400: theme-color(danger);
+$red-600: tint($red-400, 6%);
+
+$green-400: theme-color(success);
+$green-600: tint($green-400, 6%);
+
+$blue-grey-50: tint($proexper-grey, 58%);
+$blue-grey-100: tint($proexper-grey, 46%);
+$blue-grey-200: tint($proexper-grey, 34%);
+$blue-grey-300: tint($proexper-grey, 22%);
+$blue-grey-400: tint($proexper-grey, 16%);
+$blue-grey-500: tint($proexper-grey, 12%);
+$blue-grey-600: tint($proexper-grey, 10%);
+$blue-grey-700: tint($proexper-grey, 8%);
+$blue-grey-800: tint($proexper-grey, 6%);
+$blue-grey-900: $proexper-grey;
+$blue-grey-dark: $color-black;
+$blue-grey: $blue-grey-500;
+$border-radius: 3px;
+$border-radius-base: 3px;
+$border-radius-small: 2px;
+$border-radius-large: 6px;
+$border-radius-huge: 9px;
+$border-radius-label: 3px;
+$border-radius-extreme: 50px;
+
+$grey-50: tint($proexper-grey, 58%);
+$grey-100: tint($proexper-grey, 46%);
+$grey-200: tint($proexper-grey, 34%);
+$grey-300: tint($proexper-grey, 22%);
+$grey-400: tint($proexper-grey, 16%);
+$grey-500: tint($proexper-grey, 12%);
+$grey-600: tint($proexper-grey, 10%);
+$grey-700: tint($proexper-grey, 8%);
+$grey-800: tint($proexper-grey, 6%);
+$grey-900: $proexper-grey;
+$grey-dark: $color-black;
+$grey: $grey-500;
+
+// New colors
+
+$black-color: $proexper-grey;
+$black: $grey-dark;
+$rgb-black: '29,35,43';
+$white: #fff;
+$rgb-white: '250, 250, 250';
+
+$gray-color: $proexper-grey;
+$white-color: $white;
+
+//## Gray and brand colors for use across Bootstrap.
+
+$brand-primary: $primary !default; // #337ab7
+$brand-success: $success !default;
+$brand-info: $info !default;
+$brand-warning: $warning !default;
+$brand-danger: $danger !default;
+
+$base-blue: #24a0ff;
+$base-gray: #7d8c8f;
+$base-gren: #00dca9;
+$base-yellow: #d1c900;
+$base-red: #e84d4d;
+$base-black: #1d232b;
+
+$white-darker: #d9dadb;
+$white-dark: #f9fbff;
+$white: #ffffff;
+$white-light: #f5f7f9;
+
+$gray-darker: #3c4553;
+$gray-dark: #67788e;
+$gray: #929fb1;
+$gray-light: #cad5e3;
+$gray-lighter: #e9eef5;
+
+$yellow-darker: #e89700;
+$yellow-dark: #feb62b;
+$yellow: #fed737;
+$yellow-light: #e0ca6c;
+$yellow-lighter: #e6d509;
+
+$blue-darker: #333c49;
+$blue-dark: #809dff;
+$blue: #01b1ff;
+$blue-light: #01d2e3;
+$blue-lighter: #78bcf0;
+
+$green-dark: #068f29;
+$green: #06cc37;
+$green-light: #66bb6a;
+$green-lighter: #adec4d;
+
+$red-dark: #d52525;
+$red: $base-red;
+$red-light: #e86143;

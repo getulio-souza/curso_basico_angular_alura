@@ -1,0 +1,145 @@
+@import '../../../styles/variables.scss';
+
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  min-width: 550px;
+  max-height: none !important;
+  min-height: 435px !important;
+
+  padding: 30px 20px 25px;
+
+  border: 1px solid #e5e6e6;
+  border-radius: 12px;
+
+  box-shadow: 5px 5px 10px #2a6fa510;
+  color: $base-gray;
+}
+
+.modal-header {
+  display: grid;
+  place-content: center;
+
+  border: none !important;
+  span {
+    font-weight: bold;
+    font-size: 28px;
+  }
+}
+
+.close {
+  position: absolute !important;
+  display: flex;
+
+  width: 45px;
+  height: 45px;
+
+  top: -70px;
+  right: -300px;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  opacity: 1;
+
+  color: #000;
+  background: $gray-lighter;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+.body-small {
+  display: grid;
+  place-items: center;
+
+  .textAlert {
+    margin-top: -20px;
+
+    font-size: 18px;
+    text-transform: uppercase;
+
+    color: $base-red;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  width: 120px;
+  height: 38px;
+
+  padding: 0;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 500;
+  font-family: $font-family-sans-serif !important;
+
+  border: 1px solid $green-dark;
+  box-shadow: 5px 5px 10px rgba(42, 111, 165, 0.12);
+  transition: all 150ms ease-in-out;
+
+  color: $green-dark;
+  background-color: $white;
+
+  &:hover {
+    box-shadow: 5px 5px 10px rgba(42, 111, 165, 0.2);
+  }
+}
+
+.btn-primary {
+  &:hover {
+    border: 1px solid $green-dark;
+
+    color: $green-dark;
+    background: unset;
+  }
+}
+
+.btn-secondary {
+  border-color: $red;
+
+  color: $red;
+
+  &:hover {
+    border-color: $red;
+
+    color: $red;
+    background: unset;
+  }
+}
+
+.dialog-full {
+  width: 65%;
+  height: 100vh;
+
+  max-width: none;
+  max-height: none;
+
+  margin: 0 auto;
+}
+
+.content-full {
+  min-height: 100vh !important;
+  max-height: none !important;
+
+  padding: 5px !important;
+
+  border-radius: 0px;
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-full {
+  top: 10px;
+  right: -230px;
+}

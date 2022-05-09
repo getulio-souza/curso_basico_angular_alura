@@ -1,0 +1,20 @@
+<section class="notification-messages py-1 fixed-bottom d-flex justify-content-center align-items-center fade-in" *ngIf="showNotificationMessage"
+         [style.background]="backgroundColor">
+
+  <div class="notification-messages-icon mx-2">
+    <i *ngIf="severityMessage == 'error' || severityMessage == 'warn'" class="material-icons message-icon"> warning</i>
+    <i *ngIf="severityMessage == 'success'" class="material-icons message-icon"> check</i>
+  </div>
+
+  <div class="notification-messages-title">
+    <span> {{titleMessage}} </span>
+    <span class="notification-messages-detail hidden_991"> - {{detailMessage}} </span>
+  </div>
+
+  <div class="position-absolute float-right d-flex justify-content-center align-content-center" style="right: 3rem;">
+    <span class="d-flex justify-content-center align-content-center" style="margin-top: -6px;">
+      <i class="material-icons message-icon rounded-circle p-1" style="cursor: pointer; background: rgba(0,0,0,.2); font-size: 1rem;" *ngIf="isMessageClosable" (click)="clearMessages()" >close</i>
+    </span>
+  </div>
+
+</section>

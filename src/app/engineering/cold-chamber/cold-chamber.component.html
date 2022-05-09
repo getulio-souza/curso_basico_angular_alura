@@ -1,0 +1,23 @@
+<div *ngIf="coldChambers?.length > 0" class="card dark-card">
+  <div class="card-body" style="min-height: 250px;">
+    <table class="table table-transparent-dark table-hover">
+      <tr *ngFor="let coldChamber of coldChambers" [ngClass]="{
+                    'coldChamber-ok': coldChamber.temperature < 0,
+                    'coldChamber-warning': coldChamber.temperature >=0,
+                    'coldChamber-noValue': !coldChamber.temperature
+                    }">
+        <td>
+          {{coldChamber.name}}
+        </td>
+        <td>
+          <span *ngIf="coldChamber.temperature || coldChamber.temperature == 0">{{coldChamber.temperatureLabel}} </span>
+          <span *ngIf="!coldChamber.temperature && coldChamber.temperature != 0">-</span>
+        </td>
+      </tr>
+    </table>
+    <div class="card-footer">
+      <div class="stats">
+        <i class="material-icons">access_time</i> {{ 'updated 30 seconds ago' | translate }}
+      </div>
+    </div>
+  </div>

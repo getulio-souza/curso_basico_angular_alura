@@ -1,0 +1,20 @@
+{
+    "Historical": "Historical",
+    "navigation-date-month": "{{monthName}} {{year}}",
+    "navigation-date-hour": "{{monthName}} {{day}}",
+    "chart.occupancy.title" : "Occupancy",
+    "BackRoom": "Back",
+    "Home": "Home",
+    "label-date-simple": "{{month}} {{day}}",
+    "make-up-room": "Make Up Room",
+    "do-not-disturb": "Do Not Disturb",
+    "none": "Ready",
+    "ANSWERED_CALL": "Answered call",
+    "MISSED_CALL": "Missed call",
+    "REJECTED_CALL": "Rejected call",
+    "label-call-from": "From",
+    "label-call-to": "To",
+    "open-command": "On",
+    "close-command": "Off",
+    "no-data-avaliable": "No Data Avaliable"
+}

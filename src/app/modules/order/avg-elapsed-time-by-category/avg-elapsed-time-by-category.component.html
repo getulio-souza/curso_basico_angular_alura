@@ -1,0 +1,14 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+
+  <div class="chart-header center">
+    <div>Tempo médio de atendimento por categoria</div>
+  </div>
+  <app-filter [items]="sectors" [selected]="selectedSector" (selectedModified)="pickLoopItem($event)"></app-filter>
+  <div style="width: 100%;">
+    <div class="row" style="margin-left: 1rem; margin-right: 1rem; margin-top: 1rem; margin-bottom: 1rem;">
+      <div class="col-md-12" *ngFor="let element of avgs; let i = index">
+        <app-card-info-summary-item [bgColor]="getBackgroundColor()[i % getBackgroundColor().length]" [category]="element.key" [value]="element.value"></app-card-info-summary-item>
+      </div>
+    </div>
+  </div>
+</div>

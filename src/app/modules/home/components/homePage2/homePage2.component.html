@@ -1,0 +1,43 @@
+<!-- Nova marcaçã da home page -->
+<section class="main-panel home" id="homePage"
+	[ngClass]="{'summary-complete': isSidebarOpen == true, 'scroll-y': homePanelOpen}" [ngStyle]="backgroundStyle">
+	<!-- menu hamburguer mobile -->
+	<nav class="navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
+		<div class="container-fluid">
+			<app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+		</div>
+	</nav>
+
+	<!-- temperature -->
+	<section class="fade-in home-content ">
+		<!-- temperatura e calendario -->
+
+		<div class="general-infos">
+			<section class="info-content">
+				<div class="display-all">
+					<div class="content-home-weather">
+						<home-weather [hasLoadedProperties]="hasLoadedProperties"
+							[temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit" class="home-weather">
+						</home-weather>
+					</div>
+					<div class="content-home-clock">
+						<home-clock class="mb-3"></home-clock>
+						<home-calendar [properties]="properties" class="mb-3"></home-calendar>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- cards group -->
+		<div class="general-infos">
+			<perfect-scrollbar [config]="scrollBarConfig">
+				<div class="d-flex justify-content-md-center px-4">
+					<span *ngFor="let indicatorGroup of indicatorGroups">
+						<home-rating-card [propertyId]="propertyId" [indicatorGroup]="indicatorGroup">
+						</home-rating-card>
+					</span>
+				</div>
+			</perfect-scrollbar>
+		</div>
+	</section>
+</section>

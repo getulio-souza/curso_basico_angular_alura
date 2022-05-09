@@ -1,0 +1,89 @@
+@import '../../styles/variables.scss';
+
+.login-container {
+  // display: flex;
+  width: 100%;
+  height: 100%;
+
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.loginImg {
+  width: 60%;
+  height: 100vh;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.login-page {
+  // width: 40%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white-light;
+}
+
+::ng-deep .form-control,
+.ui-inputtext {
+  height: 40.8px;
+
+  font-size: 14px;
+  padding: 0px 10px;
+
+  border-radius: 12px;
+  border: 1px solid $white-darker;
+  box-shadow: 5px 5px 10px rgba(107, 112, 116, 0.14);
+
+  color: $gray;
+  background: $white-dark;
+}
+
+::ng-deep .card {
+  margin-bottom: 30px;
+  margin-top: 30px;
+
+  border: none;
+  box-shadow: none;
+
+  background: transparent;
+}
+
+.form-control:focus {
+  outline: 0;
+  border-color: $base-blue;
+  box-shadow: none;
+
+  background: $white;
+}
+
+.image-adjustment {
+  overflow: visible;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60vw;
+  height: 100vh;
+}
+
+h3 {
+  font-weight: bolder;
+}
+
+label {
+  color: $base-gray;
+}
+
+.footer-logo {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.version {
+  font-size: 9px;
+  padding-top: 5px;
+}

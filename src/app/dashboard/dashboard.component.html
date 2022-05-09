@@ -1,0 +1,120 @@
+<div class="main-panel home"
+  [ngStyle]="backgroundStyle"
+>
+  <!-- Navbar -->
+  <nav
+    class=" navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top "
+  >
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand"
+          >{{ "Energy Management" | translate }}
+        </a>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+
+  <div
+    class="property-summary summary-complete"
+    ng-if="$ctrl.selectedEnergyGroup"
+  >
+    <!-- cards -->
+    <div class="summary-content ">
+      <div class="container">
+        <app-card-info-summary
+          [energyGroupId]="selectedEnergyGroup"
+        ></app-card-info-summary>
+      </div>
+    </div>
+    <div class="summary-card-content">
+      <div style="padding:0px 2rem">
+        <!-- h3> {{ 'Historical' | translate }} </h3 -->
+        <!-- historical charts -->
+        <div class="row">
+          <div class="col-md-6">
+            <h3>{{ "This month" | translate }}</h3>
+            <div class="card">
+              <div class="card-body">
+                <app-thirty-days-summary
+                  [energyGroupId]="selectedEnergyGroup"
+                ></app-thirty-days-summary>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              {{ "Week profile" | translate }} ({{ weekProfileNumberOfWeeks }}
+              {{ "weeks" | translate }})
+            </h3>
+            <div class="card">
+              <div class="card-body">
+                <app-week-summary
+                  [energyGroupId]="selectedEnergyGroup"
+                ></app-week-summary>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+      <div style="padding:20px 40px;border-top: 1px solid #c2c0c0;margin-top:40px;box-shadow: inset 0px 1px 0px #fff;">
+          Real-time charts
+          <h3>{{ 'Real-time' | translate }}</h3>
+          <div class="row">
+              <div class="col-md-3">
+                  <div class="card">
+                      <div class="card-header " data-background-color="deltix">
+                          <h4 class="title">{{ 'chart.occupancy.title' | translate }}</h4>
+
+                      </div>
+                      <div class="card-content" style="max-height: 250px;">
+                          <app-graph-occupancy-real-time [energyGroupId]="selectedEnergyGroup"> </app-graph-occupancy-real-time>
+
+                      </div>
+                      <div class="card-footer">
+                          <p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 27%
+                          </span>{{ 'high in sales' | translate }}</p>
+                          <div class="stats">
+                              <i class="material-icons">access_time</i> {{ 'updated 30 minutes ago' | translate }}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="card">
+                      <div class="card-header" data-background-color="deltix">
+                          <h4 class="title">{{ 'HVAC status' | translate }}</h4>
+                      </div>
+                      <div class="card-content" style="max-height: 250px; overflow:hidden;">
+                          <app-graph-hvac-real-time [energyGroupId]="selectedEnergyGroup"> </app-graph-hvac-real-time>
+                      </div>
+                      <div class="card-footer">
+                          <p class="category"><span class="text-danger"><i class="fa fa-long-arrow-down"></i> 8%
+                          </span> {{ 'have turned the hvac off in the last hour' | translate }}</p>
+                          <div class="stats">
+                              <i class="material-icons">access_time</i> {{ 'updated 30 minutes ago' | translate }}
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    -->
+
+    <div style="padding:0px 2rem" class="summary-content ">
+      <h3>{{ "External Dashboard" | translate }}</h3>
+      <!-- FIXME: create a property to make this configurable! -->
+      <iframe
+        style="border: none; border-radius:3px;"
+        src="https://kibana.alis.solutions/app/kibana#/dashboard/AWcpOR0qMZzqlSaXI9h8?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(display%3AOff%2Cpause%3A!f%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fd%2Cmode%3Aquick%2Cto%3Anow%2Fd))"
+        width="100%"
+        height="600px"
+      ></iframe>
+    </div>
+  </div>
+</div>

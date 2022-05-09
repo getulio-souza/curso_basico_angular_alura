@@ -1,0 +1,307 @@
+<div class="main-panel home" [ngStyle]="backgroundStyle">
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top ">
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">{{'Engineering' | translate }} </a>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+      <!--
+      <building-unit-filter
+        *ngIf="properties"
+        [structure]="structure"
+        [properties]="properties"
+        [propertyId]="propertyId"
+        (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"
+        >
+      </building-unit-filter>
+      -->
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="summary-content" *ngIf="!showGridRooms && showEMSCards">
+      <div class="container">
+        <app-card-info-summary [energyGroupId]="selectedEnergyGroup"></app-card-info-summary>
+      </div>
+    </div>
+    <div class="summary-card-content">
+      <div *ngIf="!showGridRooms">
+        <div class="px-3" *ngIf="showOccupancyCharts || showConsumptionCharts">
+          <div class="row">
+            <div class="col-md-6">
+
+              <div class="card dark-card px-3 my-1">
+                <h3>{{ "This month" | translate }}</h3>
+                <app-thirty-days-summary 
+                  [showOccupancyCharts]="showOccupancyCharts"
+                  [showConsumptionCharts]="showConsumptionCharts"
+                  [energyGroupId]="selectedEnergyGroup"></app-thirty-days-summary>
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+
+              <div class="card dark-card px-3 my-1">
+                <h3>
+                  {{ "Week profile" | translate }} ({{ weekProfileNumberOfWeeks }}
+                  {{ "weeks" | translate }})
+                </h3>
+                <app-week-summary
+                  [showOccupancyCharts]="showOccupancyCharts"
+                  [showConsumptionCharts]="showConsumptionCharts"
+                  [energyGroupId]="selectedEnergyGroup"></app-week-summary>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="px-3">
+          <div class="row">
+      
+            <!-- Consumption and Savings -->
+            <div *ngIf="showRelayPresenceChart" class="col-md-12 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{'Consumption' | translate}}</h3>
+                <div>
+                  <relay-presence-chart
+                    [propertyId]="propertyId"
+                    [tag]="selectedFloor?.id"
+                    >
+                  </relay-presence-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                      
+        <div class="px-3 nav-item hidden_991">
+            <!-- SVG component-->
+            <div class="card dark-card text-center my-1">
+              <div *ngFor="let dataSvg of dataSvgsConfig">
+                <h3>{{dataSvg.name}}</h3>
+                <engineering-data-svg
+                  [alertConfig]="properties?.alerts"
+                  [svgConfig]="dataSvg"
+                  [propertyId]="propertyId"
+                  [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                  [pressureUomIsPsi]="pressureUomIsPsi"
+                  >
+                </engineering-data-svg>
+              </div>
+            </div>
+        </div>
+
+        <div class="px-3">
+          <div class="row">
+
+             <!-- chiller -->
+            <div *ngIf="showChillerBoard" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{chillerConfig?.name | translate}}</h3>
+                <div>
+                  <engineering-chiller
+                    [propertyId]="propertyId"
+                    [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                    [chillerConfig]="chillerConfig">
+                   </engineering-chiller>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- thermometers -->
+            <div *ngIf="showThermometersBoard" class="col-md-6 d-flex">
+                <div class="card dark-card text-center my-1">
+                  <h3>{{'Thermometers' | translate}}</h3>
+                  <div>
+                    <engineering-thermometers [properties]="properties" [thermometersConfig]="thermometersConfig"> </engineering-thermometers>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="px-3">
+          <div class="row">
+      
+            <!-- ACTIVE CONSUMPTION -->
+            <div *ngIf="showActiveConsumptionChart" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{'Active Consumption' | translate}}</h3>
+                <div>
+                  <engineering-active-consumption-chart
+                    [propertyId]="propertyId"
+                    [activeConsumptionConfig]="properties?.engineering?.activeConsumptions"
+                    >
+                  </engineering-active-consumption-chart>
+                </div>
+              </div>
+            </div>
+            
+            <!-- CoolingDemandChart -->
+            <div *ngIf="showCoolingDemandChart" class="col-md-6 d-flex">
+                <div class="card dark-card text-center my-1">
+                  <h3 class="mb-3">{{'Cooling Demand' | translate }}</h3>
+                  <div>
+                    <engineering-cooling-demand-chart
+                    [propertyId]="propertyId"
+                    [chillerId]="chillerConfig?.id"
+                    [thermometerId]="chillerConfig?.thermometerId"
+                    > </engineering-cooling-demand-chart>
+                  </div>
+                </div>
+              </div>
+
+            <!-- ADVANCED COLDCHAMBER -->
+            <div *ngIf="showAdvancedColdChamber" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{'Cold Storage' | translate }}</h3>
+                <div>
+                  <engineering-advanced-cold-chamber [properties]="properties" ></engineering-advanced-cold-chamber>
+                  <app-multi-chart-advanced-cold-chamber
+                    [propertyId]="propertyId"
+                    [advancedColdChamberId]="properties?.engineering?.advancedColdChambers[0]?.id"
+                    [meterId]="properties?.engineering?.coldChamberMeterId"
+                    [properties]="properties"
+                    
+                    ></app-multi-chart-advanced-cold-chamber>
+                </div>
+              </div>
+            </div>
+
+            <!-- THERMOSTATS ONLINE-->
+            <div *ngIf="showThermostatOnlineBoard" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3 class="mb-3 ml-3">{{'Thermostats Online' | translate}}</h3>
+                  <div class="chart" style="height: 100%;">
+                      <engineering-thermostat-online-chart
+                        [dateToAcceptData]="dateToAcceptData"
+                        [propertyId]="propertyId"
+                        [structure]="structure"
+                        [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                        (onChartClickEmitter)="onCharClick($event)" >
+                      </engineering-thermostat-online-chart>
+                    </div>
+              </div>
+            </div>
+
+            <!-- THERMOSTATS -->
+            <div *ngIf="showThermostatBoard" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3 class="mb-3">{{'Thermostats' | translate}}</h3>
+                <div>
+                  <div class="d-flex justify-content-around">
+                    <div class="chart pb-3">
+                      <h4 class="mb-0">{{'Mode' | translate }}</h4>
+                      <engineering-thermostat-mode-chart class="chart"
+                        [dateToAcceptData]="dateToAcceptData"
+                        [propertyId]="propertyId"
+                        [structure]="structure"
+                        [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+
+                        (onChartClickEmitter)="onCharClick($event)"></engineering-thermostat-mode-chart>
+                    </div>
+                    <div class="chart pb-3">
+                      <h4 class="mb-0">{{'Fan Setting' | translate }}</h4>
+                      <engineering-thermostat-fan-chart
+                        [dateToAcceptData]="dateToAcceptData"
+                        [propertyId]="propertyId"
+                        [structure]= "structure"
+                        [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                        (onChartClickEmitter)="onCharClick($event)"></engineering-thermostat-fan-chart>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <div class="chart pb-3">
+                      <h4 class="mb-0">{{'Occupancy' | translate }}</h4>
+                      <engineering-thermostat-occupancy-chart class="chart"
+                        [dateToAcceptData]="dateToAcceptData"
+                        [propertyId]="propertyId"
+                        [structure]="structure"
+                        [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+
+                        (onChartClickEmitter)="onCharClick($event)"></engineering-thermostat-occupancy-chart>
+                    </div>
+                    <div class="chart pb-3">
+                      <h4 class="mb-0">{{'State' | translate }}</h4>
+                      <engineering-thermostat-state-chart class="chart"
+                        [dateToAcceptData]="dateToAcceptData"
+                        [propertyId]="propertyId"
+                        [structure]="structure"
+                        [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                        (onChartClickEmitter)="onCharClick($event)"
+
+                        ></engineering-thermostat-state-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- SETPOINT DIFFERENTIAL TIME -->
+            <div *ngIf="showSetpointDiffrentialChart" class="col-md-6 d-flex">
+                <div class="card dark-card text-center my-1">
+                  <h3>{{'Thermostat Differential Temperature' | translate }}</h3>
+                  <div class="chart" style="height: 100%;">
+                    <engineering-setpoint-differential-chart
+                      [dateToAcceptData]="dateToAcceptData"
+                      [propertyId]="propertyId"
+                      [structure]="structure"
+                      [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+                      (onChartClickEmitter)="onCharClick($event)" >
+                    </engineering-setpoint-differential-chart>
+                  </div>
+              </div>
+            </div>
+
+
+            <!-- power -->
+            <div *ngIf="showPowerBoard" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{'Power' | translate}}</h3>
+                <div>
+                  <app-power-real-time [properties]="properties"> </app-power-real-time>
+                </div>
+              </div>
+            </div>
+
+            <!-- cold chamber -->
+            <div *ngIf="showColdChamberBoard" class="col-md-6 d-flex">
+              <div class="card dark-card text-center my-1">
+                <h3>{{'Cold Chambers' | translate}}</h3>
+                <div>
+                  <app-cold-chamber [properties]="properties"> </app-cold-chamber>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="px-3">
+              <!-- EXTERNAL DASHBOAR -->
+              <div *ngIf="showExternalDashboard" style="padding:0px 2rem" class="summary-content ">
+                <h3>{{ "External Dashboard" | translate }}</h3>
+                <!-- FIXME: create a property to make this configurable! -->
+                <iframe style="border: none; border-radius:3px;" src="https://kibana.alis.solutions/app/kibana#/dashboard/AWcpOR0qMZzqlSaXI9h8?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(display%3AOff%2Cpause%3A!f%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fd%2Cmode%3Aquick%2Cto%3Anow%2Fd))"
+                  width="100%" height="600px"></iframe>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showGridRooms">
+        <div class="container">
+          <h3 style="text-align: center;">{{gridTitle}}</h3>
+          <i (click)="back()" style="cursor: pointer;" class="material-icons">
+            keyboard_backspace
+          </i>
+          <proxper-grid *ngIf="gridData" [showDataButton]="false" [data]="gridData" [customColumns]="gridCols"></proxper-grid>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

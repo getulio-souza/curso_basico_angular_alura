@@ -1,0 +1,129 @@
+<div class="card dark-card card-alt card-summary card-hover m-b-1" style="margin:5px 0px; ">
+  <div class="card-header" style="display: flex;">
+    <div style="flex: 1; text-align: center">
+      <h3>{{summary?.name | translate}}</h3>
+    </div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="showOccupancyBars" class="chart-line">
+      <label>{{ 'Occupancy' | translate }}</label>
+
+      <div class="progress progress-dark m-0">
+
+       
+          <div class="progress-bar" role="progressbar" [style.width]="summary?.occupancyPercent + '%'"
+            data-toggle="tooltip" [ngClass]="{'dndBar': summary.occupancyPercent > 0}" data-placement="bottom" title="occupied"
+             aria-valuemax="100">
+            <span *ngIf="summary?.occupancyPercent > 0">
+                {{summary?.occupancyPercent}}%
+            </span>
+          </div>
+
+          <div class="progress-bar" role="progressbar" [style.width]="summary?.unoccupiedPercent + '%'"
+          data-toggle="tooltip" data-placement="bottom"  [ngClass]="{'dndBar': summary.unoccupiedPercent > 0}" style="background-color: darkgray !important"  title="unoccupied"
+           aria-valuemax="100">
+            <span *ngIf="summary?.unoccupiedPercent > 0">
+                {{summary?.unoccupiedPercent}}%
+            </span>
+          </div>
+
+          <div class="progress-bar" role="progressbar" [style.width]="summary?.occupancyNAPercent + '%'"
+          data-toggle="tooltip" data-placement="bottom" [ngClass]="{'dndBar': summary.occupancyNAPercent > 0}" style="background-color: #434649 !important"  title="N/A"
+           aria-valuemax="100">
+            <span *ngIf="summary?.occupancyNAPercent > 0">
+                {{summary?.occupancyNAPercent}}%
+            </span>
+          </div>
+
+
+
+
+
+      </div>
+    </div>
+    <div *ngIf="showSoldBars" class="chart-line">
+      <label>{{ 'Sold' | translate }}</label>
+      <div class="progress progress-dark m-0">
+        
+        
+        <div class="progress-bar bg-success" role="progressbar" [style.width]="summary?.soldPercent + '%'"
+          data-toggle="tooltip"  [ngClass]="{'dndBar': summary.soldPercent > 0}" data-placement="bottom" title="sold" aria-valuemin="0" aria-valuemax="100">
+          <span *ngIf="summary.soldPercent > 0">
+            {{summary?.soldPercent}}%
+          </span>
+        </div>
+
+          
+
+          <div class="progress-bar" role="progressbar" [style.width]="summary?.unSoldPercent + '%'"
+          data-toggle="tooltip" data-placement="bottom"  [ngClass]="{'dndBar': summary.unSoldPercent > 0}" style="background-color: darkgray !important"  title="unsold"
+           aria-valuemax="100">
+            <span *ngIf="summary?.unSoldPercent > 0">
+                {{summary?.unSoldPercent}}%
+            </span>
+          </div>
+
+          <div class="progress-bar" role="progressbar" [style.width]="summary?.soldNAPercent + '%'"
+          data-toggle="tooltip" data-placement="bottom" [ngClass]="{'dndBar': summary.soldNAPercent > 0}" style="background-color: #434649 !important"  title="N/A"
+           aria-valuemax="100">
+            <span *ngIf="summary?.soldNAPercent > 0">
+                {{summary?.soldNAPercent}}%
+            </span>
+          </div>
+
+      </div>
+
+
+    </div>
+
+    <div *ngIf="showDndBars" class="chart-line">
+      <label>{{ 'DND' | translate }}</label>
+      <div class="progress progress-dark m-0">
+        <div *ngIf="summary.dndMakeUpRoomPercent > 0" class="progress-bar" role="progressbar" data-toggle="tooltip"
+          data-placement="bottom" title="make up room" style="background-color: #00dca9 !important" [style.width]="summary?.dndMakeUpRoomPercent + '%'"
+          aria-valuemin="0" [ngClass]="{'dndBar': summary.dndMakeUpRoomPercent > 0}" aria-valuemax="100">
+          <span *ngIf="summary.dndMakeUpRoomPercent > 0">
+            {{summary?.dndMakeUpRoomPercent}}%
+          </span>
+        </div>
+
+        <div class="progress-bar bg-dark" role="progressbar" data-toggle="tooltip"
+          data-placement="bottom" title="do not disturb" style="background-color: #c6010a !important" [style.width]="summary?.dndDndPercent + '%'"
+          aria-valuemin="0" [ngClass]="{'dndBar': summary.dndDndPercent > 0}" aria-valuemax="100">
+          <span *ngIf="summary.dndDndPercent > 0">
+            {{summary?.dndDndPercent}}%
+          </span>
+        </div>
+
+        <div class="progress-bar bg-dark" role="progressbar" data-toggle="tooltip"
+          data-placement="bottom" title="ready" style="background-color: darkgray !important" [style.width]="summary?.dndNonePercent + '%'"
+          aria-valuemin="0" [ngClass]="{'dndBar': summary.dndNonePercent > 0}" aria-valuemax="100">
+          <span *ngIf="summary.dndNonePercent > 0">
+            {{summary?.dndNonePercent}}%
+          </span>
+        </div>
+
+        <div class="progress-bar bg-dark" role="progressbar" data-toggle="tooltip"
+          data-placement="bottom" title="N/A" style="background-color: #434649 !important" [style.width]="summary?.dndNAPercent + '%'"
+          [ngClass]="{'dndBar': summary.dndNAPercent > 0}" aria-valuemin="0" aria-valuemax="100">
+          <span *ngIf="summary.dndNAPercent > 0">
+            {{summary?.dndNAPercent}}%
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    <span>
+      <h3 style="margin: 10px 0 0px 0"> {{summary?.totalRooms}}</h3>
+      <h6 style="margin: 5px 0 ">{{'Rooms' | translate}}</h6>
+    </span>
+    <span *ngIf="showConsumptionSummaryData">
+      <h3 style="margin: 10px 0 0px 0"> {{summary?.consumptionValue}}</h3>
+      <h6 style="margin: 5px 0 ">{{summary?.consumptionUom}} </h6>
+    </span>
+  </div>
+</div>

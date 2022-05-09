@@ -1,0 +1,61 @@
+<div class="main-panel home maintenance">
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">{{'Orders' | translate}} </a>
+        <app-history-navigation-pick [resolution]="resolution" [startDate]="startDate" [endDate]="endDate" (onViewChange)="onNavigationDateChange($event)">
+        </app-history-navigation-pick>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="general-info summary-content pt-3 charts">
+
+      <div class="chartsDiv light-group" style="display: flex">
+        <div style="width: 70%;">
+          <div class="light-group">
+            <app-order-qty-chart [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+              *ngIf="components.includes('order-qty-chart')"></app-order-qty-chart>
+          </div>
+          <section style="margin-top:1rem"></section>
+          <div class="light-group">
+            <app-order-qty-chart-by-days [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate" [resolution]="resolution"
+              *ngIf="components.includes('order-qty-chart-by-days')">
+            </app-order-qty-chart-by-days>
+          </div>
+          <section style="margin-top:1rem"></section>
+          <div class="light-group">
+            <app-order-qty-delayed [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+            *ngIf="components.includes('order-qty-delayed')"></app-order-qty-delayed>
+          </div>
+          <section style="margin-top:1rem"></section>
+          <div class="light-group">
+            <app-avg-elapsed-time-by-practitioner [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+            *ngIf="components.includes('avg-elapsed-time-by-practitioner')">
+            </app-avg-elapsed-time-by-practitioner>
+          </div>
+        </div>
+        <div style="width: 30%; padding-left: 2rem;">
+          <app-order-by-sectors-chart [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+          *ngIf="components.includes('order-by-sectors-chart')"></app-order-by-sectors-chart>
+          <hr>
+          <app-top4-most-demand-by-category-chart [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+          *ngIf="components.includes('top4-most-demand-by-category-chart')">
+          </app-top4-most-demand-by-category-chart>
+          <hr>
+          <app-avg-elapsed-time-by-category [dateChangedEvent]="dateChangedEvent" [startDate]="startDate" [endDate]="endDate"
+          *ngIf="components.includes('avg-elapsed-time-by-category')">
+          </app-avg-elapsed-time-by-category>
+        </div>
+      </div>
+      <div class="chartsDiv" *ngIf="false">
+        <div (click)="openDiv[7] = !openDiv[7]">8. Relatório completo de pedidos com filtros por setor, quarto, categoria, período e status.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

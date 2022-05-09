@@ -1,0 +1,52 @@
+
+  <div style="display:flex; flex-direction: column">
+    <div style="margin: 10px auto 10px auto; display: flex;">
+      
+      
+      <button class="btn btn-secondary btn-round btn-just-icon"
+        style="background: transparent; position: relative; bottom: 5px; " (click)="backToGrid()">
+        <i _ngcontent-c29="" class="material-icons"> keyboard_arrow_left </i>
+      </button>
+
+      <building-unit-filter [showAllAsOption]="false" [startsWith]="unitStructureSelected" [showStep2]="false"
+        [subdivisionFilterLabel]="'Room'" [structure]="structure" [properties]="properties" [propertyId]="propertyId"
+        [subdivisionFilterLevel]="0" (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)">
+      </building-unit-filter>
+
+
+      <i 
+        *ngIf="contextService.allowedTabs.includes('roomControl')"
+        style="font-size: 30px; margin-top: 8px; margin-left: 23px; cursor: pointer;"
+        (click)="onClickControlRoom($event)" class="material-icons">
+        devices_other
+      </i>
+
+    </div>
+
+    <div>
+      <section style="display:flex;flex-grow: 1;" class="d-flex px-4">
+        <ul class="d-flex room-detail-header">
+
+          <li class="d-flex flex-column align-items-center">
+            <h4 style="font-weight: bold;">{{ "Now" | translate }}: </h4>
+          </li>
+
+
+          <li *ngFor="let col of gridColumnsToBeShown" class="d-flex flex-column align-items-center">
+            <app-grid-state [column]="col" [room]="room"></app-grid-state>
+            <h6> {{col.header | translate}} </h6>
+          </li>
+
+        </ul>
+      </section>
+
+      <div *ngIf="!timelineIsReady">
+        <img src="assets/loading.svg" style="display: block; margin-left: auto; margin-right: auto;  width: 6%;"
+          alt="loading">
+      </div>
+
+      <div>
+        <section style="margin: auto 30px;" id="time-line-plus" class="time-line-plus"></section>
+      </div>
+    </div>
+  </div>

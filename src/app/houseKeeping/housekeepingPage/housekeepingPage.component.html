@@ -1,0 +1,93 @@
+<div class="main-panel home" *ngIf="showGridRooms">
+  <div class="property-summary summary-complete">
+    <h2 style="text-align: center;">{{ gridName }}</h2>
+    <a (click)="back()" class="ml-4">
+        <i class="material-icons">
+            keyboard_backspace
+          </i>
+    </a>
+    <proxper-grid
+      [customColumns]="customColumns"
+      (onBackClickEmitter)="onBackGrid($event)"
+      [data]="gridData"
+    ></proxper-grid>
+  </div>
+</div>
+
+<div class="main-panel home" *ngIf="!showGridRooms" [ngStyle]="backgroundStyle">
+  <!-- Navbar -->
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top ">
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">{{ "Housekeeping" | translate }} </a>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="content">
+        <div class="summary-content">
+          <div class="row">
+            <div class="card dark-card col-md-5 px-4 mx-3">
+              <div *ngIf="unitTraceMap">
+                <h3>{{ "DND state" | translate }}</h3>
+                <housekeeping-dnd-state-chart
+                  [propertyId]="propertyId"
+                  [unitTraceMap]="unitTraceMap"
+                  [dateToAcceptData]="dateToAcceptData"
+                  (onChartClickEmitter)="onCharClick($event)"
+                ></housekeeping-dnd-state-chart>
+              </div>
+            </div>
+            <div class="card dark-card dark-card-response-time col ml-0 mr-3 px-4">
+              <div *ngIf="unitTraceMap" class="chat-bars">
+                <h3>{{ "Response time" | translate }}</h3>
+                <housekeeping-dnd-time-chart
+                  [propertyId]="propertyId"
+                  [unitTraceMap]="unitTraceMap"
+                  [dateToAcceptData]="dateToAcceptData"
+                  (onChartClickEmitter)="onCharClick($event)"
+                ></housekeeping-dnd-time-chart>
+              </div>
+            </div>
+          </div>
+
+        <div class="summary-card-content row">
+          <div class="card dark-card mx-3">
+            <h3 style="text-align: center;">{{ "DND" | translate }}</h3>
+            <housekeeping-dnd-grid
+              *ngIf="structure"
+              [propertyId]="propertyId"
+              [unitTraceMap]="unitTraceMap"
+              [dateToAcceptData]="dateToAcceptData"
+              [structure]="structure"
+            ></housekeeping-dnd-grid>
+          </div>
+        </div>
+
+        <!-- <div class="summary-card-content">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>{{'Make up room' | translate }}</h3>
+              <housekeeping-makeuproom-histogram-chart [lastTraces]="dndLastTraces" [dateToAcceptData]="dateToAcceptData"
+                (onChartClickEmitter)="onCharClick($event)"></housekeeping-makeuproom-histogram-chart>
+            </div>
+
+            <div class="col-md-4">
+              <h3>{{'Response time' | translate }}</h3>
+              <housekeeping-makeuproom-delta-time-chart [lastTraces]="dndLastTraces" [dateToAcceptData]="dateToAcceptData"
+                (onChartClickEmitter)="onCharClick($event)"></housekeeping-makeuproom-delta-time-chart>
+            </div>
+
+            <div class="col-md-4">
+              <h3>{{'Staff occurrences' | translate }}</h3>
+              <housekeeping-staff-histogram-chart [lastTraces]="dndLastTraces" [dateToAcceptData]="dateToAcceptData"
+                (onChartClickEmitter)="onCharClick($event)"></housekeeping-staff-histogram-chart>
+            </div>
+
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+
+
+.section {
+    height: 160px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: calc(100% - 100px) !important;
+    position: absolute;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.rounded-circle{
+    background-color: #3D4955;
+
+}
+
+.rounded-circle:hover {
+    background-color: #445567;
+}
+
+.close-button {
+
+    position: absolute;
+    right: 0px;
+    margin-right: 0px;
+
+}
+
+.btn {
+    margin-bottom: 30px !important;
+    border-radius: 41px !important;
+    font-size: 21px !important;
+    padding: 3px !important;
+    max-height: 40px !important;
+    margin-left: 15px !important;
+}
+
+
+.underline {
+
+    background: #00dca9 !important;
+    height: 5px !important;
+    width: 100% !important;
+    margin: auto !important;
+    min-height: 4px !important;
+    border-radius: 9px;
+}

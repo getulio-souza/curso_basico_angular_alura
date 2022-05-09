@@ -1,0 +1,67 @@
+<div class="main-panel home maintenance" [ngStyle]="backgroundStyle">
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
+    <div class="container-fluid justify-content-center">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand">{{'Maintenance' | translate }} </a>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="general-info summary-content pt-3">
+      <!-- owl-carousel -->
+      <section class="maintenance-carousel-container m-auto">
+        <owl-carousel-o [options]="config" class="maintenance-carousel">
+          <ng-template carouselSlide *ngFor="let card of cards; let i = index;">
+            <section (click)="onCardClick(card)" class="card dark-card text-uppercase text-center ">
+              <div class="d-flex justify-content-center align-items-center p-2 rounded"
+                [ngStyle]="{'background-color': card.id == cardIdSelected ? cardSelectedBgColor : '#434c58'}">
+                <div class="border-color fadeIn" [ngStyle]="{'background-color': card.color}"></div>
+                <div class="card-content w-100">
+                  <div class="d-flex flex-column justify-content-center align-content-center h-75">
+                    <h3 class="m-0">{{card?.value}}</h3>
+                    <h6>{{card?.status | translate}}</h6>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div class="marker-card-selected text-center" [ngClass]="{'invisible': card.id != cardIdSelected}">
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 108.2 32.8"
+                style="enable-background:new 0 0 108.2 32.8;" xml:space="preserve">
+                <g transform="translate(-229.829 -389.397)">
+                  <path id="Path_283" class="st0" style="opacity:1;fill:#333c49;enable-background:new"
+                    d="M252.3,423.3l31.7-32.3l31.2,32.1L252.3,423.3z" />
+                  <path id="Path_284" class="st1" style="fill:none; stroke-width:2;" [attr.stroke]="cardSelectedBgColor"
+                    d="M229.8,421.2l24.1,0l30.2-29.9l30,29.9h23.9" />
+                </g>
+              </svg>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+      </section>
+      <!--  Graphic -->
+      <section class="summary-card-content py-1">
+        <div class="container-fluid px-4 max-1500">
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <section class="card dark-card px-3 d-flex">
+                <mult-chart-events [chartNumber]="chartNumber"></mult-chart-events>
+              </section>
+            </div>
+            <div class="col-12 col-md-4 d-flex">
+              <div class="card dark-card card-chartPie-maintenance">
+                <chart-pizza-events [chartNumber]="chartNumber" [chartStatus]="chartStatus"
+                  [chartAverage]="chartAverage">
+                </chart-pizza-events>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--  Component Grid Devices  -->
+
+    </div>
+    <app-grid-details [data]="data"></app-grid-details>
+  </div>
+</div>

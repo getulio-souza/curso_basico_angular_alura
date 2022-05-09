@@ -1,0 +1,97 @@
+<div style="background-color: white; height: 100%;">
+
+
+  <div class="card" *ngFor="let zone of zones" style="width: 30rem;margin-right: 50px;padding: 15px;">
+    <!-- Card image -->
+    <!-- TODO receive image -->
+    <img *ngIf="zone.name != 'anexo'" class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/38.jpg" alt="Card image cap">
+    <!-- Card content -->
+    <div class="card-body">
+      <h4 class="card-title">
+        <a style="text-transform: uppercase;">{{zone.name}}</a>
+      </h4>
+      <p class="card-text">
+        {{'Occupancy' | translate }}: {{zone?.traces?.occupancy}}
+        <br> {{'Temperature' | translate }}: {{zone?.traces?.temperature}}ºC
+        <br>
+        <span (click)="onRoomDetailsClick(zone)" class="btn btn-primary">{{'Details' | translate }}</span>
+    </div>
+  </div>
+  <h3 style="text-align: center;padding-top: 25px;">Rooms summary</h3>
+  <div style="width:  90%;margin: auto;">
+    <div *ngFor="let unitTemplateInfo of unitTemplateInformations" class="card" style="width: 20rem; margin-left: 10px;margin-right: 10px; text-align: center">
+      <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/38.jpg" alt="Card image cap">
+      <!-- Card content -->
+      <div class="card-body">
+        <h4 class="card-title">
+          <a style="text-transform: uppercase;">{{unitTemplateInfo.unitTemplate.name}}</a>
+        </h4>
+
+        <p class="card-text">
+          <h6 class="card-subtitle mb-2 text-muted">{{unitTemplateInfo.totalRooms}} rooms</h6>
+          <br>
+          <b> {{ 'Consumption' | translate }}: </b> {{unitTemplateInfo.trace.consume | number:'1.0-0'}} kWh
+          <br>
+          <b>{{ 'Occupancy' | translate }}:</b> {{unitTemplateInfo.trace.occupancy * 100 | number:'1.0-0'}}%
+          <br>
+          <b>{{ 'Sold' | translate }}: </b>{{unitTemplateInfo.trace.sold * 100 | number:'1.0-0'}} %
+          <br>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Thermostat?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip"
+            data-placement="right" title="{{getMissingToolTip(unitTemplateInfo,'Thermostat')}}">
+            ac_unit
+          </i>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Thermostat?.devices == 0" class="material-icons" style="color: green;" title="Ok" >
+            ac_unit
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.TV?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip" data-placement="right"
+            title="{{getMissingToolTip(unitTemplateInfo,'TV')}}">
+            tv
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.TV?.devices == 0" class="material-icons" style="color: green;" title="Ok" data-toggle="tooltip"
+            data-placement="right">
+            tv
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Relay?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip"
+            data-placement="right" title="{{getMissingToolTip(unitTemplateInfo,'Relay')}}">
+            lightbulb_outline
+          </i>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Relay?.devices == 0" class="material-icons" style="color: green;" title="Ok" data-toggle="tooltip"
+            data-placement="right">
+            lightbulb_outline
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Level?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip"
+            data-placement="right" title="{{getMissingToolTip(unitTemplateInfo,'Level')}}">
+            track_changes
+          </i>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Level?.devices == 0" class="material-icons" style="color: green;" title="Ok" data-toggle="tooltip"
+            data-placement="right">
+            track_changes
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Curtain?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip"
+            data-placement="right" title="{{getMissingToolTip(unitTemplateInfo,'Curtain')}}">
+            view_day
+          </i>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.Curtain?.devices == 0" class="material-icons" style="color: green;" title="Ok" data-toggle="tooltip"
+            data-placement="right">
+            view_day
+          </i>
+
+          <i *ngIf="unitTemplateInfo.missingDeviceType.PulsedRelay?.devices > 0" class="material-icons" style="color: red;" data-toggle="tooltip"
+            data-placement="right" title="{{getMissingToolTip(unitTemplateInfo,'PulsedRelay')}}">
+            local_hospitality
+          </i>
+          <i *ngIf="unitTemplateInfo.missingDeviceType.PulsedRelay?.devices == 0" class="material-icons" style="color: green;" title="Ok" data-toggle="tooltip"
+            data-placement="right">
+            local_hospitality
+          </i>
+
+      </div>
+    </div>
+
+  </div>
+</div>

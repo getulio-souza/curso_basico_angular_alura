@@ -1,0 +1,14 @@
+.over530 {
+    display: inline;
+}
+.below530 {
+    display: none;
+}
+@media screen and (max-width: 530px) {
+    .over530 {
+        display: none;
+    }
+    .below530 {
+        display: inline;
+    }
+}

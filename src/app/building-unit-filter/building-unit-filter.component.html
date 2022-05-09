@@ -1,0 +1,38 @@
+<div class="d-flex align-items-center property-dropdown-level">
+  
+  <span class="property-dropdown-level-label"> {{subdivisionFilterLabel | translate}} 
+    <span *ngIf="subdivisionFilterLabel != null">:</span>
+  </span>
+    
+    <!-- step 1 -->
+    <p-autoComplete
+    [(ngModel)]="structureFilteredStep1" [forceSelection]="true"
+    field="currentLabel" [suggestions]="structureFiltersOptionsStep1"
+    (completeMethod)="filterStructures($event)"
+    [size]="30" [minLength]="1" placeholder="Hint: type unit name"
+    [dropdown]="true" (onSelect)="onChangeStructureFilterStep1($event)">
+    <ng-template let-item pTemplate="item">
+        <span (click)="onStep1Click($event, item.label)" >{{item?.label}}</span>
+    </ng-template>
+
+    <ng-template pTemplate="selectedItem" let-value>
+        {{value?.label}}
+    </ng-template>
+    </p-autoComplete>
+
+    
+    <!-- step 2 -->
+    <p-dropdown *ngIf="showStep2" class="smb-3 selectStructureFilter"
+                [options]="structureFiltersStep2"
+                [(ngModel)]="structureFilteredStep2"
+                (onChange)="onChangeStructureFilterStep2($event)">
+      <ng-template pTemplate="item" let-item>
+        {{item.label | translate}}
+      </ng-template>
+      <ng-template pTemplate="selectedItem" let-item>
+        {{item.label | translate}}
+      </ng-template>
+    </p-dropdown>
+
+    
+</div>

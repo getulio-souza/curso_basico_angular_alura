@@ -1,0 +1,12 @@
+.coldChamber-ok {
+    background-color: seagreen;
+}
+
+.coldChamber-warning {
+    background-color: rgb(239, 83, 80);
+}
+
+.coldChamber-noValue {
+    background-color: grey;
+}
+

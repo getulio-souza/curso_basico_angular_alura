@@ -1,0 +1,94 @@
+@import '../../../styles/variables.scss';
+
+.btn-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 165px;
+  height: 38px;
+
+  padding: 0 15px;
+
+  border: 1px solid;
+  border-color: $base-blue;
+  border-radius: 12px;
+  box-shadow: 5px 5px 10px #2a6fa524;
+
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+
+  transition: all 150ms ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  color: $base-blue;
+  background: $white;
+
+  i {
+    font-size: 22px;
+    margin-right: 8px;
+    color: $base-blue;
+  }
+
+  &:hover {
+    color: $white;
+    background: $base-blue;
+
+    i {
+      color: $white;
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+
+    border-color: $base-gray;
+
+    color: $base-gray;
+    background: none;
+
+    i {
+      color: $base-gray;
+    }
+  }
+}
+
+.full {
+  width: 100%;
+  height: 46px;
+}
+
+.green {
+  color: $green;
+  border-color: $green;
+
+  i {
+    color: $green;
+  }
+
+  &:hover {
+    border-color: $green;
+    background: $green;
+  }
+}
+
+.red {
+  color: $base-red;
+  border-color: $base-red;
+
+  i {
+    color: $base-red;
+  }
+
+  &:hover {
+    border-color: $base-red;
+    background: $base-red;
+  }
+}

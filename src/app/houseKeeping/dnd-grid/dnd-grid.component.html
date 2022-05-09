@@ -1,0 +1,59 @@
+
+  <div *ngIf="makeUpRoomsData.length > 0">
+    <section class="container ">
+      <div class="grid">
+        <div *ngFor="let room of makeUpRoomsData">
+          <button (click)="selectRoom(room)" data-toggle="modal" data-target="#roomDetailsInfo" class="btn btn-secondary btn-round btn-just-icon btn-lg  "
+            [style.background]="getBackgroundColor(room)">
+            <i class="material-icons-svg"><img src="assets/images/icon-occupeded.svg" style="width: 37px;margin-top: -8px;"></i>
+          </button>
+          <h5>{{room?.name}}</h5>
+        </div>
+      </div>
+
+  </section>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="roomDetailsInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">{{selectedRoom?.name}} </h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6" style="flex: none; max-width: 100%; margin-bottom: -15px">
+            <h5>{{'State' | translate}}{{': '}}            
+              <span> {{selectedRoom?.state | translate}}</span>
+            </h5>
+          </div>
+        </div>
+        <div class="card dark-card" [style.background]="getBackgroundColor(selectedRoom)">
+          <header class="card-header d-flex justify-content-between">
+            <div>
+              <h3>
+                <span style="color: #ffffff;">
+                  {{selectedRoom?.stateDurationLabel}}</span>
+              </h3>
+            </div>
+          </header>
+        </div>
+        <div class="row">
+          <div class="col-sm-6" style="flex: none; max-width: 100%">
+            <h5>{{'Since' | translate}}
+              <span> {{selectedRoom?.stateSince | date: 'short'}}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

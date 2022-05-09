@@ -1,0 +1,44 @@
+@media (max-width: 420px) {
+    building-unit-filter .ui-autocomplete-dd input.ui-corner-all, .ui-autocomplete-dd .ui-autocomplete-multiple-container.ui-corner-all{
+        width: 160px !important;
+        font-size: 16px !important;
+    }
+
+    building-unit-filter .property-dropdown-level-label {
+        display: none;
+    }
+    
+    building-unit-filter .property-dropdown-level-label {
+        margin-left: -20px !important;
+    }
+
+    app-it .owl-dots {
+        margin: initial;
+    }
+
+
+  }
+  
+
+  @media (max-width: 767px) {
+
+      app-engineering-page .summary-complete{
+        margin-top: 68px !important;
+      }
+
+      app-it .summary-complete{
+        margin-top: 68px !important;
+      }
+
+  }
+
+  @media(max-width: 991px) {
+
+    .sidebar::before, .off-canvas-sidebar nav .navbar-collapse::before {
+        height: 89% !important;
+    }
+    
+    .sidebar, .off-canvas-sidebar nav .navbar-collapse {
+        background-color: #fff !important;
+    }
+  }

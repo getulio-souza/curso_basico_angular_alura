@@ -1,0 +1,66 @@
+<div class="row no-gutters" *ngIf="svgConfig != null">
+      
+    <div class="col-md-3 col-lg-2 py-2 px-2">
+        <button 
+            *ngFor="let component of svgConfig?.components"
+            (mouseenter) ="onMouseLegendEnter($event,component)"
+            (mouseleave) ="onMouseLegendLeave(component)"
+            (click)="onLegendClick(component)" 
+            type="button"
+            [ngClass]="{'hover': currentSvgElementHover == component.anchor}"
+            class="btn btn-secondary text-right btn-block">
+
+
+            <div class="row">
+                <span class="col-md-9" style="text-align: left" >
+                    <span 
+                    *ngIf="component?.name != null"
+                    [ngStyle]="{ 'color': hasActiveAlert(component) ? getWarningIconColorByConfig(component?.deviceId) : 'unset'}"
+               
+                    > {{component.name}}</span>
+                    <span *ngIf="component?.name == null">{{component.deviceId}}</span>
+                </span>
+
+                <span class="col-md-3">
+                    <span *ngIf="hasActiveAlert(component)">
+                        <div 
+                        style="width: 40px;
+                        height: 28px;
+                        bottom: 5px;
+                        position: relative;
+                        left: 2px;
+                        top: 2px;"
+                         id="{{ 'alert-icon-' + component.deviceId }}"
+                       ></div>
+                    </span>
+        
+                    <i *ngIf="!hasActiveAlert(component.deviceId,component)" class="material-icons">keyboard_arrow_right</i>
+                </span>
+            </div>
+           
+            
+            
+        </button>
+    </div>
+
+    <div class="col  p-2">
+        <engineering-data-svg 
+            [svgConfig]="svgConfig"
+            [alertConfig]="alertConfig"
+            [propertyId]="propertyId"
+            [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+            [pressureUomIsPsi]="pressureUomIsPsi"
+            [selectedComponent]="selectedComponent"
+            [selectedAlert]="selectedAlert"
+            (onElementMouseEnterEmitter)="onElementMouseEnter($event)"
+            (onAlertIconHoverEmitter)="onAlertIconHover($event)"
+            (onElementMouseLeaveEmitter)="onElementMouseLeave($event)"
+            (onGetNewAlertsEmitter)="onGetNewAlerts($event)"
+            >
+        </engineering-data-svg>
+    </div>
+</div>
+
+<div *ngIf="svgConfig == null">
+  <h5 style="text-align: center; margin:auto;">No B.M.S data</h5>
+</div>

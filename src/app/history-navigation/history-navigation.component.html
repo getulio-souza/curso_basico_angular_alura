@@ -1,0 +1,56 @@
+<div class="d-flex flex-column align-items-center justify-content-end">
+    
+    <div *ngIf="enableBackwardsNavigation && resolution != 'hour'">
+        <a class="btn btn-primary btn-link" (click)="oneStepFoward()" >
+            <span class="pointer my-0" *ngIf="resolution == 'month'">{{ 'Monthly view' | translate}}</span>
+            <span class="pointer my-0" *ngIf="resolution == 'day'">{{ 'Daily view' | translate}}</span>
+        </a>
+    </div>
+
+    <!-- month view -->
+    <div class="d-flex align-items-center" *ngIf="resolution == 'day'" >
+        <h4 class="pointer my-0" (click)="goToPreviousPeriod()" style="opacity:0.5;"> 
+             {{'navigation-date-month' | translate: {monthName: getDateLabelMonth(-1).monthName | translate, day: getDateLabelMonth(-1).day, year: getDateLabelMonth(-1).year} }} 
+        </h4>
+        <h3 class="my-0 mx-2"> 
+            {{'navigation-date-month' | translate: {monthName: getDateLabelMonth(0).monthName | translate, day: getDateLabelMonth(0).day, year: getDateLabelMonth(0).year} }} 
+        </h3>
+        <h4 class="pointer my-0" (click)="goToNextPeriod()" style="opacity:0.5">
+             {{'navigation-date-month' | translate: {monthName: getDateLabelMonth(1).monthName | translate, day: getDateLabelMonth(1).day, year: getDateLabelMonth(1).year} }} 
+        </h4>
+    </div>
+
+    <!-- anual view -->
+    <div class="d-flex align-items-center"  *ngIf="resolution == 'month'" >
+        <h4 class="pointer my-0" (click)="goToPreviousPeriod()" style="opacity:0.5;"> 
+            {{getDateLabelYear(-1)}} 
+        </h4>
+        <h3 class="my-0 mx-2"> 
+             {{getDateLabelYear(0)}}
+        </h3>
+        <h4 class="pointer my-0" (click)="goToNextPeriod()" style="opacity:0.5">
+             {{getDateLabelYear(1)}}
+        </h4>
+    </div>
+
+
+    <!-- day view -->
+    <div class="d-flex align-items-center"  *ngIf="resolution == 'hour'" >
+        <h4 class="pointer my-0" (click)="goToPreviousPeriod()" style="opacity:0.5;"> 
+             {{'navigation-date-hour' | translate: {monthName: getDateLabelDay(-1).monthName | translate, day: getDateLabelDay(-1).day, year: getDateLabelDay(-1).year} }} 
+        </h4>
+        <h3 class="my-0 mx-2"> 
+            {{'navigation-date-hour' | translate: {monthName: getDateLabelDay(0).monthName | translate, day: getDateLabelDay(0).day, year: getDateLabelDay(0).year} }} 
+        </h3>
+        <h4 class="pointer my-0" (click)="goToNextPeriod()" style="opacity:0.5">
+             {{'navigation-date-hour' | translate: {monthName: getDateLabelDay(1).monthName | translate, day: getDateLabelDay(1).day, year: getDateLabelDay(1).year} }} 
+        </h4>
+    </div>
+    <div ng-hide="resolution == 'month'">
+        <a class="btn btn-primary btn-link" (click)="oneStepBack()"  *ngIf="resolution != 'month'">
+                <span  class="pointer my-0" *ngIf="resolution == 'day'"> {{ 'Yearly view' | translate}}</span>
+                <span  class="pointer my-0" *ngIf="resolution == 'hour'"> {{ 'Monthly view' | translate}}</span>
+        </a>
+    </div>
+
+</div>

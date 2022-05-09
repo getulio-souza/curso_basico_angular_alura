@@ -1,0 +1,44 @@
+<div _ngcontent-c13="" class="card">
+  <div _ngcontent-c13="" class="card-header" data-background-color="deltix">
+    <h4 _ngcontent-c13="" style="margin: 0px;">{{'Rooms' | translate }}</h4>
+  </div>
+  <div _ngcontent-c13="" class="card-content">
+    <div style="display:flex;width: 100%;justify-content: space-around;">
+      <div>
+        <i class="material-icons color-ball" style="color:red">
+          brightness_1
+        </i>
+        <b style="position:  relative;bottom: 2px;">{{ 'Occupancy' | translate }}</b>
+        <br>
+        <span style="top: -5px;color: red;font-weight:  bold;font-size: 24px;">{{occupancyPercentage | number : '1.0-0'}}%</span>
+
+        <div *ngFor="let bar of unoccupiedArray" class="percentageBar" style="background-color: lightgray"></div>
+        <div *ngFor="let bar of occupiedArray" class="percentageBar" style="background-color:red"></div>
+      </div>
+      <div>
+        <i class="material-icons color-ball" style="color:#1E90FF">
+          brightness_1
+        </i>
+
+        <b style="position:  relative;bottom: 2px;">{{'Sold' | translate}}</b>
+        <br>
+        <span style="top: -5px;color: #1E90FF;font-weight:  bold;font-size: 24px;">{{100 - occupancyPercentage | number :
+          '1.0-0'}}%
+        </span>
+        <div *ngFor="let bar of occupiedArray" class="percentageBar" style="background-color: lightgray"></div>
+        <div *ngFor="let bar of unoccupiedArray" class="percentageBar" style="background-color: #1E90FF"></div>
+
+      </div>
+    </div>
+    <button mat-raised-button mat-min-fab class="btn btn-just-icon btn-round btn-add" style="background-color: dodgerblue; "
+      (click)="onAddButtonClick()">
+      <i class="material-icons">add_circle_outline</i>
+    </button>
+  </div>
+  <div _ngcontent-c13="" class="card-footer">
+    <div _ngcontent-c13="" class="stats">
+      <h3 _ngcontent-c13=""><small _ngcontent-c13=""><i class="material-icons" style="position: relative; top:4px">date_range
+          </i>20/07/2018</small></h3>
+    </div>
+  </div>
+</div>

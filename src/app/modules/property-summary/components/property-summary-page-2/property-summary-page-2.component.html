@@ -1,0 +1,41 @@
+
+<div *ngIf="!finishSvgRequest"
+      class="main-panel"
+      style="display: flex;height: 100%;justify-content: center;">
+    <img src="assets/loading.svg" style="height: 18%;" style="display: block; margin-left: auto; margin-right: auto;" alt="loading">
+    
+  </div>
+
+  
+<div *ngIf="finishSvgRequest" 
+      class="main-panel" 
+      [ngStyle]="backgroundStyle" [ngClass]="{
+        '--map': svgString != null,
+        '--open': isCurtainOpen
+      }" 
+      >
+      
+    <!-- <div *ngIf="isLoadingSummaries" class="main-panel" style="z-index: 2;" >
+        <img src="assets/loading.svg" style="position: fixed; top: 25%; left: 50%" alt="loading">    
+    </div> -->
+
+  <app-property-map 
+    *ngIf="svgString != null"
+    [ngStyle]="{'pointer-events': isCurtainOpen || isLoadingSummaries ? 'none' : 'auto' }"
+    [svgString]="svgString"
+    [selectedFloor]="floorFromPropertySummaryCurtain"
+    [propertyId]="propertyId"
+    [propertyMapConfig]="properties?.propertySummary?.propertyMap"
+    (onChangeFloorEmitter)="onFloorIdFromMapChange($event)" >
+  </app-property-map>
+
+  <app-property-summary-curtain
+    [propertyId]="propertyId"
+    [svg]="svgString"
+    [structure]="structure"
+    [properties]="properties"
+    [floorIdFromFloorplan]="floorIdFromCurtain"
+    (onChangeCurtainEmitter)="onChangeCurtain($event)"
+    (onCardSummaryChangeEmitter)="onCardSummaryChange($event)">
+  </app-property-summary-curtain>
+</div>

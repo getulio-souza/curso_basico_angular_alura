@@ -1,0 +1,184 @@
+
+
+$brand-primary: #009fff;
+$success: #00dca9;
+$danger: #e45454;
+$proexper-grey: #333c49;
+
+$blue-grey-900: $proexper-grey;
+$blue-grey-dark: $proexper-grey;
+$blue-grey-500: tint($proexper-grey, 12%);
+
+.unit-content {
+    width      : calc(100% - 300px);
+    position   : relative;
+    margin-left: 300px;
+}
+
+.unit-nav {
+    padding-top     : 20px;
+    background-color: shade($blue-grey-900, 10%);
+}
+
+.unit-control {
+    background-color: rgba($blue-grey-dark, 0.9);
+    box-shadow      : 3px 0px 13px #21262e;
+
+
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+
+}
+
+.unit-header {
+    background-color: $blue-grey-500;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+
+    .btn-lg .material-icons {
+        font-size: 26px !important;
+    }
+}
+
+
+.hvac-control {
+  
+    border         : 4px solid #4b535f;
+    border-radius  : 50%;
+    width          : 165px;
+    height         : 165px;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+}
+
+sup.unit {
+    font-size: 25%;
+    top      : -2em;
+}
+
+sub.unit {
+    font-size: 25%;
+}
+
+.card .card-footer {
+    background-color: rgba($blue-grey-900, 0.3);
+    margin          : 0px;
+    border-radius   : 0px 0px 6px 6px;
+}
+
+
+.health-chart {
+    position: relative;
+    color   : $blue-grey-dark;
+}
+
+.health-chart-bar {
+    position   : absolute;
+    bottom     : 9px;
+    height     : 46%;
+    overflow   : hidden;
+    display    : flex;
+    align-items: flex-end;
+    color      : $success;
+    transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+
+.--unitCarousel .card {
+    height: 140px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.--unitCarousel .card.itemCardSelected {
+    height: 160px;
+}
+
+.--unitCarousel .card .material-icons {
+    font-size: 50px;
+}
+
+.--unitCarousel .card.itemCardSelected .material-icons {
+    color: $success;
+}
+
+.--unitCarousel .owl-item {
+    height: 231px;
+}
+
+
+.light-levels {
+    border         : 4px solid $blue-grey-500;
+    border-radius  : 50%;
+    width          : 165px;
+    height         : 165px;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    margin         : auto;
+
+    .material-icons {
+        font-size: 50px;
+    }
+}
+
+.btn-setpoint-less, .btn-setpoint-more{
+  cursor: pointer;
+  background: none;
+  outline: none;
+  color: #ffffff;
+  border: none;
+  transition: all 0.5s ease;
+  .material-icons{
+    font-size: 45px;
+  }
+  &:active, &:visited, &:focus{
+    outline: 0;
+    border: none;
+  }
+}
+.btn-setpoint-less{
+  &:hover{
+    margin-top: -10px;
+  }
+}
+.btn-setpoint-more{
+  &:hover{
+    margin-top: 10px;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.color-set{
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &.color-set--fun{
+    background:  linear-gradient(to right, #A6A6FF 60%, #ffffff 100%)
+  }
+  &.color-set--energiser{
+    background:linear-gradient(to right, #56bcdc 60%, #ffffff 100%)
+  }
+  &.color-set--candle-light{
+    background: linear-gradient(to right, #ecd350 60%, #ffffff 100%);
+  }
+  &.color-set--warm{
+    background: linear-gradient(to right, #f78711 60%, #ffffff 100%);
+  }
+}

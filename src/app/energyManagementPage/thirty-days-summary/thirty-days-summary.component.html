@@ -1,0 +1,16 @@
+<span *ngIf="showConsumptionCharts">
+
+  <h4 class="card-title">{{ "Consumption" | translate }}</h4>
+  <app-graph-consume-summary [energyGroupId]="energyGroupId" [occupancyAndConsumeList]="occupancyAndConsumeList">
+  </app-graph-consume-summary>
+</span>
+
+<span *ngIf="showOccupancyCharts">
+  <h4 class="card-title">
+    {{ "chart.occupancy.title" | translate }}
+  </h4>
+
+  <app-graph-occupancy-summary [energyGroupId]="energyGroupId" [occupancyAndConsumeList]="occupancyAndConsumeList">
+  </app-graph-occupancy-summary>
+
+</span>

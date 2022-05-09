@@ -1,0 +1,26 @@
+<proxper-grid
+  *ngIf="showGrid && ready && unitSelected == null"
+  [customColumns]="gridColumns"
+  [showDataButton]="false"
+  [hideGridColumns]="hideGridColumns"
+  [data]="roomsInfo"
+  (onGridItemEmitter)="onGridItemClick($event)"
+  >
+</proxper-grid>
+
+<div *ngIf="!showGrid || !ready && unitSelected == null">
+    <img src="assets/loading.svg" style="display: block; margin-left: auto; margin-right: auto;" alt="loading">
+</div>
+
+
+
+<section *ngIf="unitSelected != null">
+  <app-room-detail
+    [properties]="properties"
+    [structure]="selectedFloor?.structure"
+    [room]="unitSelected"
+    [propertyId]="propertyId"
+    [hideGridColumns]="hideGridColumns"
+    (backToGridEmmiter)="onBackRoomDetail($event)"
+    (onChangeStructureFilterEmitter)="onChangeStructureFilter($event)"></app-room-detail>
+</section>

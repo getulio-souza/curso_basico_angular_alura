@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header" data-background-color="deltix">
+    <h4 class="title">{{ 'Other devices' | translate }}</h4>
+  </div>
+  <div class="card-content" style="min-height: 250px;">
+    <table class="table table-hover">
+      <tr *ngFor="let device of devices; let i=index;">
+        <td>
+          {{device.name}}
+        </td>
+        <td>
+          {{device.value}}º
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
