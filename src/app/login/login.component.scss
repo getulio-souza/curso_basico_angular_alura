@@ -1,5 +1,9 @@
 @import '../../styles/variables.scss';
 
+input {
+  -webkit-text-fill-color: #7d8c8f !important;
+}
+
 .login-container {
   // display: flex;
   width: 100%;

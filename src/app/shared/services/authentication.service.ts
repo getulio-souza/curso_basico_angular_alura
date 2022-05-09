@@ -30,65 +30,44 @@ export class AuthenticationService {
     sessionStorage.removeItem("lastLoginDate");
     sessionStorage.removeItem("firstlogin");
 
-    return this.propertiesService.getAppConfig().pipe(
-      flatMap((config) => {
-        return forkJoin([
-          this.httpClient.post<any>(config.authServer + "/oauth/token", body, {
-            headers: this.getHeaders(),
-          }),
-          of(config),
-        ]);
-      }),
-      flatMap((joinedResult: any) => {
-        const userData = joinedResult[0];
-        const config = joinedResult[1];
-        console.log("logou");
+    return this.httpClient
+    .post<any>(
+      PropertiesService.properties.authServer + '/oauth/token',
+      body,
+      { headers: this.getHeaders() }
+    )
+    .pipe(
+      map((userData) => {
+
         if (!userData.lastLoginDate) {
-          sessionStorage.setItem("lastLoginDate", null);
+          sessionStorage.setItem('lastLoginDate', null);
           this.firstLogin = true;
         } else {
-          sessionStorage.setItem("lastLoginDate", userData.lastLoginDate);
+          sessionStorage.setItem('lastLoginDate', userData.lastLoginDate);
         }
 
-        sessionStorage.setItem("username", username);
+        sessionStorage.setItem('username', username);
 
         let tokenStr = userData.access_token;
-        sessionStorage.setItem("token", tokenStr);
-        localStorage.setItem("access_token", tokenStr);
+        sessionStorage.setItem('token', tokenStr);
+        localStorage.setItem('access_token', tokenStr);
 
         const jwtJson = this.jwtHelper.decodeToken(tokenStr);
         sessionStorage.setItem(
-          "permissions",
+          'permissions',
           JSON.stringify(jwtJson.permissions)
         );
-        sessionStorage.setItem("lastLoginDate", jwtJson.lastLoginDate);
+        sessionStorage.setItem('lastLoginDate', jwtJson.lastLoginDate);
+
         this.emitter.emit("successLogEvent", true);
-        return forkJoin([
-          of(userData),
-          of(config),
-          this.httpClient.get(config.restApiServer + "/user/me"),
-        ]);
-      }),
-      flatMap((joinedResults) => {
-        const userData = joinedResults[0];
-        const config = joinedResults[1];
-        const user: any = joinedResults[2];
-        const observables = [of(userData)];
-        if (user)
-          observables.push(
-            this.httpClient.get(
-              config.restApiServer + "/practitioner/" + user.practitionerId
-            )
-          );
-        return forkJoin(observables);
-      }),
-      map((joinedResults) => {
-        const userData = joinedResults[0];
-        if (joinedResults.length > 1) {
-          const practitioner: any = joinedResults[1];
-          if (practitioner)
-            sessionStorage.setItem("sector", practitioner.sector[0]);
-        }
+        
+        this.httpClient.get(PropertiesService.properties.restApiServer + '/user/me').subscribe((user: any) => {
+          if(user) {
+            this.httpClient.get(PropertiesService.properties.restApiServer + '/practitioner/' + user.practitionerId).subscribe((practitioner: any) => {
+              sessionStorage.setItem('sector', practitioner.sector[0]);
+            });
+          }
+        });
         return userData;
       })
     );

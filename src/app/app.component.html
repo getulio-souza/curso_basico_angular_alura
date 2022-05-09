@@ -4,6 +4,7 @@
         </div>
 </span> -->
 
-<div>
-        <router-outlet></router-outlet>
+<div *ngIf="ready">
+  <router-outlet></router-outlet>
 </div>
+<pxb-simple-notification #simpleNotificationComponent></pxb-simple-notification>

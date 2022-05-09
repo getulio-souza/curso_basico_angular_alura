@@ -1,6 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { SimpleNotificationComponent, SimpleNotificationService } from '@alis/proxper-base';
+import { PropertiesService } from '@alis/ng-services';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,25 @@ import { AuthenticationService } from './shared/services/authentication.service'
   encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
 
   acessoExterno = false;
   auth: { loggedIn: boolean; } = {loggedIn: false};
 
-  constructor(private route: ActivatedRoute, private authenticationService: AuthenticationService) {
+  ready = false;
+
+  @ViewChild('simpleNotificationComponent', { static: false })
+  simpleNotificationComponent: SimpleNotificationComponent;
+
+  constructor(private route: ActivatedRoute, 
+    private propertiesService: PropertiesService,
+    private authenticationService: AuthenticationService,
+    private simpleNotificationService: SimpleNotificationService) {
     setTimeout(() => {
+      this.propertiesService.readAllProperties().subscribe(() => {
+        this.ready = true;
+        console.log(PropertiesService.properties.authServer)
+      });
       this.auth = {loggedIn: this.authenticationService.isUserLoggedIn()}
       this.authenticationService.registerEvent('successLogEvent', (result: boolean)=> this.auth.loggedIn = result);
       this.route.firstChild.params.subscribe(resp => {
@@ -25,9 +39,10 @@ export class AppComponent implements OnInit {
     }, 1000);
   }
 
-  ngOnInit() {
-    // REMOVAL AUTH0 - não tem mais necessidade
-    // this.auth.localAuthSetup();
+  ngAfterViewInit() {
+    this.simpleNotificationService.addListener(
+      this.simpleNotificationComponent
+    );
   }
-  
+
 }
