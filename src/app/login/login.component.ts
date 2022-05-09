@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   loginInternal(user: string, password: string): void {
-    this.authenticationService.authenticate('admin', 'password').subscribe(
+    this.authenticationService.authenticate(user, password).subscribe(
       async() => {
         // await this.userActivityService.createActivity({context:'health-backoffice', activity:'login'}).toPromise();
         this.checkFirstLogin();
