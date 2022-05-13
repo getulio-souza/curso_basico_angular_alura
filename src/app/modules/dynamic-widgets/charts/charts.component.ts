@@ -145,82 +145,116 @@ export class ChartsComponent extends PropertyDataLoader implements OnInit, OnCha
     }
   }
 
+  charts: any[] = [
+    { type: CHART_TYPES.BAR_HORIZONTAL, attribute: 'chartBarHorizontal', shouldApply: true },
+    { type: CHART_TYPES.BAR_VERTICAL, attribute: 'chartBarVertical', shouldApply: true },
+    { type: CHART_TYPES.PIZZA, attribute: 'chartPizza', shouldApply: true },
+    { type: CHART_TYPES.LINES, attribute: 'chartLines', shouldApply: true },
+    { type: CHART_TYPES.FUNNEL, attribute: 'chartFunnel', shouldApply: true },
+    { type: CHART_TYPES.GAUGE, attribute: 'chartGauge', shouldApply: false },
+    { type: CHART_TYPES.STACKED_LINE, attribute: 'chartStackedLine', shouldApply: true },
+    { type: CHART_TYPES.BAR_VERTICAL_SIMPLE, attribute: 'chartBarVerticalSimple', shouldApply: true },
+    { type: CHART_TYPES.BAR_VERTICAL_NPS, attribute: 'chartBarVerticalNps', shouldApply: true },
+    { type: CHART_TYPES.LINES_NPS, attribute: 'chartLinesNps', shouldApply: true }
+  ]
+
   configureWithTypeAsset(itens: SingleDataStatistics[]): void {
     if (itens.length) {
+
       setTimeout(() => {
-        switch (this.type) {
-          case CHART_TYPES.BAR_HORIZONTAL:
-            this.chartBarHorizontal.configureChart(itens);
-          break;
-          case CHART_TYPES.BAR_VERTICAL:
-            this.chartBarVertical.configureChart(itens);
-          break;
-          case CHART_TYPES.PIZZA:
-            this.chartPizza.configureChart(itens);
-          break;
-          case CHART_TYPES.LINES:
-            this.chartLines.configureChart(itens);
-          break;
-          case CHART_TYPES.FUNNEL:
-            this.chartFunnel.configureChart(itens);
-          break;
-          case CHART_TYPES.GAUGE:
-            //this.chartGauge.configureChart(itens);
-          break;
-          case CHART_TYPES.STACKED_LINE:
-            this.chartStackedLine.configureChart(itens);
-          break;
-          case CHART_TYPES.BAR_VERTICAL_SIMPLE:
-            this.chartBarVerticalSimple.configureChart(itens);
-          break;
-          case CHART_TYPES.BAR_VERTICAL_NPS:
-            this.chartBarVerticalNps.configureChart(itens);
-          break;
-          case CHART_TYPES.LINES_NPS:
-            this.chartLinesNps.configureChart(itens);
-          break;
-          default:
-            console.log('NOT MAPPED CHART TYPE')
-        }
+
+        this.executeOnSelectedChart((item): void => item.configureChart(itens))
+        
+        // switch (this.type) {
+        //   case CHART_TYPES.BAR_HORIZONTAL:
+        //     this.chartBarHorizontal.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.BAR_VERTICAL:
+        //     this.chartBarVertical.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.PIZZA:
+        //     this.chartPizza.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.LINES:
+        //     this.chartLines.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.FUNNEL:
+        //     this.chartFunnel.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.GAUGE:
+        //     //this.chartGauge.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.STACKED_LINE:
+        //     this.chartStackedLine.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.BAR_VERTICAL_SIMPLE:
+        //     this.chartBarVerticalSimple.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.BAR_VERTICAL_NPS:
+        //     this.chartBarVerticalNps.configureChart(itens);
+        //   break;
+        //   case CHART_TYPES.LINES_NPS:
+        //     this.chartLinesNps.configureChart(itens);
+        //   break;
+        //   default:
+        //     console.log('NOT MAPPED CHART TYPE')
+        // }
       }, 500);
 
     }
   }
 
   clearWithTypeAsset(): void {
-    switch (this.type) {
-      case CHART_TYPES.BAR_HORIZONTAL:
-        this.chartBarHorizontal ? this.chartBarHorizontal.clearChart() : {};
-      break;
-      case CHART_TYPES.BAR_VERTICAL:
-        this.chartBarVertical ? this.chartBarVertical.clearChart() : {};
-      break;
-      case CHART_TYPES.PIZZA:
-        this.chartPizza ? this.chartPizza.clearChart() : {};
-      break;
-      case CHART_TYPES.LINES:
-        this.chartLines ? this.chartLines.clearChart() : {};
-      break;
-      case CHART_TYPES.FUNNEL:
-        this.chartFunnel ? this.chartFunnel.clearChart() : {};
-      break;
-      case CHART_TYPES.GAUGE:
-        //this.chartGauge.clearChart();
-      break;
-      case CHART_TYPES.STACKED_LINE:
-        this.chartStackedLine ? this.chartStackedLine.clearChart() : {};
-      break;
-      case CHART_TYPES.BAR_VERTICAL_SIMPLE:
-        this.chartBarVerticalSimple ? this.chartBarVerticalSimple.clearChart() : {};
-      break;
-      case CHART_TYPES.BAR_VERTICAL_NPS:
-        this.chartBarVerticalNps.clearChart();
-      break;
-      case CHART_TYPES.LINES_NPS:
-        this.chartLinesNps.clearChart();
-      break;
-      default:
-        console.log('NOT MAPPED CHART TYPE')
+
+    this.executeOnSelectedChart((item): void => item.clearChart())
+
+    // switch (this.type) {
+    //   case CHART_TYPES.BAR_HORIZONTAL:
+    //     this.chartBarHorizontal ? this.chartBarHorizontal.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.BAR_VERTICAL:
+    //     this.chartBarVertical ? this.chartBarVertical.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.PIZZA:
+    //     this.chartPizza ? this.chartPizza.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.LINES:
+    //     this.chartLines ? this.chartLines.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.FUNNEL:
+    //     this.chartFunnel ? this.chartFunnel.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.GAUGE:
+    //     //this.chartGauge.clearChart();
+    //   break;
+    //   case CHART_TYPES.STACKED_LINE:
+    //     this.chartStackedLine ? this.chartStackedLine.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.BAR_VERTICAL_SIMPLE:
+    //     this.chartBarVerticalSimple ? this.chartBarVerticalSimple.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.BAR_VERTICAL_NPS:
+    //     this.chartBarVerticalNps ? this.chartBarVerticalNps.clearChart() : {};
+    //   break;
+    //   case CHART_TYPES.LINES_NPS:
+    //     this.chartLinesNps.clearChart();
+    //   break;
+    //   default:
+    //     console.log('NOT MAPPED CHART TYPE')
+    // }
+  }
+
+  executeOnSelectedChart(executeMethod: (item: any) => void) {
+    const chart = this.charts.find(item => item.type === this.type);
+        
+    if(!chart) {
+      console.log('NOT MAPPED CHART TYPE');
+      return;
+    }
+
+    const attribute = this[chart.attribute];
+    if(chart.shouldApply && attribute) {
+      executeMethod(attribute);
     }
   }
 

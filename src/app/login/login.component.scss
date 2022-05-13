@@ -25,12 +25,8 @@ input {
 }
 
 .login-page {
-  // width: 40%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $white-light;
+  color: #7d8c8f !important;
+  background-color: $white-light !important;
 }
 
 ::ng-deep .form-control,
@@ -90,4 +86,13 @@ label {
 .version {
   font-size: 9px;
   padding-top: 5px;
+}
+
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
 }

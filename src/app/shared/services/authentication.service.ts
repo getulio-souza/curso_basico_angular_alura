@@ -12,9 +12,15 @@ import { Permission, UserMetadata } from "../model/permission";
   providedIn: "root",
 })
 export class AuthenticationService {
+  
   emitter: EventEmitter = new EventEmitter();
 
   firstLogin: boolean = false;
+  
+  authServer: string;
+  restApiServer: string;
+  integrationServer: string;
+
   constructor(
     private httpClient: HttpClient,
     private jwtHelper: JwtHelperService,
@@ -30,44 +36,75 @@ export class AuthenticationService {
     sessionStorage.removeItem("lastLoginDate");
     sessionStorage.removeItem("firstlogin");
 
-    return this.httpClient
-    .post<any>(
-      PropertiesService.properties.authServer + '/oauth/token',
-      body,
-      { headers: this.getHeaders() }
-    )
-    .pipe(
-      map((userData) => {
-
+    return this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
+      flatMap((config) => {
+        return forkJoin([
+          this.httpClient.post<any>(config.authServer + "/oauth/token", body, {
+            headers: this.getHeaders(),
+          }),
+          of(config),
+        ]);
+      }),
+      flatMap((joinedResult: any) => {
+        const userData = joinedResult[0];
+        const config = joinedResult[1];
+        console.log("logou");
         if (!userData.lastLoginDate) {
-          sessionStorage.setItem('lastLoginDate', null);
+          sessionStorage.setItem("lastLoginDate", null);
           this.firstLogin = true;
         } else {
-          sessionStorage.setItem('lastLoginDate', userData.lastLoginDate);
+          sessionStorage.setItem("lastLoginDate", userData.lastLoginDate);
         }
 
-        sessionStorage.setItem('username', username);
+        sessionStorage.setItem("username", username);
 
         let tokenStr = userData.access_token;
-        sessionStorage.setItem('token', tokenStr);
-        localStorage.setItem('access_token', tokenStr);
+        sessionStorage.setItem("token", tokenStr);
+        localStorage.setItem("access_token", tokenStr);
 
         const jwtJson = this.jwtHelper.decodeToken(tokenStr);
         sessionStorage.setItem(
-          'permissions',
+          "permissions",
           JSON.stringify(jwtJson.permissions)
         );
-        sessionStorage.setItem('lastLoginDate', jwtJson.lastLoginDate);
 
-        this.emitter.emit("successLogEvent", true);
+        const propertyIds = jwtJson.permissions
+          .filter(item => item.permission.startsWith('propertyId'))
+          .map(item=>item.permission)
+          .map(permission => permission.replace('propertyId:', ''))
         
-        this.httpClient.get(PropertiesService.properties.restApiServer + '/user/me').subscribe((user: any) => {
-          if(user) {
-            this.httpClient.get(PropertiesService.properties.restApiServer + '/practitioner/' + user.practitionerId).subscribe((practitioner: any) => {
-              sessionStorage.setItem('sector', practitioner.sector[0]);
-            });
-          }
-        });
+        const administrativeArea = jwtJson.permissions.find(item => item.permission.startsWith('administrativeArea'));
+        
+        sessionStorage.setItem('user_metadata', JSON.stringify({propertyIds, administrativeArea}));
+
+        sessionStorage.setItem("lastLoginDate", jwtJson.lastLoginDate);
+        this.emitter.emit("successLogEvent", true);
+        return forkJoin([
+          of(userData),
+          of(config),
+          this.httpClient.get(config.restApiServer + "/user/me"),
+        ]);
+      }),
+      flatMap((joinedResults) => {
+        const userData = joinedResults[0];
+        const config = joinedResults[1];
+        const user: any = joinedResults[2];
+        const observables = [of(userData)];
+        if (user)
+          observables.push(
+            this.httpClient.get(
+              config.restApiServer + "/practitioner/" + user.practitionerId
+            )
+          );
+        return forkJoin(observables);
+      }),
+      map((joinedResults) => {
+        const userData = joinedResults[0];
+        if (joinedResults.length > 1) {
+          const practitioner: any = joinedResults[1];
+          if (practitioner)
+            sessionStorage.setItem("sector", practitioner.sector[0]);
+        }
         return userData;
       })
     );
@@ -86,7 +123,7 @@ export class AuthenticationService {
 
     return this.httpClient
       .post<any>(
-        PropertiesService.properties.integrationServer +
+        this.integrationServer +
           "/egress/loginExternal",
         body,
         { headers: this.getHeadersExternalLogin() }
@@ -171,7 +208,7 @@ export class AuthenticationService {
   }
 
   public getUserMetadata(): Observable<UserMetadata> {
-    return of({ roles: this.getPermission().map((value) => value.permission) });
+    return of(JSON.parse(sessionStorage.getItem('user_metadata')));
   }
 
   getToken(): string {
@@ -181,7 +218,7 @@ export class AuthenticationService {
 
   forgotPassword(email: string, callbackRelativeURL: string): Observable<any> {
     return this.httpClient.post(
-      PropertiesService.properties.authServer + "/forgotpassword",
+      this.authServer + "/forgotpassword",
       {
         email: email,
         language: localStorage.getItem("language"),
@@ -200,7 +237,7 @@ export class AuthenticationService {
     newpassword: string
   ): Observable<any> {
     return this.httpClient.post(
-      PropertiesService.properties.authServer +
+      this.authServer +
         "/forgotpassword/changepassword",
       {
         otp: otp,

@@ -46,12 +46,10 @@ export class NoRegisteredGuard implements CanActivate {
       }));
   }
 
-  private checkAvailableProperties() {
-
-    return this.proxperConfigService.updateConfigAndAvailableProperties(() => {
-      let propertiesAvailable = this.proxperConfigService.getAvailableProperties();
-      this.emitChangeSource.next(propertiesAvailable);
-    });
+  private async checkAvailableProperties() {
+    await this.proxperConfigService.updateConfigAndAvailableProperties();
+    let propertiesAvailable = this.proxperConfigService.getAvailableProperties();
+    this.emitChangeSource.next(propertiesAvailable);
   }
 
 

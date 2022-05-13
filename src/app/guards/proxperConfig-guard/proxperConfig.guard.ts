@@ -50,32 +50,28 @@ export class ProxperConfigGuard implements CanActivate {
         }
       }));
   }
-  private isPropertyAvailable(next: ActivatedRouteSnapshot) {
+  private async isPropertyAvailable(next: ActivatedRouteSnapshot) {
 
-    return this.proxperConfigService.updateConfigAndAvailableProperties(() => {
+    await this.proxperConfigService.updateConfigAndAvailableProperties();
 
-      let emitterData = {};
-      let propertiesAvailable = this.proxperConfigService.getAvailableProperties();
-      let propertyIsAvaible;
-      let selectedProperty = next.params['propertyId'];
-      if (propertiesAvailable != null && propertiesAvailable.includes(selectedProperty)) {
-        propertyIsAvaible = true;
-      } else {
-        propertyIsAvaible = false;
-      }
+    let emitterData = {};
+    let propertiesAvailable = this.proxperConfigService.getAvailableProperties();
+    let propertyIsAvaible;
+    let selectedProperty = next.params['propertyId'];
+    if (propertiesAvailable != null && propertiesAvailable.includes(selectedProperty)) {
+      propertyIsAvaible = true;
+    } else {
+      propertyIsAvaible = false;
+    }
 
-      emitterData['isAllowed'] = propertyIsAvaible;
-      emitterData['selectedProperty'] = selectedProperty;
-      emitterData['propertiesAvailable'] = propertiesAvailable;
+    emitterData['isAllowed'] = propertyIsAvaible;
+    emitterData['selectedProperty'] = selectedProperty;
+    emitterData['propertiesAvailable'] = propertiesAvailable;
 
-      this.propertiesService.getAppConfig().subscribe((res) => {
-    
-        this.proxperConfigService.setPropertyAndLoadConfigs(selectedProperty);
-        this.emitChangeSource.next(emitterData);
-      });
+    this.proxperConfigService.setPropertyAndLoadConfigs(selectedProperty);
+    this.emitChangeSource.next(emitterData);
 
-
-    });
+    return 
   }
 
   

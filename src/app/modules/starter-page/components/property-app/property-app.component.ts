@@ -52,12 +52,10 @@ export class PropertyAppComponent extends PropertyDataLoader implements Notifica
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loggedIn = this.auth.isUserLoggedIn();
-    this.proxperConfigService.updateConfigAndAvailableProperties(() => {
-      this.afterSetConfigs();
-    })
-
+    await this.proxperConfigService.updateConfigAndAvailableProperties()
+    this.afterSetConfigs();
   }
 
   afterSetConfigs() {

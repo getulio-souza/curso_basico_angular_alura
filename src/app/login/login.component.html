@@ -1,20 +1,20 @@
-<div class="login-container">
-  <div class="login-page">
-    <div class="card w-75">
-      <div class="card-content">
+<section class="login-page vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-md-8 col-lg-6 col-xl-4 mt-4">
         <div>
           <h3 class="raleway negrito mt-4">
-            {{ 'Welcome' | translate }}
+            {{ "Welcome" | translate }}
           </h3>
         </div>
         <div
           style="width: 30px; border: 1px solid #687484; border-radius: 1px"
         ></div>
         <div style="padding-top: 10px; margin-bottom: 15px">
-          {{ 'Enter your login details, please.' | translate }}.
+          {{ "Enter your login details, please." | translate }}.
         </div>
 
-        <form #registryForm="ngForm" name="form" class="seplogin mt-2">
+        <form #registryForm="ngForm" name="form">
           <fieldset>
             <div class="form-group" *ngIf="!firstLogin">
               <label class="txlabel" for="userInput" translate>User</label>
@@ -87,10 +87,12 @@
           ></app-button>
         </form>
       </div>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center">
       <div class="footer-logo">
         <img src="../../assets/images/logo-proxper-final.svg" width="100px" />
         <p class="version">V. {{ this.pjson }}</p>
       </div>
     </div>
   </div>
-</div>
+</section>

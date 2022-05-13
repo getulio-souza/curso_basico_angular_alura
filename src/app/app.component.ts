@@ -21,14 +21,9 @@ export class AppComponent implements AfterViewInit {
   simpleNotificationComponent: SimpleNotificationComponent;
 
   constructor(private route: ActivatedRoute, 
-    private propertiesService: PropertiesService,
     private authenticationService: AuthenticationService,
     private simpleNotificationService: SimpleNotificationService) {
     setTimeout(() => {
-      this.propertiesService.readAllProperties().subscribe(() => {
-        this.ready = true;
-        console.log(PropertiesService.properties.authServer)
-      });
       this.auth = {loggedIn: this.authenticationService.isUserLoggedIn()}
       this.authenticationService.registerEvent('successLogEvent', (result: boolean)=> this.auth.loggedIn = result);
       this.route.firstChild.params.subscribe(resp => {

@@ -1,8 +1,9 @@
 export class Permission {
   permission: string;
-  tag: string;
+  tag?: string;
 }
 
 export class UserMetadata {
-  roles: string[]
+  propertyIds: string[];
+  administrativeArea: string;
 }

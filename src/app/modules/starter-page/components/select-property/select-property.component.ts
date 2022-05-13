@@ -26,26 +26,24 @@ export class SelectPropertyComponent implements OnInit {
     public proxperConfigService: ProxperConfigService,
     private router: Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loggedIn = this.auth.isUserLoggedIn();
-    this.proxperConfigService.updateConfigAndAvailableProperties(() => {
-      let availableProperties = this.proxperConfigService.getAvailableProperties();
-      if (availableProperties == null || availableProperties.length == 0) {
-        // case no property is available
-        console.warn("there is no property configured");
-        this.goToNotFoundConfig();
-      } else if (availableProperties.length == 1) {
-        //case only one property is available
-        this.onEnterSelectedProperty({ selectedPropertyId: availableProperties[0] });
-      } else {
-        //multi property case, should show select property component
-      }
-      
-      // else
-      //multi property case, should show select property component
+    await this.proxperConfigService.updateConfigAndAvailableProperties()
+    let availableProperties = this.proxperConfigService.getAvailableProperties();
 
-      this.appIsReady = true;
-    })
+    const thereIsNoPropertyConfigured = availableProperties == null || availableProperties.length == 0;
+    const thereIsOnlyOneProperty = availableProperties.length == 1;
+
+    if (thereIsNoPropertyConfigured) {
+      console.warn("there is no property configured");
+      this.goToNotFoundConfig();
+    } else if (thereIsOnlyOneProperty) this.selectFirstProperty(availableProperties);
+    
+    this.appIsReady = true;
+  }
+
+  private selectFirstProperty(availableProperties: string[]) {
+    this.onEnterSelectedProperty({ selectedPropertyId: availableProperties[0] });
   }
 
   goToNotFoundConfig() {

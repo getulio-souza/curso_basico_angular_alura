@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { PropertiesService } from '@alis/ng-services';
 import { tap } from 'rxjs/operators';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProxperConfigService {
   private proxperBaseUrl;
   private availableProperties: Array<string>;
 
-  constructor(private propertiesService: PropertiesService) {
+  constructor(private propertiesService: PropertiesService, private authenticationService: AuthenticationService) {
   }
 
   setPropertyAndLoadConfigs(propertyId) {
@@ -20,24 +21,21 @@ export class ProxperConfigService {
     this.propertiesService.setPropertiesUrl(propertyProxperUrl);
   }
 
-  updateConfigAndAvailableProperties(afterSet) {
+  async updateConfigAndAvailableProperties() {
 
-    this.availableProperties = ['capjuluca', 'copapalace', 'acqualina', 'einsteinsp', 'unimedsorocaba']
+    const userMetadata = await this.authenticationService.getUserMetadata().toPromise();
+    this.availableProperties = userMetadata.propertyIds;
 
-    return this.propertiesService.getAppConfig().pipe(
-      tap((config) => {
-        this.proxperBaseUrl = config.proxperConfigsBaseUrl;
-      }))
+    this.proxperBaseUrl = await this.getProxperUrl();
+  }
 
-    // ANALISAR IMPACTO - Precisa de variaveis que enviei como imagem para o odair.
-    
-    // this.auth.getUser$().subscribe((user) => {
-    //   this.auth.processUserMetadata(user).subscribe((res) => {
-    //     this.proxperBaseUrl = res[0];
-    //     this.availableProperties = res[1];
-    //     afterSet();
-    //   });
-    // });
+  async getProxperUrl() {
+    const properties = await this.propertiesService.readProperties("assets/appConfig.properties.json").toPromise();
+    let proxperConfigsUrl = properties['proxperConfigsBaseUrl'];
+    if (proxperConfigsUrl == null) {
+      console.error("Could not find 'proxperConfigsBaseUrl' in properties file");
+    }
+    return proxperConfigsUrl;
   }
 
   public getAvailableProperties() {

@@ -25,7 +25,7 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
 
   // lets intercept and add authorization token to all intercepts
   // that contains the following string
-  private static INTERCEPT_URLS = ["automation", "tracking", "state", "user/me"];
+  private static INTERCEPT_URLS = ["automation", "tracking", "state", "user/me", "activities"];
 
   constructor(private propertiesService: PropertiesService) {}
 

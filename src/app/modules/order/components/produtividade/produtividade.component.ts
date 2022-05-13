@@ -106,30 +106,11 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
 
   constructor(translateService: TranslateService, structureService: StructureService, propertiesService: PropertiesService, private dateService: DateService, private orderEventService: OrderEventService, private orderService: OrderService, private route: ActivatedRoute, private router: Router) {
     super(translateService, structureService, propertiesService);
-
-    this.route.queryParams.subscribe(query => {
-      this.orderToken = query['auth'];
-      this.orderService.validateAccess(query['auth']).subscribe(validate => {
-        if (!validate) {
-          this.router.navigate(['']);
-        }
-      }, () => this.router.navigate(['']));
-    });
-
-    this.route.params.subscribe(response => {
-      if (response['property'] && response['sector']) {
-        this.acessoExterno = true;
-
-        this.property = response['property'];
-        this.sector = response['sector'];
-        
-        this.orderEventService.setPropertyId(response['property']);
-        this.orderService.setExterno(this.orderToken);
-      }
-    });
   }
 
   async ngOnInit() {
+    await this.loadRouteParams();
+
     this.loadingSubject.pipe(debounceTime(200))
     .subscribe((_) => {
       this.loading = false;
@@ -157,6 +138,26 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
     setInterval(() => this.refresh() , this.TRINTA_SEGUNDOS);
 
     this.initView('admin');
+  }
+
+  async loadRouteParams() {
+    const _this = this;
+    _this.route.params.subscribe(response => {
+      if (response['property'] && response['sector']) {
+        _this.route.queryParams.subscribe(query => {
+          _this.acessoExterno = true;
+          _this.orderToken = query.auth;
+          _this.sector = response.sector;
+          _this.orderEventService.setPropertyId(response.property);
+          _this.orderService.setExterno(_this.orderToken);
+          _this.orderService.validateAccess(_this.orderToken).subscribe(validate => {
+            if (!validate) {
+              _this.router.navigate(['']);
+            }
+          })
+        });
+      }
+    });
   }
 
   async initView(view: string): Promise<void> {
