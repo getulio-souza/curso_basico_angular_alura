@@ -153,6 +153,10 @@ export function createTranslateLoader(http: HttpClient) {
     ])
 }
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -262,7 +266,7 @@ export function createTranslateLoader(http: HttpClient) {
     //   echarts: () => import('echarts')
     // }),
     JwtModule.forRoot({
-      config: { tokenGetter: ()=>localStorage.getItem('access_token') },
+      config: { tokenGetter },
     }),
     RouterModule.forRoot([
       {
