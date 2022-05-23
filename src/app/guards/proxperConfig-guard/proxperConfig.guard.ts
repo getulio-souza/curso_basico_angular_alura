@@ -4,6 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProxperConfigService } from '../../services/proxperConfig/proxperConfig.service';
 import { PropertiesService } from '@alis/ng-services';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,12 @@ export class ProxperConfigGuard implements CanActivate {
   constructor(
     private proxperConfigService: ProxperConfigService,
     private propertiesService: PropertiesService,
+    private auth: AuthenticationService,
     private router: Router) { }
 
   private emitChangeSource = new Subject<any>();
 
   private canActivate$ = this.emitChangeSource.asObservable();
-
-
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -69,6 +69,11 @@ export class ProxperConfigGuard implements CanActivate {
     emitterData['propertiesAvailable'] = propertiesAvailable;
 
     this.proxperConfigService.setPropertyAndLoadConfigs(selectedProperty);
+
+    if(!this.auth.isPropertyLoggedIn()) {
+      await this.auth.authenticateProperty(selectedProperty).toPromise();
+    }
+
     this.emitChangeSource.next(emitterData);
 
     return 

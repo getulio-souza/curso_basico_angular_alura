@@ -42,21 +42,22 @@ export class SelectPropertyComponent implements OnInit {
     this.appIsReady = true;
   }
 
-  private selectFirstProperty(availableProperties: string[]) {
-    this.onEnterSelectedProperty({ selectedPropertyId: availableProperties[0] });
+  private async selectFirstProperty(availableProperties: string[]) {
+    await this.onEnterSelectedProperty({ selectedPropertyId: availableProperties[0] });
   }
 
-  goToNotFoundConfig() {
+  public goToNotFoundConfig() {
     this.router.navigateByUrl("/noRegisteredProperty");
   }
 
-  logout() {
+  public logout() {
     this.auth.logout();
     this.router.navigate(['/login'], { queryParams: { url: this.router.routerState.snapshot.url } });
   }
 
-  onEnterSelectedProperty(event) {
-    this.router.navigateByUrl("/propertyApp/" + event.selectedPropertyId);
+  public async onEnterSelectedProperty(event) {
+    const {selectedPropertyId} = event;
+    this.router.navigateByUrl("/propertyApp/" + selectedPropertyId);
   }
 
 }

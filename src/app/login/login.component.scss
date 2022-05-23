@@ -44,16 +44,6 @@ input {
   background: $white-dark;
 }
 
-::ng-deep .card {
-  margin-bottom: 30px;
-  margin-top: 30px;
-
-  border: none;
-  box-shadow: none;
-
-  background: transparent;
-}
-
 .form-control:focus {
   outline: 0;
   border-color: $base-blue;

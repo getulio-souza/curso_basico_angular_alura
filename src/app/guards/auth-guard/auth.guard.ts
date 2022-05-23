@@ -25,15 +25,6 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
-  
-    // REMOVAL AUTH0 - não tem mais necessidade
-    // return this.auth.isAuthenticated$.pipe(
-    //   tap(loggedIn => {
-    //     if (!loggedIn) {
-    //       this.auth.login(state.url);
-    //     }
-    //   })
-    // )
   }
 
 }

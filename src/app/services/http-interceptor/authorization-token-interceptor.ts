@@ -25,21 +25,23 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
 
   // lets intercept and add authorization token to all intercepts
   // that contains the following string
-  private static INTERCEPT_URLS = ["automation", "tracking", "state", "user/me", "activities"];
+  private static INTERCEPT_URLS = ["automation", "state", "user/me", "activities"];
+
+  private static INTERCEPT_URLS_PROXPER_AUTH = ['tracking']
 
   constructor(private propertiesService: PropertiesService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // check if should add Authorization Token to the current request
-    const addAuthToken = this.shoulddAuthorizationToken(request.url);
+    const addAuthToken = this.shouldAuthorizationToken(request.url);
     if (!addAuthToken) {
       return next.handle(request);
     }
 
-    if (sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
+    if (sessionStorage.getItem('username') && this.hasTokenOnSessionStorage(request.url)) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+          Authorization: 'Bearer ' + this.hasTokenOnSessionStorage(request.url),
         },
       });
     }
@@ -62,19 +64,28 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 
-  shoulddAuthorizationToken(currentUrl: string) {
+  hasTokenOnSessionStorage(currentUrl: string) {
 
-    const urls = AuthorizationTokenInterceptor.INTERCEPT_URLS
+    let token = sessionStorage.getItem('token')
 
-    for (let i = 0; i < urls.length; i++) {
-      if (currentUrl.includes(urls[i])) {
-        return true;
-      }
+    const matchesProxperAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS_PROXPER_AUTH.some(url => currentUrl.includes(url));
+    
+    if(sessionStorage.getItem('property_token') && matchesProxperAuth) {
+      token = sessionStorage.getItem('property_token')
     }
-
-    return false;
+    
+    return token;
+    
   }
 
+  shouldAuthorizationToken(currentUrl: string) {
 
+    const matchesNormalAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS.some(url => currentUrl.includes(url));
+    const matchesProxperAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS_PROXPER_AUTH.some(url => currentUrl.includes(url));
+
+    return matchesNormalAuth || matchesProxperAuth;
+
+  }
 
 }
+

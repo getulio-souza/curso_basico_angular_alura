@@ -43,6 +43,7 @@ export class OrderEventService {
       }
       // properties de dev nao contem a eventsUrl apos verificar realizar mudança
       this.eventsUrl = (response.eventsUrl ? response.eventsUrl : 'https://events-dev.cloud.evolutix.com.br');
+      // this.eventsUrl = "http://localhost:8080";
     });
   }
 

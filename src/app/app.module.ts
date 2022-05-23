@@ -1,5 +1,3 @@
-import { ProxperTokenProvider } from './services/proxper-token-provider/proxper-token-provider.service';
-import { TokenProviderService } from '@alis/ng-services';
 import { AuthorizationTokenInterceptor } from './services/http-interceptor/authorization-token-interceptor';
 import { HomeModule } from './modules/home/home.module';
 import { PropertySummaryModule } from './modules/property-summary/property-summary.module';
@@ -128,7 +126,6 @@ import { StarterPageModule } from './modules/starter-page/starter-page.module';
 import { CRMModule } from './modules/crm/crm.module';
 import { OrderModule } from './modules/order/order.module';
 import { ProxperCommonModule } from './modules/proxperCommon/proxperCommon.module';
-import { ProxperAuthService } from './services/proxper-auth/proxper-auth.service';
 import { NotAllowedComponent } from './modules/starter-page/components/not-allowed/not-allowed.component';
 import { OrderPageComponent } from './modules/order/components/order-page/order-page.component';
 import { RoomControlModule } from './modules/room-control/room-control.module';
@@ -154,7 +151,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 export function tokenGetter() {
-  return localStorage.getItem('access_token');
+  return sessionStorage.getItem('token');
 }
 
 @NgModule({

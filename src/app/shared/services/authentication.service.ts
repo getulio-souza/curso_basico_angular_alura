@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { EventEmitter } from "events";
 import { forkJoin, Observable, of } from "rxjs";
-import { flatMap, map } from "rxjs/operators";
+import { flatMap, map, tap } from "rxjs/operators";
 import { Authentication } from "../model/authentication";
 import { Permission, UserMetadata } from "../model/permission";
 
@@ -48,7 +48,6 @@ export class AuthenticationService {
       flatMap((joinedResult: any) => {
         const userData = joinedResult[0];
         const config = joinedResult[1];
-        console.log("logou");
         if (!userData.lastLoginDate) {
           sessionStorage.setItem("lastLoginDate", null);
           this.firstLogin = true;
@@ -60,11 +59,10 @@ export class AuthenticationService {
 
         let tokenStr = userData.access_token;
         sessionStorage.setItem("token", tokenStr);
-        localStorage.setItem("access_token", tokenStr);
 
         const jwtJson = this.jwtHelper.decodeToken(tokenStr);
         sessionStorage.setItem(
-          "permissions",
+          'permissions',
           JSON.stringify(jwtJson.permissions)
         );
 
@@ -135,6 +133,28 @@ export class AuthenticationService {
       );
   }
 
+  public authenticateProperty(property: string): Observable<string> {
+    return forkJoin([
+        this.propertiesService.getAppConfig(), 
+        this.propertiesService.readProperties("assets/appConfig.properties.json")
+      ]).pipe(
+        flatMap(results => {
+          const [propertyConfig, localConfig] = results;
+          
+          if(!propertyConfig.username) {
+            console.log(`Property doesn't have username and password to login`)
+            return of(false);
+          }
+
+          const body = `username=${propertyConfig.username}&password=${propertyConfig.password}&grant_type=password`;
+          return this.httpClient.post<any>(localConfig.authServer + "/oauth/token", body, {
+            headers: this.getHeaders(),
+          });
+        }),
+        tap(token => sessionStorage.setItem('property_token', token.access_token))
+      );
+  } 
+
   private getHeadersExternalLogin(): HttpHeaders {
     return new HttpHeaders({
       "Content-Type": "application/json",
@@ -158,6 +178,11 @@ export class AuthenticationService {
   public isUserLoggedIn(): boolean {
     let user = sessionStorage.getItem("username");
     return user != null;
+  }
+
+  public isPropertyLoggedIn(): boolean {
+    let isLoggedIn = sessionStorage.getItem("property_token");
+    return isLoggedIn != null;
   }
 
   public getUsername(): string {
@@ -185,14 +210,13 @@ export class AuthenticationService {
   }
 
   public logout(): void {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("lastLoginDate");
-    sessionStorage.removeItem("sector");
+    const items = ['username', 'lastLoginDate', 'sector', 'token', 'permissions', 'user_metadata', 'property_token'];
+    items.forEach(item => sessionStorage.removeItem(item));
     this.emitter.emit("successLogEvent", false);
   }
 
   public hasPermission(s: string): boolean {
-    const permissionsOnSession = sessionStorage.getItem("permissions");
+    const permissionsOnSession = sessionStorage.getItem('permissions');
     if (!permissionsOnSession) {
       return false;
     }
@@ -202,18 +226,13 @@ export class AuthenticationService {
 
   public getPermission(): Permission[] {
     const permissions: Permission[] = JSON.parse(
-      sessionStorage.getItem("permissions")
+      sessionStorage.getItem('permissions')
     );
     return permissions;
   }
 
   public getUserMetadata(): Observable<UserMetadata> {
     return of(JSON.parse(sessionStorage.getItem('user_metadata')));
-  }
-
-  getToken(): string {
-    const accessToken = localStorage.getItem("access_token");
-    return accessToken;
   }
 
   forgotPassword(email: string, callbackRelativeURL: string): Observable<any> {
