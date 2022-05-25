@@ -55,7 +55,8 @@ dcos:
     - docker
   stage: docker-deploy
   script:
-    - "chmod +x ./restart-dcos-app.sh dev/health/services/proxper-health"
+    - "chmod +x restart-dcos-app.sh"
+    - "./restart-dcos-app.sh dev/health/services/proxper-health"
   only:
     - develop
   dependencies:
