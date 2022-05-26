@@ -3,5 +3,28 @@
     "structureUrl": "https://structure.cloud.evolutix.com.br",
     "orderApi": "https://health-order.cloud.evolutix.com.br",
     "npsApi": "https://health-nps.cloud.evolutix.com.br",
-    "restApiServer": "https://health-whiteboard.cloud.evolutix.com.br"
+    "restApiServer": "https://health-whiteboard.cloud.evolutix.com.br",
+
+    "authServer": "https://health-authorization.cloud.evolutix.com.br",
+    "integrationServer": "https://integration-api-dev.cloud.evolutix.com.br",
+    
+    "backgrounds": {
+      "login": "assets/images/clients-logo/einstein/backoffice.png",
+      "dashboard": ""
+    },
+  
+    "sidebar": {
+      "logo": "assets/images/clients-logo/einstein/logo.svg",
+      "tabs": [
+        "encounter",
+        "_Timetable",
+        "Orders",
+        "Team and patient",
+        "Items",
+        "_Adm",
+        "Message"
+      ]
+    },
+
+    "loginExternal": false
 }
