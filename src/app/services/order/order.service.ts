@@ -2,21 +2,29 @@ import { PropertiesService } from '@alis/ng-services';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Item } from '../../modules/order/model/item';
+import { ItemCategory } from '../../modules/order/model/item-category.dto';
 import { Order } from '../../modules/order/model/order';
+import { ApiService } from '../api/api.service';
 import { FakeDataService } from '../fake-data/fake-data.service';
+import { HealthService } from '../health/health.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
+export class OrderService extends ApiService {
 
   externo = false;
   orderToken = null;
 
-  constructor(private http: HttpClient, private propertiesService: PropertiesService, private fakeDataService: FakeDataService) {
+  constructor(
+    private http: HttpClient, 
+    propertiesService: PropertiesService, 
+    private fakeDataService: FakeDataService,
+    private whiteboardService: HealthService) {
+      super('v1/order', propertiesService);
   }
 
   getCardsList() {
@@ -30,57 +38,38 @@ export class OrderService {
   }
 
   validateAccess(token): Observable<boolean> {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<boolean>(`${orderApi}/order/validate`,
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<boolean>(`${apiUrl}/request/validate`,
       { headers: { 'Authorization': 'Bearer ' + token } });
     }));
   }
 
   getOrders(): Observable<Order[]> {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<Order[]>(`${orderApi}/order`,
-        { headers: { 'Authorization': 'Bearer ' + res['ordertoken'] } });
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<Order[]>(`${apiUrl}/request`);
     }));
   }
 
   getOrdersByStatus(status: string) {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<Order[]>(`${orderApi}/order?status=${status}`,
-        { headers: { 'Authorization': 'Bearer ' + res['ordertoken'] } });
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<Order[]>(`${apiUrl}/request?status=${status}`);
     }));
   }
 
   getItems(): Observable<Item[]> {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<Item[]>(`${orderApi}/item/`,
-        { headers: { 'Authorization': 'Bearer ' + res['ordertoken'] } });
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<Item[]>(`${apiUrl}/item`);
     }));
   }
 
-  getItemCategories(): Observable<{ labels: any, id: string }[]> {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<any[]>(`${orderApi}/category/`,
-        { headers: { 'Authorization': 'Bearer ' + res['ordertoken'] } });
+  getItemCategories(): Observable<ItemCategory[]> {
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<ItemCategory[]>(`${apiUrl}/category`);
     }));
   }
 
   getItemOrganizations(): Observable<{ id: string, name: string }[]> {
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const restApiServer = res['orders']['whiteboardApi'];
-      
-      return this.http.get<{ id: string, name: string }[]>(`${restApiServer}/organization/allByTypeAndPartOf?type=WARD&partOf=5d82403f3d24e7229c7296cb`,
-        { headers: { 'Authorization': 'Bearer ' + res['ordertoken'] } });
-    }));
+    return this.whiteboardService.getItemOrganizations();
   }
 
   ordersFilteredForAdvancedView(status: string, category: string, sector: string, ward: string, subject: string, date: string, sla: string, rate: number) {
@@ -93,15 +82,10 @@ export class OrderService {
     const slaFilter = sla ? `sla=${sla}&` : '';
     const rateFilter = rate ? `rate=${rate}&` : '';
 
-    return this.propertiesService.getAppConfig().pipe(switchMap(res => {
-      const orderApi = this.externo ? res['orderApi'] : res['orders']['orderApi'];
-
-      return this.http.get<any>(`${orderApi}/order/advanced-filter?${statusFilter}${categoryFilter}${sectorFilter}${wardFilter}${subjectFilter}${dateFilter}${slaFilter}${rateFilter}`, {
-        headers: {
-          'Authorization': 'Bearer ' + (this.externo ? this.orderToken : res['ordertoken']) 
-        }
-      });
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<ItemCategory[]>(`${apiUrl}/request/advanced-filter?${statusFilter}${categoryFilter}${sectorFilter}${wardFilter}${subjectFilter}${dateFilter}${slaFilter}${rateFilter}`);
     }));
+   
   }
 
   orderStatus(): Map<string, string> {
@@ -112,7 +96,6 @@ export class OrderService {
     map.set('Cancelado', 'CANCELLED');
     map.set('Feito', 'DONE');
     map.set('Não Feito', 'NOT_DONE');
-
     return map;
   }
 

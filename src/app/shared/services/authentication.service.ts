@@ -5,7 +5,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { EventEmitter } from "events";
 import { forkJoin, Observable, of } from "rxjs";
 import { flatMap, map, tap } from "rxjs/operators";
-import { Authentication } from "../model/authentication";
+import { AssetsService } from "../../services/assets/assets.service";
+import { HealthService } from "../../services/health/health.service";
 import { Permission, UserMetadata } from "../model/permission";
 
 @Injectable({
@@ -17,15 +18,21 @@ export class AuthenticationService {
 
   firstLogin: boolean = false;
   
-  authServer: string;
-  restApiServer: string;
-  integrationServer: string;
+  apiServer: string;
 
   constructor(
     private httpClient: HttpClient,
     private jwtHelper: JwtHelperService,
-    private propertiesService: PropertiesService
-  ) {}
+    private propertiesService: PropertiesService,
+    private healthService: HealthService,
+    private assetsService: AssetsService
+  ) {
+    this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
+      tap((config) => {
+        this.apiServer = config.apiServer
+      })
+    ).subscribe();
+  }
 
   public authenticate(username: string, password: string): Observable<any> {
     this.firstLogin = false;
@@ -36,18 +43,10 @@ export class AuthenticationService {
     sessionStorage.removeItem("lastLoginDate");
     sessionStorage.removeItem("firstlogin");
 
-    return this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
-      flatMap((config) => {
-        return forkJoin([
-          this.httpClient.post<any>(config.authServer + "/oauth/token", body, {
-            headers: this.getHeaders(),
-          }),
-          of(config),
-        ]);
-      }),
-      flatMap((joinedResult: any) => {
-        const userData = joinedResult[0];
-        const config = joinedResult[1];
+    return this.httpClient.post<any>(this.apiServer + "/oauth/token", body, {
+      headers: this.getHeaders(),
+    }).pipe(
+      flatMap((userData: any) => {
         if (!userData.lastLoginDate) {
           sessionStorage.setItem("lastLoginDate", null);
           this.firstLogin = true;
@@ -79,21 +78,18 @@ export class AuthenticationService {
         this.emitter.emit("successLogEvent", true);
         return forkJoin([
           of(userData),
-          of(config),
-          this.httpClient.get(config.restApiServer + "/user/me"),
+          this.assetsService.getUser(),
         ]);
       }),
       flatMap((joinedResults) => {
         const userData = joinedResults[0];
-        const config = joinedResults[1];
-        const user: any = joinedResults[2];
+        const user: any = joinedResults[1];
         const observables = [of(userData)];
-        if (user)
-          observables.push(
-            this.httpClient.get(
-              config.restApiServer + "/practitioner/" + user.practitionerId
-            )
-          );
+
+        if (user) {
+          observables.push(this.healthService.getPractitioner(user.practitionerId));
+        }
+
         return forkJoin(observables);
       }),
       map((joinedResults) => {
@@ -106,31 +102,6 @@ export class AuthenticationService {
         return userData;
       })
     );
-  }
-
-  public authenticateExternalLogin(
-    username: string,
-    password: string
-  ): Observable<boolean> {
-    let body = new Authentication();
-    body.username = username;
-    body.password = password;
-
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("lastLoginDate");
-
-    return this.httpClient
-      .post<any>(
-        this.integrationServer +
-          "/egress/loginExternal",
-        body,
-        { headers: this.getHeadersExternalLogin() }
-      )
-      .pipe(
-        map((userData) => {
-          return userData;
-        })
-      );
   }
 
   public authenticateProperty(property: string): Observable<string> {
@@ -147,7 +118,7 @@ export class AuthenticationService {
           }
 
           const body = `username=${propertyConfig.username}&password=${propertyConfig.password}&grant_type=password`;
-          return this.httpClient.post<any>(localConfig.authServer + "/oauth/token", body, {
+          return this.httpClient.post<any>(localConfig.apiServer + "/oauth/token", body, {
             headers: this.getHeaders(),
           });
         }),
@@ -166,6 +137,8 @@ export class AuthenticationService {
     return new HttpHeaders({
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: "Basic " + btoa("alis:alis-pass"),
+      // Authorization: "Basic " + btoa("nuvola:ycErchiFY"),
+      // Authorization: "Basic " + btoa("vertilinc:TRanuSTEAsTa"),
     });
   }
 
@@ -237,7 +210,7 @@ export class AuthenticationService {
 
   forgotPassword(email: string, callbackRelativeURL: string): Observable<any> {
     return this.httpClient.post(
-      this.authServer + "/forgotpassword",
+      this.apiServer + "/v1/auth/password/recover",
       {
         email: email,
         language: localStorage.getItem("language"),
@@ -256,8 +229,8 @@ export class AuthenticationService {
     newpassword: string
   ): Observable<any> {
     return this.httpClient.post(
-      this.authServer +
-        "/forgotpassword/changepassword",
+      this.apiServer +
+        "/v1/auth/password/otp/change",
       {
         otp: otp,
         newpassword: newpassword,

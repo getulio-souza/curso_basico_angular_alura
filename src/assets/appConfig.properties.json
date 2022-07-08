@@ -1,14 +1,9 @@
 {
-    "proxperConfigsBaseUrl":"https://proxper-configs-dev.cloud.evolutix.com.br/config",
-    "structureUrl": "https://structure-dev.cloud.evolutix.com.br",
-    "orderApi": "https://health-order-dev.cloud.evolutix.com.br",
-    "ordertoken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsid2VicnRjLWFwaSIsImhvc3BpdGFsaXR5LWFwaSIsImF1dG9tYXRpb24tYXBpIl0sInByb3BlcnR5TmFtZSI6bnVsbCwidXNlcl9uYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9ucyI6W3sicGVybWlzc2lvbiI6ImFkZDpQcmFjdGl0aW9uZXJSZWdpc3RyeSJ9LHsicGVybWlzc2lvbiI6InVwZGF0ZTpQcmFjdGl0aW9uZXJSZWdpc3RyeSJ9LHsicGVybWlzc2lvbiI6ImluYWN0aXZhdGU6UHJhY3RpdGlvbmVyUmVnaXN0cnkifSx7InBlcm1pc3Npb24iOiJsaXN0OlByYWN0aXRpb25lclJlZ2lzdHJ5In0seyJwZXJtaXNzaW9uIjoic2VhcmNoOlByYWN0aXRpb25lclJlZ2lzdHJ5In0seyJwZXJtaXNzaW9uIjoiYWRkOlBhdGllbnRSZWdpc3RyeSJ9LHsicGVybWlzc2lvbiI6InVwZGF0ZTpQYXRpZW50UmVnaXN0cnkifSx7InBlcm1pc3Npb24iOiJkZWxldGU6UGF0aWVudFJlZ2lzdHJ5In0seyJwZXJtaXNzaW9uIjoibGlzdDpQYXRpZW50UmVnaXN0cnkifSx7InBlcm1pc3Npb24iOiJzZWFyY2g6UGF0aWVudFJlZ2lzdHJ5In0seyJwZXJtaXNzaW9uIjoiYWRtaXQ6UGF0aWVudE1vdmVtZW50In0seyJwZXJtaXNzaW9uIjoicmVsZWFzZTpQYXRpZW50TW92ZW1lbnQifSx7InBlcm1pc3Npb24iOiJ0cmFuc2ZlcjpQYXRpZW50TW92ZW1lbnQifSx7InBlcm1pc3Npb24iOiJ1cGRhdGVTdGF5OlBhdGllbnRNb3ZlbWVudCJ9LHsicGVybWlzc2lvbiI6Imxpc3RTdGF5OlBhdGllbnRNb3ZlbWVudCJ9LHsicGVybWlzc2lvbiI6InNlYXJjaFN0YXk6UGF0aWVudE1vdmVtZW50In0seyJwZXJtaXNzaW9uIjoic2V0dXBDYXRlZ29yeTpPcmRlcnMifSx7InBlcm1pc3Npb24iOiJzZXR1cEl0ZW1zOk9yZGVycyJ9LHsicGVybWlzc2lvbiI6InJlcXVlc3Q6T3JkZXJzIn0seyJwZXJtaXNzaW9uIjoiY2FuY2VsOk9yZGVycyJ9LHsicGVybWlzc2lvbiI6ImZpbmlzaDpPcmRlcnMifSx7InBlcm1pc3Npb24iOiJyYXRlOk9yZGVycyJ9LHsicGVybWlzc2lvbiI6ImhhbmRsZTpPcmRlcnMifSx7InBlcm1pc3Npb24iOiJyZWFkS1BJOk9yZGVycyJ9LHsicGVybWlzc2lvbiI6InNldHVwSGVhbHRoQ2FyZVNlcnZpY2U6U2hpZnQifSx7InBlcm1pc3Npb24iOiJzZXR1cFJvbGVzOlNoaWZ0In0seyJwZXJtaXNzaW9uIjoicmVhZDpTaGlmdCJ9LHsicGVybWlzc2lvbiI6ImFsbG9jYXRlQnlSb2xlOlNoaWZ0In0seyJwZXJtaXNzaW9uIjoiYWxsb2NhdGVCeVBhdGllbnQ6U2hpZnQifSx7InBlcm1pc3Npb24iOiJyZWFkS1BJOlNoaWZ0In1dLCJzY29wZSI6WyJyZWFkIiwiY29udHJvbCJdLCJleHAiOjIwMDAwMDAwMDAsImp0aSI6IjRjNjVlNGFjLTRkZTAtNGMxYi1hYTBjLWE5YTdmM2UxZTg2OSIsImNsaWVudF9pZCI6ImFsaXMifQ.Qy9lVVkz_q7ibsbtCMfI6tY0SVahMT9Uw9rvJx1lQB0",
-    "restApiServer": "https://health-whiteboard-dev.cloud.evolutix.com.br",
-    "eventsUrl": "https://events-dev.cloud.evolutix.com.br",
-
-    "authServer": "https://health-authorization-dev.cloud.evolutix.com.br",
-    "integrationServer": "https://integration-api-fake-dev.cloud.evolutix.com.br",
+    "apiServer": "https://api-health-dev.cloud.evolutix.com.br",
     
+    "proxperConfigsBaseUrl":"https://api-health-dev.cloud.evolutix.com.br/v1/configs/config",
+    "structureUrl": "https://structure-dev.cloud.evolutix.com.br",
+
     "backgrounds": {
       "login": "assets/images/clients-logo/einstein/backoffice.png",
       "dashboard": ""
@@ -28,5 +23,4 @@
     },
 
     "loginExternal": false
-
 }

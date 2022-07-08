@@ -27,13 +27,15 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
   // that contains the following string
   private static INTERCEPT_URLS = ["automation", "state", "user/me", "activities"];
 
-  private static INTERCEPT_URLS_PROXPER_AUTH = ['tracking']
+  private static INTERCEPT_URLS_PROXPER_AUTH = ['v1/order', 'v1/whiteboard', 'v1/tracking', 'v1/events']
+
+  private static DO_NOT_INTERCEPT_URLS_PROXPER_AUTH = ['v1/whiteboard/practitioner']
 
   constructor(private propertiesService: PropertiesService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // check if should add Authorization Token to the current request
-    const addAuthToken = this.shouldAuthorizationToken(request.url);
+    const addAuthToken = this.shouldAuthorizeToken(request.url);
     if (!addAuthToken) {
       return next.handle(request);
     }
@@ -78,12 +80,14 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
     
   }
 
-  shouldAuthorizationToken(currentUrl: string) {
+  shouldAuthorizeToken(currentUrl: string) {
 
     const matchesNormalAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS.some(url => currentUrl.includes(url));
     const matchesProxperAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS_PROXPER_AUTH.some(url => currentUrl.includes(url));
 
-    return matchesNormalAuth || matchesProxperAuth;
+    const doNotFilter = AuthorizationTokenInterceptor.DO_NOT_INTERCEPT_URLS_PROXPER_AUTH.some(url => currentUrl.includes(url));
+
+    return (matchesNormalAuth || matchesProxperAuth) && !doNotFilter;
 
   }
 
