@@ -6,6 +6,7 @@ import { AbstractService, PropertiesService } from '@alis/ng-services';
 import { FakeDataService } from '../fake-data/fake-data.service';
 import { of } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
+import { ApiService } from '../api/api.service';
 
 
 export enum EVENT_TAG {
@@ -20,6 +21,7 @@ export enum CALL_EVENT {
   MISSED_CALL = 'MISSED_CALL',
   REJECTED_CALL = 'REJECTED_CALL'
 }
+
 export enum EVENT_TYPE {
   SMART_CONTROL = 'smartControl',
   PMS_CHANGE = 'PMSChangeEvent',
@@ -29,16 +31,13 @@ export enum EVENT_TYPE {
 @Injectable({
   providedIn: 'root'
 })
-export class EventService extends AbstractService {
-
-  
-  private static apiPathProperty = 'eventsUrl';
+export class EventService extends ApiService {
 
   constructor(private fakeDataService: FakeDataService,
     propertiesService: PropertiesService, private dateService: DateService,
     private contextService: ContextService,
     private http: HttpClient) {
-    super(EventService.apiPathProperty, propertiesService);
+    super('v1/events', propertiesService);
   }
 
    /********************************** FAKE EVENTS *********************************/
@@ -65,7 +64,7 @@ export class EventService extends AbstractService {
   getEventsByTag(
   context: string, tag: string,
   eventType: string, eventSubtype: string,start: number, end: number) {
-  return this.getApiUrl().pipe(map((apiUrl) => {
+  return this.getResourceUrl().pipe(map((apiUrl) => {
     let url = this.buildEventsUrl(apiUrl, context, 'tag', tag);
     const params = this.buildReportQueryParams(eventType, eventSubtype, start, end,null,null,true);
     return this.contextService.getRequestObservable(url + params, this.http.get(url, { params: params }));
@@ -75,7 +74,7 @@ export class EventService extends AbstractService {
 getEventsBySubject(
   context: string, subject: string,
   eventType: string, eventSubtype: string, start: number, end: number) {
-  return this.getApiUrl().pipe(map((apiUrl) => {
+  return this.getResourceUrl().pipe(map((apiUrl) => {
     let url = this.buildEventsUrl(apiUrl, context, 'subject', subject);
     const params = this.buildReportQueryParams(eventType, eventSubtype, start, end,null,null,true);
     return this.contextService.getRequestObservable(url + params, this.http.get(url, { params: params }));
@@ -85,7 +84,7 @@ getEventsBySubject(
 getEventsBySource(
   context: string, source: string,
   eventType: string, eventSubtype: string, start: number, end: number) {
-  return this.getApiUrl().pipe(map((apiUrl) => {
+  return this.getResourceUrl().pipe(map((apiUrl) => {
     let url = this.buildEventsUrl(apiUrl, context, 'source', source);
     const params = this.buildReportQueryParams(eventType, eventSubtype, start, end,null,null,true);
     return this.contextService.getRequestObservable(url + params, this.http.get(url, { params: params }));
@@ -106,7 +105,7 @@ getEventsBySource(
     context: string, subject: string, resolution: string,
     eventType: string, eventSubtype: string, start: number, end: number, period: string,
     periodFilter: string, body: Object, forceRequest?) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = this.buildReportEventUrl(apiUrl, context, 'subject', subject, resolution);
       const params = this.buildReportQueryParams(eventType, eventSubtype, start, end, period, periodFilter,forceRequest);
       const cacheId = url + JSON.stringify(body);
@@ -120,7 +119,7 @@ getEventsBySource(
     context: string, source: string, resolution: string,
     eventType: string, eventSubtype: string, start: number, end: number, period: string,
     periodFilter: string, body: Object, forceRequest?) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = this.buildReportEventUrl(apiUrl, context, 'source', source, resolution);
       const params = this.buildReportQueryParams(eventType, eventSubtype, start, end, period, periodFilter,forceRequest);
       const cacheId = url + JSON.stringify(body);
@@ -133,7 +132,7 @@ getEventsBySource(
     context: string, tag: string, resolution: string,
     eventType: string, eventSubtype: string, start: number, end: number, period: string,
     periodFilter: string, body: Object, forceRequest?) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = this.buildReportEventUrl(apiUrl, context, 'tag', tag, resolution);
       const params = this.buildReportQueryParams(eventType, eventSubtype, start, end, period, periodFilter,forceRequest);
       const cacheId = url + JSON.stringify(body);

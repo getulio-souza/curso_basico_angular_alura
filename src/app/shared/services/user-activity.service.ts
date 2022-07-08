@@ -20,7 +20,7 @@ export class UserActivityService {
     return this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
      flatMap((config) => 
         this.httpClient.post<UserActivity>(
-          config.authServer + '/activities',
+          config.apiServer + '/v1/auth/activities',
           userActivity,
           { headers: new HttpHeaders({ 'Content-Type': 'application/json' })})));
   }

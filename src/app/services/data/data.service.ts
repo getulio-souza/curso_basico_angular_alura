@@ -8,6 +8,7 @@ import { FakeDataService } from './../fake-data/fake-data.service';
 import { AbstractService } from '@alis/ng-services';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiService } from '../api/api.service';
 
 class TraceApiParams {
   traceType: string;
@@ -67,20 +68,15 @@ export enum TraceType {
 @Injectable({
   providedIn: 'root'
 })
-export class DataService extends AbstractService {
-
-  private static apiPathProperty = 'trackingUrl';
-  
-
+export class DataService extends ApiService {
 
   constructor(
     propertiesService: PropertiesService,
     private http: HttpClient,
-    private fakeDataService: FakeDataService,
     private dateService: DateService,
     private contextService: ContextService) {
 
-    super(DataService.apiPathProperty, propertiesService);
+    super('v1/tracking', propertiesService);
 
   }
 
@@ -95,7 +91,7 @@ export class DataService extends AbstractService {
     body,
     forceRequest)
     {
-     return this.getApiUrl().pipe(map((apiUrl) => {
+     return this.getResourceUrl().pipe(map((apiUrl) => {
         let url = this.buildReportDeviceUrl(apiUrl, deviceId, resolution);
         const params = this.buildHttpParams(traceType, startDate, endDate,period, null, periodFilter,forceRequest);
         const cacheId = url + traceType;
@@ -104,7 +100,7 @@ export class DataService extends AbstractService {
     }
 
   latestTraceByTypeOwnerAndTag(traceType, propertyId, tag, body, minTimestamp?, forceRequest?) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = this.buildReportTagUrl(apiUrl, propertyId, tag, 'latest');
       const params = this.buildHttpParams(traceType, null, null, null, null, minTimestamp, forceRequest);
       const cacheId = url + traceType;
@@ -121,7 +117,7 @@ export class DataService extends AbstractService {
     period: string,
     periodEntries: string) {
 
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, ownerId, tag, resolution);
       const body = {};
 
@@ -141,7 +137,7 @@ export class DataService extends AbstractService {
 
 
   getEmsAggregation(traceType: TraceType, propertyId: string, tag: string, start, end, forceRequest) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, propertyId, tag, 'all');
       const body = {};
       body['kwh'] = 'SUM';
@@ -174,7 +170,7 @@ export class DataService extends AbstractService {
    * @param traceType an optional parameter to specify that only a specific kind of trace can be returned
    */
   getLastTraceByDevice(deviceId, traceType, forceRequest?) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildTraceDeviceUrl(apiUrl, deviceId);
       const config = {};
       if (traceType) {
@@ -194,7 +190,7 @@ export class DataService extends AbstractService {
 
 
   getTracesByOwnerAndTag(owner: string, tag: string, traceType, start, end, forceRequest?: boolean) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = apiUrl + '/trace/tag';
 
       const config = {};
@@ -223,7 +219,7 @@ export class DataService extends AbstractService {
  * @param traceType an optional parameter to specify that only a specific kind of trace can be returned
  */
   getLastTraceByTagAndOwner(ownerId: string, tag: string, traceType, forceRequest?: boolean) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = this.buildTraceTagUrl(apiUrl, ownerId, tag)
 
 
@@ -264,7 +260,7 @@ export class DataService extends AbstractService {
     period: string,
     periodEntries: string) {
 
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, ownerId, tag, resolution);
       const body = {};
       body['kwh'] = 'SUM';
@@ -294,7 +290,7 @@ export class DataService extends AbstractService {
     period: string,
     periodEntries: string) {
 
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, ownerId, tag, resolution);
       const body = {};
       body['presenceTime'] = 'SUM';
@@ -328,7 +324,7 @@ export class DataService extends AbstractService {
     period: string,
     periodEntries: string) {
 
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, ownerId, tag, resolution);
       const body = {};
       body['presence-time'] = 'SUM';
@@ -360,7 +356,7 @@ export class DataService extends AbstractService {
     body: any,
     traceType: TraceType
   ) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       const url = this.buildReportTagUrl(apiUrl, ownerId, tag, resolution);
 
       const params = this.buildHttpParams(traceType, startDate, endDate, period, periodEntries, null, null);
@@ -380,7 +376,7 @@ export class DataService extends AbstractService {
    * @param tag tag (opcional)
    */
   getRecentTracesByOwnerAndTraceType(owner, traceType, deviceId, tag) {
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = apiUrl + '/trace/recentTraces';
 
       //lets build httpParams
@@ -548,7 +544,7 @@ export class DataService extends AbstractService {
   }
 
   getDevicesStateByOwnerAndTraceType(owner: string, traceType: TraceType){
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = apiUrl + '/state/device';
       url+= "/" + owner + "/" + traceType;
 
@@ -558,7 +554,7 @@ export class DataService extends AbstractService {
   }
 
   getStateByOwnerTraceTypeAndDeviceId(owner: string, traceType: TraceType, deviceId: string, forceRequest?: boolean){
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = apiUrl + '/state/device';
       url+= "/" + owner + "/" + traceType + "/" + deviceId;
 
@@ -574,7 +570,7 @@ export class DataService extends AbstractService {
   }
 
   getStatesByOwnerAndTagAndTraceType(owner: string, tag: string, traceType: TraceType,forceRequest?:boolean){
-    return this.getApiUrl().pipe(map((apiUrl) => {
+    return this.getResourceUrl().pipe(map((apiUrl) => {
       let url = apiUrl + '/state/tag';
       url+= "/" + owner + "/" + tag + "/" + traceType;
 

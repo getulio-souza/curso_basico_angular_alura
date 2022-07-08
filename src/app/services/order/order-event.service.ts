@@ -10,6 +10,7 @@ import { OrderCategoryQuantityDTO } from '../../modules/order/model/order-catego
 import { OrderEvent } from '../../modules/order/model/order-event';
 import { FakeDataService } from '../fake-data/fake-data.service';
 import { Router } from '@angular/router';
+import { EventService } from '../event/event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,21 +31,24 @@ export class OrderEventService {
 
   private externo = false;
 
-  constructor(private http: HttpClient, private propertiesService: PropertiesService, private fakeDataService: FakeDataService, private translateService: TranslateService, private router: Router) {
+  constructor(
+    private http: HttpClient, 
+    private propertiesService: PropertiesService, 
+    private fakeDataService: FakeDataService, 
+    private translateService: TranslateService, 
+    private eventService: EventService,
+    private router: Router) {
     this.router.events.pipe(debounceTime(50)).subscribe((_) => {
       this.getProperties();
     });
   }
 
   async getProperties(): Promise<void> {
-    await this.propertiesService.getAppConfig().subscribe(response => {
-      if (!this.externo) {
-        this.propertyId = response.propertyId;
-      }
-      // properties de dev nao contem a eventsUrl apos verificar realizar mudança
-      this.eventsUrl = (response.eventsUrl ? response.eventsUrl : 'https://events-dev.cloud.evolutix.com.br');
-      // this.eventsUrl = "http://localhost:8080";
-    });
+    const response = await this.propertiesService.getAppConfig().toPromise();
+    if (!this.externo) {
+      this.propertyId = response.propertyId;
+    }
+    this.eventsUrl = await this.eventService.getResourceUrl().toPromise();
   }
 
   setPropertyId(property: string): void {

@@ -50,44 +50,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   doLogin() {
-    if (!this.externalLogin) {
-      this.loginInternal(this.user, this.password);
-    } else {
-      this.loginExternal(this.user, this.password);
-    }
+    this.loginInternal(this.user, this.password);
   }
 
-  loginExternal(user: string, password: string): void {
-    this.authenticationService
-      .authenticateExternalLogin(user, password)
-      .subscribe(
-        () => {
-          this.loginInternal(
-            user,
-            PropertiesService.properties.defaultPasswordIntegration
-          );
-        },
-        (err) => {
-          console.log(err);
-          const origin = this.externalLogin ? 'PROXPER: ' : '';
-          if (err.error != null && err.error.error == 'invalid_grant') {
-            this.sns.showSingleMessage(
-              MESSAGE_TYPE.ERROR,
-              this.translate('Username or password invalid'),
-              null,
-              false
-            );
-          } else {
-            this.sns.showSingleMessage(
-              MESSAGE_TYPE.ERROR,
-              this.translate('Error connecting to login server'),
-              null,
-              false
-            );
-          }
-        }
-      );
-  }
+  
 
   loginInternal(user: string, password: string): void {
     this.authenticationService.authenticate(user, password).subscribe(

@@ -9,19 +9,20 @@ import { FakeDataService } from '../fake-data/fake-data.service';
 import { NPSClosedOrderDTO } from '../../modules/nps/model/nps-closed-order.dto';
 import { NPSCategoryDTO } from '../../modules/nps/model/nps-by-category.dto';
 import { NPSCategoryLowerThanSevenDTO } from '../../modules/nps/model/nps-category-lower-than-seven.dto';
+import { ApiService } from '../api/api.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NPSEventService {
+export class NPSEventService extends ApiService{
 
   private propertyId: string;
-  private eventsUrl: string;
 
-  constructor(private http: HttpClient, private propertiesService: PropertiesService, private fakeDataService: FakeDataService, private translateService: TranslateService) {
+  constructor(private http: HttpClient, propertiesService: PropertiesService, private fakeDataService: FakeDataService, private translateService: TranslateService) {
+    super('v1/events', propertiesService);
     this.propertiesService.getAppConfig().subscribe(response => {
       this.propertyId = response.propertyId;
-      this.eventsUrl = response.eventsUrl;
     });
   }
 
@@ -35,7 +36,10 @@ export class NPSEventService {
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<NPSCategoryGlobalSatisfactionDTO>(`${this.eventsUrl}/nps/global-satisfaction/${this.propertyId}?${params}`);
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<NPSCategoryGlobalSatisfactionDTO>(`${apiUrl}/nps/global-satisfaction/${this.propertyId}?${params}`);
+    }));
+
   }
 
   findCategoriesNPSLowerThanSeven(start: number, end: number, category: string, sector: string, ward: string, subject: string): Observable<NPSCategoryLowerThanSevenDTO> {
@@ -48,7 +52,9 @@ export class NPSEventService {
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<NPSCategoryLowerThanSevenDTO>(`${this.eventsUrl}/nps/lowers-than-seven/${this.propertyId}?${params}`);
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<NPSCategoryLowerThanSevenDTO>(`${apiUrl}/nps/lowers-than-seven/${this.propertyId}?${params}`);
+    }));
   }
 
   findNPSClosedOrders(start: number, end: number, category: string, sector: string, ward: string, subject: string): Observable<NPSClosedOrderDTO> {
@@ -61,7 +67,9 @@ export class NPSEventService {
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<NPSClosedOrderDTO>(`${this.eventsUrl}/nps/closed-orders/${this.propertyId}?${params}`);
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<NPSClosedOrderDTO>(`${apiUrl}/nps/closed-orders/${this.propertyId}?${params}`);
+    }));
   }
 
   findNPSByCategory(start: number, end: number, category: string, sector: string, ward: string, subject: string): Observable<NPSCategoryDTO> {
@@ -74,12 +82,15 @@ export class NPSEventService {
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-
-    return this.http.get<NPSCategoryDTO>(`${this.eventsUrl}/nps/by-category/${this.propertyId}?${params}`);
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<NPSCategoryDTO>(`${apiUrl}/nps/by-category/${this.propertyId}?${params}`);
+    }));
   }
 
   getCategoriesAndSubjects(): Observable<NPSCategoriesWardsAndSubjectsDTO> {
-    return this.http.get<NPSCategoriesWardsAndSubjectsDTO>(`${this.eventsUrl}/nps/categories-subjects/${this.propertyId}`);
+    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
+      return this.http.get<NPSCategoriesWardsAndSubjectsDTO>(`${apiUrl}/nps/categories-subjects/${this.propertyId}?`);
+    }));
   }
 
 }

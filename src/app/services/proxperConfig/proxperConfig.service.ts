@@ -31,11 +31,11 @@ export class ProxperConfigService {
 
   async getProxperUrl() {
     const properties = await this.propertiesService.readProperties("assets/appConfig.properties.json").toPromise();
-    let proxperConfigsUrl = properties['proxperConfigsBaseUrl'];
+    let proxperConfigsUrl = properties['apiServer'];
     if (proxperConfigsUrl == null) {
-      console.error("Could not find 'proxperConfigsBaseUrl' in properties file");
+      console.error("Could not find 'apiServer' in properties file");
     }
-    return proxperConfigsUrl;
+    return `${proxperConfigsUrl}/v1/configs/config`;
   }
 
   public getAvailableProperties() {
