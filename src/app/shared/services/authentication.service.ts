@@ -64,13 +64,20 @@ export class AuthenticationService {
           'permissions',
           JSON.stringify(jwtJson.permissions)
         );
+        const propertyIds = [
+                              "einsteinsp"
+                            ]
+        const administrativeArea = {
+          "administrativeArea": "mun_2611606"
+        }                        
 
-        const propertyIds = jwtJson.permissions
-          .filter(item => item.permission.startsWith('propertyId'))
-          .map(item=>item.permission)
-          .map(permission => permission.replace('propertyId:', ''))
+        // const propertyIds = jwtJson.permissions
+        //   .filter(item => item.permission.startsWith('propertyId'))
+        //   .map(item=>item.permission)
+        //   .map(permission => permission.replace('propertyId:', ''))
         
-        const administrativeArea = jwtJson.permissions.find(item => item.permission.startsWith('administrativeArea'));
+        // const administrativeArea = jwtJson.permissions.find(item => item.permission.startsWith('administrativeArea'));
+        
         
         sessionStorage.setItem('user_metadata', JSON.stringify({propertyIds, administrativeArea}));
 
