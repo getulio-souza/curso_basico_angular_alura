@@ -27,5 +27,12 @@
       ]
     },
 
+    "properties": [
+      "einsteinsp",
+      "labevolutix"
+    ],
+
+    "administrativeArea": "mun_2611606",
+
     "loginExternal": false
 }

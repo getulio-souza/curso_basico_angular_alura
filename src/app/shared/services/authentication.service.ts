@@ -20,6 +20,9 @@ export class AuthenticationService {
   
   apiServer: string;
 
+  properties: any[] = [];
+  administrativeArea: any;
+
   constructor(
     private httpClient: HttpClient,
     private jwtHelper: JwtHelperService,
@@ -29,7 +32,9 @@ export class AuthenticationService {
   ) {
     this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
       tap((config) => {
-        this.apiServer = config.apiServer
+        this.apiServer = config.apiServer,
+        this.properties = config.properties,
+        this.administrativeArea = config.administrativeArea
       })
     ).subscribe();
   }
@@ -63,13 +68,7 @@ export class AuthenticationService {
         sessionStorage.setItem(
           'permissions',
           JSON.stringify(jwtJson.permissions)
-        );
-        const propertyIds = [
-                              "einsteinsp"
-                            ]
-        const administrativeArea = {
-          "administrativeArea": "mun_2611606"
-        }                        
+        );     
 
         // const propertyIds = jwtJson.permissions
         //   .filter(item => item.permission.startsWith('propertyId'))
@@ -77,7 +76,8 @@ export class AuthenticationService {
         //   .map(permission => permission.replace('propertyId:', ''))
         
         // const administrativeArea = jwtJson.permissions.find(item => item.permission.startsWith('administrativeArea'));
-        
+        const propertyIds = this.properties;
+        const administrativeArea = this.administrativeArea;           
         
         sessionStorage.setItem('user_metadata', JSON.stringify({propertyIds, administrativeArea}));
 
