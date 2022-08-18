@@ -1,14 +1,14 @@
-<form action="" class="form-container">
+<form action="" class="form-container" (ngSubmit)="transferir()">
   <h2>Nova transferência</h2>
   <div class="valor">
     <label for="valor">Valor</label>
-    <input id="valor" type="text">
+    <input id="valor" type="text" [(ngModel)]="valor" name="valor"/>
   </div>
 
   <div>
     <label for="valor">Destino</label>
-    <input id="destino" type="text">
+    <input id="destino" type="text"[(ngModel)]="destino" name="destino">
   </div>
 
-  <button class="button">Tranferir</button>
+  <button class="button" type="submit">Transferir</button>
 </form>
