@@ -1,7 +1,7 @@
 {
-    "apiServer": "https://api-health-dev.cloud.evolutix.com.br",
+    "apiServer": "https://proxper.evolutix.com.br:10300",
     
-    "proxperConfigsBaseUrl":"https://api-health-dev.cloud.evolutix.com.br/v1/configs/config",
+    "proxperConfigsBaseUrl":"https://proxper.evolutix.com.br:10300/v1/configs/config",
     "structureUrl": "https://structure-dev.cloud.evolutix.com.br",
 
     "backgrounds": {

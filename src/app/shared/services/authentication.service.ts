@@ -83,30 +83,7 @@ export class AuthenticationService {
 
         sessionStorage.setItem("lastLoginDate", jwtJson.lastLoginDate);
         this.emitter.emit("successLogEvent", true);
-        return forkJoin([
-          of(userData),
-          this.assetsService.getUser(),
-        ]);
-      }),
-      flatMap((joinedResults) => {
-        const userData = joinedResults[0];
-        const user: any = joinedResults[1];
-        const observables = [of(userData)];
-
-        if (user) {
-          observables.push(this.healthService.getPractitioner(user.practitionerId));
-        }
-
-        return forkJoin(observables);
-      }),
-      map((joinedResults) => {
-        const userData = joinedResults[0];
-        if (joinedResults.length > 1) {
-          const practitioner: any = joinedResults[1];
-          if (practitioner)
-            sessionStorage.setItem("sector", practitioner.sector[0]);
-        }
-        return userData;
+        return  of(userData);
       })
     );
   }
