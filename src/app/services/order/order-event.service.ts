@@ -4,18 +4,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {  Observable, of, Subject } from 'rxjs';
-import { map, debounceTime } from 'rxjs/operators';
+import { map, debounceTime, tap } from 'rxjs/operators';
 import { OrderWardQuantityDTO } from '../../modules/order/model/ordar-ward-quantity.dto';
 import { OrderCategoryQuantityDTO } from '../../modules/order/model/order-category-quantity.dto';
 import { OrderEvent } from '../../modules/order/model/order-event';
 import { FakeDataService } from '../fake-data/fake-data.service';
 import { Router } from '@angular/router';
 import { EventService } from '../event/event.service';
+import { ApiService } from '../api/api.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderEventService {
+export class OrderEventService  {
   private createOrderSubject: Subject<OrderEvent[]> = new Subject();
   private delayedOrderSubject: Subject<OrderEvent[]> = new Subject();
   private estimateOrderSubject: Subject<OrderEvent[]> = new Subject();
@@ -27,28 +29,38 @@ export class OrderEventService {
   private assignOrderSubject: Subject<OrderEvent[]> = new Subject();
 
   private propertyId: string;
-  private eventsUrl: string;
+  private apiServer: string;
 
   private externo = false;
 
   constructor(
-    private http: HttpClient, 
-    private propertiesService: PropertiesService, 
+    private http: HttpClient,
+    private propertiesService: PropertiesService,
     private fakeDataService: FakeDataService, 
     private translateService: TranslateService, 
     private eventService: EventService,
     private router: Router) {
-    this.router.events.pipe(debounceTime(50)).subscribe((_) => {
-      this.getProperties();
-    });
+      this.router.events.pipe(debounceTime(50)).subscribe((_) => {
+        this.getProperties();
+      });
+      this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
+        tap((config) => {
+          this.apiServer = config.apiServer
+        })
+      ).subscribe();
   }
 
   async getProperties(): Promise<void> {
-    const response = await this.propertiesService.getAppConfig().toPromise();
-    if (!this.externo) {
-      this.propertyId = response.propertyId;
-    }
-    this.eventsUrl = await this.eventService.getResourceUrl().toPromise();
+      const response = await this.propertiesService.getAppConfig().toPromise();
+      if (!this.externo) {
+        this.propertyId = response.propertyId;
+      }
+      const properties = await this.propertiesService.readProperties("assets/appConfig.properties.json").toPromise();
+      let proxperConfigsUrl = properties['apiServer'];
+      if (proxperConfigsUrl == null) {
+        console.error("Could not find 'apiServer' in properties file");
+      }
+     return proxperConfigsUrl;
   }
 
   setPropertyId(property: string): void {
@@ -62,7 +74,7 @@ export class OrderEventService {
   }
 
   getEvents(eventSubType: 'CreateOrder' | 'DelayedOrder' | 'EstimateOrder' | 'HandleOrder' | 'CancelOrder' | 'DoneOrder' | 'NotDoneOrder' | 'CanceledOrder' | 'AssignOrder'): Observable<OrderEvent[]> {
-    return this.http.get<OrderEvent[]>(`${this.eventsUrl}/event/source/${this.propertyId}/OrderEventKafkaProducer?eventType=OrderEvent&eventSubtype=${eventSubType}`);
+    return this.http.get<OrderEvent[]>(`${this.apiServer}/event/source/${this.propertyId}/OrderEventKafkaProducer?eventType=OrderEvent&eventSubtype=${eventSubType}`);
   }
 
   translateEventsCategory(events: OrderEvent[]): OrderEvent[] {
@@ -259,7 +271,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.eventsUrl}/order/categories-half/${this.propertyId}?${params}`);
+    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.apiServer}/v1/events/order/categories-half/${this.propertyId}?${params}`);
   }
 
   findEventsOpennedAtHalfhour(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderEvent[]> {
@@ -271,7 +283,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderEvent[]>(`${this.eventsUrl}/order/orders-half/${this.propertyId}?${params}`);
+    return this.http.get<OrderEvent[]>(`${this.apiServer}/v1/events/order/orders-half/${this.propertyId}?${params}`);
   }
 
   topFiveCategoriesWithOpennedOrders(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderCategoryQuantityDTO[]> {
@@ -283,7 +295,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.eventsUrl}/order/openned-top-categories/${this.propertyId}?${params}`);
+    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.apiServer}/v1/events/order/openned-top-categories/${this.propertyId}?${params}`);
   }
 
   topFiveWardsAndOppenedOrdersQuantity(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderWardQuantityDTO[]> {
@@ -295,7 +307,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderWardQuantityDTO[]>(`${this.eventsUrl}/order/openned-top-wards/${this.propertyId}?${params}`);
+    return this.http.get<OrderWardQuantityDTO[]>(`${this.apiServer}/v1/events/order/openned-top-wards/${this.propertyId}?${params}`);
   }
 
   findEventsOpennedOrders(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderEvent[]> {
@@ -307,7 +319,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderEvent[]>(`${this.eventsUrl}/order/openned-itens/${this.propertyId}?${params}`);
+    return this.http.get<OrderEvent[]>(`${this.apiServer}/v1/events/order/openned-itens/${this.propertyId}?${params}`);
   }
 
   topFiveCategoriesWithDelayedOrders(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderCategoryQuantityDTO[]> {
@@ -319,7 +331,7 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.eventsUrl}/order/delayed-top-categories/${this.propertyId}?${params}`);
+    return this.http.get<OrderCategoryQuantityDTO[]>(`${this.apiServer}/v1/events/order/delayed-top-categories/${this.propertyId}?${params}`);
   }
 
   findEventsDelayed(ward: string, category: string, subject: string, start: number, end: number): Observable<OrderEvent[]> {
@@ -331,14 +343,16 @@ export class OrderEventService {
 
     const params = `${wardParam}&${categoryParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.http.get<OrderEvent[]>(`${this.eventsUrl}/order/delayed-itens/${this.propertyId}?${params}`);
+    return this.http.get<OrderEvent[]>(`${this.apiServer}/v1/events/order/delayed-itens/${this.propertyId}?${params}`);
   }
 
-  getCategoriesAndSubjects(): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
-    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.eventsUrl}/order/categories-subjects/${this.propertyId}`);
+  getCategoriesAndSubjects(propertyId: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
+    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/categories-subjects/${propertyId}`);
+    
   }
 
-  getSubjectsByWard(ward: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
-    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.eventsUrl}/order/subjects/${this.propertyId}/${ward}`);
+  getSubjectsByWard(ward: string, propertyId: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
+    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/subjects/${propertyId}/${ward}`);
+    
   }
 }

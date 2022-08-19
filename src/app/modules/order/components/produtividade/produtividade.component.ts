@@ -103,9 +103,13 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
   property = null;
   sector = null;
   orderToken = null;
+  selectedPropertyId: string;
 
   constructor(translateService: TranslateService, structureService: StructureService, propertiesService: PropertiesService, private dateService: DateService, private orderEventService: OrderEventService, private orderService: OrderService, private route: ActivatedRoute, private router: Router) {
     super(translateService, structureService, propertiesService);
+    this.loadData(() => {
+      this.afterPropertyHasBeenLoaded();
+    });
   }
 
   async ngOnInit() {
@@ -140,6 +144,12 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
     this.initView('admin');
   }
 
+  public afterPropertyHasBeenLoaded() {
+
+    
+    this.selectedPropertyId = this.properties.propertyId;
+  }
+
   async loadRouteParams() {
     const _this = this;
     _this.route.params.subscribe(response => {
@@ -165,7 +175,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
       this.adminView = true;
 
       setTimeout(() => {
-        this.orderEventService.getCategoriesAndSubjects()
+        this.orderEventService.getCategoriesAndSubjects(this.selectedPropertyId)
         .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
           this.seletorWards = response.wards;
         });
@@ -179,7 +189,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
       this.adminView = false;
       this.loading = true;
 
-      this.orderEventService.getCategoriesAndSubjects()
+      this.orderEventService.getCategoriesAndSubjects(this.selectedPropertyId)
       .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
         this.categoriesAdvanced = response.categories;
         this.wardsAdvanced = response.wards;
@@ -379,7 +389,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
 
   selectedFilterEvent(event): void {
     if (!event.subject) {
-      this.orderEventService.getSubjectsByWard(event.ward)
+      this.orderEventService.getSubjectsByWard(event.ward, this.selectedPropertyId)
       .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
         this.seletorSubjects =  response.subjects;
       });
@@ -427,7 +437,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
     this.wardsAdvancedSelecionado = event;
     const status = this.statusAdvancedSelecionado ? this.orderService.orderStatus().get(this.statusAdvancedSelecionado) : null;
     const datas = this.rangeSelected.map(date => date.getTime()).toString().replace("[", "").replace("]", "");
-    this.orderEventService.getSubjectsByWard(event)
+    this.orderEventService.getSubjectsByWard(event, this.selectedPropertyId)
     .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
       this.subjectsAdvanced = response.subjects;
     });

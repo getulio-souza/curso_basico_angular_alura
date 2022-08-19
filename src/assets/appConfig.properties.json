@@ -2,7 +2,7 @@
     "apiServer": "https://proxper.evolutix.com.br:10300",
     
     "proxperConfigsBaseUrl":"https://proxper.evolutix.com.br:10300/v1/configs/config",
-    "structureUrl": "https://structure-dev.cloud.evolutix.com.br",
+    "structureUrl": "https://proxper.evolutix.com.br:10290",
 
     "backgrounds": {
       "login": "assets/images/clients-logo/einstein/backoffice.png",
@@ -15,6 +15,7 @@
         "encounter",
         "_Timetable",
         "Orders",
+        "nps",
         "Team and patient",
         "Items",
         "_Adm",
