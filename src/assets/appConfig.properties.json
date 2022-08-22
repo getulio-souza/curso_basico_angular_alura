@@ -1,6 +1,6 @@
 {
     "apiServer": "https://proxper.evolutix.com.br:10300",
-    
+    "apiEventServer": "https://proxper.evolutix.com.br:10105",
     "proxperConfigsBaseUrl":"https://proxper.evolutix.com.br:10300/v1/configs/config",
     "structureUrl": "https://proxper.evolutix.com.br:10290",
 

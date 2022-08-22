@@ -10,7 +10,6 @@ import { NPSClosedOrderDTO } from '../../modules/nps/model/nps-closed-order.dto'
 import { NPSCategoryDTO } from '../../modules/nps/model/nps-by-category.dto';
 import { NPSCategoryLowerThanSevenDTO } from '../../modules/nps/model/nps-category-lower-than-seven.dto';
 import { ApiService } from '../api/api.service';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +17,13 @@ import { switchMap } from 'rxjs/operators';
 export class NPSEventService extends ApiService{
 
   private propertyId: string;
+  private apiServer: string;
 
   constructor(private http: HttpClient, propertiesService: PropertiesService, private fakeDataService: FakeDataService, private translateService: TranslateService) {
     super('v1/events', propertiesService);
     this.propertiesService.getAppConfig().subscribe(response => {
       this.propertyId = response.propertyId;
+      this.apiServer = `${response.apiEventServer}/v1/events`;
     });
   }
 
@@ -36,9 +37,7 @@ export class NPSEventService extends ApiService{
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
-      return this.http.get<NPSCategoryGlobalSatisfactionDTO>(`${apiUrl}/nps/global-satisfaction/${this.propertyId}?${params}`);
-    }));
+    return this.http.get<NPSCategoryGlobalSatisfactionDTO>(`${this.apiServer}/nps/global-satisfaction/${this.propertyId}?${params}`);
 
   }
 
@@ -52,9 +51,7 @@ export class NPSEventService extends ApiService{
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
-      return this.http.get<NPSCategoryLowerThanSevenDTO>(`${apiUrl}/nps/lowers-than-seven/${this.propertyId}?${params}`);
-    }));
+    return this.http.get<NPSCategoryLowerThanSevenDTO>(`${this.apiServer}/nps/lowers-than-seven/${this.propertyId}?${params}`);
   }
 
   findNPSClosedOrders(start: number, end: number, category: string, sector: string, ward: string, subject: string): Observable<NPSClosedOrderDTO> {
@@ -67,9 +64,8 @@ export class NPSEventService extends ApiService{
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
-      return this.http.get<NPSClosedOrderDTO>(`${apiUrl}/nps/closed-orders/${this.propertyId}?${params}`);
-    }));
+  
+    return this.http.get<NPSClosedOrderDTO>(`${this.apiServer}/nps/closed-orders/${this.propertyId}?${params}`);
   }
 
   findNPSByCategory(start: number, end: number, category: string, sector: string, ward: string, subject: string): Observable<NPSCategoryDTO> {
@@ -82,15 +78,13 @@ export class NPSEventService extends ApiService{
 
     const params = `${categoryParam}&${sectorParam}&${wardParam}&${subjectParam}&${startTime}&${endTime}`;
 
-    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
-      return this.http.get<NPSCategoryDTO>(`${apiUrl}/nps/by-category/${this.propertyId}?${params}`);
-    }));
+    
+    return this.http.get<NPSCategoryDTO>(`${this.apiServer}/nps/by-category/${this.propertyId}?${params}`);
+  
   }
 
   getCategoriesAndSubjects(): Observable<NPSCategoriesWardsAndSubjectsDTO> {
-    return this.getResourceUrl().pipe(switchMap((apiUrl) => {
-      return this.http.get<NPSCategoriesWardsAndSubjectsDTO>(`${apiUrl}/nps/categories-subjects/${this.propertyId}?`);
-    }));
+    return this.http.get<NPSCategoriesWardsAndSubjectsDTO>(`${this.apiServer}/nps/categories-subjects/${this.propertyId}?`);
   }
 
 }

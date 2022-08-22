@@ -17,7 +17,7 @@ import { switchMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderEventService  {
+export class OrderEventService extends ApiService{
   private createOrderSubject: Subject<OrderEvent[]> = new Subject();
   private delayedOrderSubject: Subject<OrderEvent[]> = new Subject();
   private estimateOrderSubject: Subject<OrderEvent[]> = new Subject();
@@ -35,19 +35,24 @@ export class OrderEventService  {
 
   constructor(
     private http: HttpClient,
-    private propertiesService: PropertiesService,
+    propertiesService: PropertiesService,
     private fakeDataService: FakeDataService, 
     private translateService: TranslateService, 
     private eventService: EventService,
     private router: Router) {
+      super('v1/events', propertiesService);
+    this.propertiesService.getAppConfig().subscribe(response => {
+      this.propertyId = response.propertyId;
+      this.apiServer = response.apiEventServer
+    });
       this.router.events.pipe(debounceTime(50)).subscribe((_) => {
         this.getProperties();
       });
-      this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
-        tap((config) => {
-          this.apiServer = config.apiServer
-        })
-      ).subscribe();
+      // this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
+      //   tap((config) => {
+      //     this.apiServer = config.apiEventServer
+      //   })
+      // ).subscribe();
   }
 
   async getProperties(): Promise<void> {
@@ -346,13 +351,13 @@ export class OrderEventService  {
     return this.http.get<OrderEvent[]>(`${this.apiServer}/v1/events/order/delayed-itens/${this.propertyId}?${params}`);
   }
 
-  getCategoriesAndSubjects(propertyId: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
-    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/categories-subjects/${propertyId}`);
+  getCategoriesAndSubjects(): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
+    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/categories-subjects/${this.propertyId}`);
     
   }
 
-  getSubjectsByWard(ward: string, propertyId: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
-    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/subjects/${propertyId}/${ward}`);
+  getSubjectsByWard(ward: string): Observable<OrderCategoriesWardsSubjectsAndSectorsDTO> {
+    return this.http.get<OrderCategoriesWardsSubjectsAndSectorsDTO>(`${this.apiServer}/v1/events/order/subjects/${this.propertyId}/${ward}`);
     
   }
 }

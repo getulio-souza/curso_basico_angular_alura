@@ -147,86 +147,86 @@ export class NotificationMessagesComponent extends PropertyDataLoader implements
       since property is being considered a device
       we can call this endpoint to get the current property state
     */
-    this.dataService.getDevicesStateByOwnerAndTraceType(this.propertyId, TraceType.PROPERTY_STATUS).subscribe((responses) => {
-      let currentState: PropertyState;
+    // this.dataService.getDevicesStateByOwnerAndTraceType(this.propertyId, TraceType.PROPERTY_STATUS).subscribe((responses) => {
+    //   let currentState: PropertyState;
       
-      let stateResponse;
-      let status;
+    //   let stateResponse;
+    //   let status;
 
-      if (responses != null) {
-        //since its a property we know there is just one
-        stateResponse = responses[0];
+    //   if (responses != null) {
+    //     //since its a property we know there is just one
+    //     stateResponse = responses[0];
 
-        // since property is a device
-        // we expect just one
-        if(responses.length > 1) {
-          console.warn("Received more than 1 'property' for propertyId '" + this.propertyId + "'. Responses: ", responses);
-        } 
+    //     // since property is a device
+    //     // we expect just one
+    //     if(responses.length > 1) {
+    //       console.warn("Received more than 1 'property' for propertyId '" + this.propertyId + "'. Responses: ", responses);
+    //     } 
 
-      }
+    //   }
 
-      if (stateResponse == null) {
-        //unknown state
-        status = null;
-      } else {
-        status = stateResponse.status;
-      }
+    //   if (stateResponse == null) {
+    //     //unknown state
+    //     status = null;
+    //   } else {
+    //     status = stateResponse.status;
+    //   }
 
-      if (status == this.PROPERTY_STATUS_ONLINE) {
-        console.log('Property is being considered online cause received state as ', stateResponse);
-        currentState = PropertyState.ONLINE;
-      } else if (status == this.PROPERTY_STATUS_STALE) {
-        console.log('Property is being considered stale cause received state as', stateResponse);
-        currentState = PropertyState.STALE;
-      } else if (status == this.PROPERTY_STATUS_OFFLINE) {
-        console.log('Property is being considered offline cause received state as', stateResponse);
-        currentState = PropertyState.OFFLINE;
-      } else if (status == null){
-        console.log('Property is being considered without connection cause received state as', stateResponse);
-        currentState = null;
-      }
+    //   if (status == this.PROPERTY_STATUS_ONLINE) {
+    //     console.log('Property is being considered online cause received state as ', stateResponse);
+    //     currentState = PropertyState.ONLINE;
+    //   } else if (status == this.PROPERTY_STATUS_STALE) {
+    //     console.log('Property is being considered stale cause received state as', stateResponse);
+    //     currentState = PropertyState.STALE;
+    //   } else if (status == this.PROPERTY_STATUS_OFFLINE) {
+    //     console.log('Property is being considered offline cause received state as', stateResponse);
+    //     currentState = PropertyState.OFFLINE;
+    //   } else if (status == null){
+    //     console.log('Property is being considered without connection cause received state as', stateResponse);
+    //     currentState = null;
+    //   }
 
-      if (this.lastPropertyState != currentState) {
-        //is different since last check
-        if (currentState == PropertyState.ONLINE) {
-          this.showSingleMessage(MESSAGE_TYPE.SUCCESS, this.MESSAGE_TITLE_PROPERTY_ONLINE, this.MESSAGE_BODY_PROPERTY_ONLINE, true);
-        } else if (currentState == PropertyState.STALE) {
-          this.showSingleMessage(MESSAGE_TYPE.WARNING, this.MESSAGE_TITLE_PROPERTY_STALE, this.MESSAGE_BODY_PROPERTY_STALE, true);
-        } else if (currentState == PropertyState.OFFLINE) {
-          this.showSingleMessage(MESSAGE_TYPE.ERROR, this.MESSAGE_TITLE_PROPERTY_OFFLINE, this.MESSAGE_BODY_PROPERTY_OFFLINE, false);
-        } else if (currentState == null) {
-          //there is a response but with no current state
-          this.showConnectionError();
-          this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE_AFTER_CONNECTION_ERROR);
-        }
+    //   if (this.lastPropertyState != currentState) {
+    //     //is different since last check
+    //     if (currentState == PropertyState.ONLINE) {
+    //       this.showSingleMessage(MESSAGE_TYPE.SUCCESS, this.MESSAGE_TITLE_PROPERTY_ONLINE, this.MESSAGE_BODY_PROPERTY_ONLINE, true);
+    //     } else if (currentState == PropertyState.STALE) {
+    //       this.showSingleMessage(MESSAGE_TYPE.WARNING, this.MESSAGE_TITLE_PROPERTY_STALE, this.MESSAGE_BODY_PROPERTY_STALE, true);
+    //     } else if (currentState == PropertyState.OFFLINE) {
+    //       this.showSingleMessage(MESSAGE_TYPE.ERROR, this.MESSAGE_TITLE_PROPERTY_OFFLINE, this.MESSAGE_BODY_PROPERTY_OFFLINE, false);
+    //     } else if (currentState == null) {
+    //       //there is a response but with no current state
+    //       this.showConnectionError();
+    //       this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE_AFTER_CONNECTION_ERROR);
+    //     }
 
-        if(this.lastPropertyState == null && currentState != null){
-          //was null but is not anymore, so we have a valid data from now on
-          //lets go back to normal interval
-          this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE);
-        }
-      }
+    //     if(this.lastPropertyState == null && currentState != null){
+    //       //was null but is not anymore, so we have a valid data from now on
+    //       //lets go back to normal interval
+    //       this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE);
+    //     }
+    //   }
 
-      this.lastPropertyState = currentState;
-    },
-      (error) => {
-        console.error(error);
-        if(this.lastPropertyState != null){
-          this.showConnectionError();
-          this.showConnectionErrorCount = 1;
-          this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE_AFTER_CONNECTION_ERROR);
-        }
+    //   this.lastPropertyState = currentState;
+    // },
+    //   (error) => {
+    //     console.error(error);
+    //     if(this.lastPropertyState != null){
+    //       this.showConnectionError();
+    //       this.showConnectionErrorCount = 1;
+    //       this.startIntervalToGetPropertyState(NotificationMessagesComponent.TIME_TO_UPDATE_PROPERTY_STATE_AFTER_CONNECTION_ERROR);
+    //     }
       
-        this.lastPropertyState = null;
+    //     this.lastPropertyState = null;
                   
-        if(this.showConnectionErrorCount == 0 || this.showConnectionErrorCount == 5){
-          this.showConnectionErrorCount = 1;
-          this.showConnectionError();
-        } else {
-          this.showConnectionErrorCount ++;
-        }
-      }
-    );
+    //     if(this.showConnectionErrorCount == 0 || this.showConnectionErrorCount == 5){
+    //       this.showConnectionErrorCount = 1;
+    //       this.showConnectionError();
+    //     } else {
+    //       this.showConnectionErrorCount ++;
+    //     }
+    //   }
+    // );
   }
 
   showConnectionError() {

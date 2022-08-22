@@ -1,4 +1,6 @@
 {
+   "apiServer": "https://proxper.evolutix.com.br:10300",
+   "apiEventServer": "https://proxper.evolutix.com.br:10105",
     "proxperConfigsBaseUrl":"https://proxper-configs-dev.cloud.evolutix.com.br/config",
     "structureUrl": "https://structure-dev.cloud.evolutix.com.br",
     "orderApi": "https://health-order-dev.cloud.evolutix.com.br",

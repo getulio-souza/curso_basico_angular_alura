@@ -1,4 +1,6 @@
 {
+    "apiServer": "https://proxper.evolutix.com.br:10300",
+    "apiEventServer": "https://proxper.evolutix.com.br:10105",
     "structureUrl": "https://structure.cloud.evolutix.com.br",
     "orderApi": "https://health-order.cloud.evolutix.com.br",
     "npsApi": "https://health-nps.cloud.evolutix.com.br",

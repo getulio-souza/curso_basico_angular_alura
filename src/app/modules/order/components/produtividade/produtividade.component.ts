@@ -144,9 +144,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
     this.initView('admin');
   }
 
-  public afterPropertyHasBeenLoaded() {
-
-    
+  public afterPropertyHasBeenLoaded() {    
     this.selectedPropertyId = this.properties.propertyId;
   }
 
@@ -175,7 +173,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
       this.adminView = true;
 
       setTimeout(() => {
-        this.orderEventService.getCategoriesAndSubjects(this.selectedPropertyId)
+        this.orderEventService.getCategoriesAndSubjects()
         .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
           this.seletorWards = response.wards;
         });
@@ -189,7 +187,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
       this.adminView = false;
       this.loading = true;
 
-      this.orderEventService.getCategoriesAndSubjects(this.selectedPropertyId)
+      this.orderEventService.getCategoriesAndSubjects()
       .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
         this.categoriesAdvanced = response.categories;
         this.wardsAdvanced = response.wards;
@@ -389,7 +387,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
 
   selectedFilterEvent(event): void {
     if (!event.subject) {
-      this.orderEventService.getSubjectsByWard(event.ward, this.selectedPropertyId)
+      this.orderEventService.getSubjectsByWard(event.ward)
       .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
         this.seletorSubjects =  response.subjects;
       });
@@ -437,7 +435,7 @@ export class ProdutividadePageComponent extends PropertyDataLoader implements On
     this.wardsAdvancedSelecionado = event;
     const status = this.statusAdvancedSelecionado ? this.orderService.orderStatus().get(this.statusAdvancedSelecionado) : null;
     const datas = this.rangeSelected.map(date => date.getTime()).toString().replace("[", "").replace("]", "");
-    this.orderEventService.getSubjectsByWard(event, this.selectedPropertyId)
+    this.orderEventService.getSubjectsByWard(event)
     .subscribe((response: OrderCategoriesWardsSubjectsAndSectorsDTO) => {
       this.subjectsAdvanced = response.subjects;
     });

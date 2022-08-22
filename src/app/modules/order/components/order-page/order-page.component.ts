@@ -158,6 +158,7 @@ export class OrderPageComponent extends PropertyDataLoader implements OnInit {
   }
 
   afterPropertyHasBeenLoaded() {
+    this.propertyId = this.properties.propertyId;
   }
 
   onCardClick(card) {
