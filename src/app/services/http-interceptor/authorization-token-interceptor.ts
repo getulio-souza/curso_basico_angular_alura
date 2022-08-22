@@ -72,7 +72,7 @@ export class AuthorizationTokenInterceptor implements HttpInterceptor {
 
     const matchesProxperAuth = AuthorizationTokenInterceptor.INTERCEPT_URLS_PROXPER_AUTH.some(url => currentUrl.includes(url));
     
-    if(sessionStorage.getItem('property_token') && matchesProxperAuth) {
+    if(sessionStorage.getItem('property_token') !== "undefined" && matchesProxperAuth) {
       token = sessionStorage.getItem('property_token')
     }
     
