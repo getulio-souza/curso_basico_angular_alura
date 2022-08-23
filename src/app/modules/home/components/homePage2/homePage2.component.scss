@@ -1,10 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /*******dashboard**********/
 .dashboard-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: url(../../../../../assets/images/homePage2/medicine-doctor-background-2.jpg);
+  background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+
+  /*dashboard container - rgba effect */
 
   .dashboard-user-logged {
     position: absolute;
