@@ -3,7 +3,7 @@
   min-height: 100vh;
   width: 100vw;
 
-  padding-top: 30px;
+  padding: 30px 0 0 100px;
 }
 
 .title {
@@ -13,7 +13,7 @@
 
   width: 100%;
 
-  padding-left: 150px;
+  padding-left: 50px;
   margin-bottom: 30px;
 
   h1 {
@@ -36,23 +36,26 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 5px 20px 5px 150px;
+  padding: 15px 20px;
   background-color: rgba(255, 255, 255, 0.38);
   box-shadow: 0px 0px 20px rgba(175, 185, 198, 0.455);
-  height: 75px;
+
+  min-height: 75px;
+  height: auto;
   width: 100%;
 
   .filter-box {
     display: flex;
     flex-direction: row;
 
-    width: 100%;
+    width: 75%;
 
     .text-box {
       font-family: Raleway;
       font-weight: bold;
       color: #ffffff;
       font-size: 20px;
+      margin-right: 10px;
 
       .underline-text {
         width: 70px;
@@ -65,13 +68,20 @@
         margin-bottom: 6px;
       }
     }
+
+    .dropdown-box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 690px;
+    }
   }
 
   .bts-box {
     display: flex;
     justify-content: center;
 
-    width: 250px;
+    width: 25%;
 
     button {
       height: 45px;
