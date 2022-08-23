@@ -1,267 +1,85 @@
-// component temperature
-.home-content .general-infos {
-  @media (max-width: 900px){
-    justify-content: flex-end;
+/*******dashboard**********/
+.dashboard-container {
+  width: 100vw;
+  height: 100vh;
+  .dashboard-user-logged {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    padding-right: 10px;
+  }
+  .dashboard-user-container {
+    display: flex;
+    text-align: end;
+    padding: 5px;
+  }
+  .dashbaord-user-text-container {
+    margin-right: 10px;
+  }
+  .dashboard-user-title {
+    padding-right: 10px;
+    margin-bottom: 2px;
+  }
+  .dashbaord-user-description {
+    font-size: 10px;
+    word-wrap: break-word;
+  }
+  .dashboard-user-icon {
+    width: 30px;
+    height: 30px;
   }
 }
 
-.home-content .info-content {
-  height: auto;
-  width: auto;
-  max-width: 800px;
-  padding: 15px;
+/* Time Container */
 
-  @media (max-width: 900px){
-    padding: 50px;
-  }
-  
-  .display-all {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 100%;
-    
-    @media (max-width: 900px){
-      align-items: flex-end;
-    }
-    
-    @media (max-width: 1000px){
-      flex-direction: column;
-    }
-
-    .content-home-weather {
-      width: 300px;
-      height: 300px;
-      padding: 10px;
-      
-      .home-weather {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .content-home-clock {
-      width: 270px;
-      height: 150px;
-      padding: 10px;
-    }
-  }
-}
-
-// component card home
-.card {
-  &.card--property {
-    min-height   : 340px;
-    width        : 260px;
-    border-radius: 20px;
-
-    .card-header {
-      // height              : 110px;
-      border-top-left-radius : 20px;
-      border-top-right-radius: 20px;
-
-      .material-icons {
-        color    : #858a92;
-        font-size: 33px;
-      }
-
-      // .title{
-      //  color: #dcdee0!important;
-      // }
-      .card-header-content {}
-    }
-  }
-
-  .card-content {
-    .w-20 {
-      width: 20px !important;
-    }
-
-    .material-icons {
-      color: #a9afbb;
-    }
-
-    .table {
-      tr {
-
-        text-transform: uppercase;
-
-        td {
-          border-color: rgba(0, 0, 0, 0.1) !important;
-        }
-      }
-
-      .card-content-table-value {
-        text-align : right;
-        font-size  : 1.125rem;
-        line-height: 1.4em;
-        font-weight: 500;
-      }
-
-      .card-content-table-icons {}
-
-      .card-content-table-label {
-        font-size     : 0.75rem;
-        text-transform: uppercase;
-        font-weight   : 600;
-        opacity       : 0.65;
-      }
-    }
-  }
-}
-
-.btn-toggle-panel {
-  position       : absolute;
-  height         : 60px;
-  width          : 50px;
-  display        : flex;
+.info-container {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items    : center;
-  margin-top     : -30px;
-  margin-left    : calc(50% - 33px);
-  z-index        : 9999;
-}
-
-.home-panel {
-  height          : 70px;
-  background-color: #333c49;
-  overflow-y      : hidden;
-
-  &.home-panel--open {
-    height            : 80vh;
-    min-height        : 670px;
-    -moz-transition   : height .5s ease;
-    -webkit-transition: height .5s ease;
-    -o-transition     : height .5s ease;
-    transition        : height .5s ease;
-    overflow-x        : hidden !important;
+  align-items: center;
+  .info-temp {
+    text-align: center;
+    margin: 0 20px;
+    font-size: 56px;
   }
-
-  &.home-panel--close {
-    height            : 70px;
-    -moz-transition   : height .5s ease;
-    -webkit-transition: height .5s ease;
-    -o-transition     : height .5s ease;
-    transition        : height .5s ease;
-    overflow-x        : hidden;
+  .info-temp-icon-container {
+    display: flex;
   }
-}
-
-
-/// grafico de cards nova home
-.ratingCharting {
-  .nvd3-svg {
-    height     : 90px !important;
-    margin-top : -10px;
-    width      : 100px !important;
-    margin-left: -20px;
-
-    .nvd3.nv-wrap.nv-pieChart {
-      transform: translate(0, 0)
-    }
-  }
-}
-
-.ratingChartLabel {
-  position   : absolute;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
-  font-weight: 500;
-  text-align : center;
-  font-size  : 1.6rem;
-  width      : 50px;
-  height     : 30px;
-  margin-top : 20px;
-  margin-left: 5px;
-}
-
-
-.temperature-home-expanded {
-  z-index         : 999;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  .weather-container {
+  .info-temp-icon {
     img {
-      max-width   : 50px;
-      margin-right: 20px;
-    }
-
-    .display-2 {
-      font-size: 2.5rem;
-    }
-
-    .unit {
-      margin-left: 3px;
-      font-size  : 12px;
-      margin-top : -9px;
+      height: 40px;
+      width: 40px;
+      margin-right: 10px;
     }
   }
 
-  .date-content {
-    .display-4 {
-      font-size: 2rem;
-
-      span {
-        font-size: 1.7rem;
-      }
+  .info-temp-description {
+    font-size: 81px;
+  }
+  .info-temp-text {
+    font-size: 10px;
+  }
+  .time_and_calendar_container {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-time {
+    display: flex;
+    align-items: center;
+  }
+  .info-time-icon {
+    img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
     }
-
-    .material-icons.md-48 {
-      font-size   : 20px;
-      margin-right: 15px !important;
-    }
   }
-
-  .hidden-home-expanded {
-    display: none;
+  .info-time-details-date {
+    margin-bottom: 2px;
   }
-}
-
-.home-page-slider-panel {
-  margin-top: 70px;
-}
-
-.line-chart-graph {
-
-  // .nv-legendWrap.nvd3-svg{
-  //  transform: translate(calc(-100% / 3), 400px) !important;
-  //  }
-  .nvd3.nv-legend-text {
-    transform: translateX(10px) !important;
-  }
-}
-
-.card-dark-home {
-  width: 300px;
-}
-
-.margin-top-up {
-  margin-top: -100vh;
-  transition: all .5s ease;
-}
-
-.margin-top-normal {
-  margin-top: 0;
-  transition: all .5s ease;
-}
-
-.card--container {
-  min-width: 380px;
-  max-width: 381px;
-  margin   : 0 20px;
-}
-
-.scroll-y {
-  height    : auto !important;
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
-}
-
-.home-advertising {
-  height: 300px;
-
-  .material-icons {
-    font-size: 60px;
+  .info-calendar {
+    display: flex;
+    align-items: center;
   }
 }

@@ -1,43 +1,53 @@
-<!-- Nova marcaçã da home page -->
-<section class="main-panel home" id="homePage"
-	[ngClass]="{'summary-complete': isSidebarOpen == true, 'scroll-y': homePanelOpen}" [ngStyle]="backgroundStyle">
-	<!-- menu hamburguer mobile -->
-	<nav class="navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
-		<div class="container-fluid">
-			<app-collapse-hamburguer-button></app-collapse-hamburguer-button>
-		</div>
-	</nav>
+<!-- dashboard -->
+<section class="dashboard-container">
+  <!--user logged-->
+    <section class="dashboard-user-logged">
+      <article class="dashboard-user-container">
+        <div class="dashboard-user-text-container">
+          <p class="dashboard-user-title">Samanta Dias</p>
+          <p class="dashbaord-user-description">Último acesso em xx/xx/xxx - 14:00</p>
+        </div>
+        <div class="dashboard-user-icon">
+          <img src="../../homepage2-images/homePage2/Icon awesome-user-alt.svg" alt="">
+        </div>
+      </article>
+    </section>
 
-	<!-- temperature -->
-	<section class="fade-in home-content ">
-		<!-- temperatura e calendario -->
+    <!-- time & temperature info-->
+    <section class="info-container">
+      <!-- temperature-->
+       <article class="info-temp">
+        <div class="info-temp-icon-container">
+           <div class="info-temp-icon">
+            <img src="../../homepage2-images/homePage2/Cloud.svg" alt="">
+           </div>
+          <p class="info-temp-descripion">20°C</p>
+        </div>
+        <div class="info-temp-text">parcialmente nublado</div>
+       </article>
+       <!-- time-->
+       <section class="time_and_calendar_container">
+       <article class="info-time">
+          <div class="info-time-icon">
+            <img src="../../homepage2-images/homePage2/Caminho 21.svg" alt="">
+          </div>
+          <div class="info-time-details">14:30</div>
+       </article>
+       <!-- calendar-->
+       <article class="info-calendar">
+          <div class="info-time-icon">
+            <img src="../../homepage2-images/homePage2/Caminho 23.svg" alt="">
+          </div>
+          <div class="info-time-details">
+            <p class="info-time-details-date">01 de março</p>
+            <p>São Paulo - SP</p>
+          </div>
+       </article>
+      </section>
+    </section>
 
-		<div class="general-infos">
-			<section class="info-content">
-				<div class="display-all">
-					<div class="content-home-weather">
-						<home-weather [hasLoadedProperties]="hasLoadedProperties"
-							[temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit" class="home-weather">
-						</home-weather>
-					</div>
-					<div class="content-home-clock">
-						<home-clock class="mb-3"></home-clock>
-						<home-calendar [properties]="properties" class="mb-3"></home-calendar>
-					</div>
-				</div>
-			</section>
-		</div>
-
-		<!-- cards group -->
-		<div class="general-infos">
-			<perfect-scrollbar [config]="scrollBarConfig">
-				<div class="d-flex justify-content-md-center px-4">
-					<span *ngFor="let indicatorGroup of indicatorGroups">
-						<home-rating-card [propertyId]="propertyId" [indicatorGroup]="indicatorGroup">
-						</home-rating-card>
-					</span>
-				</div>
-			</perfect-scrollbar>
-		</div>
-	</section>
+    <!-- box research -->
+    <section></section>
+    <!-- box order -->
+    <section></section>
 </section>
