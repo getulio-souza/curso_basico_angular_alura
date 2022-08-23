@@ -2,6 +2,10 @@
 .dashboard-container {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: url(../../../../../assets/images/homePage2/medicine-doctor-background-2.jpg);
+
   .dashboard-user-logged {
     position: absolute;
     top: 0;
@@ -45,11 +49,12 @@
   }
   .info-temp-icon-container {
     display: flex;
+    align-items: center;
   }
   .info-temp-icon {
     img {
-      height: 40px;
-      width: 40px;
+      height: 60px;
+      width: 60px;
       margin-right: 10px;
     }
   }
@@ -67,6 +72,7 @@
   .info-time {
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
   }
   .info-time-icon {
     img {
