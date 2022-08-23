@@ -13,6 +13,7 @@
   align-items: flex-start;
 
   padding-left: 60px;
+  margin-bottom: 30px;
 
   h1 {
     font-family: Raleway;
@@ -33,8 +34,35 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   padding: 5px 0;
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 0 20px rgb(175 185 198 / 45%);
-  min-height: 75px;
+  background-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0px 0px 20px rgba(175, 185, 198, 0.455);
+  height: 75px;
+
+  .filter-box {
+    display: flex;
+    flex-direction: row;
+
+    padding-left: 55px;
+    width: 100%;
+
+    .text-box {
+      font-family: Raleway;
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 20px;
+
+      .underline-text {
+        width: 70px;
+        border-top-color: #ffffff;
+        border-top-style: solid;
+        border-top-width: initial;
+        border-radius: 10px;
+        opacity: 1;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+    }
+  }
 }
