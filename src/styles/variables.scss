@@ -13,11 +13,11 @@ $danger: #e45454;
 $proexper-grey: #333c49;
 $color-black: #1d232b;
 $theme-colors: (
-  'primary': #24a0ff,
-  'danger': $danger,
-  'success': $success,
-  'warning': $warning,
-  'info': $info,
+  "primary": #24a0ff,
+  "danger": $danger,
+  "success": $success,
+  "warning": $warning,
+  "info": $info,
 );
 
 $grid-gutter-width: 0.75rem;
@@ -65,9 +65,9 @@ $grey: $grey-500;
 
 $black-color: $proexper-grey;
 $black: $grey-dark;
-$rgb-black: '29,35,43';
+$rgb-black: "29,35,43";
 $white: #fff;
-$rgb-white: '250, 250, 250';
+$rgb-white: "250, 250, 250";
 
 $gray-color: $proexper-grey;
 $white-color: $white;
