@@ -14,6 +14,29 @@ export class OrderGraphicsViewComponent implements OnInit {
 
   CHART_TYPES = CHART_TYPES;
 
+  teste = [
+    {
+      label: "teste 1",
+      value: [1, 2, 3, 4],
+      week: null,
+    },
+    {
+      label: "teste 3",
+      value: [1, 2, 3, 4],
+      week: null,
+    },
+    {
+      label: "teste 2",
+      value: [1, 2, 3, 4],
+      week: null,
+    },
+    {
+      label: "teste 4",
+      value: [1, 2, 3, 4],
+      week: null,
+    },
+  ];
+
   constructor() {}
 
   ngOnInit() {}
