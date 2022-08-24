@@ -10,13 +10,13 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  // background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
+  background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
+  background-color: #000;
+  opacity: 0.9;
   padding-left: 260px;
-
-  /*dashboard container - rgba effect */
 
   .dashboard-user-logged {
     position: absolute;
