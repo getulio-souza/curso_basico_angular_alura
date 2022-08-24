@@ -86,7 +86,6 @@
   }
 
   .info-temp-text {
-    font-family: roboto;
     font-weight: 500;
     font-size: 10px;
     letter-spacing: 0.02em;
@@ -112,7 +111,6 @@
     }
   }
   .info-time-details {
-    font-family: roboto;
     font-weight: 500;
     font-size: 10px;
     letter-spacing: 0.02em;
@@ -121,7 +119,6 @@
     margin-bottom: 2px;
   }
   .info-time-details-time {
-    font-family: roboto;
     font-weight: normal;
     font-size: 30px;
     text-align: left;
@@ -136,4 +133,8 @@
 .info-calendar {
   display: flex;
   // align-items: center;
+}
+
+.font-roboto {
+  font-family: "Roboto";
 }
