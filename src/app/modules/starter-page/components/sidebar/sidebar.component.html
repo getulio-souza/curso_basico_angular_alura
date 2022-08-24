@@ -133,4 +133,16 @@
             </ul>
         </div>
 
+        <div class="sidebar-footer" *ngIf="propertyId && showRedirectBackoffice">
+            <ul class="nav" style="margin:10px 0px">
+                <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;" (click)="redirectUrl()" data-toggle="tooltip" data-placement="right"
+                        title="{{ 'Backoffice' | translate }}">
+                        <i class="material-icons">swap_horiz</i>
+                        <span>{{'Backoffice' | translate}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
 </nav>

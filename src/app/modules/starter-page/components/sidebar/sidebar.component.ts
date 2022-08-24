@@ -31,6 +31,8 @@ export class SidebarComponent extends PropertyDataLoader implements AfterViewChe
   logoUrl;
   tabs = [];
 
+  showRedirectBackoffice: boolean;
+
   constructor(el: ElementRef,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -138,6 +140,7 @@ export class SidebarComponent extends PropertyDataLoader implements AfterViewChe
 
   loadSideBarConfig() {
     let sideBarConfig = this.properties['sidebar'];
+    this.showRedirectBackoffice = this.properties['showRedirectBackoffice'];
 
     if (!sideBarConfig) {
       console.error("Could not find 'sidebar' in appConfig");
@@ -237,6 +240,10 @@ export class SidebarComponent extends PropertyDataLoader implements AfterViewChe
 
   leaveProperty() {
     this.router.navigateByUrl("/selectProperty")
+  }
+
+  redirectUrl() {
+    window.open(`${this.properties['urlBackoffice']}`);
   }
 
 }

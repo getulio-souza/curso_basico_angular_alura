@@ -1,6 +1,7 @@
 import { PropertiesService } from "@alis/ng-services";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { EventEmitter } from "events";
 import { forkJoin, Observable, of } from "rxjs";
@@ -28,7 +29,8 @@ export class AuthenticationService {
     private jwtHelper: JwtHelperService,
     private propertiesService: PropertiesService,
     private healthService: HealthService,
-    private assetsService: AssetsService
+    private assetsService: AssetsService,
+    private route: ActivatedRoute
   ) {
     this.propertiesService.readProperties("assets/appConfig.properties.json").pipe(
       tap((config) => {
@@ -134,6 +136,25 @@ export class AuthenticationService {
 
   public isUserLoggedIn(): boolean {
     let user = sessionStorage.getItem("username");
+    if(user === null) {
+      const propertyId = document.location.pathname.split('/')[2] || '';
+      const shareToken = document.location.search.split('?auth=')[1] || '';
+      if(shareToken){
+        const jwtJson = this.jwtHelper.decodeToken(shareToken);
+        sessionStorage.setItem("username", jwtJson.user_name);
+        sessionStorage.setItem("token", shareToken);
+        sessionStorage.setItem(
+          'permissions',
+          JSON.stringify(jwtJson.permissions)
+        );     
+        const propertyIds = [propertyId];         
+        
+        sessionStorage.setItem('user_metadata', JSON.stringify({propertyIds}));
+
+        sessionStorage.setItem("lastLoginDate", jwtJson.lastLoginDate);
+        return jwtJson.user_name != null;
+      }
+    }
     return user != null;
   }
 
