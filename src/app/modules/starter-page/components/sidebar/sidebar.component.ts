@@ -243,7 +243,7 @@ export class SidebarComponent extends PropertyDataLoader implements AfterViewChe
   }
 
   redirectUrl() {
-    window.open(`${this.properties['urlBackoffice']}`);
+    window.location.href = `${this.properties['urlBackoffice']}`;
   }
 
 }
