@@ -10,10 +10,11 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
+  // background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
+  padding-left: 260px;
 
   /*dashboard container - rgba effect */
 
@@ -57,24 +58,41 @@
     text-align: center;
     margin: 0 20px;
     font-size: 56px;
+    padding-right: 15px;
   }
   .info-temp-icon-container {
     display: flex;
     align-items: center;
+    span {
+      font-size: 20px;
+      position: relative;
+      top: -25px;
+    }
   }
   .info-temp-icon {
     img {
-      height: 60px;
-      width: 60px;
-      margin-right: 10px;
+      width: 99.2px;
+      height: 72.15px;
+      color: #fff;
+      margin-right: 15px;
     }
   }
 
   .info-temp-description {
+    font-weight: 300;
     font-size: 81px;
+    text-align: left;
+    color: #fff;
   }
+
   .info-temp-text {
+    font-family: roboto;
+    font-weight: 500;
     font-size: 10px;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #e6e6e6;
+    margin-top: 10px;
   }
   .time_and_calendar_container {
     display: flex;
@@ -87,16 +105,35 @@
   }
   .info-time-icon {
     img {
-      width: 40px;
-      height: 40px;
+      width: 29.64px;
+      height: 33.93px;
       margin-right: 10px;
+      opacity: 0.8;
     }
   }
-  .info-time-details-date {
+  .info-time-details {
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #e6e6e6;
     margin-bottom: 2px;
   }
-  .info-calendar {
-    display: flex;
-    align-items: center;
+  .info-time-details-time {
+    font-family: roboto;
+    font-weight: normal;
+    font-size: 30px;
+    text-align: left;
+    color: #fff;
   }
+
+  .info-time-details-date {
+    line-height: 16px;
+  }
+}
+
+.info-calendar {
+  display: flex;
+  // align-items: center;
 }
