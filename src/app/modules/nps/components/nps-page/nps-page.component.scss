@@ -72,7 +72,7 @@
         .title-underline {
           display: flex;
           flex-direction: column;
-          justify-content: space-around;
+          justify-content: center;
 
           height: 100%;
 
@@ -90,6 +90,8 @@
             width: 100%;
             height: 4px;
 
+            margin-top: 5px;
+
             background-color: #ffffff;
 
             border-radius: 10px;
@@ -106,7 +108,7 @@
           width: 100%;
 
           .inputs-container {
-            margin: 0 10px;
+            margin: 8px 10px;
           }
         }
       }
@@ -118,6 +120,18 @@
 
       display: flex;
       flex-direction: column;
+
+      overflow: auto;
+
+      app-nps-graphics-view {
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: auto;
+      }
     }
   }
 }

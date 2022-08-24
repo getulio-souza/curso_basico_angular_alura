@@ -1,0 +1,17 @@
+.graphics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, auto));
+  gap: 15px 20px;
+
+  padding: 50px;
+
+  overflow-y: auto;
+
+  width: 100%;
+  height: 100%;
+
+  .graphics-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,1 +1,30 @@
-<p>nps-graphics-view works!</p>
+<div class="graphics-grid">
+  <div class="graphics-container">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Porcentagem de respostas por categoria'"
+      [itens]="testeData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-container">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Top 5 categorias com avaliações abaixo da média'"
+      [itens]="testeData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-container">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Avaliações na média por categoria'"
+      [itens]="testeData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-container">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Quantidade de avaliações por categoria'"
+      [itens]="testeData"
+    ></app-charts-component>
+  </div>
+</div>

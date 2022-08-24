@@ -64,7 +64,12 @@
       </div>
     </div>
     <div class="nps-graphics-container">
-      <app-nps-graphics-view></app-nps-graphics-view>
+      <app-nps-graphics-view
+        [globalSatisfactionData]="globalSatisfactionData"
+        [npsByCategoryData]="npsByCategoryData"
+        [npsClosedOrdersData]="npsClosedOrdersData"
+        [categoriesNpsLowerThanSevenData]="categoriesNpsLowerThanSevenData"
+      ></app-nps-graphics-view>
     </div>
   </div>
 </section>
