@@ -2,9 +2,9 @@
   <!-- Título -->
   <div class="title">
     <h1>
-      {{ "Orders" | translate }}
+      {{ "Orders / Productivity" | translate }}
     </h1>
-    <span>> HOME > PEDIDOS</span>
+    <span>> HOME > PEDIDOS/PRODUTIVIDADE</span>
   </div>
   <!-- <app-loading></app-loading> -->
 
@@ -15,10 +15,36 @@
         {{ "Filtros" }}
         <div class="underline-text"></div>
       </div>
-      <div class="dropdown-box">
-        <p-dropdown></p-dropdown>
-        <p-calendar></p-calendar>
-        <p-calendar></p-calendar>
+      <div class="inputs-container">
+        <div class="input-box">
+          <p-dropdown
+            [placeholder]="'Período'"
+            [options]="options"
+            optionLabel="'label'"
+          ></p-dropdown>
+        </div>
+        <div class="input-box">
+          <div class="datepicker form-group inner-addon">
+            <p-calendar
+              dateFormat="dd/mm/yy"
+              [monthNavigator]="false"
+              [yearNavigator]="false"
+            >
+            </p-calendar>
+            <i class="material-icons notranslate">calendar_today</i>
+          </div>
+        </div>
+        <div class="input-box">
+          <div class="datepicker form-group inner-addon">
+            <p-calendar
+              dateFormat="dd/mm/yy"
+              [monthNavigator]="false"
+              [yearNavigator]="false"
+            >
+            </p-calendar>
+            <i class="material-icons notranslate">calendar_today</i>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bts-box">
