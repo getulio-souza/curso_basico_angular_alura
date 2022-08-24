@@ -1,3 +1,30 @@
-<p>
-  order-graphics-view works!
-</p>
+<section class="graphics-container">
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Quantidade de pedidos com tempo de SLA expirado'"
+      [itens]="halfHourData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Top 5 areas com pedidos em aberto'"
+      [itens]="halfHourData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'top 5 categorias com pedidos fechados fora do SLA'"
+      [itens]="halfHourData"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Top 5 alas com pedidos em aberto'"
+      [itens]="halfHourData"
+    ></app-charts-component>
+  </div>
+</section>
