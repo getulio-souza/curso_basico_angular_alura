@@ -15,16 +15,20 @@
   </div>
   <div class="graphics-container">
     <app-charts-component
-      [type]="CHART_TYPES.PIZZA"
+      [type]="CHART_TYPES.LINES"
       [title]="'Avaliações na média por categoria'"
       [itens]="testeData"
+      [exibirSeletor]="true"
+      [exibirSeletorCategoria]="true"
     ></app-charts-component>
   </div>
   <div class="graphics-container">
     <app-charts-component
-      [type]="CHART_TYPES.PIZZA"
+      [type]="CHART_TYPES.BAR_VERTICAL"
       [title]="'Quantidade de avaliações por categoria'"
       [itens]="testeData"
+      [exibirSeletor]="true"
+      [exibirSeletorCategoria]="true"
     ></app-charts-component>
   </div>
 </div>

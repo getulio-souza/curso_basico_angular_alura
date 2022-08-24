@@ -20,6 +20,8 @@ body {
 
   background-color: #333c49 !important;
 
+  overflow: hidden;
+
   .summary-card-content {
     background-color: #333c49 !important;
   }
@@ -226,44 +228,40 @@ app-alert-carousel .owl-dots {
   cursor: pointer;
 }
 
-.light-group {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 .charts {
-  .chartsDiv {
-    position: relative;
-    padding: 2rem;
-    * {
-      border-radius: 4px;
-    }
-    .chart-header {
-      display: flex;
-      width: 90%;
-      padding-bottom: 1rem;
-      margin-top: 1.2rem;
-      div {
-        margin-right: 1rem;
-        display: flex;
-        align-items: center;
-      }
-      .dropdown {
-        .dropdown-menu,
-        .show {
-          display: block;
-        }
-      }
-    }
-    .chart-header.center {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      div {
-        margin-right: 0;
-      }
-    }
-  }
+  // .chartsDiv {
+  //   position: relative;
+  //   padding: 2rem;
+  //   * {
+  //     border-radius: 4px;
+  //   }
+  //   .chart-header {
+  //     display: flex;
+  //     width: 90%;
+  //     padding-bottom: 1rem;
+  //     margin-top: 1.2rem;
+  //     div {
+  //       margin-right: 1rem;
+  //       display: flex;
+  //       align-items: center;
+  //     }
+  //     .dropdown {
+  //       .dropdown-menu,
+  //       .show {
+  //         display: block;
+  //       }
+  //     }
+  //   }
+  //   .chart-header.center {
+  //     width: 100%;
+  //     display: flex;
+  //     justify-content: center;
+  //     text-align: center;
+  //     div {
+  //       margin-right: 0;
+  //     }
+  //   }
+  // }
   //Dropdown
   .dropdown {
     background-color: rgba(255, 255, 255, 0.1);
