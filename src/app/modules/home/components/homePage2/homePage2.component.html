@@ -1,154 +1,43 @@
-<!-- dashboard -->
-<section class="dashboard-container dashboard-background">
-    <!-- main container -->
-    <section class="dashboard-main-container">
-      <!-- first container -->
-      <article class="dashboard-first-container">
-    <div class="dashboard-info-time-container font-roboto">
-      <!-- temperature-->
-       <article class="info-temp">
-        <div class="info-temp-icon-container">
-           <div class="info-temp-icon">
-            <img src="../../../../../assets/images/homePage2/Cloud.svg" alt="">
-           </div>
-          <p class="info-temp-descripion">20<span>°C</span></p>
-        </div>
-        <div class="info-temp-text">parcialmente nublado</div>
-       </article>
-       <!-- time-->
-       <article class="time_and_calendar_container">
-       <div class="info-time">
-          <div class="info-time-icon">
-            <img src="../../../../../assets/images/homePage2/Caminho 21.svg" alt="">
-          </div>
-          <div class="info-time-details-time">14:30</div>
-       </div>
-       <!-- calendar-->
-       <div class="info-calendar">
-          <div class="info-time-icon">
-            <img src="../../../../../assets/images/homePage2/Caminho 23.svg" alt="">
-          </div>
-          <div class="info-time-details">
-            <p class="info-time-details-date">01 de março</p>
-            <p>São Paulo - SP</p>
-          </div>
-       </div>
-      </article>
-    </div>
+<!-- Nova marcaçã da home page -->
+<section class="main-panel home" id="homePage"
+	[ngClass]="{'summary-complete': isSidebarOpen == true, 'scroll-y': homePanelOpen}" [ngStyle]="backgroundStyle">
+	<!-- menu hamburguer mobile -->
+	<nav class="navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
+		<div class="container-fluid">
+			<app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+		</div>
+	</nav>
 
-  </article>
-  <!-- second container -->
-  <article class="dashboard-second-container">
-    <!-- card container -->
-    <div class="dashboard-card-container">
-      <!-- box research -->
-      <article class="dashboard-card">
-        <!-- card header-->
-        <div class="dashboard-card-header">
-          <!-- title -->
-          <div class="dashboard-title_and_percent">
-            <!-- icon-->
-            <img src="../../../../../assets/images/homePage2/Icon material-star-border.svg" alt="">
-            <!--text-->
-            <h5>Pesquisa de satisfação</h5>
-            <!-- circle percent -->
-            <div class="dashboard-bigger-circle">
-              <div class="dashboard-small-circle">
-                <p>42%</p>
-              </div>
-            </div>
-          </div>
-          <!--details-->
-          <div class="dashboard-card-header-details">
-            <p>Índice de resposta global</p>
-            <h6>Atualizado em 01/03/2021 às 14:30</h6>
-          </div>
-        </div>
-        <!-- card body -->
-        <article class="dashboard-card-body">
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>avaliações abaixo da média</h6>
-            <p class="dashboad-card-number">32%</p>
-          </div>
-          <div class="underline"></div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>avaliações na média</h6>
-            <p class="dashboad-card-number">32%</p>
-          </div>
-          <div class="underline"></div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>QTD  de avaliações abaixo da média</h6>
-            <p class="dashboad-card-number">9</p>
-          </div>
-          <div class="underline">
-          </div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>avaliações abaixo da média</h6>
-            <p class="dashboad-card-number">32%</p>
-          </div>
-        </article>
-      </article>
-    </div>
+	<!-- temperature -->
+	<section class="fade-in home-content ">
+		<!-- temperatura e calendario -->
 
-    <!-- box order -->
-    <div class="dashboard-card-container">
-      <!-- box research -->
-      <article class="dashboard-card">
-        <!-- card header-->
-        <div class="dashboard-card-header">
-          <!-- title -->
-          <div class="dashboard-title_and_percent">
-            <!-- icon-->
-            <img src="../../../../../assets/images/homePage2/bell-concierge-solid.svg" alt="">
-            <!--text-->
-            <h5>Pedidos</h5>
-            <!-- circle percent -->
-            <div class="dashboard-bigger-circle">
-              <div class="dashboard-small-circle">
-                <p>65%</p>
-              </div>
-            </div>
-          </div>
-          <!--details-->
-          <div class="dashboard-card-header-details-2">
-            <p>Índice de resposta global</p>
-            <h6>Atualizado em 01/03/2021 às 14:30</h6>
-          </div>
-        </div>
-        <!-- card body -->
-        <article class="dashboard-card-body">
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>Em aberto</h6>
-            <p class="dashboad-card-number">32%</p>
-          </div>
-          <div class="underline"></div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>Em andamento</h6>
-            <p class="dashboad-card-number">15%</p>
-          </div>
-          <div class="underline"></div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>Fechados</h6>
-            <p class="dashboad-card-number">10%</p>
-          </div>
-          <div class="underline">
-          </div>
-          <!-- card line-->
-          <div class="dashboard-card-info">
-            <h6>Cancelados</h6>
-            <p class="dashboad-card-number">8%</p>
-          </div>
-        </article>
-      </article>
-    </div>
-  </article>
-  </section>
+		<div class="general-infos">
+			<section class="info-content">
+				<div class="display-all">
+					<div class="content-home-weather">
+						<home-weather [hasLoadedProperties]="hasLoadedProperties"
+							[temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit" class="home-weather">
+						</home-weather>
+					</div>
+					<div class="content-home-clock">
+						<home-clock class="mb-3"></home-clock>
+						<home-calendar [properties]="properties" class="mb-3"></home-calendar>
+					</div>
+				</div>
+			</section>
+		</div>
 
+		<!-- cards group -->
+		<div class="general-infos">
+			<perfect-scrollbar [config]="scrollBarConfig">
+				<div class="d-flex justify-content-md-center px-4">
+					<span *ngFor="let indicatorGroup of indicatorGroups">
+						<home-rating-card [propertyId]="propertyId" [indicatorGroup]="indicatorGroup">
+						</home-rating-card>
+					</span>
+				</div>
+			</perfect-scrollbar>
+		</div>
+	</section>
 </section>
