@@ -1,123 +1,65 @@
-@import "../../../../../styles/main.scss";
+.subtitle-icon{
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  float: left;
+  position: absolute;
+  border: 10px red;
+  height: 35px;
+  width: 60px;
+  /* background-color: white; */
+  // border-bottom: 5px darkgreen solid;
+  border-radius: 0;
+
 }
 
-.nps-section {
-  height: 100vh;
-  min-height: 100vh;
-  width: 100vw;
+.filter-buttons {
+  min-width: 150px;
+  max-width: 150px;
+}
 
-  padding-left: 100px;
+.activation {
+  background-color: #6c757d;
+}
 
-  .nps-container {
-    height: 100%;
-    width: 100%;
+.buttons-join>button:hover {
+  background-color: #6c757d !important;
+}
 
-    display: flex;
-    flex-direction: column;
+.open-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-height: 100%;
+}
 
-    .nps-header {
-      padding-top: 30px;
+.margin-filter-bar {
+  margin-left: 50px;
+  margin-top: 15px;
+}
 
-      display: flex;
-      flex-direction: column;
+.filter-button {
+  margin-left: 10px;
+  width: 150px;
+}
 
-      .title-container {
-        width: 100%;
+.filter-button > button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 18ch;
+}
 
-        padding: 8px 50px;
-
-        h1 {
-          font-family: "Raleway";
-          font-weight: bold;
-          font-size: 30px;
-
-          letter-spacing: 0px;
-
-          color: #ffffff;
-        }
-      }
-
-      .breadcrumb-container {
-        width: 100%;
-
-        padding: 8px 50px;
-
-        p {
-          font-family: "Raleway";
-          font-size: 13px;
-
-          letter-spacing: 0px;
-
-          color: #ffffff;
-        }
-      }
-      .filter-container {
-        min-height: 60px;
-
-        margin-top: 25px;
-        padding: 10px 50px;
-
-        background-color: rgba(255, 255, 255, 0.38);
-
-        box-shadow: 0px 0px 20px #afb9c674;
-
-        display: flex;
-        flex-direction: row;
-
-        .title-underline {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-
-          height: 100%;
-
-          span {
-            font-size: 20px;
-            font-family: "Raleway";
-            font-weight: bold;
-
-            letter-spacing: 0px;
-
-            color: #ffffff;
-          }
-
-          .underline {
-            width: 100%;
-            height: 4px;
-
-            background-color: #ffffff;
-
-            border-radius: 10px;
-          }
-        }
-
-        .tie-filters {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-
-          margin: 0 10px;
-
-          width: 100%;
-
-          .inputs-container {
-            margin: 0 10px;
-          }
-        }
-      }
-    }
-
-    .nps-graphics-container {
-      height: 100%;
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-    }
-  }
+.loading {
+  position        : absolute;
+  display         : flex;
+  justify-content : center;
+  height          : 100vh;
+  width           : 100vw;
+  top             : 0;
+  bottom          : 0;
+  left            : 0;
+  right           : 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 1;
 }
