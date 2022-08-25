@@ -16,7 +16,8 @@ $bigDevices: 992px;
   height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+    url(https://i.postimg.cc/VvRwYSqQ/medicine-doctor-background-2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
