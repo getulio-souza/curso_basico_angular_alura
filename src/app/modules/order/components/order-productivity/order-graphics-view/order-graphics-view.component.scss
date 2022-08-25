@@ -3,6 +3,9 @@
   grid-template-columns: repeat(auto-fit, minmax(500px, auto));
   gap: 20px 15px;
 
+  height: 100%;
+  overflow: auto;
+
   .graphic-content {
     grid-column: 1;
     grid-row: 1;

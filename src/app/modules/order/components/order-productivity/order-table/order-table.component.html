@@ -1,8 +1,17 @@
 <section class="table-container">
   <div class="title">
     {{ "Top 5 wards with open orders" | translate }}
+    <div class="underline-text"></div>
   </div>
   <div class="tb-content">
-    <div class="head-tb"></div>
+    <div class="head-tb">
+      <proxper-grid
+        class="proxper-grid"
+        [showDataButton]="false"
+        [customColumns]="cols"
+        [data]="data"
+      ></proxper-grid>
+    </div>
+    <div class="body-tb"></div>
   </div>
 </section>

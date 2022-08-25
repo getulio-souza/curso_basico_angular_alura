@@ -1,4 +1,48 @@
 .table-container {
   display: flex;
   flex-direction: column;
+
+  .title {
+    font-family: Raleway;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+
+    .underline-text {
+      width: 70px;
+      border-top-color: #24a0ff;
+      border-top-style: solid;
+      border-top-width: initial;
+      border-radius: 10px;
+      opacity: 1;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+  }
+
+  .tb-content {
+    display: flex;
+
+    height: 250px;
+    width: 500px;
+
+    background: linear-gradient(230deg, #333c49 0%, #0a0c0f 100%);
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 10px;
+
+    font-family: Raleway;
+
+    .head-tb {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px 10px 0 0;
+
+      width: 100%;
+      height: 25%;
+      background-color: rgb(145 150 157);
+      opacity: 0.3;
+    }
+  }
 }
