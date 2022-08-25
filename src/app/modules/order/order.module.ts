@@ -1,3 +1,4 @@
+import { OrderTableComponent } from "./components/order-productivity/order-table/order-table.component";
 import { OrderGraphicsViewComponent } from "./components/order-productivity/order-graphics-view/order-graphics-view.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
@@ -36,6 +37,7 @@ import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
     AvgElapsedTimeByPractitionerComponent,
     OrderQtyChartByDaysComponent,
     OrderGraphicsViewComponent,
+    OrderTableComponent,
   ],
 })
 export class OrderModule {}
