@@ -14,8 +14,9 @@
   <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.PIZZA"
-      [title]="'Top 5 areas com pedidos em aberto'"
-      [itens]="teste"
+      [title]="'Top 5 de áreas com pedidos em aberto'"
+      [itens]="topFiveOppened"
+      (clickPizzaEvent)="clickPizza($event)"
     ></app-charts-component>
   </div>
   <div class="graphics-content">

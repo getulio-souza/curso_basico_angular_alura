@@ -7,6 +7,7 @@ import { OrderCategoriesWardsSubjectsAndSectorsDTO } from "../../../model/order-
 import { OrderCategoryQuantityDTO } from "../../../model/order-category-quantity.dto";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
+import { OrderWardQuantityDTO } from "../../../model/ordar-ward-quantity.dto";
 
 @Component({
   selector: "app-order-graphics-view",
@@ -29,6 +30,8 @@ export class OrderGraphicsViewComponent implements OnInit {
   private loadingSubject: Subject<void> = new Subject<void>();
 
   loading = false;
+
+  cachePizzaCategory: string = null;
 
   teste = [
     {
@@ -218,6 +221,92 @@ export class OrderGraphicsViewComponent implements OnInit {
               .map((obj) => parseInt(obj.quantity))
               .reduce((act, nxt) => act + nxt);
             this.afterSlaData.push(
+              Object.assign({}, { label, value: [quantity] })
+            );
+          });
+        }
+      });
+  }
+
+  clickPizza(event: { to: string; value: any }): void {
+    if (event.to === "category") {
+      this.cachePizzaCategory = null;
+      this.topFiveCategoriesWithOpennedOrders(null, null, null, null, null);
+    } else if (event.to === "ward") {
+      this.cachePizzaCategory = event.value;
+      this.topFiveWardsAndOppenedOrdersQuantity(
+        null,
+        event.value,
+        null,
+        null,
+        null
+      );
+    } else if (event.to === "item") {
+      this.findEventsOpennedOrders(
+        event.value,
+        this.cachePizzaCategory,
+        null,
+        null,
+        null
+      );
+    }
+  }
+
+  private topFiveCategoriesWithOpennedOrders(
+    ward,
+    category,
+    subject,
+    start,
+    end
+  ): void {
+    this.orderEventService
+      .topFiveCategoriesWithOpennedOrders(ward, category, subject, start, end)
+      .subscribe((response: OrderCategoryQuantityDTO[]) => {
+        this.topFiveOppened = response.map((category) => {
+          this.loadingSubject.next();
+          return Object.assign(
+            {},
+            { label: category.category, value: [category.quantity] }
+          );
+        });
+      });
+  }
+
+  private topFiveWardsAndOppenedOrdersQuantity(
+    ward,
+    category,
+    subject,
+    start,
+    end
+  ): void {
+    this.orderEventService
+      .topFiveWardsAndOppenedOrdersQuantity(ward, category, subject, start, end)
+      .subscribe((response: OrderWardQuantityDTO[]) => {
+        this.topFiveOppened = response.map((ward) => {
+          return Object.assign(
+            {},
+            { label: ward.ward, value: [ward.quantity] }
+          );
+        });
+      });
+  }
+
+  private findEventsOpennedOrders(ward, category, subject, start, end): void {
+    this.orderEventService
+      .findEventsOpennedOrders(ward, category, subject, start, end)
+      .subscribe((events: OrderEvent[]) => {
+        this.topFiveOppened = [];
+        if (events.length) {
+          const itens = new Set(events.map((item) => item.item));
+          itens.forEach((item) => {
+            const label = events.find((obj) => obj.item === item).labels
+              ? events.find((obj) => obj.item === item).labels["pt"]
+              : null;
+            const quantity = events
+              .filter((obj) => obj.item === item)
+              .map((obj) => parseInt(obj.quantity))
+              .reduce((act, nxt) => act + nxt);
+            this.topFiveOppened.push(
               Object.assign({}, { label, value: [quantity] })
             );
           });
