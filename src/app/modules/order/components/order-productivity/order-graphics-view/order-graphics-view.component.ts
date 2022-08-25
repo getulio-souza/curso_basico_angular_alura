@@ -172,4 +172,56 @@ export class OrderGraphicsViewComponent implements OnInit {
         }
       });
   }
+
+  afterSlaChartClickEvent(event: { to: string; value: any }): void {
+    if (event.to === "category") {
+      this.topFiveCategoriesWithDelayedOrders(null, null, null, null, null);
+    }
+    if (event.to === "item") {
+      this.findEventsDelayed(null, event.value, null, null, null);
+    }
+  }
+
+  private topFiveCategoriesWithDelayedOrders(
+    ward,
+    category,
+    subject,
+    start,
+    end
+  ): void {
+    this.orderEventService
+      .topFiveCategoriesWithDelayedOrders(ward, category, subject, start, end)
+      .subscribe((response: OrderCategoryQuantityDTO[]) => {
+        this.loadingSubject.next();
+        this.afterSlaData = response.map((category) => {
+          return Object.assign(
+            {},
+            { label: category.category, value: [category.quantity] }
+          );
+        });
+      });
+  }
+
+  private findEventsDelayed(ward, category, subject, start, end): void {
+    this.orderEventService
+      .findEventsDelayed(ward, category, subject, start, end)
+      .subscribe((events: OrderEvent[]) => {
+        this.afterSlaData = [];
+        if (events.length) {
+          const itens = new Set(events.map((item) => item.item));
+          itens.forEach((item) => {
+            const label = events.find((obj) => obj.item === item).labels
+              ? events.find((obj) => obj.item === item).labels["pt"]
+              : null;
+            const quantity = events
+              .filter((obj) => obj.item === item)
+              .map((obj) => parseInt(obj.quantity))
+              .reduce((act, nxt) => act + nxt);
+            this.afterSlaData.push(
+              Object.assign({}, { label, value: [quantity] })
+            );
+          });
+        }
+      });
+  }
 }

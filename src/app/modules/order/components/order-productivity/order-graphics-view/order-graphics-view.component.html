@@ -21,8 +21,9 @@
   <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL"
-      [title]="'top 5 categorias com pedidos fechados fora do SLA'"
-      [itens]="teste"
+      [title]="'Top 5 de áreas com pedidos fechados fora da SLA'"
+      [itens]="afterSlaData"
+      (clickBarVerticalEvent)="afterSlaChartClickEvent($event)"
     ></app-charts-component>
   </div>
   <div class="graphics-content">
