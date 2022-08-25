@@ -1,0 +1,61 @@
+<section class="order-container">
+  <!-- Título -->
+  <div class="title">
+    <h1>
+      {{ "Orders / Productivity" | translate }}
+    </h1>
+    <span>> HOME > PEDIDOS/PRODUTIVIDADE</span>
+  </div>
+  <!-- <app-loading></app-loading> -->
+
+  <!-- Barra de filtros -->
+  <div class="filter-bar">
+    <div class="filter-box">
+      <div class="text-box">
+        {{ "Filtros" }}
+        <div class="underline-text"></div>
+      </div>
+      <div class="inputs-container">
+        <div class="input-box">
+          <p-dropdown
+            [placeholder]="'Período'"
+            [options]="options"
+            optionLabel="'label'"
+          ></p-dropdown>
+        </div>
+        <div class="input-box">
+          <div class="datepicker form-group inner-addon">
+            <p-calendar
+              dateFormat="dd/mm/yy"
+              [monthNavigator]="false"
+              [yearNavigator]="false"
+            >
+            </p-calendar>
+            <i class="material-icons notranslate">calendar_today</i>
+          </div>
+        </div>
+        <div class="input-box">
+          <div class="datepicker form-group inner-addon">
+            <p-calendar
+              dateFormat="dd/mm/yy"
+              [monthNavigator]="false"
+              [yearNavigator]="false"
+            >
+            </p-calendar>
+            <i class="material-icons notranslate">calendar_today</i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Botões da Barra de filtro -->
+    <!-- <div class="bts-box">
+      <button>{{ "Details" | translate }}</button>
+      <button>{{ "Teste" }}</button>
+    </div> -->
+  </div>
+
+  <!-- Componente de gráficos -->
+  <div class="graphics-view">
+    <app-order-graphics-view></app-order-graphics-view>
+  </div>
+</section>

@@ -131,7 +131,7 @@ import { NotAllowedComponent } from "./modules/starter-page/components/not-allow
 import { OrderPageComponent } from "./modules/order/components/order-page/order-page.component";
 import { RoomControlModule } from "./modules/room-control/room-control.module";
 import { UnitDataService } from "./services/unit-data/unit-data.service";
-import { ProdutividadePageComponent } from "./modules/order/components/produtividade/produtividade.component";
+import { OrderProductivityComponent } from "./modules/order/components/order-productivity/order-productivity.component";
 import { DynamicWidgetModule } from "./modules/dynamic-widgets/dynamic-widgets.module";
 import { NPSModule } from "./modules/nps/nps.module";
 import { NPSPageComponent } from "./modules/nps/components/nps-page/nps-page.component";
@@ -294,7 +294,7 @@ export function tokenGetter() {
       },
       {
         path: "produtividade/:property/:sector",
-        component: ProdutividadePageComponent,
+        component: OrderProductivityComponent,
       },
       {
         path: "**",
