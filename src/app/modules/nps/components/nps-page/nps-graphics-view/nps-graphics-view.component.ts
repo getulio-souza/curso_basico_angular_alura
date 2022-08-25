@@ -1,3 +1,4 @@
+import { CHART_INDEX } from "./../nps-page.component";
 import { Component, Input, OnInit } from "@angular/core";
 import { CHART_TYPES } from "../../../../dynamic-widgets/charts/charts.component";
 import { SingleDataStatistics } from "../nps-page.component";
@@ -13,9 +14,16 @@ export class NpsGraphicsViewComponent implements OnInit {
   @Input() npsClosedOrdersData: SingleDataStatistics[] = [];
   @Input() categoriesNpsLowerThanSevenData: SingleDataStatistics[] = [];
 
+  @Input() selectedCategoryNpsByCategoryFilter: string;
+  @Input() seletorCategoryNPSByCategoryDataChart: string;
+  @Input() selectedFilterEvent: (event, chartIndex) => void;
+  @Input() selectedCategoryClosedOrdersFilter: string;
+  @Input() seletorCategoryClosedOrdersDataChart: string[] = [];
+
   testeData: SingleDataStatistics[] = [];
 
   CHART_TYPES = CHART_TYPES;
+  CHART_INDEXES = CHART_INDEX;
 
   constructor() {}
 

@@ -33,11 +33,6 @@ export enum CHART_INDEX {
   TOP_5_NPS_BELLOW_7,
 }
 
-interface Teste {
-  label: string;
-  value: string;
-}
-
 const EMPTY_OPTION = "Todos";
 
 @Component({
@@ -49,9 +44,6 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   private dateFilterSubject: Subject<void> = new Subject<void>();
   private dateRangeFilterSubject: Subject<void> = new Subject<void>();
   private loadingSubject: Subject<void> = new Subject<void>();
-
-  //Teste
-  optionsTeste: Teste[];
 
   CHART_TYPES = CHART_TYPES;
   CHART_INDEXES = CHART_INDEX;
@@ -100,6 +92,9 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   // GRID
   gridData: any[] = [{}];
 
+  parent: any;
+  value: any;
+
   constructor(
     translateService: TranslateService,
     structureService: StructureService,
@@ -111,22 +106,6 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   }
 
   ngOnInit() {
-    //teste
-    this.optionsTeste = [
-      {
-        label: "Novo Teste",
-        value: "Novo Teste",
-      },
-      {
-        label: "Novo Teste 2",
-        value: "Novo Teste",
-      },
-      {
-        label: "Novo Teste 3",
-        value: "Novo Teste",
-      },
-    ];
-
     // Date Filters
     this.startDate = this.dateService.getOneDayBefore();
     this.endDate = new Date().getTime();

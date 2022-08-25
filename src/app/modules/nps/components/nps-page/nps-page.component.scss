@@ -9,9 +9,6 @@
 .nps-section {
   height: 100vh;
   min-height: 100vh;
-  width: 100vw;
-
-  padding-left: 100px;
 
   .nps-container {
     height: 100%;
@@ -109,6 +106,41 @@
 
           .inputs-container {
             margin: 8px 10px;
+          }
+        }
+        .filter-button {
+          display: flex;
+          align-items: center;
+
+          height: 100%;
+
+          .button {
+            width: 176px;
+            height: 46px;
+
+            background-color: #f9fbff;
+
+            box-shadow: 5px 5px 10px #2a6fa524;
+
+            border: 1px solid #7d8c8f;
+            border-radius: 12px;
+
+            span {
+              text-align: center;
+              font-family: "Roboto";
+              letter-spacing: 0.29px;
+              color: #7d8c8f;
+            }
+
+            &:hover {
+              background-color: #7d8c8f;
+
+              box-shadow: 5px 5px 10px #2a6fa524;
+
+              span {
+                color: #ffffff;
+              }
+            }
           }
         }
       }

@@ -3,32 +3,40 @@
     <app-charts-component
       [type]="CHART_TYPES.PIZZA"
       [title]="'Porcentagem de respostas por categoria'"
-      [itens]="testeData"
+      [itens]="globalSatisfactionData"
     ></app-charts-component>
   </div>
   <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.PIZZA"
       [title]="'Top 5 categorias com avaliações abaixo da média'"
-      [itens]="testeData"
+      [itens]="categoriesNpsLowerThanSevenData"
     ></app-charts-component>
   </div>
   <div class="graphics-container">
     <app-charts-component
-      [type]="CHART_TYPES.LINES"
+      [type]="CHART_TYPES.LINES_NPS"
       [title]="'Avaliações na média por categoria'"
-      [itens]="testeData"
-      [exibirSeletor]="true"
+      [itens]="npsByCategoryData"
       [exibirSeletorCategoria]="true"
+      [selectedCategory]="selectedCategoryNpsByCategoryFilter"
+      [seletorCategory]="seletorCategoryNPSByCategoryDataChart"
+      (selectedFilterEvent)="
+        selectedFilterEvent($event, CHART_INDEXES.NPS_BY_CATEGORY)
+      "
     ></app-charts-component>
   </div>
   <div class="graphics-container">
     <app-charts-component
-      [type]="CHART_TYPES.BAR_VERTICAL"
+      [type]="CHART_TYPES.BAR_VERTICAL_NPS"
       [title]="'Quantidade de avaliações por categoria'"
-      [itens]="testeData"
-      [exibirSeletor]="true"
+      [itens]="npsClosedOrdersData"
       [exibirSeletorCategoria]="true"
+      [selectedCategory]="selectedCategoryClosedOrdersFilter"
+      [seletorCategory]="seletorCategoryClosedOrdersDataChart"
+      (selectedFilterEvent)="
+        selectedFilterEvent($event, CHART_INDEXES.NPS_CLOSED_ORDERS)
+      "
     ></app-charts-component>
   </div>
 </div>

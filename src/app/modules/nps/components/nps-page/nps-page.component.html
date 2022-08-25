@@ -1,4 +1,4 @@
-<section class="nps-section">
+<section #mainPanel id="mainPanel" class="main-panel nps-section">
   <div class="nps-container">
     <div class="nps-header">
       <div class="title-container">
@@ -17,49 +17,32 @@
           <div class="inputs-container">
             <p-dropdown
               [placeholder]="'Ala'"
-              [options]="optionsTeste"
-              optionLabel="label"
+              [options]="wardsAdvanced"
+              (ngModelChange)="selecionarSetorDetail($event)"
             >
             </p-dropdown>
           </div>
           <div class="inputs-container">
             <p-dropdown
               [placeholder]="'Quarto'"
-              [options]="optionsTeste"
-              optionLabel="label"
+              [options]="subjectsAdvanced"
+              (selectedModified)="selecionarUnidadeDetail($event)"
             >
             </p-dropdown>
           </div>
-          <div class="inputs-container">
-            <p-dropdown
-              [placeholder]="'Período'"
-              [options]="optionsTeste"
-              optionLabel="label"
-            >
-            </p-dropdown>
-          </div>
-          <div class="inputs-container">
-            <div class="datepicker form-group inner-addon">
-              <p-calendar
-                dateFormat="dd/mm/yy"
-                [monthNavigator]="false"
-                [yearNavigator]="false"
-              >
-              </p-calendar>
-              <i class="material-icons notranslate">calendar_today</i>
-            </div>
-          </div>
-          <div class="inputs-container">
-            <div class="datepicker form-group inner-addon">
-              <p-calendar
-                dateFormat="dd/mm/yy"
-                [monthNavigator]="false"
-                [yearNavigator]="false"
-              >
-              </p-calendar>
-              <i class="material-icons notranslate">calendar_today</i>
-            </div>
-          </div>
+          <app-history-navigation-inputed
+            [resolution]="resolution"
+            [startDate]="rangeDates[0]"
+            [endDate]="rangeDates[1]"
+            [showFilter]="true"
+            (onViewChange)="setRangeDate($event)"
+          >
+          </app-history-navigation-inputed>
+        </div>
+        <div class="filter-button">
+          <button class="button" type="button" (click)="doFilter()">
+            <span>Atualizar</span>
+          </button>
         </div>
       </div>
     </div>
@@ -69,6 +52,19 @@
         [npsByCategoryData]="npsByCategoryData"
         [npsClosedOrdersData]="npsClosedOrdersData"
         [categoriesNpsLowerThanSevenData]="categoriesNpsLowerThanSevenData"
+        [selectedCategoryNpsByCategoryFilter]="
+          selectedCategoryNpsByCategoryFilter
+        "
+        [seletorCategoryNPSByCategoryDataChart]="
+          seletorCategoryNPSByCategoryDataChart
+        "
+        [selectedFilterEvent]="selectedFilterEvent"
+        [selectedCategoryClosedOrdersFilter]="
+          selectedCategoryClosedOrdersFilter
+        "
+        [seletorCategoryClosedOrdersDataChart]="
+          seletorCategoryClosedOrdersDataChart
+        "
       ></app-nps-graphics-view>
     </div>
   </div>
