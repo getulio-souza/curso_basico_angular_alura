@@ -2,8 +2,13 @@
   <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL"
-      [title]="'Quantidade de pedidos com tempo de SLA expirado'"
-      [itens]="teste"
+      [title]="'Pedidos em aberto há mais de 30 minutos'"
+      [itens]="halfHourData"
+      [exibirSeletor]="true"
+      [seletorWards]="seletorWards"
+      [seletorSubjects]="seletorSubjects"
+      (clickBarVerticalEvent)="halfChartClickEvent($event)"
+      (selectedFilterEvent)="selectedFilterEvent($event)"
     ></app-charts-component>
   </div>
   <div class="graphics-content">
