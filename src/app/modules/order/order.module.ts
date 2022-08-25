@@ -1,4 +1,4 @@
-import { OrderGraphicsViewComponent } from "./components/produtividade/order-graphics-view/order-graphics-view.component";
+import { OrderGraphicsViewComponent } from "./components/order-productivity/order-graphics-view/order-graphics-view.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
@@ -13,7 +13,7 @@ import { OrderQtyChartComponent } from "./order-qty-chart/order-qty-chart.compon
 import { OrderQtyDelayed } from "./order-qty-delayed/order-qty-delayed";
 import { Top4MostDemandByCategoryChart } from "./top4-most-demand-by-category-chart/top4-most-demand-by-category-chart.component";
 import { OrderBySectorsChartComponent } from "./order-by-sectors-chart/order-by-sectors-chart.component";
-import { ProdutividadePageComponent } from "./components/produtividade/produtividade.component";
+import { OrderProductivityComponent } from "./components/order-productivity/order-productivity.component";
 import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
 
 @NgModule({
@@ -27,7 +27,7 @@ import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
   declarations: [
     OrderSummaryComponent,
     OrderPageComponent,
-    ProdutividadePageComponent,
+    OrderProductivityComponent,
     OrderQtyChartComponent,
     OrderBySectorsChartComponent,
     OrderQtyDelayed,

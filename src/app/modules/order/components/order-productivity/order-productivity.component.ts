@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { OrderService } from "./../../../../services/order/order.service";
-import { OrderCategoryQuantityDTO } from "./../../model/order-category-quantity.dto";
-import { OrderEvent } from "./../../model/order-event";
-import { OrderEventService } from "./../../../../services/order/order-event.service";
+import { OrderService } from "../../../../services/order/order.service";
+import { OrderCategoryQuantityDTO } from "../../model/order-category-quantity.dto";
+import { OrderEvent } from "../../model/order-event";
+import { OrderEventService } from "../../../../services/order/order-event.service";
 import { PropertiesService } from "@alis/ng-services";
 import { StructureService } from "@alis/tracking-ng";
 import { Component, EventEmitter, OnInit } from "@angular/core";
@@ -26,11 +26,11 @@ export interface SingleDataStatistics {
 }
 
 @Component({
-  selector: "app-produtividade-page",
-  templateUrl: "./produtividade.component.html",
-  styleUrls: ["./produtividade.component.scss"],
+  selector: "app-order-productivity",
+  templateUrl: "./order-productivity.component.html",
+  styleUrls: ["./order-productivity.component.scss"],
 })
-export class ProdutividadePageComponent
+export class OrderProductivityComponent
   extends PropertyDataLoader
   implements OnInit
 {

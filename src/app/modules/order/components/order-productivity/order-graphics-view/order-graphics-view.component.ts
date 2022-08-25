@@ -1,5 +1,5 @@
-import { SingleDataStatistics } from "./../../../../nps/components/nps-page/nps-page.component";
-import { CHART_TYPES } from "./../../../../dynamic-widgets/charts/charts.component";
+import { SingleDataStatistics } from "../../../../nps/components/nps-page/nps-page.component";
+import { CHART_TYPES } from "../../../../dynamic-widgets/charts/charts.component";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
