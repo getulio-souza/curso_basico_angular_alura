@@ -1,70 +1,171 @@
-<section class="nps-section">
-  <div class="nps-container">
-    <div class="nps-header">
-      <div class="title-container">
-        <h1>Pesquisa de Satisfação</h1>
-      </div>
-      <div class="breadcrumb-container">
-        <p>> HOME > PESQUISA DE SATISFAÇÃO</p>
-      </div>
-      <div class="filter-container">
-        <div class="title-underline">
-          <span>Filtros</span>
-          <div class="underline"></div>
-        </div>
+<span *ngIf="loading" >
+  <div [hidden]="!loading" class="loading">
+    <img src="assets/loading.svg" alt="loading">
+  </div>
+</span>
 
-        <div class="tie-filters">
-          <div class="inputs-container">
-            <p-dropdown
-              [placeholder]="'Ala'"
-              [options]="optionsTeste"
-              optionLabel="label"
-            >
-            </p-dropdown>
-          </div>
-          <div class="inputs-container">
-            <p-dropdown
-              [placeholder]="'Quarto'"
-              [options]="optionsTeste"
-              optionLabel="label"
-            >
-            </p-dropdown>
-          </div>
-          <div class="inputs-container">
-            <p-dropdown
-              [placeholder]="'Período'"
-              [options]="optionsTeste"
-              optionLabel="label"
-            >
-            </p-dropdown>
-          </div>
-          <div class="inputs-container">
-            <div class="datepicker form-group inner-addon">
-              <p-calendar
-                dateFormat="dd/mm/yy"
-                [monthNavigator]="false"
-                [yearNavigator]="false"
-              >
-              </p-calendar>
-              <i class="material-icons notranslate">calendar_today</i>
-            </div>
-          </div>
-          <div class="inputs-container">
-            <div class="datepicker form-group inner-addon">
-              <p-calendar
-                dateFormat="dd/mm/yy"
-                [monthNavigator]="false"
-                [yearNavigator]="false"
-              >
-              </p-calendar>
-              <i class="material-icons notranslate">calendar_today</i>
-            </div>
-          </div>
+<div class="main-panel home maintenance" style="height: 100%;">
+  <nav class="navbar navbar-summary navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
+    <div class="container-fluid justify-content-left">
+      <div class="navbar-wrapper">
+        <div style="margin-left:20px">
+          <a class="navbar-brand">
+            <h3 style=" margin-bottom: 0;">NPS</h3>
+            <h6 style="font-weight: 300;"> HOME > ACOMPANHAMENTO EXPERIÊNCIA</h6>
+          </a>
         </div>
+      </div>
+      <app-collapse-hamburguer-button></app-collapse-hamburguer-button>
+    </div>
+  </nav>
+  <div class="property-summary summary-complete">
+    <div class="general-info summary-content pt-3 charts" style="height: 100%;">
+      <div class="chartsDiv light-group" style="display: flex;">
+        <div class="row justify-content-between" style="width: 100%;">
+          <div class="row" *ngIf="adminView">
+            <app-history-navigation-inputed
+              [resolution]="resolution"
+              [startDate]="startDate"
+              [endDate]="endDate"
+              (onViewChange)="onNavigationDateChange($event)">
+            </app-history-navigation-inputed>
+
+            <div class="filter-button">
+              <button class="form-control" type="button" (click)="doFilter()">
+                <span>Atualizar</span>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="!adminView" class="row justify-content-between align-items-center" style="width: 80%;">
+            <div class="col-sm-12">
+              <div class="row justify-content-between align-items-center">
+                <div class="row">
+                  <div>
+                    <h4>Filtros:</h4>
+                  </div>
+                  <app-filter class="filter-buttons mx-1"
+                    [items]="categoriesAdvanced" [caption]="'Categoria'" [selected]="null"
+                    (selectedModified)="selecionarCategoriaDetail($event)">
+                  </app-filter>
+                  <app-filter class="filter-buttons mx-1"
+                    [items]="sectorAdvanced" [caption]="'Setor'" [selected]="null"
+                    (selectedModified)="selecionarSetorDetail($event)">
+                  </app-filter>
+
+                  <app-filter class="filter-buttons mx-1"
+                    [items]="wardsAdvanced" [caption]="'Ala'" [selected]="null"
+                    (selectedModified)="selecionarAlaDetail($event)">
+                  </app-filter>
+
+                  <app-filter class="filter-buttons mx-1"
+                    [items]="subjectsAdvanced" [caption]="'Unidade'" [selected]="null"
+                    (selectedModified)="selecionarUnidadeDetail($event)">
+                  </app-filter>
+                </div>
+              </div>
+
+              <div class="row margin-filter-bar">
+                <div class="datas">
+                  <app-history-navigation-inputed
+                    [resolution]="resolution"
+                    [startDate]="rangeDates[0]"
+                    [endDate]="rangeDates[1]"
+                    [showFilter]="false"
+                    (onViewChange)="setRangeDate($event)">
+                  </app-history-navigation-inputed>
+                </div>
+
+                <div class="filter-button">
+                  <button class="form-control" type="button" (click)="doFilter()">
+                    <span>Atualizar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttons-join">
+            <button type="button" class="btn btn-sm mx-1 btn-outline-secondary" [class.activation]="adminView" (click)="initView('admin')">admin view</button>
+            <button type="button" class="btn btn-sm mx-1 btn-outline-secondary" [class.activation]="!adminView" (click)="initView('detail')">detail view</button>
+          </div>
       </div>
     </div>
-    <div class="nps-graphics-container">
-      <app-nps-graphics-view></app-nps-graphics-view>
+
+      <div *ngIf="adminView" class="chartsDiv light-group" style="display: flex;">
+        <div style="width: 60%;">
+          <app-charts-component
+            [type]="CHART_TYPES.PIZZA"
+            [title]="'NPS Satisfação Global'"
+            [itens]="globalSatisfactionData">
+          </app-charts-component>
+          <section style="margin-top:2rem"></section>
+          <app-charts-component
+            [type]="CHART_TYPES.LINES_NPS"
+            [title]="'NPS por Categoria'"
+            [itens]="npsByCategoryData"
+            [exibirSeletorCategoria]="true"
+            [selectedCategory]="selectedCategoryNpsByCategoryFilter"
+            [seletorCategory]="seletorCategoryNPSByCategoryDataChart"
+            (selectedFilterEvent)="selectedFilterEvent($event, CHART_INDEXES.NPS_BY_CATEGORY)" >
+          </app-charts-component>
+        </div>
+        <div style="width: 40%; padding-left: 2rem;">
+          <app-charts-component
+            [type]="CHART_TYPES.BAR_VERTICAL_NPS"
+            [title]="'NPS de Pedidos Fechados'"
+            [itens]="npsClosedOrdersData"
+            [exibirSeletorCategoria]="true"
+            [selectedCategory]="selectedCategoryClosedOrdersFilter"
+            [seletorCategory]="seletorCategoryClosedOrdersDataChart"
+            (selectedFilterEvent)="selectedFilterEvent($event, CHART_INDEXES.NPS_CLOSED_ORDERS)">
+          </app-charts-component>
+          <section style="margin-top:2rem"></section>
+          <app-charts-component
+            [type]="CHART_TYPES.PIZZA"
+            [title]="'Top 5 Categorias com NPS Detractor (Abaixo de 7)'"
+            [itens]="categoriesNpsLowerThanSevenData">
+          </app-charts-component>
+        </div>
+      </div>
+
+      <div *ngIf="!adminView" class="chartsDiv light-group" style="display: flex;">
+        <div style="width: 50%;">
+          <app-charts-component
+            [type]="CHART_TYPES.LINES_NPS"
+            [title]="'NPS Satisfação Global'"
+            [itens]="globalSatisfactionData">
+          </app-charts-component>
+          <section style="margin-top:1rem"></section>
+          <app-charts-component
+            [type]="CHART_TYPES.LINES_NPS"
+            [title]="'NPS por Categoria'"
+            [itens]="npsByCategoryData" >
+          </app-charts-component>
+          <section style="margin-top:1rem"></section>
+        </div>
+        <div style="width: 50%; padding-left: 2rem;">
+          <app-charts-component
+            [type]="CHART_TYPES.BAR_VERTICAL_NPS"
+            [title]="'NPS de Pedidos Fechados'"
+            [itens]="npsClosedOrdersData">
+          </app-charts-component>
+          <section style="margin-top:1rem"></section>
+          <app-charts-component
+            [type]="CHART_TYPES.BAR_VERTICAL"
+            [showCaption]="false"
+            [title]="'Top 5 Categorias com NPS Detractor (Abaixo de 7)'"
+            [itens]="categoriesNpsLowerThanSevenData">
+          </app-charts-component>
+          <section style="margin-top:1rem"></section>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+
+  <!-- grid -->
+  <div *ngIf="!adminView">
+    <app-collapse-grid-nps [data]="gridData" (gridFiltroSelecionado)="gerarGridData($event)"></app-collapse-grid-nps>
+  </div>
+
+</div>
