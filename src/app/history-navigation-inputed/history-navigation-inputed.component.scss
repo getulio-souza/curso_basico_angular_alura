@@ -13,19 +13,9 @@
 .date-filter-div {
   display: flex;
   flex-direction: row;
-  margin: 8px 10px;
 
-  div:first-child {
-    margin-right: 10px;
-  }
-
-  div:nth-child(2) {
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-
-  div:last-child {
-    margin-left: 10px;
+  div {
+    margin: 8px 10px;
   }
 }
 
