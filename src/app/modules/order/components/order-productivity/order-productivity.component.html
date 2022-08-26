@@ -34,6 +34,16 @@
 
   <!-- Componente de gráficos -->
   <div class="graphics-view">
-    <app-order-graphics-view></app-order-graphics-view>
+    <app-order-graphics-view
+      [halfHourData]="halfHourData"
+      [topFiveOppened]="topFiveOppened"
+      [afterSlaData]="afterSlaData"
+      [seletorWards]="seletorWards"
+      [seletorSubjects]="seletorSubjects"
+      [selectedFilterEvent]="selectedFilterEvent"
+      [clickPizza]="clickPizza"
+      [afterSlaChartClickEvent]="afterSlaChartClickEvent"
+      [halfChartClickEvent]="halfChartClickEvent"
+    ></app-order-graphics-view>
   </div>
 </section>
