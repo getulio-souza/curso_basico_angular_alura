@@ -15,6 +15,9 @@ export class OrderGraphicsViewComponent implements OnInit {
   @Input() seletorWards: string[] = [];
   @Input() seletorSubjects: string[] = [];
 
+  @Input() cols: any[];
+  @Input() data: any[];
+
   @Input() selectedFilterEvent: (event) => void;
   @Input() clickPizza: (event: { to: string; value: any }) => void;
   @Input() afterSlaChartClickEvent: (event: { to: string; value: any }) => void;
