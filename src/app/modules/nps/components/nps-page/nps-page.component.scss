@@ -1,65 +1,169 @@
-.subtitle-icon{
+@import "../../../../../styles/main.scss";
 
-  float: left;
-  position: absolute;
-  border: 10px red;
-  height: 35px;
-  width: 60px;
-  /* background-color: white; */
-  // border-bottom: 5px darkgreen solid;
-  border-radius: 0;
-
-}
-
-.filter-buttons {
-  min-width: 150px;
-  max-width: 150px;
-}
-
-.activation {
-  background-color: #6c757d;
-}
-
-.buttons-join>button:hover {
-  background-color: #6c757d !important;
-}
-
-.open-orders {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  max-height: 100%;
 }
 
-.margin-filter-bar {
-  margin-left: 50px;
-  margin-top: 15px;
-}
+.nps-section {
+  height: 100vh;
+  min-height: 100vh;
 
-.filter-button {
-  margin-left: 10px;
-  width: 150px;
-}
+  .nps-container {
+    height: 100%;
+    width: 100%;
 
-.filter-button > button {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 18ch;
-}
+    display: flex;
+    flex-direction: column;
 
-.loading {
-  position        : absolute;
-  display         : flex;
-  justify-content : center;
-  height          : 100vh;
-  width           : 100vw;
-  top             : 0;
-  bottom          : 0;
-  left            : 0;
-  right           : 0;
-  background-color: rgba($color: #000000, $alpha: 0.5);
-  z-index: 1;
+    .nps-header {
+      padding-top: 30px;
+
+      display: flex;
+      flex-direction: column;
+
+      .title-container {
+        width: 100%;
+
+        padding: 8px 50px;
+
+        h1 {
+          font-family: "Raleway";
+          font-weight: bold;
+          font-size: 30px;
+
+          letter-spacing: 0px;
+
+          color: #ffffff;
+        }
+      }
+
+      .breadcrumb-container {
+        width: 100%;
+
+        padding: 8px 50px;
+
+        p {
+          font-family: "Raleway";
+          font-size: 13px;
+
+          letter-spacing: 0px;
+
+          color: #ffffff;
+        }
+      }
+      .filter-container {
+        min-height: 60px;
+
+        margin-top: 25px;
+        padding: 10px 50px;
+
+        background-color: rgba(255, 255, 255, 0.38);
+
+        box-shadow: 0px 0px 20px #afb9c674;
+
+        display: flex;
+        flex-direction: row;
+
+        .title-underline {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          height: 100%;
+
+          span {
+            font-size: 20px;
+            font-family: "Raleway";
+            font-weight: bold;
+
+            letter-spacing: 0px;
+
+            color: #ffffff;
+          }
+
+          .underline {
+            width: 60px;
+            height: 4px;
+
+            margin-top: 5px;
+
+            background-color: #ffffff;
+
+            border-radius: 10px;
+          }
+        }
+
+        .tie-filters {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+
+          margin: 0 10px;
+
+          width: 100%;
+
+          .inputs-container {
+            margin: 8px 10px;
+          }
+        }
+        .filter-button {
+          display: flex;
+          align-items: center;
+
+          height: 100%;
+
+          .button {
+            width: 176px;
+            height: 46px;
+
+            background-color: #f9fbff;
+
+            box-shadow: 5px 5px 10px #2a6fa524;
+
+            border: 1px solid #7d8c8f;
+            border-radius: 12px;
+
+            span {
+              text-align: center;
+              font-family: "Roboto";
+              letter-spacing: 0.29px;
+              color: #7d8c8f;
+            }
+
+            &:hover {
+              background-color: #7d8c8f;
+
+              box-shadow: 5px 5px 10px #2a6fa524;
+
+              span {
+                color: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .nps-graphics-container {
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: auto;
+
+      app-nps-graphics-view {
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: auto;
+      }
+    }
+  }
 }
