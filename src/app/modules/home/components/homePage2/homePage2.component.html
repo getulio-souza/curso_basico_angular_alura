@@ -1,5 +1,5 @@
 <!-- dashboard -->
-<section class="dashboard-container dashboard-background">
+<section class="dashboard-container dashboard-background main-panel">
   <!-- main container -->
   <section class="dashboard-main-container">
     <!-- first container -->
@@ -33,33 +33,21 @@
       </div>
     </article>
     <!-- second container -->
-    <article class="dashboard-second-container">
-      <span
-        class="dashboard-card"
-        *ngFor="let indicatorGroup of indicatorGroups"
-      >
-        <div class="dashboard-card-header"></div>
-        <home-rating-card
-          [propertyId]="propertyId"
-          [indicatorGroup]="indicatorGroup"
-        >
-        </home-rating-card>
-      </span>
+    <article>
+      <perfect-scrollbar [config]="scrollBarConfig">
+        <article class="dashboard-second-container">
+          <span
+            class="dashboard-card"
+            *ngFor="let indicatorGroup of indicatorGroups"
+          >
+            <home-rating-card
+              [propertyId]="propertyId"
+              [indicatorGroup]="indicatorGroup"
+            >
+            </home-rating-card>
+          </span>
+        </article>
+      </perfect-scrollbar>
     </article>
   </section>
-
-  <!-- cards group -->
-  <div class="general-infos">
-    <perfect-scrollbar [config]="scrollBarConfig">
-      <div class="d-flex justify-content-md-center px-4">
-        <span *ngFor="let indicatorGroup of indicatorGroups">
-          <home-rating-card
-            [propertyId]="propertyId"
-            [indicatorGroup]="indicatorGroup"
-          >
-          </home-rating-card>
-        </span>
-      </div>
-    </perfect-scrollbar>
-  </div>
 </section>
