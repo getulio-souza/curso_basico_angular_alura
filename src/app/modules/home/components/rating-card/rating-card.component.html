@@ -1,4 +1,4 @@
-<div class="mx-2">
+<div class="dashboard-card">
         <div class="card card--property dark-card my-0">
           <div class="card-header">
             <div class="card-header-content m-0 px-0 d-flex justify-content-between">
@@ -6,10 +6,11 @@
               <span class="col-6 pl-0 d-flex align-content-center flex-wrap">
                 <h6 class="title">{{ indicatorGroup?.label | translate }}</h6>
               </span>
+              <!--rating card -->
               <span class="col-4">
                 <span *ngIf="average != null" class="ratingChartLabel">{{average}}</span>
                 <span *ngIf="average == null" class="ratingChartLabel">--</span>
-                <home-rating-pie-chart [rating]='average'></home-rating-pie-chart>
+                  <home-rating-pie-chart [rating]='average'></home-rating-pie-chart>
               </span>
             </div>
           </div>

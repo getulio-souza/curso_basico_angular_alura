@@ -1,43 +1,65 @@
-<!-- Nova marcaçã da home page -->
-<section class="main-panel home" id="homePage"
-	[ngClass]="{'summary-complete': isSidebarOpen == true, 'scroll-y': homePanelOpen}" [ngStyle]="backgroundStyle">
-	<!-- menu hamburguer mobile -->
-	<nav class="navbar navbar-expand-lg navbar-transparent navbar-fixed fixed-top">
-		<div class="container-fluid">
-			<app-collapse-hamburguer-button></app-collapse-hamburguer-button>
-		</div>
-	</nav>
+<!-- dashboard -->
+<section class="dashboard-container dashboard-background">
+  <!-- main container -->
+  <section class="dashboard-main-container">
+    <!-- first container -->
+    <article class="dashboard-first-container">
+      <div class="dashboard-info-time-container font-roboto">
+        <!-- temperature-->
+        <article class="info-temp">
+          <div class="info-temp-icon-container">
+            <home-weather
+              [hasLoadedProperties]="hasLoadedProperties"
+              [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+              class="home-weather"
+            >
+            </home-weather>
+          </div>
+          <div class="info-temp-text">parcialmente nublado</div>
+        </article>
+        <!-- time-->
+        <article class="time_and_calendar_container">
+          <div class="info-time">
+            <home-clock></home-clock>
+          </div>
+          <!-- calendar-->
+          <div class="info-calendar">
+            <home-calendar
+              [properties]="properties"
+              class="mb-3"
+            ></home-calendar>
+          </div>
+        </article>
+      </div>
+    </article>
+    <!-- second container -->
+    <article class="dashboard-second-container">
+      <span
+        class="dashboard-card"
+        *ngFor="let indicatorGroup of indicatorGroups"
+      >
+        <div class="dashboard-card-header"></div>
+        <home-rating-card
+          [propertyId]="propertyId"
+          [indicatorGroup]="indicatorGroup"
+        >
+        </home-rating-card>
+      </span>
+    </article>
+  </section>
 
-	<!-- temperature -->
-	<section class="fade-in home-content ">
-		<!-- temperatura e calendario -->
-
-		<div class="general-infos">
-			<section class="info-content">
-				<div class="display-all">
-					<div class="content-home-weather">
-						<home-weather [hasLoadedProperties]="hasLoadedProperties"
-							[temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit" class="home-weather">
-						</home-weather>
-					</div>
-					<div class="content-home-clock">
-						<home-clock class="mb-3"></home-clock>
-						<home-calendar [properties]="properties" class="mb-3"></home-calendar>
-					</div>
-				</div>
-			</section>
-		</div>
-
-		<!-- cards group -->
-		<div class="general-infos">
-			<perfect-scrollbar [config]="scrollBarConfig">
-				<div class="d-flex justify-content-md-center px-4">
-					<span *ngFor="let indicatorGroup of indicatorGroups">
-						<home-rating-card [propertyId]="propertyId" [indicatorGroup]="indicatorGroup">
-						</home-rating-card>
-					</span>
-				</div>
-			</perfect-scrollbar>
-		</div>
-	</section>
+  <!-- cards group -->
+  <div class="general-infos">
+    <perfect-scrollbar [config]="scrollBarConfig">
+      <div class="d-flex justify-content-md-center px-4">
+        <span *ngFor="let indicatorGroup of indicatorGroups">
+          <home-rating-card
+            [propertyId]="propertyId"
+            [indicatorGroup]="indicatorGroup"
+          >
+          </home-rating-card>
+        </span>
+      </div>
+    </perfect-scrollbar>
+  </div>
 </section>
