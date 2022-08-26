@@ -16,35 +16,13 @@
         <div class="underline-text"></div>
       </div>
       <div class="inputs-container">
-        <div class="input-box">
-          <p-dropdown
-            [placeholder]="'Período'"
-            [options]="options"
-            optionLabel="'label'"
-          ></p-dropdown>
-        </div>
-        <div class="input-box">
-          <div class="datepicker form-group inner-addon">
-            <p-calendar
-              dateFormat="dd/mm/yy"
-              [monthNavigator]="false"
-              [yearNavigator]="false"
-            >
-            </p-calendar>
-            <i class="material-icons notranslate">calendar_today</i>
-          </div>
-        </div>
-        <div class="input-box">
-          <div class="datepicker form-group inner-addon">
-            <p-calendar
-              dateFormat="dd/mm/yy"
-              [monthNavigator]="false"
-              [yearNavigator]="false"
-            >
-            </p-calendar>
-            <i class="material-icons notranslate">calendar_today</i>
-          </div>
-        </div>
+        <app-history-navigation-inputed
+          [startDate]="rangeDates[0]"
+          [endDate]="rangeDates[1]"
+          [showFilter]="true"
+          (onViewChange)="setRangeDate($event)"
+        >
+        </app-history-navigation-inputed>
       </div>
     </div>
     <!-- Botões da Barra de filtro -->
@@ -56,6 +34,18 @@
 
   <!-- Componente de gráficos -->
   <div class="graphics-view">
-    <app-order-graphics-view></app-order-graphics-view>
+    <app-order-graphics-view
+      [halfHourData]="halfHourData"
+      [topFiveOppened]="topFiveOppened"
+      [afterSlaData]="afterSlaData"
+      [seletorWards]="seletorWards"
+      [seletorSubjects]="seletorSubjects"
+      [selectedFilterEvent]="selectedFilterEvent"
+      [clickPizza]="clickPizza"
+      [afterSlaChartClickEvent]="afterSlaChartClickEvent"
+      [halfChartClickEvent]="halfChartClickEvent"
+      [cols]="cols"
+      [data]="data"
+    ></app-order-graphics-view>
   </div>
 </section>
