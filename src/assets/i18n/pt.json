@@ -392,21 +392,23 @@
 
     "Others" : "Outros",
 
-    "Category": "Categoria",
-    "hospitality": "Hotelaria",
-    "housekeeping": "Serviço de limpeza",
-    "nurse": "Enfermagem",
-    "maintenance": "Manutenção",
-    "nutritionist": "Nutrição",
-    "front desk": "Atendimento",
-    "ombudsman": "Ouvidoria",
-    "HOSPITALITY": "Hotelaria",
-    "HOUSEKEEPING": "Serviço de limpeza",
-    "NURSE": "Enfermagem",
-    "MAINTENANCE": "Manutenção",
-    "NUTRITIONIST": "Nutrição",
-    "FRONT DESK": "Atendimento",
-    "OMBUDSMAN": "Ouvidoria",
-    "no-data-avaliable" : "Nenhum dado disponível"
 
+  "Category": "Categoria",
+  "hospitality": "Hotelaria",
+  "housekeeping": "Serviço de limpeza",
+  "nurse": "Enfermagem",
+  "maintenance": "Manutenção",
+  "nutritionist": "Nutrição",
+  "front desk": "Atendimento",
+  "ombudsman": "Ouvidoria",
+  "HOSPITALITY": "Hotelaria",
+  "HOUSEKEEPING": "Serviço de limpeza",
+  "NURSE": "Enfermagem",
+  "MAINTENANCE": "Manutenção",
+  "NUTRITIONIST": "Nutrição",
+  "FRONT DESK": "Atendimento",
+  "OMBUDSMAN": "Ouvidoria",
+  "no-data-avaliable": "Nenhum dado disponível",
+
+  "Top 5 wards with open orders": "Top 5 alas com pedidos em aberto"
 }
