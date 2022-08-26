@@ -33,6 +33,11 @@ export enum CHART_INDEX {
   TOP_5_NPS_BELLOW_7,
 }
 
+interface OptionsDropdown {
+  label: string;
+  value: string;
+}
+
 const EMPTY_OPTION = "Todos";
 
 @Component({
@@ -78,9 +83,9 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   categoriesAdvancedSelecionado: string = null;
   categoriesAdvanced: string[] = [];
   wardsAdvancedSelecionado: string = null;
-  wardsAdvanced: string[] = [];
+  wardsAdvanced: OptionsDropdown[] = [];
   subjectsAdvancedSelecionado: string = null;
-  subjectsAdvanced: string[] = [];
+  subjectsAdvanced: OptionsDropdown[] = [];
   chartGlobalSatiscationDataDetail: NPSDataDetailChartDTO[];
   chartGlobalClosedOrderDataDetail: NPSDataDetailChartDTO[];
   chartByCategoryDataDetail: NPSDataDetailChartDTO[];
@@ -124,34 +129,63 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   }
 
   async initView(view: string): Promise<void> {
-    if (view === "admin") {
-      this.adminView = true;
-      this.dispatchFilter();
-    }
-    if (view === "detail") {
-      this.loading = true;
-      this.adminView = false;
+    this.loading = true;
+    this.adminView = false;
 
-      this.npsEventService
-        .getCategoriesAndSubjects()
-        .subscribe((response: NPSCategoriesWardsAndSubjectsDTO) => {
-          this.categoriesAdvanced = [EMPTY_OPTION, ...response.categories];
-          this.wardsAdvanced = [EMPTY_OPTION, ...response.wards];
-          this.subjectsAdvanced = [EMPTY_OPTION, ...response.subjects];
-          this.sectorAdvanced = [EMPTY_OPTION, ...response.sectors];
-        });
+    this.npsEventService
+      .getCategoriesAndSubjects()
+      .subscribe((response: NPSCategoriesWardsAndSubjectsDTO) => {
+        this.categoriesAdvanced = [EMPTY_OPTION, ...response.categories];
+        this.wardsAdvanced = response.wards.map((x) => ({
+          label: x,
+          value: x,
+        }));
+        this.subjectsAdvanced = response.subjects.map((x) => ({
+          label: x,
+          value: x,
+        }));
 
-      this.sectorAdvancedSelecionado = null;
-      this.categoriesAdvancedSelecionado = null;
-      this.wardsAdvancedSelecionado = null;
-      this.subjectsAdvancedSelecionado = null;
-      this.subjectsAdvanced = [];
+        this.sectorAdvanced = [EMPTY_OPTION, ...response.sectors];
+      });
 
-      this.npsClosedOrdersData = [];
-      this.categoriesNpsLowerThanSevenData = [];
+    this.sectorAdvancedSelecionado = null;
+    this.categoriesAdvancedSelecionado = null;
+    this.wardsAdvancedSelecionado = null;
+    this.subjectsAdvancedSelecionado = null;
+    this.subjectsAdvanced = [];
 
-      this.dispatchFilterDetail();
-    }
+    this.npsClosedOrdersData = [];
+    this.categoriesNpsLowerThanSevenData = [];
+
+    this.dispatchFilterDetail();
+    // if (view === "admin") {
+    //   this.adminView = true;
+    //   this.dispatchFilter();
+    // }
+    // if (view === "detail") {
+    //   this.loading = true;
+    //   this.adminView = false;
+
+    //   this.npsEventService
+    //     .getCategoriesAndSubjects()
+    //     .subscribe((response: NPSCategoriesWardsAndSubjectsDTO) => {
+    //       this.categoriesAdvanced = [EMPTY_OPTION, ...response.categories];
+    //       this.wardsAdvanced = [EMPTY_OPTION, ...response.wards];
+    //       this.subjectsAdvanced = [EMPTY_OPTION, ...response.subjects];
+    //       this.sectorAdvanced = [EMPTY_OPTION, ...response.sectors];
+    //     });
+
+    //   this.sectorAdvancedSelecionado = null;
+    //   this.categoriesAdvancedSelecionado = null;
+    //   this.wardsAdvancedSelecionado = null;
+    //   this.subjectsAdvancedSelecionado = null;
+    //   this.subjectsAdvanced = [];
+
+    //   this.npsClosedOrdersData = [];
+    //   this.categoriesNpsLowerThanSevenData = [];
+
+    //   this.dispatchFilterDetail();
+    // }
   }
 
   selectedFilterEvent(event, chartIndex): void {
