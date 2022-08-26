@@ -8,30 +8,23 @@
       <!-- temperature-->
        <article class="info-temp">
         <div class="info-temp-icon-container">
-           <div class="info-temp-icon">
-            <img src="../../../../../assets/images/homePage2/Cloud.svg" alt="">
-           </div>
-          <p class="info-temp-descripion">20<span>°C</span></p>
+          <home-weather
+          [hasLoadedProperties]="hasLoadedProperties"
+          [temperatureUomIsFahrenheit]="temperatureUomIsFahrenheit"
+          class="home-weather"
+          >
+          </home-weather>
         </div>
         <div class="info-temp-text">parcialmente nublado</div>
        </article>
        <!-- time-->
        <article class="time_and_calendar_container">
        <div class="info-time">
-          <div class="info-time-icon">
-            <img src="../../../../../assets/images/homePage2/Caminho 21.svg" alt="">
-          </div>
-          <div class="info-time-details-time">14:30</div>
+        <home-clock></home-clock>
        </div>
        <!-- calendar-->
        <div class="info-calendar">
-          <div class="info-time-icon">
-            <img src="../../../../../assets/images/homePage2/Caminho 23.svg" alt="">
-          </div>
-          <div class="info-time-details">
-            <p class="info-time-details-date">01 de março</p>
-            <p>São Paulo - SP</p>
-          </div>
+        <home-calendar [properties]="properties" class="mb-3"></home-calendar>
        </div>
       </article>
     </div>
@@ -40,6 +33,9 @@
   <!-- second container -->
   <article class="dashboard-second-container">
       <span class="dashboard-card" *ngFor="let indicatorGroup of indicatorGroups">
+         <div class="dashboard-card-header">
+
+         </div>
         <home-rating-card [propertyId]="propertyId" [indicatorGroup]="indicatorGroup">
         </home-rating-card>
         </span>
