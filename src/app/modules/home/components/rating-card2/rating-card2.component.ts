@@ -1,14 +1,14 @@
 import { map } from "rxjs/operators";
 import { Observable, of } from "rxjs";
-import { IndicatorService } from "./../../services/indicator/indicator.service";
+import { IndicatorService } from "../../services/indicator/indicator.service";
 import { OnInit, OnDestroy } from "@angular/core";
 import { Component, Input } from "@angular/core";
 import { RealTime } from "../../../../abstracts/realTime";
 
 @Component({
-  selector: "home-rating-card",
-  templateUrl: "./rating-card.component.html",
-  styleUrls: ["./rating-card.component.scss"],
+  selector: "home-rating-card2",
+  templateUrl: "./rating-card2.component.html",
+  styleUrls: ["./rating-card2.component.scss"],
 })
 export class RatingCardComponent2 implements OnInit, OnDestroy {
   @Input() indicatorGroup;

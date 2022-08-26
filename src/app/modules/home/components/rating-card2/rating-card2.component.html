@@ -1,0 +1,42 @@
+<!-- box research -->
+<article class="dashboard-card">
+  <!-- card header-->
+  <div class="dashboard-card-header">
+    <!-- title -->
+    <div class="dashboard-title_and_percent">
+      <!-- icon-->
+      <!-- <img [src]="indicatorGroup.icon" alt="" /> -->
+      <i class="material-icons"> {{ indicatorGroup.icon }} </i>
+      <!--text-->
+      <h5>{{ indicatorGroup?.label | translate }}</h5>
+      <!-- circle percent -->
+      <div class="dashboard-bigger-circle">
+        <div class="dashboard-small-circle">
+          <p>{{ average ? average : "--" }}</p>
+        </div>
+      </div>
+    </div>
+    <!--details-->
+    <div class="dashboard-card-header-details">
+      <p>Índice de resposta global</p>
+      <h6>
+        {{ "Updated" | translate }} {{ indicatorGroup?.date | date: "short" }}
+      </h6>
+    </div>
+  </div>
+  <!-- card body -->
+  <article class="dashboard-card-body">
+    <!-- card line-->
+    <ng-container
+      *ngFor="let indicator of indicatorGroup?.indicators; let lastItem = last"
+    >
+      <div class="dashboard-card-info">
+        <h6>{{ indicator?.label | translate }}</h6>
+        <p class="dashboad-card-number">
+          {{ indicator?.data?.label ? indicator?.data?.label : "--" }}
+        </p>
+      </div>
+      <div *ngIf="!lastItem" class="underline"></div>
+    </ng-container>
+  </article>
+</article>
