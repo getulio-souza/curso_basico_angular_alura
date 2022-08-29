@@ -1,7 +1,20 @@
 <section class="btn-container">
-  <button class="btn-close">
+  <button
+    class="btn-close"
+    [ngClass]="panelOpen ? 'grid-open' : ''"
+    (click)="onShowContentGrid()"
+  >
     <mat-icon>expand_less</mat-icon>
   </button>
+  <div *ngIf="panelOpen">
+    <div></div>
+    <proxper-grid
+      [customColumns]="cols"
+      [data]="data"
+      [showDataButton]="showDataButton"
+      [buttonTitle]="'exportar dados'"
+    ></proxper-grid>
+  </div>
 </section>
 
 <!-- <section
