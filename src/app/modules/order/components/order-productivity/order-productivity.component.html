@@ -59,4 +59,11 @@
       [wardsAdvance]="wardsAdvance"
     ></app-order-graphics-detail>
   </div>
+
+  <div *ngIf="!adminView">
+    <app-collapse-grid
+      [data]="gridData"
+      (gridFiltroSelecionado)="gerarGridData($event)"
+    ></app-collapse-grid>
+  </div>
 </section>
