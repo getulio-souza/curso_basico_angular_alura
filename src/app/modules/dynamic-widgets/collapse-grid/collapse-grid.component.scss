@@ -1,0 +1,22 @@
+.btn-container {
+  width: max-content;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.btn-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  outline: 0;
+  height: 65px;
+  width: 65px;
+
+  background-color: #545b66;
+  color: #fff;
+}
