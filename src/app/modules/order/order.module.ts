@@ -1,6 +1,6 @@
+import { OrderGraphicsAdminComponent } from "./components/order-productivity/order-graphics-admin/order-graphics-admin.component";
 import { OrderProductivityComponent } from "./components/order-productivity/order-productivity.component";
 import { OrderTableComponent } from "./components/order-productivity/order-table/order-table.component";
-import { OrderGraphicsViewComponent } from "./components/order-productivity/order-graphics-view/order-graphics-view.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
@@ -36,7 +36,7 @@ import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
     AvgElapsedTimeByCategoryComponent,
     AvgElapsedTimeByPractitionerComponent,
     OrderQtyChartByDaysComponent,
-    OrderGraphicsViewComponent,
+    OrderGraphicsAdminComponent,
     OrderTableComponent,
   ],
 })

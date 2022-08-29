@@ -1,14 +1,14 @@
-import { CHART_INDEX } from "./../../../../nps/components/nps-page/nps-page.component";
-import { CHART_TYPES } from "./../../../../dynamic-widgets/charts/charts.component";
-import { SingleDataStatistics } from "./../../produtividade/produtividade.component";
+import { CHART_INDEX } from "../../../../nps/components/nps-page/nps-page.component";
+import { CHART_TYPES } from "../../../../dynamic-widgets/charts/charts.component";
+import { SingleDataStatistics } from "../../produtividade/produtividade.component";
 import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-order-graphics-view",
-  templateUrl: "./order-graphics-view.component.html",
-  styleUrls: ["./order-graphics-view.component.scss"],
+  selector: "app-order-graphics-admin",
+  templateUrl: "./order-graphics-admin.component.html",
+  styleUrls: ["./order-graphics-admin.component.scss"],
 })
-export class OrderGraphicsViewComponent implements OnInit {
+export class OrderGraphicsAdminComponent implements OnInit {
   @Input() halfHourData: SingleDataStatistics[] = [];
   @Input() topFiveOppened: SingleDataStatistics[] = [];
   @Input() afterSlaData: SingleDataStatistics[] = [];
