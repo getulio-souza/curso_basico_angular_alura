@@ -26,15 +26,16 @@
       </div>
     </div>
     <!-- Botões da Barra de filtro -->
-    <!-- <div class="bts-box">
-      <button>{{ "Details" | translate }}</button>
-      <button>{{ "Teste" }}</button>
-    </div> -->
+    <div class="bts-box">
+      <button (click)="adminView ? initView('detail') : initView('admin')">
+        {{ adminView ? "DETAIL VIEW" : "ADMIN VIEW" }}
+      </button>
+    </div>
   </div>
 
-  <!-- Componente de gráficos -->
-  <div class="graphics-view">
-    <app-order-graphics-view
+  <!-- Componente de gráficos ADMIN VIEW -->
+  <div *ngIf="adminView" class="graphics-view">
+    <app-order-graphics-admin
       [halfHourData]="halfHourData"
       [topFiveOppened]="topFiveOppened"
       [afterSlaData]="afterSlaData"
@@ -46,6 +47,16 @@
       [halfChartClickEvent]="halfChartClickEvent"
       [cols]="cols"
       [data]="data"
-    ></app-order-graphics-view>
+    ></app-order-graphics-admin>
+  </div>
+
+  <!-- Componente de gráficos DETAIL VIEW -->
+  <div *ngIf="!adminView" class="graphics-view">
+    <app-order-graphics-detail
+      [opennedAdvance]="opennedAdvance"
+      [categoriesAdvance]="categoriesAdvance"
+      [afterSlaAdvance]="afterSlaAdvance"
+      [wardsAdvance]="wardsAdvance"
+    ></app-order-graphics-detail>
   </div>
 </section>
