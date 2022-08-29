@@ -165,6 +165,21 @@ $bigDevices: 992px;
   }
 }
 
+/*clock */
+
+.clock-container {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 30px;
+  }
+}
+
+.display-4 {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .info-calendar {
   display: flex;
   span {
