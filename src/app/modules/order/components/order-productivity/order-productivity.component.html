@@ -27,12 +27,14 @@
     </div>
     <!-- Botões da Barra de filtro -->
     <div class="bts-box">
-      <button>{{ "DETAIL VIEW" }}</button>
+      <button (click)="adminView ? initView('detail') : initView('admin')">
+        {{ adminView ? "DETAIL VIEW" : "ADMIN VIEW" }}
+      </button>
     </div>
   </div>
 
   <!-- Componente de gráficos ADMIN VIEW -->
-  <!-- <div class="graphics-view">
+  <div *ngIf="adminView" class="graphics-view">
     <app-order-graphics-admin
       [halfHourData]="halfHourData"
       [topFiveOppened]="topFiveOppened"
@@ -46,10 +48,10 @@
       [cols]="cols"
       [data]="data"
     ></app-order-graphics-admin>
-  </div> -->
+  </div>
 
   <!-- Componente de gráficos DETAIL VIEW -->
-  <div class="graphics-view">
+  <div *ngIf="!adminView" class="graphics-view">
     <app-order-graphics-detail
       [opennedAdvance]="opennedAdvance"
       [categoriesAdvance]="categoriesAdvance"
