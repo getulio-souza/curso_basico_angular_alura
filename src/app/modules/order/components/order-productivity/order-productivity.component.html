@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <!-- Componente de gráficos -->
+  <!-- Componente de gráficos ADMIN VIEW -->
   <!-- <div class="graphics-view">
     <app-order-graphics-admin
       [halfHourData]="halfHourData"
@@ -47,7 +47,14 @@
       [data]="data"
     ></app-order-graphics-admin>
   </div> -->
+
+  <!-- Componente de gráficos DETAIL VIEW -->
   <div class="graphics-view">
-    <app-order-graphics-detail></app-order-graphics-detail>
+    <app-order-graphics-detail
+      [opennedAdvance]="opennedAdvance"
+      [categoriesAdvance]="categoriesAdvance"
+      [afterSlaAdvance]="afterSlaAdvance"
+      [wardsAdvance]="wardsAdvance"
+    ></app-order-graphics-detail>
   </div>
 </section>
