@@ -47,7 +47,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 15px 20px 15px 50px;
+  padding: 15px 50px;
   background-color: rgba(255, 255, 255, 0.38);
   box-shadow: 0px 0px 20px rgba(175, 185, 198, 0.455);
 
@@ -58,6 +58,7 @@
   .filter-box {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     width: 75%;
 
@@ -94,19 +95,21 @@
     display: flex;
     justify-content: center;
 
-    width: 25%;
-
     button {
-      height: 45px;
+      height: 40px;
       width: 130px;
-      border: 1px solid #545b66;
-      background-color: rgba(48, 55, 67, 0.644);
+      border: 1px solid #24a0ff;
+      background-color: #ffffff;
       border-radius: 10px;
-      margin: 0 10px;
 
-      font-family: Raleway;
-      color: #ffffff;
+      font-family: Roboto;
+      color: #24a0ff;
       font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #24a0ff;
+      color: #ffffff;
     }
   }
 }

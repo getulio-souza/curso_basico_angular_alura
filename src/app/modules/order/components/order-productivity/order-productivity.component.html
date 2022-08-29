@@ -26,14 +26,13 @@
       </div>
     </div>
     <!-- Botões da Barra de filtro -->
-    <!-- <div class="bts-box">
-      <button>{{ "Details" | translate }}</button>
-      <button>{{ "Teste" }}</button>
-    </div> -->
+    <div class="bts-box">
+      <button>{{ "DETAIL VIEW" }}</button>
+    </div>
   </div>
 
   <!-- Componente de gráficos -->
-  <div class="graphics-view">
+  <!-- <div class="graphics-view">
     <app-order-graphics-admin
       [halfHourData]="halfHourData"
       [topFiveOppened]="topFiveOppened"
@@ -47,5 +46,8 @@
       [cols]="cols"
       [data]="data"
     ></app-order-graphics-admin>
+  </div> -->
+  <div class="graphics-view">
+    <app-order-graphics-detail></app-order-graphics-detail>
   </div>
 </section>
