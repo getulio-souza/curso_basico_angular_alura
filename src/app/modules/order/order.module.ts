@@ -1,3 +1,4 @@
+import { OrderGraphicsDetailComponent } from "./components/order-productivity/order-graphics-detail/order-graphics-detail.component";
 import { OrderGraphicsAdminComponent } from "./components/order-productivity/order-graphics-admin/order-graphics-admin.component";
 import { OrderProductivityComponent } from "./components/order-productivity/order-productivity.component";
 import { OrderTableComponent } from "./components/order-productivity/order-table/order-table.component";
@@ -38,6 +39,7 @@ import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
     OrderQtyChartByDaysComponent,
     OrderGraphicsAdminComponent,
     OrderTableComponent,
+    OrderGraphicsDetailComponent,
   ],
 })
 export class OrderModule {}
