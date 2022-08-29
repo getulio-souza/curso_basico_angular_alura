@@ -19,9 +19,9 @@
     <!--details-->
     <div class="dashboard-card-header-details">
       <p>Índice de resposta global</p>
-      <h6>
+      <!-- <h6>
         {{ "Updated" | translate }} {{ indicatorGroup?.date | date: "short" }}
-      </h6>
+      </h6> -->
     </div>
   </div>
   <!-- card body -->
@@ -38,5 +38,11 @@
       </div>
       <div *ngIf="!lastItem" class="underline"></div>
     </ng-container>
+    <!-- status -->
+    <div class="dashboard-updated-status">
+      <h6>
+        {{ "Updated" | translate }} {{ indicatorGroup?.date | date: "short" }}
+      </h6>
+    </div>
   </article>
 </article>
