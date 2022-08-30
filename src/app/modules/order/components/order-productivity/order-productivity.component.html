@@ -39,8 +39,9 @@
   </div>
 
   <!-- Componente de gráficos ADMIN VIEW -->
-  <div *ngIf="adminView" class="graphics-view">
+  <div class="graphics-view">
     <app-order-graphics-admin
+      *ngIf="adminView"
       [halfHourData]="halfHourData"
       [topFiveOppened]="topFiveOppened"
       [afterSlaData]="afterSlaData"
@@ -53,15 +54,21 @@
       [cols]="cols"
       [data]="data"
     ></app-order-graphics-admin>
-  </div>
 
-  <!-- Componente de gráficos DETAIL VIEW -->
-  <div *ngIf="!adminView" class="graphics-view">
+    <!-- Componente de gráficos DETAIL VIEW -->
+
     <app-order-graphics-detail
+      *ngIf="!adminView"
       [opennedAdvance]="opennedAdvance"
       [categoriesAdvance]="categoriesAdvance"
       [afterSlaAdvance]="afterSlaAdvance"
       [wardsAdvance]="wardsAdvance"
     ></app-order-graphics-detail>
+
+    <app-collapse-grid
+      *ngIf="!adminView"
+      [data]="gridData"
+      (gridFiltroSelecionado)="gerarGridData($event)"
+    ></app-collapse-grid>
   </div>
 </section>
