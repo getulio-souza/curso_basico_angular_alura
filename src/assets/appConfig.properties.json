@@ -8,13 +8,13 @@
       "login": "assets/images/clients-logo/einstein/backoffice.png",
       "dashboard": ""
     },
-  
+
     "sidebar": {
       "logo": "assets/images/clients-logo/einstein/logo.svg",
       "tabs": [
         "encounter",
         "_Timetable",
-        "Orders",
+        "orders",
         "nps",
         "Team and patient",
         "Items",

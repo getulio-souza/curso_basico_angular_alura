@@ -18,7 +18,7 @@ import { AuthenticationService } from "../../../../shared/services/authenticatio
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.css"],
+  styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent
   extends PropertyDataLoader
@@ -31,12 +31,14 @@ export class SidebarComponent
   @Output() onSidebarChangeEmitter = new EventEmitter<boolean>();
   @Output() onSidebarToggleEmitter = new EventEmitter<any>();
 
-  itemClicked: string;
+  itemClicked: string = "home";
   el: ElementRef;
   links: any;
 
   logoUrl;
   tabs = [];
+
+  showRedirectBackoffice: boolean;
 
   constructor(
     el: ElementRef,
@@ -143,6 +145,11 @@ export class SidebarComponent
 
   loadSideBarConfig() {
     let sideBarConfig = this.properties["sidebar"];
+    this.showRedirectBackoffice = this.properties["showRedirectBackoffice"];
+    this.showChangeProperty = !this.showRedirectBackoffice;
+
+    console.log("config sidebar: ", sideBarConfig);
+    console.log("redirect to backoffice: ", this.showRedirectBackoffice);
 
     if (!sideBarConfig) {
       console.error("Could not find 'sidebar' in appConfig");
@@ -242,5 +249,9 @@ export class SidebarComponent
 
   leaveProperty() {
     this.router.navigateByUrl("/selectProperty");
+  }
+
+  redirectUrl() {
+    window.location.href = `${this.properties["urlBackoffice"]}`;
   }
 }
