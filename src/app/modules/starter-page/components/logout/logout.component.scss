@@ -1,24 +1,24 @@
 /* user loggout */
 .dashboard-user-logged {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  padding-top: 10px;
-  padding-right: 10px;
+  padding-top: 20px;
+  padding-right: 30px;
   z-index: 9999999999999999999; //mantem o componente visivel na tela
 }
 .dashboard-user-container {
   display: flex;
-  text-align: end;
+  gap: 10px;
   padding: 5px;
 }
-.dashbaord-user-text-container {
-  margin-right: 10px;
+.dashboard-user-text-container {
+  text-align: end;
+  h6 {
+    margin: 8px 0 -3px 0;
+  }
 }
-.dashboard-user-title {
-  padding-right: 10px;
-  margin-bottom: 2px;
-}
+
 .dashbaord-user-description {
   font-size: 10px;
   word-wrap: break-word;

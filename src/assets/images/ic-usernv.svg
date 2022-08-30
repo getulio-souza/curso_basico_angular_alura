@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="51.853" height="51.853" viewBox="0 0 51.853 51.853">
+  <defs>
+    <filter id="Caminho_2015" x="0" y="0" width="51.853" height="51.853" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-color="#2a6fa5" flood-opacity="0.141"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_2219" data-name="Grupo 2219" transform="translate(-157 -26)">
+    <g transform="matrix(1, 0, 0, 1, 157, 26)" filter="url(#Caminho_2015)">
+      <path id="Caminho_2015-2" data-name="Caminho 2015" d="M9.708,0H30.145a9.708,9.708,0,0,1,9.708,9.708V30.145a9.708,9.708,0,0,1-9.708,9.708H9.708A9.708,9.708,0,0,1,0,30.145V9.708A9.708,9.708,0,0,1,9.708,0Z" transform="translate(4 4)" fill="#afb9c6"/>
+    </g>
+    <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M8.627,9.706A4.853,4.853,0,1,0,3.774,4.853,4.854,4.854,0,0,0,8.627,9.706Zm4.314,1.078H11.084a5.866,5.866,0,0,1-4.913,0H4.314A4.313,4.313,0,0,0,0,15.1v.539a1.618,1.618,0,0,0,1.618,1.618H15.637a1.618,1.618,0,0,0,1.618-1.618V15.1A4.313,4.313,0,0,0,12.941,10.784Z" transform="translate(172.241 41.241)" fill="#fff"/>
+  </g>
+</svg>
