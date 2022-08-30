@@ -1,30 +1,30 @@
-<section class="graphics-container">
-  <div class="graphics-content">
+<div class="graphics-grid">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Status do pedido x Tempo de espera'"
       [itens]="opennedAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos por Área'"
       [itens]="categoriesAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos finalizados fora do SLA por Área'"
       [itens]="afterSlaAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos por Ala'"
       [itens]="wardsAdvance"
     ></app-charts-component>
   </div>
-</section>
+</div>
