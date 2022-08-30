@@ -24,12 +24,25 @@
   word-wrap: break-word;
 }
 .dashboard-user-icon {
-  div {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #fff;
-    border-radius: 10px;
-    margin: 0 auto;
-    margin-bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: #1d232b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  i {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+  img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
   }
 }
