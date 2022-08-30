@@ -62,6 +62,20 @@ export class SidebarComponent
   //   this.chartsObservable.unsubscribe();
   // }
 
+  addClass(item?) {
+    let navItems = document.querySelectorAll(".nav-item");
+
+    navItems.forEach((itemRemove) => {
+      if (itemRemove.id == item) {
+        itemRemove.classList.add("active");
+      } else {
+        itemRemove.classList.remove("active");
+      }
+    });
+
+    this.itemClicked = item;
+  }
+
   afterPropertyHasBeenLoaded() {
     this.links = this.el.nativeElement.querySelectorAll(
       '[data-toggle="tooltip"]'
