@@ -24,6 +24,12 @@
   word-wrap: break-word;
 }
 .dashboard-user-icon {
-  width: 30px;
-  height: 30px;
+  div {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
 }
