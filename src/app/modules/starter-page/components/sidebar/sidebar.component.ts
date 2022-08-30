@@ -146,7 +146,6 @@ export class SidebarComponent
   loadSideBarConfig() {
     let sideBarConfig = this.properties["sidebar"];
     this.showRedirectBackoffice = this.properties["showRedirectBackoffice"];
-    this.showChangeProperty = !this.showRedirectBackoffice;
 
     console.log("config sidebar: ", sideBarConfig);
     console.log("redirect to backoffice: ", this.showRedirectBackoffice);

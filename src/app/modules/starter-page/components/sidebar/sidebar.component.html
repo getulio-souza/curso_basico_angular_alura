@@ -210,22 +210,22 @@
     <span>Versão 1.17</span>
     <div>
       <a
-        *ngIf="propertyId && showChangeProperty && showRedirectBackoffice"
+        *ngIf="propertyId && showRedirectBackoffice"
+        class="pointer"
+        (click)="redirectUrl()"
+        title="{{ 'Backoffice' | translate }}"
+      >
+        <img src="../../../../../assets//images/backoffice-icon.svg" alt="" />
+        <span> {{ "Backoffice" | translate }}</span>
+      </a>
+      <a
+        *ngIf="propertyId && showChangeProperty"
         class="pointer"
         (click)="leaveProperty()"
         title="{{ 'Change property' | translate }}"
       >
         <i class="material-icons">swap_horiz</i>
         <span>{{ "Change property" | translate }}</span>
-      </a>
-      <a
-        *ngIf="propertyId && showRedirectBackoffice && !showChangeProperty"
-        class="pointer"
-        (click)="redirectUrl()"
-        title="{{ 'Backoffice' | translate }}"
-      >
-        <i class="material-icons">devices</i>
-        <span> {{ "Backoffice" | translate }}</span>
       </a>
     </div>
   </footer>
