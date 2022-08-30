@@ -1,0 +1,33 @@
+<section class="graphics-container">
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.BAR_VERTICAL"
+      [title]="'Pedidos em aberto há mais de 30 minutos'"
+      [itens]="halfHourData"
+      [exibirSeletor]="true"
+      [seletorWards]="seletorWards"
+      [seletorSubjects]="seletorSubjects"
+      (clickBarVerticalEvent)="halfChartClickEvent($event)"
+      (selectedFilterEvent)="selectedFilterEvent($event)"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.PIZZA"
+      [title]="'Top 5 de áreas com pedidos em aberto'"
+      [itens]="topFiveOppened"
+      (clickPizzaEvent)="clickPizza($event)"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-charts-component
+      [type]="CHART_TYPES.BAR_VERTICAL"
+      [title]="'Top 5 de áreas com pedidos fechados fora da SLA'"
+      [itens]="afterSlaData"
+      (clickBarVerticalEvent)="afterSlaChartClickEvent($event)"
+    ></app-charts-component>
+  </div>
+  <div class="graphics-content">
+    <app-order-table [cols]="cols" [data]="data"></app-order-table>
+  </div>
+</section>

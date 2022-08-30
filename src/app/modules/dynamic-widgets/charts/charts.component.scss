@@ -1,22 +1,91 @@
-.subtitle-icon{
-    
-    float: left;
-    position: absolute;
-    border: 10px red;
-    height: 35px;
-    width: 60px;
-    /* background-color: white; */
-    // border-bottom: 5px darkgreen solid;
-    border-radius: 0;
-
+.subtitle-icon {
+  float: left;
+  position: absolute;
+  border: 10px red;
+  height: 35px;
+  width: 60px;
+  /* background-color: white; */
+  // border-bottom: 5px darkgreen solid;
+  border-radius: 0;
 }
 
 .filter-buttons {
-    min-width: 150px;
-    max-width: 150px;
+  min-width: 150px;
+  max-width: 150px;
 }
 
-.light-group {
-    height: 100%;
-    max-height: 300px;
+.charts-container {
+  height: 100%;
+
+  .charts-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    .charts-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      width: 100%;
+
+      .title-container {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        margin-bottom: 20px;
+
+        span {
+          font-size: 20px;
+          font-family: "Raleway";
+          font-weight: bold;
+
+          letter-spacing: 0px;
+          color: #ffffff;
+        }
+
+        .underline {
+          width: 85px;
+          height: 4px;
+
+          margin-top: 5px;
+
+          background-color: #24a0ff;
+
+          border-radius: 10px;
+        }
+      }
+
+      .filter-container {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+
+        .tie-filters {
+          display: flex;
+          flex-direction: row;
+
+          app-filter:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .charts-bottom {
+      width: 100%;
+
+      padding: 20px;
+
+      border-radius: 15px;
+
+      background: linear-gradient(231deg, #333c49 0%, #0a0c0f 100%);
+
+      box-shadow: 0px 3px 6px #00000029;
+    }
+  }
 }

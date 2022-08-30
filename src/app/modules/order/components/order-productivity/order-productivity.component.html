@@ -1,0 +1,67 @@
+<section class="order-container main-panel">
+  <!-- Título -->
+  <div class="title">
+    <h1>
+      {{ "Orders / Productivity" | translate }}
+    </h1>
+    <span>> HOME > PEDIDOS/PRODUTIVIDADE</span>
+  </div>
+  <!-- <app-loading></app-loading> -->
+
+  <!-- Barra de filtros -->
+  <div class="filter-bar">
+    <div class="filter-box">
+      <div class="text-box">
+        {{ "Filtros" }}
+        <div class="underline-text"></div>
+      </div>
+      <div class="inputs-container">
+        <app-history-navigation-inputed
+          [startDate]="rangeDates[0]"
+          [endDate]="rangeDates[1]"
+          [showFilter]="true"
+          (onViewChange)="setRangeDate($event)"
+        >
+        </app-history-navigation-inputed>
+      </div>
+      <div class="filter-button">
+        <button class="button" type="button" (click)="doFilter()">
+          <span>Atualizar</span>
+        </button>
+      </div>
+    </div>
+    <!-- Botões da Barra de filtro -->
+    <div class="bts-box">
+      <button (click)="adminView ? initView('detail') : initView('admin')">
+        {{ adminView ? "DETAIL VIEW" : "ADMIN VIEW" }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Componente de gráficos ADMIN VIEW -->
+  <div *ngIf="adminView" class="graphics-view">
+    <app-order-graphics-admin
+      [halfHourData]="halfHourData"
+      [topFiveOppened]="topFiveOppened"
+      [afterSlaData]="afterSlaData"
+      [seletorWards]="seletorWards"
+      [seletorSubjects]="seletorSubjects"
+      [selectedFilterEvent]="selectedFilterEvent"
+      [clickPizza]="clickPizza"
+      [afterSlaChartClickEvent]="afterSlaChartClickEvent"
+      [halfChartClickEvent]="halfChartClickEvent"
+      [cols]="cols"
+      [data]="data"
+    ></app-order-graphics-admin>
+  </div>
+
+  <!-- Componente de gráficos DETAIL VIEW -->
+  <div *ngIf="!adminView" class="graphics-view">
+    <app-order-graphics-detail
+      [opennedAdvance]="opennedAdvance"
+      [categoriesAdvance]="categoriesAdvance"
+      [afterSlaAdvance]="afterSlaAdvance"
+      [wardsAdvance]="wardsAdvance"
+    ></app-order-graphics-detail>
+  </div>
+</section>

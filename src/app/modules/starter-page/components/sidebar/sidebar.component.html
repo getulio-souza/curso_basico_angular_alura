@@ -1,148 +1,232 @@
-<nav class="sidebar" id="sideBar" data-color="white">
-        <div class="sidebar-collapse" style="cursor: pointer;" (click)="toggleSidebar()"><i class="material-icons">arrow_left</i></div>
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="logo pt-4">
-            <!--button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button-->
-            <div (click)="changeMenu('home')" style="cursor: pointer;">
-                <a ><img *ngIf="logoUrl" [src]="logoUrl"></a>
-            </div>
-            <app-header-status></app-header-status>
-        </div>
+<nav class="sidebar sidebar-background">
+  <div
+    class="sidebar-collapse"
+    style="cursor: pointer"
+    (click)="toggleSidebar()"
+  >
+    <i class="material-icons">arrow_left</i>
+  </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="sidebar-wrapper">
-            <ul class="nav">
-                <li *ngIf="showTab('propertySummary')" class="nav-item" [ngClass]="{'active': itemClicked == 'propertySummary'}"  data-toggle="tooltip" data-placement="right" title="{{ 'Property Summary' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('propertySummary')">
-                        <i class="material-icons">domain</i>
-                        <span>{{ 'Property summary' | translate }}</span>
-                    </a>
-                </li>
-                <li  *ngIf="showTab('dashboard')" class="nav-item" [ngClass]="{'active': itemClicked == 'dashboard'}">
-                    <a class="nav-link" (click)="changeMenu('dashboard')" data-toggle="tooltip" data-placement="right" title="{{ 'Energy Management Dashboard' | translate }}">
-                        <i class="material-icons">multiline_chart</i>
-                        <span>{{ 'Energy Management Dashboard' | translate }} </span>
+  <div class="logo pt-4">
+    <div>
+      <a><img *ngIf="logoUrl" [src]="logoUrl" /></a>
+    </div>
+  </div>
 
-                    </a>
-                </li>
-                <li *ngIf="showTab('engineering')" class="nav-item" [ngClass]="{'active': itemClicked == 'engineering'}" data-toggle="tooltip" data-placement="right" title="{{ 'Engineering' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('engineering')">
-                        <i class="material-icons">settings</i>
-                        <span>{{ 'Engineering' | translate }}</span>
-                    </a>
-                </li>
+  <div class="sidebar-wrapper menu-container">
+    <ul class="nav">
+      <li
+        *ngIf="showTab('dashboard')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'home' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Dashboard' | translate }}"
+      >
+        <a class="item-link pointer" (click)="changeMenu('home')">
+          <i class="material-icons">dashboard</i>
+          <span>{{ "Dashboard" | translate }} </span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('it')" class="nav-item" [ngClass]="{'active': itemClicked == 'it'}" data-toggle="tooltip" data-placement="right" title="{{ 'IT' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('it')">
-                        <i class="material-icons">computer</i>
-                        <span>{{ 'IT' | translate }}</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('propertySummary')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'propertySummary' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Property Summary' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('propertySummary')">
+          <i class="material-icons">domain</i>
+          <span>{{ "Property summary" | translate }}</span>
+        </a>
+      </li>
 
-				<li *ngIf="showTab('maintenance')" class="nav-item" [ngClass]="{'active': itemClicked == 'maintenance'}"
-					data-toggle="tooltip" data-placement="right" title="{{ 'Maintenance' | translate }}">
-					<a class="nav-link" (click)="changeMenu('maintenance')">
-            <i class="material-icons">playlist_add_check</i>
-						<span> {{ 'Maintenance' | translate }}</span>
-					</a>
-				</li>
+      <li
+        *ngIf="showTab('engineering')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'engineering' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Engineering' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('engineering')">
+          <i class="material-icons">settings</i>
+          <span>{{ "Engineering" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('housekeeping')" class="nav-item" [ngClass]="{'active': itemClicked == 'housekeeping'}" data-toggle="tooltip" data-placement="right" title="{{ 'Housekeeping' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('housekeeping')">
-                        <i class="material-icons">group</i>
-                        <span> {{ 'Housekeeping' | translate }}</span>
-                    </a>
-				</li>
+      <li
+        *ngIf="showTab('it')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'it' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'IT' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('it')">
+          <i class="material-icons">computer</i>
+          <span>{{ "IT" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('crm')" class="nav-item" [ngClass]="{'active': itemClicked == 'crm'}" data-toggle="tooltip" data-placement="right" title="{{ 'Customer Relations' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('crm')">
-                        <i class="material-icons">person</i>
-                        <span> {{ 'Customer Relations' | translate }}</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('maintenance')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'maintenance' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Maintenance' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('maintenance')">
+          <i class="material-icons">playlist_add_check</i>
+          <span> {{ "Maintenance" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('usageReport')" class="nav-item" [ngClass]="{'active': itemClicked == 'usageReport'}" data-toggle="tooltip" data-placement="right" title="{{ 'Customer Relations' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('usageReport')">
-                        <i class="material-icons">menu_book</i>
-                        <span> {{ 'Usage Report' | translate }}</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('housekeeping')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'housekeeping' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Housekeeping' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('housekeeping')">
+          <i class="material-icons">group</i>
+          <span> {{ "Housekeeping" | translate }}</span>
+        </a>
+      </li>
 
-                <!-- <li *ngIf="showTab('order')" class="nav-item" [ngClass]="{'active': itemClicked == 'order'}" data-toggle="tooltip" data-placement="right" title="{{ 'Order Dashboard' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('order')">
-                        <i class="material-icons">room_service</i>
-                        <span> {{ 'Order Dashboard' | translate }}</span>
-                    </a>
-                </li> -->
+      <li
+        *ngIf="showTab('crm')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'crm' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Customer Relations' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('crm')">
+          <i class="material-icons">person</i>
+          <span> {{ "Customer Relations" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('order')" class="nav-item" [ngClass]="{'active': itemClicked == 'produtividade'}" data-toggle="tooltip" data-placement="right" title="Produtividade">
-                    <a class="nav-link" (click)="changeMenu('produtividade')">
-                        <i class="material-icons">bar_chart_sharp</i>
-                        <span> Produtividade</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('usageReport')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'usageReport' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Customer Relations' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('usageReport')">
+          <i class="material-icons">menu_book</i>
+          <span> {{ "Usage Report" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('nps')" class="nav-item" [ngClass]="{'active': itemClicked == 'nps'}" data-toggle="tooltip" data-placement="right" title="NPS">
-                  <a class="nav-link" (click)="changeMenu('nps')">
-                      <i class="material-icons">star</i>
+      <!-- <li *ngIf="showTab('order')" class="item-container" [ngClass]="{'active': itemClicked == 'order'}" data-toggle="tooltip" data-placement="right" title="{{ 'Order Dashboard' | translate }}">
+          <a class="item-link" (click)="changeMenu('order')">
+              <i class="material-icons">room_service</i>
+              <span> {{ 'Order Dashboard' | translate }}</span>
+          </a>
+      </li> -->
 
-                      <span> NPS</span>
-                  </a>
-                </li>
+      <li
+        *ngIf="showTab('nps')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'nps' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="NPS"
+      >
+        <a class="item-link pointer" (click)="changeMenu('nps')">
+          <i class="material-icons">language</i>
 
-                <li *ngIf="showTab('roomControl')" class="nav-item" [ngClass]="{'active': itemClicked == 'roomControl'}" data-toggle="tooltip" data-placement="right" title="{{ 'Room Control' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('roomControl')">
-                        <i class="material-icons">devices_other</i>
-                        <span> {{ 'Room Control' | translate }}</span>
-                    </a>
-                </li>
+          <span>PESQUISA DE SATISFAÇÃO</span>
+        </a>
+      </li>
 
+      <li
+        *ngIf="showTab('order')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'produtividade' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="Produtividade"
+      >
+        <a class="item-link pointer" (click)="changeMenu('produtividade')">
+          <i class="material-icons">signal_cellular_alt</i>
+          <span>PEDIDOS / PRODUTIVIDADE</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('optimization')" class="nav-item hidden_991" [ngClass]="{'active': itemClicked == 'optimization'}" data-toggle="tooltip" data-placement="right" title="{{ 'Optimization Services' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('optimization')">
-                        <i class="material-icons">timer</i>
-                        <span> {{ 'Optimization Services' | translate }}</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('roomControl')"
+        class="item-container"
+        [ngClass]="{ active: itemClicked == 'roomControl' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Room Control' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('roomControl')">
+          <i class="material-icons">devices_other</i>
+          <span> {{ "Room Control" | translate }}</span>
+        </a>
+      </li>
 
-                <li *ngIf="showTab('energyManagement')" class="nav-item hidden_991" [ngClass]="{'active': itemClicked == 'energyManagement'}" data-toggle="tooltip" data-placement="right" title="{{ 'Energy Management' | translate }}">
-                    <a class="nav-link" (click)="changeMenu('energyManagement')">
-                        <i class="material-icons">multiline_chart</i>
-                        <span> {{ 'Energy Management' | translate }}</span>
-                    </a>
-                </li>
+      <li
+        *ngIf="showTab('optimization')"
+        class="item-container hidden_991"
+        [ngClass]="{ active: itemClicked == 'optimization' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Optimization Services' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('optimization')">
+          <i class="material-icons">timer</i>
+          <span> {{ "Optimization Services" | translate }}</span>
+        </a>
+      </li>
 
-            </ul>
-        </div><!-- /.navbar-collapse -->
-
-        <div class="sidebar-footer" *ngIf="propertyId && showChangeProperty">
-            <ul class="nav" style="margin:10px 0px">
-                <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer;" (click)="leaveProperty()" data-toggle="tooltip" data-placement="right"
-                        title="{{ 'Change property' | translate }}">
-                        <i class="material-icons">swap_horiz</i>
-                        <span>{{'Change property' | translate}}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="sidebar-footer" *ngIf="propertyId && showRedirectBackoffice">
-            <ul class="nav" style="margin:10px 0px">
-                <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer;" (click)="redirectUrl()" data-toggle="tooltip" data-placement="right"
-                        title="{{ 'Backoffice' | translate }}">
-                        <i class="material-icons">swap_horiz</i>
-                        <span>{{'Backoffice' | translate}}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
+      <li
+        *ngIf="showTab('energyManagement')"
+        class="item-container hidden_991"
+        [ngClass]="{ active: itemClicked == 'energyManagement' }"
+        data-toggle="tooltip"
+        data-placement="right"
+        title="{{ 'Energy Management' | translate }}"
+      >
+        <a class="item-link" (click)="changeMenu('energyManagement')">
+          <i class="material-icons">multiline_chart</i>
+          <span> {{ "Energy Management" | translate }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <footer class="bottom-container">
+    <span>Versão 1.17</span>
+    <div>
+      <a
+        *ngIf="propertyId && showRedirectBackoffice"
+        class="pointer"
+        (click)="redirectUrl()"
+        title="{{ 'Backoffice' | translate }}"
+      >
+        <img src="../../../../../assets//images/backoffice-icon.svg" alt="" />
+        <span> {{ "Backoffice" | translate }}</span>
+      </a>
+      <a
+        *ngIf="propertyId && showChangeProperty"
+        class="pointer"
+        (click)="leaveProperty()"
+        title="{{ 'Change property' | translate }}"
+      >
+        <i class="material-icons">swap_horiz</i>
+        <span>{{ "Change property" | translate }}</span>
+      </a>
+    </div>
+  </footer>
 </nav>

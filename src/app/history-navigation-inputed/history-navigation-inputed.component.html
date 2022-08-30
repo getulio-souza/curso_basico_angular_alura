@@ -1,26 +1,33 @@
 <div class="light-group main-style">
   <div class="date-filter-div">
-    <div class="inner-addon right-addon bg-input-calendar" style="margin-right: 5px; padding: 4px;">
+    <div *ngIf="showFilter">
+      <p-dropdown
+        [options]="periods"
+        [placeholder]="'Período'"
+        (ngModelChange)="pickPeriod($event)"
+      >
+      </p-dropdown>
+    </div>
+    <div class="datepicker form-group inner-addon">
       <p-calendar
         dateFormat="dd/mm/yy"
         [readonlyInput]="true"
         [(ngModel)]="rangeDates[0]"
-        (ngModelChange)="filterByDate()">
+        (ngModelChange)="filterByDate()"
+      >
       </p-calendar>
-      <i class="material-icons notranslate" style="color: white; cursor: pointer;">calendar_today</i>
+      <i class="material-icons notranslate">calendar_today</i>
     </div>
 
-    <div class="inner-addon right-addon bg-input-calendar">
+    <div class="datepicker form-group inner-addon">
       <p-calendar
         dateFormat="dd/mm/yy"
         [readonlyInput]="true"
         [(ngModel)]="rangeDates[1]"
-        (ngModelChange)="filterByDate()">
+        (ngModelChange)="filterByDate()"
+      >
       </p-calendar>
-      <i class="material-icons notranslate" style="color: white; cursor: pointer; padding: 4px;">calendar_today</i>
+      <i class="material-icons notranslate">calendar_today</i>
     </div>
-  </div>
-  <div *ngIf="showFilter" class="charts charts-header filter-input">
-    <app-filter [items]="periods" [selected]="period" (selectedModified)="pickPeriod($event)"></app-filter>
   </div>
 </div>

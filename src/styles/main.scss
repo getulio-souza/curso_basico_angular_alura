@@ -1,7 +1,9 @@
+@import "./variables.scss";
+@import "./p-dropDown.scss";
+@import "./p-datepicker.scss";
 @import "components/propertySummary/propertySummary.scss";
 @import "../../src/app/building-unit-filter/building-unit-filter.component.scss";
 @import "../../src/app/modules/home/components/homePage2/homePage2.component.scss";
-
 @import "components/crmPage/crm-page.scss";
 @import "components/control/control.scss";
 
@@ -17,6 +19,8 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 
   background-color: #333c49 !important;
+  //pode ser que mude
+  overflow: hidden;
 
   .summary-card-content {
     background-color: #333c49 !important;
@@ -101,6 +105,23 @@ home-property-summary2 .owl-dots {
 .nav-open .--map .navbar-vilas {
   width: calc(100% - 260px);
   left: 260px;
+}
+
+// .nav-open .nps-section {
+//   padding-left: 260px !important;
+//   transition: padding-left 0.3s linear;
+// }
+
+.nav-open .bottom-container div i {
+  margin-right: 15px !important;
+}
+
+.nav-open .bottom-container div img {
+  margin-right: 15px !important;
+}
+
+.nav-open .bottom-container div span {
+  display: inline !important;
 }
 
 .carousel-vilas {
@@ -224,44 +245,40 @@ app-alert-carousel .owl-dots {
   cursor: pointer;
 }
 
-.light-group {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 .charts {
-  .chartsDiv {
-    position: relative;
-    padding: 2rem;
-    * {
-      border-radius: 4px;
-    }
-    .chart-header {
-      display: flex;
-      width: 90%;
-      padding-bottom: 1rem;
-      margin-top: 1.2rem;
-      div {
-        margin-right: 1rem;
-        display: flex;
-        align-items: center;
-      }
-      .dropdown {
-        .dropdown-menu,
-        .show {
-          display: block;
-        }
-      }
-    }
-    .chart-header.center {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      div {
-        margin-right: 0;
-      }
-    }
-  }
+  // .chartsDiv {
+  //   position: relative;
+  //   padding: 2rem;
+  //   * {
+  //     border-radius: 4px;
+  //   }
+  //   .chart-header {
+  //     display: flex;
+  //     width: 90%;
+  //     padding-bottom: 1rem;
+  //     margin-top: 1.2rem;
+  //     div {
+  //       margin-right: 1rem;
+  //       display: flex;
+  //       align-items: center;
+  //     }
+  //     .dropdown {
+  //       .dropdown-menu,
+  //       .show {
+  //         display: block;
+  //       }
+  //     }
+  //   }
+  //   .chart-header.center {
+  //     width: 100%;
+  //     display: flex;
+  //     justify-content: center;
+  //     text-align: center;
+  //     div {
+  //       margin-right: 0;
+  //     }
+  //   }
+  // }
   //Dropdown
   .dropdown {
     background-color: rgba(255, 255, 255, 0.1);

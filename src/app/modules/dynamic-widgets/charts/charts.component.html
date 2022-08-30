@@ -1,47 +1,82 @@
-<div class="light-group">
-    <div class="d-flex flex-column align-items-center justify-content-end">
-        <div class="chart-header justify-content-between">
-            <span style="font-size: 18px; font-weight: 600;">{{title}}</span>
-
-            <div *ngIf="exibirSeletorCategoria" class="row justify-content-between">
-              <app-filter class="filter-buttons"
-                  [items]="categories" [caption]="'Categoria'" [selected]="selectedCategory"
-                  (selectedModified)="selecionarCategory($event)">
-              </app-filter>
-          </div>
-
-            <div *ngIf="exibirSeletor" class="row justify-content-between">
-                <app-filter class="filter-buttons"
-                    [items]="wards" [caption]="'Ala'" [selected]="selectedWard"
-                    (selectedModified)="selecionarWard($event)">
-                </app-filter>
-
-                <app-filter class="filter-buttons"
-                    [items]="subjects" [caption]="'Quarto'" [selected]="selectedSubject"
-                    (selectedModified)="selecionarSubject($event)">
-                </app-filter>
-            </div>
-
-            <div class="subtitle-icon"></div>
+<div class="charts-container">
+  <div class="charts-display">
+    <div class="charts-header">
+      <div class="title-container">
+        <span>{{ title }}</span>
+        <div class="underline"></div>
+      </div>
+      <div class="filter-container">
+        <div *ngIf="exibirSeletorCategoria" class="tie-filters">
+          <app-filter
+            class="filter-buttons"
+            [items]="categories"
+            [caption]="'Categoria'"
+            [selected]="selectedCategory"
+            (selectedModified)="selecionarCategory($event)"
+          >
+          </app-filter>
         </div>
-        <div *ngIf="itens.length" style="width: 100%;">
-            <ng-container *ngIf="isFinishLoading$ | async" [ngSwitch]="type">
-                <app-chart-bar-horizontal       *ngSwitchCase="CHART_TYPES.BAR_HORIZONTAL"></app-chart-bar-horizontal>
-                <app-chart-bar-vertical         *ngSwitchCase="CHART_TYPES.BAR_VERTICAL" [showCaption]="showCaption" (clickBarVerticalEvent)="clickVertical($event)" (restoreVerticalEvent)="restoreVertical()"></app-chart-bar-vertical>
-                <app-chart-pizza                *ngSwitchCase="CHART_TYPES.PIZZA" (clickPizzaEvent)="clickPizza($event)"></app-chart-pizza>
-                <app-chart-lines                *ngSwitchCase="CHART_TYPES.LINES"></app-chart-lines>
-                <app-chart-lines-nps            *ngSwitchCase="CHART_TYPES.LINES_NPS"></app-chart-lines-nps>
-                <app-chart-funnel               *ngSwitchCase="CHART_TYPES.FUNNEL"></app-chart-funnel>
-                <app-chart-gauge                *ngSwitchCase="CHART_TYPES.GAUGE"></app-chart-gauge>
-                <app-chart-stacked-line         *ngSwitchCase="CHART_TYPES.STACKED_LINE"></app-chart-stacked-line>
-                <app-chart-bar-vertical-simple  *ngSwitchCase="CHART_TYPES.BAR_VERTICAL_SIMPLE"></app-chart-bar-vertical-simple>
-                <app-chart-bar-vertical-nps     *ngSwitchCase="CHART_TYPES.BAR_VERTICAL_NPS"></app-chart-bar-vertical-nps>
-            </ng-container>
+        <div *ngIf="exibirSeletor" class="tie-filters">
+          <app-filter
+            class="filter-buttons"
+            [items]="wards"
+            [caption]="'Ala'"
+            [selected]="selectedWard"
+            (selectedModified)="selecionarWard($event)"
+          >
+          </app-filter>
+
+          <app-filter
+            class="filter-buttons"
+            [items]="subjects"
+            [caption]="'Quarto'"
+            [selected]="selectedSubject"
+            (selectedModified)="selecionarSubject($event)"
+          >
+          </app-filter>
         </div>
-        <div *ngIf="!itens.length" style="width: 100%;">
-            <div class="row justify-content-center" style="min-height: 250px; width: 100%;">
-                <h3 class="align-self-center">{{ 'no-data-avaliable' | translate }}</h3>
-            </div>
-        </div>
+      </div>
+      <div class="subtitle-icon"></div>
     </div>
+    <div class="charts-bottom" *ngIf="itens.length">
+      <ng-container *ngIf="isFinishLoading$ | async" [ngSwitch]="type">
+        <app-chart-bar-horizontal
+          *ngSwitchCase="CHART_TYPES.BAR_HORIZONTAL"
+        ></app-chart-bar-horizontal>
+        <app-chart-bar-vertical
+          *ngSwitchCase="CHART_TYPES.BAR_VERTICAL"
+          [showCaption]="showCaption"
+          (clickBarVerticalEvent)="clickVertical($event)"
+          (restoreVerticalEvent)="restoreVertical()"
+        ></app-chart-bar-vertical>
+        <app-chart-pizza
+          *ngSwitchCase="CHART_TYPES.PIZZA"
+          (clickPizzaEvent)="clickPizza($event)"
+        ></app-chart-pizza>
+        <app-chart-lines *ngSwitchCase="CHART_TYPES.LINES"></app-chart-lines>
+        <app-chart-lines-nps
+          *ngSwitchCase="CHART_TYPES.LINES_NPS"
+        ></app-chart-lines-nps>
+        <app-chart-funnel *ngSwitchCase="CHART_TYPES.FUNNEL"></app-chart-funnel>
+        <app-chart-gauge *ngSwitchCase="CHART_TYPES.GAUGE"></app-chart-gauge>
+        <app-chart-stacked-line
+          *ngSwitchCase="CHART_TYPES.STACKED_LINE"
+        ></app-chart-stacked-line>
+        <app-chart-bar-vertical-simple
+          *ngSwitchCase="CHART_TYPES.BAR_VERTICAL_SIMPLE"
+        ></app-chart-bar-vertical-simple>
+        <app-chart-bar-vertical-nps
+          *ngSwitchCase="CHART_TYPES.BAR_VERTICAL_NPS"
+        ></app-chart-bar-vertical-nps>
+      </ng-container>
+    </div>
+    <div *ngIf="!itens.length" style="width: 100%">
+      <div
+        class="row justify-content-center"
+        style="min-height: 250px; width: 100%"
+      >
+        <h3 class="align-self-center">{{ "no-data-avaliable" | translate }}</h3>
+      </div>
+    </div>
+  </div>
 </div>

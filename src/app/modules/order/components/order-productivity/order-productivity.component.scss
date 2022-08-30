@@ -1,0 +1,163 @@
+@import "../../../../../styles/main.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.order-container {
+  height: 100vh;
+  min-height: 100vh;
+  background-color: #303743;
+
+  padding-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+
+  padding-left: 50px;
+  margin-bottom: 30px;
+
+  h1 {
+    font-family: Raleway;
+    font-size: 30px;
+    font-weight: bolder;
+    color: #ffffff;
+  }
+
+  span {
+    font-family: Raleway;
+    font-size: 13px;
+    color: #ffffff;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 50px;
+  background-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0px 0px 20px rgba(175, 185, 198, 0.455);
+
+  min-height: 75px;
+  height: auto;
+  width: 100%;
+
+  .filter-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 75%;
+
+    .text-box {
+      font-family: Raleway;
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 20px;
+
+      .underline-text {
+        width: 70px;
+        border-top-color: #ffffff;
+        border-top-style: solid;
+        border-top-width: initial;
+        border-radius: 10px;
+        opacity: 1;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+    }
+
+    .inputs-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .input-box {
+        padding: 0 10px;
+      }
+    }
+
+    //vai remover...
+    .filter-button {
+      display: flex;
+      align-items: center;
+
+      .button {
+        width: 170px;
+        height: 38px;
+
+        background-color: #f9fbff;
+
+        box-shadow: 5px 5px 10px #2a6fa524;
+
+        border: 1px solid #7d8c8f;
+        border-radius: 12px;
+
+        margin: 8px 10px;
+
+        span {
+          text-align: center;
+          font-family: "Roboto";
+          letter-spacing: 0.29px;
+          color: #7d8c8f;
+        }
+
+        &:hover {
+          background-color: #7d8c8f;
+
+          box-shadow: 5px 5px 10px #2a6fa524;
+
+          span {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .bts-box {
+    display: flex;
+    justify-content: center;
+
+    button {
+      height: 40px;
+      width: 130px;
+      border: 1px solid #24a0ff;
+      background-color: #ffffff;
+      border-radius: 10px;
+
+      font-family: Roboto;
+      color: #24a0ff;
+      font-size: 14px;
+    }
+
+    button:hover {
+      transition-duration: 0.2s;
+      background-color: #24a0ff;
+      color: #ffffff;
+    }
+  }
+}
+
+.graphics-view {
+  height: 100%;
+  width: 100%;
+  padding: 20px 50px;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
