@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%, 0);
 }
-.btn-close {
+.btn-grid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,4 +19,20 @@
 
   background-color: #545b66;
   color: #fff;
+
+  mat-icon {
+    transform: rotate(0);
+    transition: transform 400ms linear;
+  }
+}
+.btn-grid.opened {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  mat-icon {
+    transform: rotate(180deg);
+    transition: transform 400ms linear;
+  }
 }
