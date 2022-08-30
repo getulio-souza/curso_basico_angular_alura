@@ -144,6 +144,9 @@ import { LoginComponent } from "../../login/login.component";
             path: "produtividade",
             component: OrderProductivityComponent,
             canActivate: [RoleGuard],
+            data: {
+              breadcrumb: "Orders / Productivity",
+            },
           },
           {
             path: "roomControl",

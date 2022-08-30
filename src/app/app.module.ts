@@ -1,3 +1,4 @@
+import { SharedModule } from "./shared/shared.module";
 import { OrderProductivityComponent } from "./modules/order/components/order-productivity/order-productivity.component";
 import { AuthorizationTokenInterceptor } from "./services/http-interceptor/authorization-token-interceptor";
 import { HomeModule } from "./modules/home/home.module";
@@ -259,6 +260,7 @@ export function tokenGetter() {
     NvD3Module,
     MatSnackBarModule,
     NPSModule,
+    SharedModule,
     // NgxEchartsModule.forRoot({
     //   echarts: () => import('echarts')
     // }),
