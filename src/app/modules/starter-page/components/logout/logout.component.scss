@@ -1,0 +1,28 @@
+/* user loggout */
+.dashboard-user-logged {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+.dashboard-user-container {
+  display: flex;
+  text-align: end;
+  padding: 5px;
+}
+.dashbaord-user-text-container {
+  margin-right: 10px;
+}
+.dashboard-user-title {
+  padding-right: 10px;
+  margin-bottom: 2px;
+}
+.dashbaord-user-description {
+  font-size: 10px;
+  word-wrap: break-word;
+}
+.dashboard-user-icon {
+  width: 30px;
+  height: 30px;
+}
