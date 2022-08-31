@@ -1,26 +1,26 @@
 <section class="graphics-container">
-  <div class="graphic-content">
+  <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Status do pedido x Tempo de espera'"
       [itens]="opennedAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphic-content">
+  <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos por Área'"
       [itens]="categoriesAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphic-content">
+  <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos finalizados fora do SLA por Área'"
       [itens]="afterSlaAdvance"
     ></app-charts-component>
   </div>
-  <div class="graphic-content">
+  <div class="graphics-content">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL_SIMPLE"
       [title]="'Pedidos por Ala'"

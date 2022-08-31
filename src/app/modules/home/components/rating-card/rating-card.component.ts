@@ -10,7 +10,7 @@ import { RealTime } from "../../../../abstracts/realTime";
   templateUrl: "./rating-card.component.html",
   styleUrls: ["./rating-card.component.scss"],
 })
-export class RatingCardComponent2 implements OnInit, OnDestroy {
+export class RatingCardComponent implements OnInit, OnDestroy {
   @Input() indicatorGroup;
   @Input() propertyId;
 

@@ -23,7 +23,7 @@
         data-placement="right"
         title="{{ 'Dashboard' | translate }}"
       >
-        <a class="item-link" (click)="changeMenu('home')">
+        <a class="item-link pointer" (click)="changeMenu('home')">
           <i class="material-icons">dashboard</i>
           <span>{{ "Dashboard" | translate }} </span>
         </a>
@@ -142,7 +142,7 @@
         data-placement="right"
         title="NPS"
       >
-        <a class="item-link" (click)="changeMenu('nps')">
+        <a class="item-link pointer" (click)="changeMenu('nps')">
           <i class="material-icons">language</i>
 
           <span>PESQUISA DE SATISFAÇÃO</span>
@@ -157,7 +157,7 @@
         data-placement="right"
         title="Produtividade"
       >
-        <a class="item-link" (click)="changeMenu('produtividade')">
+        <a class="item-link pointer" (click)="changeMenu('produtividade')">
           <i class="material-icons">signal_cellular_alt</i>
           <span>PEDIDOS / PRODUTIVIDADE</span>
         </a>
@@ -210,22 +210,22 @@
     <span>Versão 1.17</span>
     <div>
       <a
-        *ngIf="propertyId && showChangeProperty && showRedirectBackoffice"
+        *ngIf="propertyId && showRedirectBackoffice"
+        class="pointer"
+        (click)="redirectUrl()"
+        title="{{ 'Backoffice' | translate }}"
+      >
+        <img src="../../../../../assets//images/backoffice-icon.svg" alt="" />
+        <span> {{ "Backoffice" | translate }}</span>
+      </a>
+      <a
+        *ngIf="propertyId && showChangeProperty"
         class="pointer"
         (click)="leaveProperty()"
         title="{{ 'Change property' | translate }}"
       >
         <i class="material-icons">swap_horiz</i>
         <span>{{ "Change property" | translate }}</span>
-      </a>
-      <a
-        *ngIf="propertyId && showRedirectBackoffice && !showChangeProperty"
-        class="pointer"
-        (click)="redirectUrl()"
-        title="{{ 'Backoffice' | translate }}"
-      >
-        <i class="material-icons">devices</i>
-        <span> {{ "Backoffice" | translate }}</span>
       </a>
     </div>
   </footer>
