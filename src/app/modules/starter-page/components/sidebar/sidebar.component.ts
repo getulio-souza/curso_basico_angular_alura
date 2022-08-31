@@ -63,7 +63,7 @@ export class SidebarComponent
   // }
 
   addClass(item?) {
-    let navItems = document.querySelectorAll(".nav-item");
+    let navItems = document.querySelectorAll(".item-container");
 
     navItems.forEach((itemRemove) => {
       if (itemRemove.id == item) {

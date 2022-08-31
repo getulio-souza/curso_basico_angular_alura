@@ -1,3 +1,4 @@
+import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { OrderProductivityComponent } from "./modules/order/components/order-productivity/order-productivity.component";
 import { AuthorizationTokenInterceptor } from "./services/http-interceptor/authorization-token-interceptor";
@@ -245,6 +246,7 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     ProxperCommonModule,
     StarterPageModule,
     CRMModule,
@@ -269,40 +271,59 @@ export function tokenGetter() {
     RouterModule.forRoot([
       {
         path: "callback",
+
         component: CallbackComponent,
       },
+
       {
         path: "",
+
         redirectTo: "selectProperty",
+
         canActivate: [AuthGuard],
+
         pathMatch: "full",
       },
+
       {
         path: "notFound",
+
         component: NotFoundComponent,
       },
+
       {
         path: NotAllowedComponent.routerName,
+
         component: NotAllowedComponent,
       },
+
       {
         path: "order",
+
         component: OrderPageComponent,
       },
+
       {
-        path: "nps/:property/:sector",
+        path: "nps",
+
         component: NPSPageComponent,
       },
+
       {
         path: "produtividade/:property/:sector",
+
         component: OrderProductivityComponent,
       },
+
       {
         path: "**",
+
         component: NotFoundComponent,
       },
+
       {
         path: "login",
+
         component: LoginComponent,
       },
     ]),
