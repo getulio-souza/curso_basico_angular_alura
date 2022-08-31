@@ -139,7 +139,6 @@ import { NPSPageComponent } from "./modules/nps/components/nps-page/nps-page.com
 import { LoginComponent } from "./login/login.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthenticationService } from "./shared/services/authentication.service";
-import { LoadingComponent } from "./shared/loading/loading.component";
 import { ModalComponent } from "./shared/modal/modal.component";
 import { LoadingModalComponent } from "./shared/loading-modal/loading-modal.component";
 import { ButtonComponent } from "./shared/button/button.component";
@@ -237,7 +236,7 @@ export function tokenGetter() {
     GridDevicesComponent,
     MultiChartAdvancedColdChamberComponent,
     LoginComponent,
-    LoadingComponent,
+
     ModalComponent,
     LoadingModalComponent,
     ButtonComponent,
