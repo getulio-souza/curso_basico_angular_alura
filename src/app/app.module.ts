@@ -291,7 +291,7 @@ export function tokenGetter() {
         component: OrderPageComponent,
       },
       {
-        path: "nps",
+        path: "nps/:property/:sector",
         component: NPSPageComponent,
       },
       {

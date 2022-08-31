@@ -139,13 +139,16 @@ import { LoginComponent } from "../../login/login.component";
             path: "nps",
             component: NPSPageComponent,
             canActivate: [RoleGuard],
+            data: {
+              breadcrumb: "NPS Research",
+            },
           },
           {
             path: "produtividade",
             component: OrderProductivityComponent,
             canActivate: [RoleGuard],
             data: {
-              breadcrumb: "Orders / Productivity",
+              breadcrumb: "Orders/Productivity",
             },
           },
           {
