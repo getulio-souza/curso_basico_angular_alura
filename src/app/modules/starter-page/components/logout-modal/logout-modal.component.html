@@ -17,5 +17,5 @@
         <p class="dashboard-modal-account">Minha conta</p>
         <p class="dashboard-modal-config">Configurações</p>
       </article>
-      <button class="dashboard-modal-logout-btn">Log out</button>
+      <button *ngIf="loggedOut" class="dashboard-modal-logout-btn" (click)="logout()">Log out</button>
     </section>

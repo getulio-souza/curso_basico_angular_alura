@@ -1,4 +1,6 @@
 import { Component, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../../shared/services/authentication.service";
 import { LogoutComponent } from "../logout/logout.component";
 
 @Component({
@@ -7,16 +9,27 @@ import { LogoutComponent } from "../logout/logout.component";
   styleUrls: ["./logout-modal.component.scss"],
 })
 export class LogoutModalComponent implements OnInit {
-  //variavel para nome
   username: string;
+  loggedOut: boolean;
 
-  constructor(private logoutComponent: LogoutComponent) {}
+  constructor(
+    private logoutComponent: LogoutComponent,
+    public auth: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.username = this.logoutComponent.getUserName();
+    this.loggedOut = this.auth.isUserLoggedIn();
   }
 
   handleModal() {
     this.logoutComponent.handleModal();
+  }
+  logout() {
+    this.auth.logout();
+    this.router.navigate(["/login"], {
+      queryParams: { url: this.router.routerState.snapshot.url },
+    });
   }
 }
