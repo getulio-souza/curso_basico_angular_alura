@@ -1,3 +1,8 @@
+import { SharedModule } from "./../../shared/shared.module";
+import { OrderRoutingModule } from "./order-routing.module";
+
+import { ProdutividadePageComponent } from "./components/produtividade/produtividade.component";
+
 import { OrderGraphicsDetailComponent } from "./components/order-productivity/order-graphics-detail/order-graphics-detail.component";
 import { OrderGraphicsAdminComponent } from "./components/order-productivity/order-graphics-admin/order-graphics-admin.component";
 import { OrderProductivityComponent } from "./components/order-productivity/order-productivity.component";
@@ -25,11 +30,14 @@ import { DynamicWidgetModule } from "../dynamic-widgets/dynamic-widgets.module";
     RouterModule.forChild([]),
     ProxperCommonModule,
     DynamicWidgetModule,
+    OrderRoutingModule,
+    SharedModule,
   ],
   declarations: [
     OrderSummaryComponent,
     OrderPageComponent,
     OrderProductivityComponent,
+    ProdutividadePageComponent,
     OrderQtyChartComponent,
     OrderBySectorsChartComponent,
     OrderQtyDelayed,

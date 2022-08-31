@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { ProxperCommonModule } from "../proxperCommon/proxperCommon.module";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
+import { RatingCardComponent } from "./components/rating-card/rating-card.component";
 import { RatingCardComponent2 } from "./components/rating-card2/rating-card2.component";
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RatingCardComponent2 } from "./components/rating-card2/rating-card2.com
   declarations: [
     HomePage2Component,
     RatingPieChartComponent,
+    RatingCardComponent,
     RatingCardComponent2,
   ],
   exports: [],
