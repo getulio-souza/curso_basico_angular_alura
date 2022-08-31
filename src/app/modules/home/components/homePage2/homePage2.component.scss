@@ -68,8 +68,8 @@ $bigDevices: 992px;
     padding-right: 15px;
   }
   .info-temp-icon-container {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
     span {
       font-size: 20px;
       position: relative;
