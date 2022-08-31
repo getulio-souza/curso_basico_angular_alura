@@ -11,6 +11,7 @@ export class OrderGraphicsDetailComponent implements OnInit {
   @Input() categoriesAdvance: any[] = [];
   @Input() afterSlaAdvance: any[] = [];
   @Input() wardsAdvance: any[] = [];
+  @Input() loading: boolean;
 
   CHART_TYPES = CHART_TYPES;
 

@@ -30,4 +30,5 @@
   <div class="graphics-container">
     <app-order-table [cols]="cols" [data]="data"></app-order-table>
   </div>
+  <app-loading *ngIf="loading" [isFull]="false"></app-loading>
 </section>

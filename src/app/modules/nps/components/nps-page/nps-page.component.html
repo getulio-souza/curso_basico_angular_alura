@@ -5,8 +5,9 @@
         <h1>Pesquisa de Satisfação</h1>
       </div>
       <div class="breadcrumb-container">
-        <p>> HOME > PESQUISA DE SATISFAÇÃO</p>
+        <app-breadcrumbs></app-breadcrumbs>
       </div>
+      <app-loading *ngIf="loading" [isFull]="false"></app-loading>
       <div class="filter-container">
         <div class="title-underline">
           <span>Filtros</span>

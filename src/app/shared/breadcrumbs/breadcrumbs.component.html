@@ -1,0 +1,21 @@
+<h2 class="bc-style caixa-alta">
+  <span
+    class="pointer"
+    (click)="goToRoute({ label: 'Home', url: '/propertyApp/:propertyId' })"
+    >{{ "Home" }}</span
+  >
+  >
+  <ng-container
+    *ngFor="let breadcrumb of breadcrumbs$ | async; let last = last"
+  >
+    <ng-container *ngIf="!last">
+      <span class="pointer" (click)="goToRoute(breadcrumb)">{{
+        breadcrumb.label | translate
+      }}</span
+      >>
+    </ng-container>
+    <ng-container *ngIf="last">
+      {{ breadcrumb.label | translate }}
+    </ng-container>
+  </ng-container>
+</h2>
