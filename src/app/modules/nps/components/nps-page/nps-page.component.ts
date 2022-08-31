@@ -94,6 +94,38 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
   rangeDates: Date[] = [new Date(), new Date()];
   rangeSelected: Date[] = [new Date(), new Date()];
 
+  cols: CollumnDefinition[] = [
+    { field: "category", header: "CATEGORIA" },
+    { field: "researchTitle", header: "PESQUISA" },
+    // { field: "sector", header: "ALA" },
+    { field: "ward", header: "ALA / QUARTO" },
+    { field: "researchDateHour", header: "DATA/HORA PESQUISA" },
+    { field: "researchResult", header: "RESULTADO DA PESQUISA" },
+    { field: "researchQuestions", header: "PERGUNTAS" },
+    { field: "researchNotes", header: "COMENTÁRIOS/ OBSERVAÇÕES" },
+  ];
+
+  filters: OptionsDropdown[] = [
+    {
+      label: "NPS Satisfação Global",
+      value: "NPS Satisfação Global",
+    },
+    {
+      label: "NPS de Pedidos Fechados",
+      value: "NPS de Pedidos Fechados",
+    },
+    {
+      label: "NPS por Categoria",
+      value: "NPS por Categoria",
+    },
+    {
+      label: "Top 5 Categorias com NPS Detractor (Abaixo de 7)",
+      value: "Top 5 Categorias com NPS Detractor (Abaixo de 7)",
+    },
+  ];
+
+  filterSelected: string = null;
+
   // GRID
   gridData: any[] = [{}];
 
@@ -158,34 +190,40 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
     this.categoriesNpsLowerThanSevenData = [];
 
     this.dispatchFilterDetail();
-    // if (view === "admin") {
-    //   this.adminView = true;
-    //   this.dispatchFilter();
-    // }
-    // if (view === "detail") {
-    //   this.loading = true;
-    //   this.adminView = false;
+    this.dispatchFilter();
+    this.loading = true;
 
-    //   this.npsEventService
-    //     .getCategoriesAndSubjects()
-    //     .subscribe((response: NPSCategoriesWardsAndSubjectsDTO) => {
-    //       this.categoriesAdvanced = [EMPTY_OPTION, ...response.categories];
-    //       this.wardsAdvanced = [EMPTY_OPTION, ...response.wards];
-    //       this.subjectsAdvanced = [EMPTY_OPTION, ...response.subjects];
-    //       this.sectorAdvanced = [EMPTY_OPTION, ...response.sectors];
-    //     });
+    this.npsEventService
+      .getCategoriesAndSubjects()
+      .subscribe((response: NPSCategoriesWardsAndSubjectsDTO) => {
+        this.categoriesAdvanced = [EMPTY_OPTION, ...response.categories];
+        this.wardsAdvanced = [
+          { label: "Todos", value: "Todos" },
+          ...response.wards.map((x) => ({
+            label: x,
+            value: x,
+          })),
+        ];
+        this.subjectsAdvanced = [
+          { label: "Todos", value: "Todos" },
+          ...response.subjects.map((x) => ({
+            label: x,
+            value: x,
+          })),
+        ];
+        this.sectorAdvanced = [EMPTY_OPTION, ...response.sectors];
+      });
 
-    //   this.sectorAdvancedSelecionado = null;
-    //   this.categoriesAdvancedSelecionado = null;
-    //   this.wardsAdvancedSelecionado = null;
-    //   this.subjectsAdvancedSelecionado = null;
-    //   this.subjectsAdvanced = [];
+    this.sectorAdvancedSelecionado = null;
+    this.categoriesAdvancedSelecionado = null;
+    this.wardsAdvancedSelecionado = null;
+    this.subjectsAdvancedSelecionado = null;
+    this.subjectsAdvanced = [];
 
-    //   this.npsClosedOrdersData = [];
-    //   this.categoriesNpsLowerThanSevenData = [];
+    this.npsClosedOrdersData = [];
+    this.categoriesNpsLowerThanSevenData = [];
 
-    //   this.dispatchFilterDetail();
-    // }
+    this.dispatchFilterDetail();
   }
 
   selectedFilterEvent(event, chartIndex): void {
@@ -479,6 +517,8 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
         this.gridData = this.chartLowerThanSevenDataDetail;
         break;
       default:
+        this.gridData = this.chartLowerThanSevenDataDetail;
+        console.log(this.gridData);
         break;
     }
   }
@@ -521,19 +561,16 @@ export class NPSPageComponent extends PropertyDataLoader implements OnInit {
 
   refresh(): void {
     this.loading = false;
-    if (this.adminView) {
-      this.dispatchFilter();
-    } else {
-      this.dispatchFilterDetail();
-    }
+
+    this.dispatchFilter();
+
+    this.dispatchFilterDetail();
   }
 
   doFilter() {
-    if (this.adminView) {
-      this.loading = true;
-      this.dispatchFilter();
-    } else {
-      this.dispatchFilterDetail();
-    }
+    this.loading = true;
+    this.dispatchFilter();
+
+    this.dispatchFilterDetail();
   }
 }

@@ -1,0 +1,106 @@
+::ng-deep .ui-table-responsive {
+  height: 100%;
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  .ui-table-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    overflow: auto;
+
+    max-height: 100%;
+    height: 100%;
+  }
+
+  .ui-table-caption {
+    background-color: #3c4553;
+  }
+
+  table {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    margin: 0;
+    padding: 10px;
+  }
+
+  table tbody {
+    display: flex;
+    height: 100%;
+    overflow-y: scroll;
+    flex-direction: column;
+  }
+
+  table thead,
+  table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  table thead,
+  table tbody tr th {
+    word-wrap: break-word;
+    overflow: hidden;
+
+    max-height: 42px;
+
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.34px;
+
+    font-size: 16px;
+    font-family: "Roboto";
+
+    color: #7d8c8f;
+  }
+
+  button {
+    margin: 10px 0;
+  }
+}
+
+.btn-export {
+  height: 40px;
+  width: 130px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 0 10px;
+
+  background-color: #ffffff;
+  color: #4d4d4d;
+
+  font-size: 14px;
+  font-family: "Roboto";
+
+  box-shadow: 10px 10px 20px #00000029;
+  border: 1px solid #4d4d4d;
+  border-radius: 9px;
+
+  i {
+    color: #4d4d4d;
+    margin-right: 10px;
+  }
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  p-dropdown {
+    margin: 10px 0;
+
+    .ui-dropdown {
+      min-width: 240px;
+    }
+  }
+}

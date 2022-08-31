@@ -1,19 +1,31 @@
-.btn-container {
-  width: max-content;
-
+.colapse-container {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
+  width: 65px;
+  height: 65px;
+  transition: height 0.6s linear;
 }
+
+.colapse-container.opened {
+  height: calc(100vh - 290px);
+  width: 100%;
+
+  max-width: 100%;
+  transition: height 0.6s linear;
+}
+
 .btn-grid {
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: none;
-  border-radius: 50%;
   outline: 0;
+  box-shadow: 0px 5px 10px #0903032e;
+  border-radius: 50%;
+
   height: 65px;
   width: 65px;
 
@@ -21,15 +33,21 @@
   color: #fff;
 
   mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+
     transform: rotate(0);
     transition: transform 400ms linear;
   }
 }
+
 .btn-grid.opened {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
+  z-index: 999;
 
   mat-icon {
     transform: rotate(180deg);

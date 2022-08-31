@@ -1,4 +1,4 @@
-<section class="btn-container">
+<section class="colapse-container" [ngClass]="panelOpen ? 'opened' : ''">
   <button
     class="btn-grid pointer"
     [ngClass]="panelOpen ? 'opened' : ''"
@@ -13,7 +13,10 @@
     [customColumns]="cols"
     [data]="data"
     [showDataButton]="showDataButton"
-    [buttonTitle]="'exportar dados'"
+    [filters]="filters"
+    [filterSelected]="filterSelected"
+    (selectedModified)="selectGraphics($event)"
+    [buttonTitle]="'Exportar'"
   ></proxper-grid>
 </section>
 

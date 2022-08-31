@@ -40,7 +40,7 @@
           </app-history-navigation-inputed>
           <div class="filter-button">
             <button class="button" type="button" (click)="doFilter()">
-              <span>Atualizar</span>
+              <span>FILTRAR</span>
             </button>
           </div>
         </div>
@@ -66,6 +66,13 @@
           seletorCategoryClosedOrdersDataChart
         "
       ></app-nps-graphics-view>
+      <app-collapse-grid
+        [data]="gridData"
+        [cols]="cols"
+        [filters]="filters"
+        [filterSelected]="filterSelected"
+        (gridFilterSelected)="gerarGridData($event)"
+      ></app-collapse-grid>
     </div>
   </div>
 </section>
