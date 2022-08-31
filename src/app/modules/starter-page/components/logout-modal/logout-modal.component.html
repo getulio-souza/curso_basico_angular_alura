@@ -1,15 +1,17 @@
   <!-- user modal -->
   <section class="dashboard-modal-container">
     <!-- close btn -->
-      <div class="dashboard-modal-close-btn">
+      <div class="dashboard-modal-close-btn" (click)="handleModal()">
         <i class="material-icons">close</i>
       </div>
       <!-- modal container -->
       <article class="dashboard-modal-icon_and_name releway-font" >
         <!--dynamic icon -->
-        <div class="dashboard-modal-dynamic-icon"></div>
-        <!-- <img src="../../../../../assets/images/ic-usernv.svg" alt=""> -->
-        <h6 class="dashboard-modal-name">Samanta Dias</h6>
+        <div class="dashboard-modal-dynamic-icon">
+          <i class="material-icons">person</i>
+          <!-- <img src="../../../../../assets/images/ic-usernv.svg" alt=""> -->
+        </div>
+        <h6 class="dashboard-modal-name">{{username}}</h6>
       </article>
       <article class="dashboard-modal-info">
         <p class="dashboard-modal-account">Minha conta</p>
