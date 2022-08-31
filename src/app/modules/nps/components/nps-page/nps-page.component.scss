@@ -119,9 +119,9 @@
 
               background-color: #f9fbff;
 
-              box-shadow: 5px 5px 10px #2a6fa524;
+              box-shadow: 5px 5px 10px #00000029;
 
-              border: 1px solid #7d8c8f;
+              border: 1px solid #91969d;
               border-radius: 12px;
 
               margin: 8px 10px;
@@ -130,13 +130,13 @@
                 text-align: center;
                 font-family: "Roboto";
                 letter-spacing: 0.29px;
-                color: #7d8c8f;
+                color: #91969d;
               }
 
               &:hover {
-                background-color: #7d8c8f;
+                background-color: #91969d;
 
-                box-shadow: 5px 5px 10px #2a6fa524;
+                box-shadow: 5px 5px 10px #00000029;
 
                 span {
                   color: #ffffff;
@@ -149,6 +149,8 @@
     }
 
     .nps-graphics-container {
+      position: relative;
+
       height: 100%;
       width: 100%;
 

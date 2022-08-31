@@ -26,7 +26,7 @@
       </div>
       <div class="filter-button">
         <button class="button" type="button" (click)="doFilter()">
-          <span>Atualizar</span>
+          <span>FILTRAR</span>
         </button>
       </div>
     </div>
@@ -68,7 +68,10 @@
     <app-collapse-grid
       *ngIf="!adminView"
       [data]="gridData"
-      (gridFiltroSelecionado)="gerarGridData($event)"
+      [cols]="cols"
+      [filters]="filters"
+      [filterSelected]="filterSelected"
+      (gridFilterSelected)="gerarGridData($event)"
     ></app-collapse-grid>
   </div>
 </section>

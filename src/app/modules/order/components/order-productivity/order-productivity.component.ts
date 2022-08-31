@@ -25,6 +25,11 @@ export interface SingleDataStatistics {
   week?: number;
 }
 
+interface Options {
+  label: string;
+  value: string;
+}
+
 @Component({
   selector: "app-order-productivity",
   templateUrl: "./order-productivity.component.html",
@@ -52,9 +57,35 @@ export class OrderProductivityComponent
   categorias: string[] = [];
 
   cols: CollumnDefinition[] = [
-    { field: "ward", header: "Ala" },
-    { field: "quantity", header: "Quantidade" },
+    { field: "category", header: "CATEGORIA" },
+    { field: "item", header: "ITEM" },
+    { field: "location", header: "ALA / QUARTO" },
+    { field: "created", header: "DATA/HORA ABERTURA DO PEDIDO" },
+    { field: "estimated", header: "TEMPO ESTIMADO" },
+    { field: "updated", header: "TEMPO EFETIVO" },
+    { field: "user", header: "RESPONSÁVEL" },
   ];
+
+  filters: Options[] = [
+    {
+      label: "SLA Expirado",
+      value: "SLA Expirado",
+    },
+    {
+      label: "Pedidos fechados fora do SLA",
+      value: "Pedidos fechados fora do SLA",
+    },
+    {
+      label: "Pedidos em aberto",
+      value: "Pedidos em aberto",
+    },
+    {
+      label: "Pedidos em aberto por Ala",
+      value: "Pedidos em aberto por Ala",
+    },
+  ];
+
+  filterSelected: string = null;
 
   data = [];
 

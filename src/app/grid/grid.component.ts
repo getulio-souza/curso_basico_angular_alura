@@ -10,6 +10,11 @@ import {
   AfterViewInit,
 } from "@angular/core";
 import { Table } from "primeng/table";
+
+interface Options {
+  label: string;
+  value: string;
+}
 @Component({
   selector: "proxper-grid",
   templateUrl: "./grid.component.html",
@@ -26,6 +31,10 @@ export class GridComponent implements OnInit, OnChanges {
   @Input() multiSortMeta = [];
   @Input() hideGridColumns;
   @Input() buttonTitle: string;
+
+  @Input() filters: Options[];
+  @Input() filterSelected: string;
+  @Output() selectedModified: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() onGridItemEmitter = new EventEmitter<Object>();
 
@@ -136,5 +145,9 @@ export class GridComponent implements OnInit, OnChanges {
     csv = "data:text/csv;charset=utf-8," + csv;
     window.open(encodeURI(csv));
     document.body.removeChild(link);
+  }
+
+  selected(event) {
+    this.selectedModified.emit(event);
   }
 }
