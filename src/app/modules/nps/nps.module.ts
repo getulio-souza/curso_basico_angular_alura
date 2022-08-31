@@ -1,3 +1,5 @@
+import { NPSRoutingModule } from "./nps-routing.module";
+import { SharedModule } from "./../../shared/shared.module";
 import { NpsGraphicsViewComponent } from "./components/nps-page/nps-graphics-view/nps-graphics-view.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
@@ -15,6 +17,8 @@ import { CollapseGridNPSComponent } from "./components/collapse-grid-nps/collaps
     RouterModule.forChild([]),
     ProxperCommonModule,
     DynamicWidgetModule,
+    NPSRoutingModule,
+    SharedModule,
   ],
   declarations: [
     NPSPageComponent,
