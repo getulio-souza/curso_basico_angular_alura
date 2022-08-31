@@ -14,6 +14,7 @@ export class OrderGraphicsAdminComponent implements OnInit {
   @Input() afterSlaData: SingleDataStatistics[] = [];
   @Input() seletorWards: string[] = [];
   @Input() seletorSubjects: string[] = [];
+  @Input() loading: boolean;
 
   @Input() cols: any[];
   @Input() data: any[];

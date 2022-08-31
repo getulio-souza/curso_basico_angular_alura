@@ -7,6 +7,7 @@
       <div class="breadcrumb-container">
         <app-breadcrumbs></app-breadcrumbs>
       </div>
+      <app-loading *ngIf="loading" [isFull]="false"></app-loading>
       <div class="filter-container">
         <div class="title-underline">
           <span>Filtros</span>

@@ -6,10 +6,20 @@ import { RouterModule, Routes } from "@angular/router";
 const routes: Routes = [
   {
     path: "",
-    component: NPSPageComponent,
+
     data: {
       breadcrumb: null,
     },
+    children: [
+      {
+        path: "",
+        component: NPSPageComponent,
+        data: {
+          reuse: true,
+          breadcrumb: null,
+        },
+      },
+    ],
   },
 ];
 
