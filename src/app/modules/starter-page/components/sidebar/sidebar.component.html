@@ -140,12 +140,12 @@
         [ngClass]="{ active: itemClicked == 'nps' }"
         data-toggle="tooltip"
         data-placement="right"
-        title="NPS"
+        title="{{ 'NPS Research' | translate }}"
       >
         <a class="item-link pointer" (click)="changeMenu('nps')">
           <i class="material-icons">language</i>
 
-          <span>PESQUISA DE SATISFAÇÃO</span>
+          <span> {{ "NPS Research" | translate }}</span>
         </a>
       </li>
 
@@ -155,11 +155,11 @@
         [ngClass]="{ active: itemClicked == 'produtividade' }"
         data-toggle="tooltip"
         data-placement="right"
-        title="Produtividade"
+        title="{{ 'Orders / Productivity' | translate }}"
       >
         <a class="item-link pointer" (click)="changeMenu('produtividade')">
           <i class="material-icons">signal_cellular_alt</i>
-          <span>PEDIDOS / PRODUTIVIDADE</span>
+          <span>{{ "Orders / Productivity" | translate }}</span>
         </a>
       </li>
 

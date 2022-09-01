@@ -154,7 +154,7 @@ import { LogoutModalComponent } from "./components/logout-modal/logout-modal.com
             component: OrderProductivityComponent,
             canActivate: [RoleGuard],
             data: {
-              breadcrumb: "Orders/Productivity",
+              breadcrumb: "Orders / Productivity",
             },
           },
           {
