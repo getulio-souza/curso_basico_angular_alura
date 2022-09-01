@@ -1,0 +1,17 @@
+
+<app-logout-modal *ngIf="showModal"></app-logout-modal>
+
+<!-- user logged-->
+    <section *ngIf="!showModal" class="dashboard-user-logged">
+      <article class="dashboard-user-container">
+        <div class="dashboard-user-text-container">
+          <h6 class="dashboard-user-title">{{username}}</h6>
+          <p class="dashbaord-user-description">Último acesso em {{lastLogin}}</p>
+        </div>
+        <div class="dashboard-user-icon" (click)="handleModal()">
+         <i class="material-icons">person</i>
+         <!-- <img src="../../../../../assets/images/evolutix.png" alt=""> -->
+        </div>
+      </article>
+    </section>
+

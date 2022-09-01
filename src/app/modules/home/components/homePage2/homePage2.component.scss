@@ -20,33 +20,11 @@ $bigDevices: 992px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
-
-  .dashboard-user-logged {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding-top: 10px;
-    padding-right: 10px;
-  }
-  .dashboard-user-container {
-    display: flex;
-    text-align: end;
-    padding: 5px;
-  }
-  .dashbaord-user-text-container {
-    margin-right: 10px;
-  }
-  .dashboard-user-title {
-    padding-right: 10px;
-    margin-bottom: 2px;
-  }
-  .dashbaord-user-description {
-    font-size: 10px;
-    word-wrap: break-word;
-  }
-  .dashboard-user-icon {
-    width: 30px;
-    height: 30px;
+  @media screen and (max-width: 1100px) {
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 150px 0;
   }
 }
 
@@ -63,6 +41,8 @@ $bigDevices: 992px;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  @media screen and (max-width: 1024px) {
+  }
 }
 
 /* second container */
@@ -95,30 +75,6 @@ $bigDevices: 992px;
     font-size: 56px;
     padding-right: 15px;
   }
-  .info-temp-icon-container {
-    display: flex;
-    align-items: center;
-    span {
-      font-size: 20px;
-      position: relative;
-      top: -25px;
-    }
-  }
-  .info-temp-icon {
-    img {
-      width: 99.2px;
-      height: 72.15px;
-      color: #fff;
-      margin-right: 15px;
-    }
-  }
-
-  .info-temp-description {
-    font-weight: 300;
-    font-size: 81px;
-    text-align: left;
-    color: #fff;
-  }
 
   .info-temp-text {
     font-weight: 500;
@@ -128,6 +84,9 @@ $bigDevices: 992px;
     color: #e6e6e6;
     margin-top: 10px;
   }
+
+  /* time and calendar */
+
   .time_and_calendar_container {
     display: flex;
     flex-direction: column;

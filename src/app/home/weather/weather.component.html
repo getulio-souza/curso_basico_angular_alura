@@ -1,21 +1,42 @@
-<section
+<!-- <section
   class="weather-container d-flex flex-column  justify-content-center"
   style="flex:1"
-  *ngIf="hasLoadedProperties && ready && temp_c != null"
->
-  <div class=" d-flex align-items-center  justify-content-center">
+  *ngIf="hasLoadedProperties && ready && temp_c != null" -->
+<!-- > -->
+  <!-- <div class=" d-flex align-items-center  justify-content-center"> -->
     <!--
       <img TODO TRANSLATE [src]="icon"><span [innerHtml]="weather.current_observation.temp_c"></span><span class="unit">{{ 'label-temperature-unit' | translate }}</span>
     -->
-    <img [src]="icon" />
+    <!-- <img [src]="icon" />
     <div class="d-flex  align-items-top">
       <span *ngIf="!temperatureUomIsFahrenheit" class="display-2" style="line-height: 0.7;" [innerHtml]="temp_c | number: '1.0-0'"></span>
       <span *ngIf="temperatureUomIsFahrenheit" class="display-2" style="line-height: 0.7;" [innerHtml]="temp_f | number: '1.0-0'"></span>
       <span *ngIf="!temperatureUomIsFahrenheit" class="unit">ºC</span>
       <span *ngIf="temperatureUomIsFahrenheit" class="unit">ºF</span>
     </div>
-  </div>
-  <div class="text-center">
-    <h4 class="text-uppercase">{{ conditionText }}</h4>
-  </div>
+  </div> -->
+  <!-- <div class="text-center"> -->
+    <!-- <h4 class="text-uppercase">{{ conditionText }}</h4> -->
+  <!-- </div> -->
+<!-- </section> -->
+
+
+<section class="weather-container" *ngIf="hasLoadedProperties && ready && temp_c != null">
+   <article class="weather-temperature-container">
+    <!-- temperature icon -->
+    <div class="weather-temperature-icon">
+      <img [src]="icon" />
+    </div>
+    <!--temperature info-->
+    <div class="weather-temperature-info">
+      <span *ngIf="!temperatureUomIsFahrenheit" [innerHtml]="temp_c | number: '1.0-0'"></span>
+      <span *ngIf="temperatureUomIsFahrenheit" [innerHtml]="temp_f | number: '1.0-0'"></span>
+      <span *ngIf="!temperatureUomIsFahrenheit">ºC</span>
+      <span *ngIf="temperatureUomIsFahrenheit">ºF</span>
+    </div>
+   </article>
+   <!-- temperature text-->
+   <article class="weather-temperature-text">
+    <p>parcialmente nublado</p>
+   </article>
 </section>

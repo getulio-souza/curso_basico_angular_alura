@@ -1,8 +1,8 @@
-<div *ngIf="loggedIn" class="userIcon" (click)="logout()">
-  <i class="material-icons" style="font-size: 36px; cursor: pointer;"> exit_to_app </i>
-</div>
 
 <div *ngIf="appIsReady" class="wrapper" [ngClass]="{'sidebar-collapsed': !isSidebarOpen, 'nav-open': isSidebarOpen}">
+  <!--logout component-->
+  <app-logout-component></app-logout-component>
+  <!-- sidebar-->
   <app-sidebar [showChangeProperty]="moreThanOnePropertyOption" (onSidebarChangeEmitter)="onSidebarChange($event)" (onSidebarToggleEmitter)="onSidebarToggle($event)"></app-sidebar>
   <router-outlet></router-outlet>
   <app-notification-messages> </app-notification-messages>

@@ -1,0 +1,25 @@
+.weather-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-temperature-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.weather-temperature-icon {
+  width: 99.2px;
+  height: 72.15px;
+  margin-bottom: 20px;
+}
+
+.weather-temperature-info {
+  font-size: 44px;
+}
+.weather-temperature-text {
+  font-size: 10px;
+}

@@ -36,6 +36,8 @@ import { RoomControlPage } from "../room-control/components/room-control-page/ro
 import { NvD3Module } from "ng2-nvd3";
 import { NPSPageComponent } from "../nps/components/nps-page/nps-page.component";
 import { LoginComponent } from "../../login/login.component";
+import { LogoutComponent } from "./components/logout/logout.component";
+import { LogoutModalComponent } from "./components/logout-modal/logout-modal.component";
 // import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
@@ -46,6 +48,10 @@ import { LoginComponent } from "../../login/login.component";
       {
         path: "login",
         component: LoginComponent,
+      },
+      {
+        path: "logout",
+        component: LogoutComponent,
       },
       {
         path: "selectProperty",
@@ -171,6 +177,8 @@ import { LoginComponent } from "../../login/login.component";
     HeaderStatusComponent,
     NotificationMessagesComponent,
     NoRegisteredPropertiesComponent,
+    LogoutComponent,
+    LogoutModalComponent,
   ],
   exports: [],
 })
