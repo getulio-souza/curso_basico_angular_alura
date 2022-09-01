@@ -406,6 +406,16 @@
 
   "Orders / Productivity": "Pedidos / Produtividade",
   "Top 5 wards with open orders": "Top 5 alas com pedidos em aberto",
+  "Opened": "Em aberto",
+  "In Progress": "Em andamento",
+  "Done": "Fechados",
+  "Canceled": "Cancelados",
 
-  "NPS Research": "Pesquisa de satisfação"
+  "NPS Research": "Pesquisa de satisfação",
+  "Satisfaction Survey": "Pesquisa de Satisfação",
+  "Number of surveys answered below average": "Quantidade de pesquisas respondidas abaixo da média",
+  "Number of surveys answered on average": "Quantidade de pesquisas respondidas na média",
+
+  "Number of surveys answered": "Quantidade de pesquisas respondidas",
+  "Number of orders for the day": "Quantidade de pedidos no dia"
 }
