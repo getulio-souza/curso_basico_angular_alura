@@ -18,6 +18,7 @@
     flex-direction: column;
 
     .nps-header {
+      background-color: #303743;
       padding-top: 30px;
 
       display: flex;
@@ -45,9 +46,7 @@
         margin-top: 25px;
         padding: 10px 50px;
 
-        background-color: rgba(255, 255, 255, 0.38);
-
-        box-shadow: 0px 0px 20px #afb9c674;
+        background-color: #afb9c674;
 
         display: flex;
         flex-direction: row;
@@ -107,7 +106,7 @@
 
               box-shadow: 5px 5px 10px #00000029;
 
-              border: 1px solid #91969d;
+              border: none;
               border-radius: 12px;
 
               margin: 8px 10px;
@@ -122,7 +121,7 @@
 
               &:hover {
                 transition-duration: 0.2s;
-                background-color: #91969d;
+                background-color: #4d4c4d;
                 box-shadow: 5px 5px 10px #00000029;
 
                 span {
@@ -136,6 +135,7 @@
     }
 
     .nps-graphics-container {
+      background-color: #303743;
       position: relative;
 
       height: 100%;
