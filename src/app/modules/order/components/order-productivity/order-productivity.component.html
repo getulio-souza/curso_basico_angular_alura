@@ -39,8 +39,9 @@
 
   <!-- Componente de gráficos ADMIN VIEW -->
   <div class="graphics-view">
+    <app-loading *ngIf="loading" [isFull]="false"></app-loading>
     <app-order-graphics-admin
-      *ngIf="adminView"
+      *ngIf="adminView && !loading"
       [halfHourData]="halfHourData"
       [topFiveOppened]="topFiveOppened"
       [afterSlaData]="afterSlaData"
@@ -57,7 +58,7 @@
     <!-- Componente de gráficos DETAIL VIEW -->
 
     <app-order-graphics-detail
-      *ngIf="!adminView"
+      *ngIf="!adminView && !loading"
       [opennedAdvance]="opennedAdvance"
       [categoriesAdvance]="categoriesAdvance"
       [afterSlaAdvance]="afterSlaAdvance"

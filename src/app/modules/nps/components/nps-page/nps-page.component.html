@@ -3,11 +3,9 @@
     <div class="nps-header">
       <div class="title-container">
         <h1>Pesquisa de Satisfação</h1>
-      </div>
-      <div class="breadcrumb-container">
         <app-breadcrumbs></app-breadcrumbs>
       </div>
-      <app-loading *ngIf="loading" [isFull]="false"></app-loading>
+
       <div class="filter-container">
         <div class="title-underline">
           <span>Filtros</span>
@@ -47,7 +45,9 @@
       </div>
     </div>
     <div class="nps-graphics-container">
+      <app-loading *ngIf="loading" [isFull]="false"></app-loading>
       <app-nps-graphics-view
+        *ngIf="!loading"
         [globalSatisfactionData]="globalSatisfactionData"
         [npsByCategoryData]="npsByCategoryData"
         [npsClosedOrdersData]="npsClosedOrdersData"

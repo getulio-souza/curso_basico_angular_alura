@@ -39,20 +39,6 @@
         }
       }
 
-      .breadcrumb-container {
-        width: 100%;
-
-        padding: 8px 50px;
-
-        p {
-          font-family: "Raleway";
-          font-size: 13px;
-
-          letter-spacing: 0px;
-
-          color: #ffffff;
-        }
-      }
       .filter-container {
         min-height: 60px;
 
@@ -114,7 +100,7 @@
             align-items: center;
 
             .button {
-              width: 170px;
+              width: 160px;
               height: 38px;
 
               background-color: #f9fbff;
@@ -131,11 +117,12 @@
                 font-family: "Roboto";
                 letter-spacing: 0.29px;
                 color: #91969d;
+                font-size: 14px;
               }
 
               &:hover {
+                transition-duration: 0.2s;
                 background-color: #91969d;
-
                 box-shadow: 5px 5px 10px #00000029;
 
                 span {

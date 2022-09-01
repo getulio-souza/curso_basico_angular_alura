@@ -19,24 +19,12 @@
 
 .title {
   width: 100%;
+  padding: 8px 50px;
 
   h1 {
     font-family: "Raleway";
     font-weight: bold;
     font-size: 30px;
-
-    letter-spacing: 0px;
-
-    color: #ffffff;
-
-    padding: 8px 50px;
-  }
-
-  span {
-    padding: 8px 50px;
-
-    font-family: "Raleway";
-    font-size: 13px;
 
     letter-spacing: 0px;
 
@@ -112,11 +100,12 @@
           font-family: "Roboto";
           letter-spacing: 0.29px;
           color: #91969d;
+          font-size: 14px;
         }
 
         &:hover {
+          transition-duration: 0.2s;
           background-color: #91969d;
-
           box-shadow: 5px 5px 10px #00000029;
 
           span {
@@ -132,20 +121,21 @@
     justify-content: center;
 
     button {
-      height: 40px;
-      width: 130px;
-      border: 1px solid #24a0ff;
+      height: 38px;
+      width: 160px;
+      border: 1px solid #91969d;
       background-color: #ffffff;
       border-radius: 10px;
 
       font-family: Roboto;
-      color: #24a0ff;
+      letter-spacing: 0.29px;
+      color: #91969d;
       font-size: 14px;
     }
 
     button:hover {
       transition-duration: 0.2s;
-      background-color: #24a0ff;
+      background-color: #91969d;
       color: #ffffff;
     }
   }
