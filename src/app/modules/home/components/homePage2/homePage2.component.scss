@@ -20,6 +20,12 @@ $bigDevices: 992px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
+  @media screen and (max-width: 1100px) {
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 150px 0;
+  }
 }
 
 /* Main Container */
@@ -35,6 +41,8 @@ $bigDevices: 992px;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  @media screen and (max-width: 1024px) {
+  }
 }
 
 /* second container */

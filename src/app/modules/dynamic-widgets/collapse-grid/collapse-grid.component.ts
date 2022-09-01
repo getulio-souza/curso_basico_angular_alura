@@ -12,6 +12,11 @@ export interface CollumnDefinition {
   header: string;
 }
 
+interface Options {
+  label: string;
+  value: string;
+}
+
 export interface GridOrderData {
   category: string;
   item: string;
@@ -35,46 +40,28 @@ export interface GridNPSData extends GridOrderData {}
 export class CollapseGridComponent implements OnInit, AfterViewInit {
   panelHeightInitial = "70px";
 
-  @Output() gridFiltroSelecionado: EventEmitter<string> =
+  @Output() gridFilterSelected: EventEmitter<string> =
     new EventEmitter<string>();
   @Input() data: any[] = [{}];
 
-  cols: CollumnDefinition[] = [
-    { field: "category", header: "CATEGORIA PEDIDO" },
-    { field: "item", header: "ITEM" },
-    { field: "sector", header: "SECTOR" },
-    { field: "location", header: "ALA/QUARTO" },
-    { field: "created", header: "DATA/HORA STATUS ABERTURA PEDIDO" },
-    { field: "updated", header: "DATA/HORA STATUS MUDANÇA STATUS PEDIDO" },
-    { field: "finished", header: "DATA/HORA STATUS ENCERRAMENTO PEDIDO" },
-    { field: "estimated", header: "TEMPO ESTIMADO RESOLUÇÃO" },
-    { field: "doneTime", header: "TEMPO EFETIVO RESOLUÇÃO" },
-    { field: "user", header: "USUÁRIO RESPONSÁVEL PELO PEDIDO" },
-  ];
+  @Input() cols: CollumnDefinition[];
+  @Input() filters: Options[];
+  @Input() filterSelected: string;
 
   panelOpen: boolean = false;
   showDataButton: boolean = true;
-
-  filtros: string[] = [
-    "Pedidos por Situação x Tempo de Espera",
-    "Pedidos finalizados fora do SLA por Área",
-    "Pedidos por Área",
-    "Pedidos por Ala",
-  ];
-
-  filtroSelecionado: string = null;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.selecionarGrafico(this.filtros[0]);
+    this.selectGraphics(this.filters[0]);
   }
 
-  selecionarGrafico(event): void {
-    this.filtroSelecionado = event;
-    this.gridFiltroSelecionado.emit(event);
+  selectGraphics(event): void {
+    this.filterSelected = event;
+    this.gridFilterSelected.emit(event);
   }
 
   onShowContentGrid() {

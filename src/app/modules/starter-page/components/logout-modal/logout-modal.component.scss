@@ -58,6 +58,10 @@
   h6 {
     font-size: 14px;
     margin: 15px 0;
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 

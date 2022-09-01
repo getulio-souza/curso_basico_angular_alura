@@ -18,65 +18,64 @@
 }
 
 .title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
   width: 100%;
 
-  padding-left: 50px;
-  margin-bottom: 30px;
-
   h1 {
-    font-family: Raleway;
+    font-family: "Raleway";
+    font-weight: bold;
     font-size: 30px;
-    font-weight: bolder;
+
+    letter-spacing: 0px;
+
     color: #ffffff;
+
+    padding: 8px 50px;
   }
 
   span {
-    font-family: Raleway;
+    padding: 8px 50px;
+
+    font-family: "Raleway";
     font-size: 13px;
+
+    letter-spacing: 0px;
+
     color: #ffffff;
   }
 }
 
 .filter-bar {
+  min-height: 60px;
+
+  margin-top: 25px;
+  padding: 10px 50px;
+
+  background-color: rgba(255, 255, 255, 0.38);
+
+  box-shadow: 0px 0px 20px #afb9c674;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-
-  padding: 15px 50px;
-  background-color: rgba(255, 255, 255, 0.38);
-  box-shadow: 0px 0px 20px rgba(175, 185, 198, 0.455);
-
-  min-height: 75px;
-  height: auto;
-  width: 100%;
 
   .filter-box {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    width: 75%;
-
     .text-box {
-      font-family: Raleway;
+      font-family: "Raleway";
       font-weight: bold;
       color: #ffffff;
+      letter-spacing: 0px;
       font-size: 20px;
 
       .underline-text {
-        width: 70px;
-        border-top-color: #ffffff;
-        border-top-style: solid;
-        border-top-width: initial;
+        width: 60px;
+        height: 4px;
+        margin-top: 5px;
+        background-color: #ffffff;
         border-radius: 10px;
-        opacity: 1;
-        margin-top: 6px;
-        margin-bottom: 6px;
       }
     }
 
@@ -101,9 +100,9 @@
 
         background-color: #f9fbff;
 
-        box-shadow: 5px 5px 10px #2a6fa524;
+        box-shadow: 5px 5px 10px #00000029;
 
-        border: 1px solid #7d8c8f;
+        border: 1px solid #91969d;
         border-radius: 12px;
 
         margin: 8px 10px;
@@ -112,13 +111,13 @@
           text-align: center;
           font-family: "Roboto";
           letter-spacing: 0.29px;
-          color: #7d8c8f;
+          color: #91969d;
         }
 
         &:hover {
-          background-color: #7d8c8f;
+          background-color: #91969d;
 
-          box-shadow: 5px 5px 10px #2a6fa524;
+          box-shadow: 5px 5px 10px #00000029;
 
           span {
             color: #ffffff;
@@ -155,7 +154,6 @@
 .graphics-view {
   height: 100%;
   width: 100%;
-  padding: 20px 50px;
 
   display: flex;
   flex-direction: column;

@@ -1,39 +1,66 @@
-<p-table #dt class="table-mobile" sortMode="multiple" [multiSortMeta]="multiSortMeta" tableStyleClass="table table-transparent-dark  table-striped table-hover bg-blue-grey" [paginator]="paginator" [rows]="rowNumber" [columns]="cols" [value]="data"  [responsive]="true">
-    <ng-template pTemplate="caption" *ngIf="showDataButton">
-        <div class="mx-4">
-            <div class="ui-helper-clearfix text-right">
-                <button class="btn btn-primary" type="button" (click)="exportCSV()">
-                    <i class="material-icons"> folder </i> {{ buttonTitle ? buttonTitle : 'Data'}}
-                </button>
-            </div>
-        </div>
-    </ng-template>
+<p-table
+  #dt
+  class="table-mobile"
+  sortMode="multiple"
+  [multiSortMeta]="multiSortMeta"
+  tableStyleClass="table table-transparent-dark  table-striped table-hover bg-blue-grey"
+  [paginator]="paginator"
+  [rows]="rowNumber"
+  [columns]="cols"
+  [value]="data"
+  [responsive]="true"
+>
+  <ng-template pTemplate="caption" *ngIf="showDataButton">
+    <div class="mx-4">
+      <div class="header-container">
+        <p-dropdown
+          [placeholder]="'Selecione...'"
+          [options]="filters"
+          [(ngModel)]="filterSelected"
+          (ngModelChange)="selected($event)"
+        ></p-dropdown>
+        <button class="btn-export" type="button" (click)="exportCSV()">
+          <i class="material-icons">upload_file</i>
+          {{ buttonTitle ? buttonTitle : "Data" }}
+        </button>
+      </div>
+    </div>
+  </ng-template>
 
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns"
-                [ngStyle]="{'display':  hideGridColumns.includes(col.field) ? 'none' : null}"
-                [pSortableColumn]="col.field">
-                {{col.header | translate}}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-room let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns"
-                [ngStyle]="{'display':  hideGridColumns.includes(col.field) ? 'none' : null}"
-                style="cursor: default;" (click)="onSelectRoom($event,room)"
-                icon="pi pi-search">
-                <span class="ui-column-title">{{col.header}}</span>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th
+        *ngFor="let col of columns"
+        [ngStyle]="{
+          display: hideGridColumns.includes(col.field) ? 'none' : null
+        }"
+        [pSortableColumn]="col.field"
+      >
+        {{ col.header | translate }}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-room let-columns="columns">
+    <tr>
+      <td
+        *ngFor="let col of columns"
+        [ngStyle]="{
+          display: hideGridColumns.includes(col.field) ? 'none' : null
+        }"
+        style="cursor: default"
+        (click)="onSelectRoom($event, room)"
+        icon="pi pi-search"
+      >
+        <span class="ui-column-title">{{ col.header }}</span>
 
-                <!-- this component will show state such as presence icon, dnd icon etc -->
-                <app-grid-state [room]="room" [column]="col" ></app-grid-state>
-
-            </td>
-        </tr>
-    </ng-template>
+        <!-- this component will show state such as presence icon, dnd icon etc -->
+        <app-grid-state [room]="room" [column]="col"></app-grid-state>
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
 
-
-<property-summary-room-info-dialog [selectedRoom]="selectedRoom"></property-summary-room-info-dialog>
+<property-summary-room-info-dialog
+  [selectedRoom]="selectedRoom"
+></property-summary-room-info-dialog>

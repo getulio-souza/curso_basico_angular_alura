@@ -1,5 +1,5 @@
-<section class="graphics-container">
-  <div class="graphics-content">
+<section class="graphics-grid">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL"
       [title]="'Pedidos em aberto há mais de 30 minutos'"
@@ -11,7 +11,7 @@
       (selectedFilterEvent)="selectedFilterEvent($event)"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.PIZZA"
       [title]="'Top 5 de áreas com pedidos em aberto'"
@@ -19,7 +19,7 @@
       (clickPizzaEvent)="clickPizza($event)"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-charts-component
       [type]="CHART_TYPES.BAR_VERTICAL"
       [title]="'Top 5 de áreas com pedidos fechados fora da SLA'"
@@ -27,7 +27,8 @@
       (clickBarVerticalEvent)="afterSlaChartClickEvent($event)"
     ></app-charts-component>
   </div>
-  <div class="graphics-content">
+  <div class="graphics-container">
     <app-order-table [cols]="cols" [data]="data"></app-order-table>
   </div>
+  <app-loading *ngIf="loading" [isFull]="false"></app-loading>
 </section>

@@ -1,12 +1,27 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
-import { Table } from 'primeng/table';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+  ViewChild,
+  AfterViewInit,
+} from "@angular/core";
+import { Table } from "primeng/table";
+
+interface Options {
+  label: string;
+  value: string;
+}
 @Component({
-  selector: 'proxper-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.less']
+  selector: "proxper-grid",
+  templateUrl: "./grid.component.html",
+  styleUrls: ["./grid.component.scss"],
 })
-export class GridComponent implements OnInit , OnChanges {
-  @ViewChild(Table, {static: false}) table: Table;
+export class GridComponent implements OnInit, OnChanges {
+  @ViewChild(Table, { static: false }) table: Table;
 
   @Input() data;
   @Input() customColumns;
@@ -17,6 +32,10 @@ export class GridComponent implements OnInit , OnChanges {
   @Input() hideGridColumns;
   @Input() buttonTitle: string;
 
+  @Input() filters: Options[];
+  @Input() filterSelected: string;
+  @Output() selectedModified: EventEmitter<string> = new EventEmitter<string>();
+
   @Output() onGridItemEmitter = new EventEmitter<Object>();
 
   selectedRoom;
@@ -24,16 +43,16 @@ export class GridComponent implements OnInit , OnChanges {
   showTempInFahrenheit;
 
   cols = [
-    { field: 'name', header: 'Name' },
-    { field: 'active-profile-label', header: 'Sold' },
-    { field: 'presence', header: 'Occupied' },
-    { field: 'setpointLabel', header: 'Setpoint' },
-    { field: 'temperatureLabel', header: 'Temperature' },
-    { field: 'consumptionLastHourLabel', header: 'kWh' },
-    { field: 'timestamp', header: 'Last Updated' }
+    { field: "name", header: "Name" },
+    { field: "active-profile-label", header: "Sold" },
+    { field: "presence", header: "Occupied" },
+    { field: "setpointLabel", header: "Setpoint" },
+    { field: "temperatureLabel", header: "Temperature" },
+    { field: "consumptionLastHourLabel", header: "kWh" },
+    { field: "timestamp", header: "Last Updated" },
   ];
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.customColumns && changes.customColumns.currentValue) {
@@ -42,15 +61,15 @@ export class GridComponent implements OnInit , OnChanges {
   }
 
   ngOnInit() {
-    if(this.customColumns){
+    if (this.customColumns) {
       this.cols = this.customColumns;
     }
 
     // if no custom sort was received
     // use default
-    if(this.multiSortMeta == null || this.multiSortMeta.length == 0 ){
-      this.cols.forEach(col => {
-        this.multiSortMeta.push({field: col.field, order:1});
+    if (this.multiSortMeta == null || this.multiSortMeta.length == 0) {
+      this.cols.forEach((col) => {
+        this.multiSortMeta.push({ field: col.field, order: 1 });
       });
     }
 
@@ -65,28 +84,28 @@ export class GridComponent implements OnInit , OnChanges {
   }
 
   exportCSV() {
-    const removeAcento = (text: string) => {       
-      text = text.toLowerCase();                                                         
-      text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
-      text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
-      text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
-      text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
-      text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
-      text = text.replace(new RegExp('[Ç]','gi'), 'c');
-      return text;                 
-    }
+    const removeAcento = (text: string) => {
+      text = text.toLowerCase();
+      text = text.replace(new RegExp("[ÁÀÂÃ]", "gi"), "a");
+      text = text.replace(new RegExp("[ÉÈÊ]", "gi"), "e");
+      text = text.replace(new RegExp("[ÍÌÎ]", "gi"), "i");
+      text = text.replace(new RegExp("[ÓÒÔÕ]", "gi"), "o");
+      text = text.replace(new RegExp("[ÚÙÛ]", "gi"), "u");
+      text = text.replace(new RegExp("[Ç]", "gi"), "c");
+      return text;
+    };
 
     let data = this.data;
     let columns = this.customColumns.length ? this.customColumns : this.cols;
-    let csv = '';
-    const csvSeparator = ',';
+    let csv = "";
+    const csvSeparator = ",";
 
     //headers
     for (var i = 0; i < columns.length; i++) {
       var column = columns[i];
       if (column.exportable !== false && column.field) {
         csv += removeAcento('"' + (column.header || column.field) + '"');
-        if (i < (columns.length - 1)) {
+        if (i < columns.length - 1) {
           csv += csvSeparator;
         }
       }
@@ -94,15 +113,15 @@ export class GridComponent implements OnInit , OnChanges {
 
     //body
     data.forEach(function (record, _) {
-      csv += '\n';
+      csv += "\n";
       for (var i_1 = 0; i_1 < columns.length; i_1++) {
         var column = columns[i_1];
 
         var cellData = record[column.field];
 
-        if ((typeof cellData) === 'object' && cellData !== null) {
+        if (typeof cellData === "object" && cellData !== null) {
           if (cellData instanceof Date) {
-            cellData = cellData.toLocaleString('pt-BR');
+            cellData = cellData.toLocaleString("pt-BR");
           }
         }
 
@@ -110,21 +129,25 @@ export class GridComponent implements OnInit , OnChanges {
           cellData = removeAcento(cellData);
           cellData = String(cellData).replace(/"/g, '""');
         } else {
-          cellData = '';
+          cellData = "";
         }
 
         csv += '"' + cellData + '"';
-        if (i_1 < (columns.length - 1)) {
+        if (i_1 < columns.length - 1) {
           csv += csvSeparator;
         }
       }
     });
-    
+
     var link = document.createElement("a");
-    link.style.display = 'none';
+    link.style.display = "none";
     document.body.appendChild(link);
-    csv = 'data:text/csv;charset=utf-8,' + csv;
+    csv = "data:text/csv;charset=utf-8," + csv;
     window.open(encodeURI(csv));
     document.body.removeChild(link);
-  };
+  }
+
+  selected(event) {
+    this.selectedModified.emit(event);
+  }
 }

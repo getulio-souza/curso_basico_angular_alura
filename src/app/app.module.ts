@@ -1,3 +1,4 @@
+import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./shared/shared.module";
 import { OrderProductivityComponent } from "./modules/order/components/order-productivity/order-productivity.component";
 import { AuthorizationTokenInterceptor } from "./services/http-interceptor/authorization-token-interceptor";
@@ -139,7 +140,6 @@ import { NPSPageComponent } from "./modules/nps/components/nps-page/nps-page.com
 import { LoginComponent } from "./login/login.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthenticationService } from "./shared/services/authentication.service";
-import { LoadingComponent } from "./shared/loading/loading.component";
 import { ModalComponent } from "./shared/modal/modal.component";
 import { LoadingModalComponent } from "./shared/loading-modal/loading-modal.component";
 import { ButtonComponent } from "./shared/button/button.component";
@@ -237,7 +237,7 @@ export function tokenGetter() {
     GridDevicesComponent,
     MultiChartAdvancedColdChamberComponent,
     LoginComponent,
-    LoadingComponent,
+
     ModalComponent,
     LoadingModalComponent,
     ButtonComponent,
@@ -246,6 +246,7 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
     ProxperCommonModule,
     StarterPageModule,
     CRMModule,
@@ -270,40 +271,59 @@ export function tokenGetter() {
     RouterModule.forRoot([
       {
         path: "callback",
+
         component: CallbackComponent,
       },
+
       {
         path: "",
+
         redirectTo: "selectProperty",
+
         canActivate: [AuthGuard],
+
         pathMatch: "full",
       },
+
       {
         path: "notFound",
+
         component: NotFoundComponent,
       },
+
       {
         path: NotAllowedComponent.routerName,
+
         component: NotAllowedComponent,
       },
+
       {
         path: "order",
+
         component: OrderPageComponent,
       },
+
       {
-        path: "nps/:property/:sector",
+        path: "nps",
+
         component: NPSPageComponent,
       },
+
       {
         path: "produtividade/:property/:sector",
+
         component: OrderProductivityComponent,
       },
+
       {
         path: "**",
+
         component: NotFoundComponent,
       },
+
       {
         path: "login",
+
         component: LoginComponent,
       },
     ]),
