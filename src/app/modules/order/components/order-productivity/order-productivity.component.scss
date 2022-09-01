@@ -38,13 +38,12 @@
   margin-top: 25px;
   padding: 10px 50px;
 
-  background-color: rgba(255, 255, 255, 0.38);
-
-  box-shadow: 0px 0px 20px #afb9c674;
+  background-color: #afb9c674;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   .filter-box {
     display: flex;
@@ -90,7 +89,7 @@
 
         box-shadow: 5px 5px 10px #00000029;
 
-        border: 1px solid #91969d;
+        border: none;
         border-radius: 12px;
 
         margin: 8px 10px;
@@ -99,13 +98,13 @@
           text-align: center;
           font-family: "Roboto";
           letter-spacing: 0.29px;
-          color: #91969d;
+          color: #4d4c4d;
           font-size: 14px;
         }
 
         &:hover {
           transition-duration: 0.2s;
-          background-color: #91969d;
+          background-color: #4d4c4d;
           box-shadow: 5px 5px 10px #00000029;
 
           span {
@@ -129,14 +128,15 @@
 
       font-family: Roboto;
       letter-spacing: 0.29px;
-      color: #91969d;
+      color: #4d4c4d;
       font-size: 14px;
     }
 
     button:hover {
       transition-duration: 0.2s;
-      background-color: #91969d;
+      background-color: #4d4c4d;
       color: #ffffff;
+      border: none;
     }
   }
 }
