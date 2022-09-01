@@ -1,8 +1,8 @@
 /* user loggout */
 .dashboard-user-logged {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   padding-top: 20px;
   padding-right: 30px;
   z-index: 9999999; //mantem o componente visivel na tela
@@ -28,7 +28,6 @@
   height: 40px;
   border-radius: 10px;
   margin: 0 auto;
-  margin-bottom: 20px;
   cursor: pointer;
   background-color: #1d232b;
   display: flex;
