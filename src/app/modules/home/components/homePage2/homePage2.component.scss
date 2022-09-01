@@ -67,30 +67,6 @@ $bigDevices: 992px;
     font-size: 56px;
     padding-right: 15px;
   }
-  .info-temp-icon-container {
-    display: flex !important;
-    align-items: center !important;
-    span {
-      font-size: 20px;
-      position: relative;
-      top: -25px;
-    }
-  }
-  .info-temp-icon {
-    img {
-      width: 99.2px;
-      height: 72.15px;
-      color: #fff;
-      margin-right: 15px;
-    }
-  }
-
-  .info-temp-description {
-    font-weight: 300;
-    font-size: 81px;
-    text-align: left;
-    color: #fff;
-  }
 
   .info-temp-text {
     font-weight: 500;
@@ -100,6 +76,9 @@ $bigDevices: 992px;
     color: #e6e6e6;
     margin-top: 10px;
   }
+
+  /* time and calendar */
+
   .time_and_calendar_container {
     display: flex;
     flex-direction: column;
