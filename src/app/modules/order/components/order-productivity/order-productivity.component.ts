@@ -225,6 +225,7 @@ export class OrderProductivityComponent
   async initView(view: string): Promise<void> {
     if (view === "admin") {
       this.adminView = true;
+      this.loading = true;
 
       setTimeout(() => {
         this.orderEventService
