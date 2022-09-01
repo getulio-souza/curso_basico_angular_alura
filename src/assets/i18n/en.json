@@ -20,6 +20,16 @@
 
   "Orders / Productivity": "Orders / Productivity",
   "Top 5 wards with open orders": "Top 5 wards with open orders",
+  "Opened": "Opened",
+  "In Progress": "In Progress",
+  "Done": "Done",
+  "Canceled": "Canceled",
 
-  "NPS Research": "NPS Research"
+  "NPS Research": "NPS Research",
+  "Satisfaction Survey": "Satisfaction Survey",
+  "Number of surveys answered below average": "Quantity of surveys answered below average",
+  "Number of surveys answered on average": "Quantity os surveys answred on average",
+
+  "Number of surveys answered": "Quantity of surveys answered",
+  "Number of orders for the day": "Quantity of orders for the day"
 }
