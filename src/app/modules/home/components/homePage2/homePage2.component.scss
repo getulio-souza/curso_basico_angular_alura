@@ -41,8 +41,6 @@ $bigDevices: 992px;
   display: flex;
   flex-direction: row;
   gap: 20px;
-  @media screen and (max-width: 1024px) {
-  }
 }
 
 /* second container */
@@ -64,7 +62,7 @@ $bigDevices: 992px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 60px;
   @media screen and (max-width: 1023px) {
     display: flex;
     flex-direction: column;

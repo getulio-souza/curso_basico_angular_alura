@@ -207,6 +207,8 @@ $bigDevices: 992px;
     letter-spacing: 0.05em;
     text-align: left;
     color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

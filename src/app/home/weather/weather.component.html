@@ -24,9 +24,9 @@
 <section class="weather-container" *ngIf="hasLoadedProperties && ready && temp_c != null">
    <article class="weather-temperature-container">
     <!-- temperature icon -->
-    <div class="weather-temperature-icon">
-      <img [src]="icon" />
-    </div>
+    <!-- <div class="weather-temperature-icon"> -->
+      <img class="weather-temperature-icon" [src]="icon" />
+    <!-- </div> -->
     <!--temperature info-->
     <div class="weather-temperature-info">
       <span *ngIf="!temperatureUomIsFahrenheit" [innerHtml]="temp_c | number: '1.0-0'"></span>
