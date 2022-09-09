@@ -1,8 +1,9 @@
 <form action="" class="form-container" (ngSubmit)="transferir()">
   <h2>Nova transferência</h2>
+
   <div class="valor">
     <label for="valor">Valor</label>
-    <input id="valor" type="text" [(ngModel)]="valor" name="valor"/>
+    <input id="valor" type="number" [(ngModel)]="valor" name="valor"/>
   </div>
 
   <div>
