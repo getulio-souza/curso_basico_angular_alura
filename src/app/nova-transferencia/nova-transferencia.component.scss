@@ -26,6 +26,7 @@ input {
   border: 1px solid #fff;
   text-align: center;
   padding: 5px 0;
+  border-radius: 5px;
   :hover {
     border: none;
   }
@@ -33,6 +34,7 @@ input {
 
 button {
   margin-top: 10px;
+  font-weight: 700;
   border: none;
   background-color: red;
   padding: 10px 20px;
@@ -45,4 +47,8 @@ button {
     border: 1px solid #fff;
     color: red;
   }
+}
+
+.valor{
+  margin: 10px 0;
 }
